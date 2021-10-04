@@ -1,9 +1,9 @@
 {
-	"name": "PL_CALCUL_LEVIER",
+	"name": "PL_CALCUL_SEUIL",
 	"properties": {
 		"activities": [
 			{
-				"name": "CALCUL LEVIER",
+				"name": "CALCUL SEUIL",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "CALCUL_LEVIER",
+						"referenceName": "CALCUL_SEUIL",
 						"type": "DataFlowReference"
 					},
 					"compute": {
