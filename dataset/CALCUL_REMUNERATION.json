@@ -1,0 +1,32 @@
+{
+	"name": "CALCUL_REMUNERATION",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "CONTRAT DISTRIBUTION"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "CALCUL_REMUNERATION.csv",
+				"folderPath": "Temp",
+				"container": "data-warehouse"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "ID contrat cadre;ID contrat;ID levier;year;ca;R�alis�;Somme quantit�",
+				"type": "String"
+			}
+		]
+	}
+}
