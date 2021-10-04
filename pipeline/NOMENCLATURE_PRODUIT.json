@@ -1,0 +1,37 @@
+{
+	"name": "NOMENCLATURE_PRODUIT",
+	"properties": {
+		"activities": [
+			{
+				"name": "NomenclatureProduit",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "NOMENCLATURE_PRODUIT",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"folder": {
+			"name": "SORTIE LOGISTIQUE"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-28T07:36:55Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

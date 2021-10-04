@@ -1,0 +1,26 @@
+{
+	"name": "DSC_ORGANISATION_NOTFOUND",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "datawarehouse",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "PREPARATION ECOULEMENT/DSC"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "errorfinding"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

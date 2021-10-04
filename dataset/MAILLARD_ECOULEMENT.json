@@ -1,0 +1,74 @@
+{
+	"name": "MAILLARD_ECOULEMENT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "PREPARATION ECOULEMENT/MAILLARD"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "dvSAUNC.csv",
+				"folderPath": "Ecoulement/Maillard",
+				"container": "data-input"
+			},
+			"columnDelimiter": ",",
+			"encodingName": "WINDOWS-1252",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Société",
+				"type": "String"
+			},
+			{
+				"name": "Dépot",
+				"type": "String"
+			},
+			{
+				"name": "Mois",
+				"type": "String"
+			},
+			{
+				"name": "Code GTAC",
+				"type": "String"
+			},
+			{
+				"name": "Référence",
+				"type": "String"
+			},
+			{
+				"name": "Désignation",
+				"type": "String"
+			},
+			{
+				"name": "Quantité",
+				"type": "String"
+			},
+			{
+				"name": "Valeur",
+				"type": "String"
+			},
+			{
+				"name": "Quantité n-1",
+				"type": "String"
+			},
+			{
+				"name": "Valeur n-1",
+				"type": "String"
+			},
+			{
+				"name": "CP Dépôt",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

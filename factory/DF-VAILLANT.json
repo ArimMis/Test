@@ -1,0 +1,9 @@
+{
+	"name": "DF-VAILLANT",
+	"location": "westeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "8366414f-3411-47f7-b6a7-994b4c0b99e1",
+		"tenantId": "67e4db54-80ae-4739-b54d-5ee94bd6472e"
+	}
+}

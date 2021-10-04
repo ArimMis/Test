@@ -1,0 +1,272 @@
+{
+	"name": "AZ_OecoulementPartedislikeWithIndex",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "BASE_COMMERCIAL"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "Temp",
+				"container": "data-warehouse"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "yearmonth",
+				"type": "String"
+			},
+			{
+				"name": "qte_ecoulement",
+				"type": "String"
+			},
+			{
+				"name": "ca_ecoulement",
+				"type": "String"
+			},
+			{
+				"name": "POSSAMidString",
+				"type": "String"
+			},
+			{
+				"name": "HubSAPid",
+				"type": "String"
+			},
+			{
+				"name": "reference",
+				"type": "String"
+			},
+			{
+				"name": "distributeur",
+				"type": "String"
+			},
+			{
+				"name": "Code postal",
+				"type": "String"
+			},
+			{
+				"name": "marque_name",
+				"type": "String"
+			},
+			{
+				"name": "is_prix_dsc",
+				"type": "String"
+			},
+			{
+				"name": "qte_ecc",
+				"type": "String"
+			},
+			{
+				"name": "Canal distribution",
+				"type": "String"
+			},
+			{
+				"name": "Secteur d'activit�",
+				"type": "String"
+			},
+			{
+				"name": "document_vente",
+				"type": "String"
+			},
+			{
+				"name": "Jour calendaire",
+				"type": "String"
+			},
+			{
+				"name": "Agence commerciale corrig�",
+				"type": "String"
+			},
+			{
+				"name": "Donneur d'ordre",
+				"type": "String"
+			},
+			{
+				"name": "R�cept. de march.",
+				"type": "String"
+			},
+			{
+				"name": "Right_reference",
+				"type": "String"
+			},
+			{
+				"name": "Facture",
+				"type": "String"
+			},
+			{
+				"name": "Type poste Facture",
+				"type": "String"
+			},
+			{
+				"name": "Qt� factur�e",
+				"type": "String"
+			},
+			{
+				"name": "CA factur�",
+				"type": "String"
+			},
+			{
+				"name": "Right_HubSAPid",
+				"type": "String"
+			},
+			{
+				"name": "Type_Facturation�",
+				"type": "String"
+			},
+			{
+				"name": "qt_fact",
+				"type": "String"
+			},
+			{
+				"name": "ca_final",
+				"type": "String"
+			},
+			{
+				"name": "qt_final",
+				"type": "String"
+			},
+			{
+				"name": "data_origin",
+				"type": "String"
+			},
+			{
+				"name": "canal_final",
+				"type": "String"
+			},
+			{
+				"name": "Commande",
+				"type": "String"
+			},
+			{
+				"name": "no_offre",
+				"type": "String"
+			},
+			{
+				"name": "ATC Performance",
+				"type": "String"
+			},
+			{
+				"name": "canal",
+				"type": "String"
+			},
+			{
+				"name": "RowCount",
+				"type": "String"
+			},
+			{
+				"name": "ATC",
+				"type": "String"
+			},
+			{
+				"name": "Canal final",
+				"type": "String"
+			},
+			{
+				"name": "code_postal_atc",
+				"type": "String"
+			},
+			{
+				"name": "NomATC",
+				"type": "String"
+			},
+			{
+				"name": "Matricule",
+				"type": "String"
+			},
+			{
+				"name": "date_id",
+				"type": "String"
+			},
+			{
+				"name": "HubName",
+				"type": "String"
+			},
+			{
+				"name": "id_canal_final",
+				"type": "String"
+			},
+			{
+				"name": "qte plateforme final",
+				"type": "String"
+			},
+			{
+				"name": "ca plateforme final",
+				"type": "String"
+			},
+			{
+				"name": "Sum_qt_factur_e",
+				"type": "String"
+			},
+			{
+				"name": "Sum_ca_factur_",
+				"type": "String"
+			},
+			{
+				"name": "Sum_ca_ecoulement",
+				"type": "String"
+			},
+			{
+				"name": "Sum_qte_ecoulement",
+				"type": "String"
+			},
+			{
+				"name": "code_depot",
+				"type": "String"
+			},
+			{
+				"name": "id_canal",
+				"type": "String"
+			},
+			{
+				"name": "marque_code",
+				"type": "String"
+			},
+			{
+				"name": "Document de vente",
+				"type": "String"
+			},
+			{
+				"name": "Type de facture",
+				"type": "String"
+			},
+			{
+				"name": "Client",
+				"type": "String"
+			},
+			{
+				"name": "Marque",
+				"type": "String"
+			},
+			{
+				"name": "ATC Corrig�",
+				"type": "String"
+			},
+			{
+				"name": "Motif commande",
+				"type": "String"
+			},
+			{
+				"name": "Org. commerciale",
+				"type": "String"
+			},
+			{
+				"name": "marque_id",
+				"type": "String"
+			},
+			{
+				"name": "Offre",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

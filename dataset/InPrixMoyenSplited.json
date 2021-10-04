@@ -1,0 +1,74 @@
+{
+	"name": "InPrixMoyenSplited",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "prixmoyensplit",
+				"folderPath": "Temp",
+				"container": "data-warehouse"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Article",
+				"type": "String"
+			},
+			{
+				"name": "Distributeur",
+				"type": "String"
+			},
+			{
+				"name": "prix_unitaire",
+				"type": "String"
+			},
+			{
+				"name": "Durée_période",
+				"type": "String"
+			},
+			{
+				"name": "Période",
+				"type": "String"
+			},
+			{
+				"name": "Mois début",
+				"type": "String"
+			},
+			{
+				"name": "Mois fin",
+				"type": "String"
+			},
+			{
+				"name": "mois1",
+				"type": "String"
+			},
+			{
+				"name": "annee1",
+				"type": "String"
+			},
+			{
+				"name": "mois2",
+				"type": "String"
+			},
+			{
+				"name": "annee2",
+				"type": "String"
+			},
+			{
+				"name": "dd",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

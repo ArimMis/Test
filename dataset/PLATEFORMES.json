@@ -1,0 +1,43 @@
+{
+	"name": "PLATEFORMES",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "BASE_COMMERCIAL"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Feuil1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Plateformes.xlsx",
+				"folderPath": "Plateformes",
+				"container": "data-input"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "WholeSalerID",
+				"type": "String"
+			},
+			{
+				"name": "WholeSalerHubID",
+				"type": "String"
+			},
+			{
+				"name": "HubName",
+				"type": "String"
+			},
+			{
+				"name": "HubSAPid",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

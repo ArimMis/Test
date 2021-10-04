@@ -1,0 +1,87 @@
+{
+	"name": "StgOffreUniq",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "BASE_COMMERCIAL"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "stg_offre_unique.xlsx",
+				"folderPath": "staging",
+				"container": "data-warehouse"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Marque",
+				"type": "String"
+			},
+			{
+				"name": "Quantité",
+				"type": "String"
+			},
+			{
+				"name": "Numéro interne 1",
+				"type": "String"
+			},
+			{
+				"name": "Client",
+				"type": "String"
+			},
+			{
+				"name": "Responsable",
+				"type": "String"
+			},
+			{
+				"name": "Offre",
+				"type": "String"
+			},
+			{
+				"name": "CODE_CMI",
+				"type": "String"
+			},
+			{
+				"name": "NOM_CMI",
+				"type": "String"
+			},
+			{
+				"name": "ATC",
+				"type": "String"
+			},
+			{
+				"name": "canal",
+				"type": "String"
+			},
+			{
+				"name": "Produit",
+				"type": "String"
+			},
+			{
+				"name": "Numéro interne 2",
+				"type": "String"
+			},
+			{
+				"name": "Right_Produit",
+				"type": "String"
+			},
+			{
+				"name": "Right_Quantité",
+				"type": "String"
+			},
+			{
+				"name": "Right_Numéro interne 1",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

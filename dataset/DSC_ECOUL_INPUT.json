@@ -1,0 +1,116 @@
+{
+	"name": "DSC_ECOUL_INPUT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "data_mart",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "PREPARATION ECOULEMENT/DSC"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "data_65f7a04e-fc08-4958-80a0-5660aa383911_968edf46-e6c8-43eb-9222-bde071bd0593.csv",
+				"container": "ecoulement"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Région Statistique",
+				"type": "String"
+			},
+			{
+				"name": "Enseigne",
+				"type": "String"
+			},
+			{
+				"name": "Marque DESC",
+				"type": "String"
+			},
+			{
+				"name": "Marque Code",
+				"type": "String"
+			},
+			{
+				"name": "Sous Famille",
+				"type": "String"
+			},
+			{
+				"name": "Référence Article Fournisseur",
+				"type": "String"
+			},
+			{
+				"name": "Article National DESC",
+				"type": "String"
+			},
+			{
+				"name": "Article National Code",
+				"type": "String"
+			},
+			{
+				"name": "Agence Code",
+				"type": "String"
+			},
+			{
+				"name": "Agence DESC",
+				"type": "String"
+			},
+			{
+				"name": "Département DESC",
+				"type": "String"
+			},
+			{
+				"name": "Département ID",
+				"type": "String"
+			},
+			{
+				"name": "Secteur",
+				"type": "String"
+			},
+			{
+				"name": "Quantité en UV BL",
+				"type": "String"
+			},
+			{
+				"name": "Année Précédente (Quantité en UV BL)",
+				"type": "String"
+			},
+			{
+				"name": "Cumul Exercice (Quantité en UV BL)",
+				"type": "String"
+			},
+			{
+				"name": "Cumul Exercice A-1 (Quantité en UV BL)",
+				"type": "String"
+			},
+			{
+				"name": "MOIS CA PRR N",
+				"type": "String"
+			},
+			{
+				"name": "MOIS CA PRR N-1",
+				"type": "String"
+			},
+			{
+				"name": "CA PRR au cumul",
+				"type": "String"
+			},
+			{
+				"name": "CA PRR au cumul N-1",
+				"type": "String"
+			},
+			{
+				"name": "fileName",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

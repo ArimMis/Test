@@ -1,0 +1,167 @@
+{
+	"name": "MAIN",
+	"properties": {
+		"activities": [
+			{
+				"name": "MAIN_PREPARATION_ECOULEMENT",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "preparation_facturation",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "MAIN_PREPARATION",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PL_MAIN_BASE_COMMERCIAL",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "MAIN_PREPARATION_ECOULEMENT",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_MAIN_BASE_COMMERCIALE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "MAIN_REFERENTIEL",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "MAIN_REFERENTIEL",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "MAIN_LOGISTIQUE",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "MAIN_REFERENTIEL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "MAIN_LOGISTIQUE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "preparation_facturation",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "preparation_facturation",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "CALCUL OBJECTIF RH",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PL_MAIN_BASE_COMMERCIAL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_MAIN_RH",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SORTIE MARKETING",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PL_MAIN_BASE_COMMERCIAL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SORTIE MARKETING",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "MAIN_LOGISTIQUE1",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PL_MAIN_BASE_COMMERCIAL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "MAIN_LOGISTIQUE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2021-10-04T10:59:39Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

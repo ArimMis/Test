@@ -1,0 +1,97 @@
+{
+	"name": "OUTPUT_CALCUL_SEUIL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "CONTRAT DISTRIBUTION"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "Temp",
+				"container": "data-warehouse"
+			},
+			"columnDelimiter": ";",
+			"encodingName": "WINDOWS-1252",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Article",
+				"type": "String"
+			},
+			{
+				"name": "NoCanalDist",
+				"type": "String"
+			},
+			{
+				"name": "NoArt",
+				"type": "String"
+			},
+			{
+				"name": "NoNiv1",
+				"type": "String"
+			},
+			{
+				"name": "NoNiv2",
+				"type": "String"
+			},
+			{
+				"name": "NoNiv3",
+				"type": "String"
+			},
+			{
+				"name": "NoNiv4",
+				"type": "String"
+			},
+			{
+				"name": "NoNiv5",
+				"type": "String"
+			},
+			{
+				"name": "NoNiv6",
+				"type": "String"
+			},
+			{
+				"name": "NoNiv7",
+				"type": "String"
+			},
+			{
+				"name": "Niv1",
+				"type": "String"
+			},
+			{
+				"name": "Niv2",
+				"type": "String"
+			},
+			{
+				"name": "Niv3",
+				"type": "String"
+			},
+			{
+				"name": "Niv4",
+				"type": "String"
+			},
+			{
+				"name": "Niv6",
+				"type": "String"
+			},
+			{
+				"name": "Niv7",
+				"type": "String"
+			},
+			{
+				"name": "CanalDist",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

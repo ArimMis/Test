@@ -1,0 +1,43 @@
+{
+	"name": "ClientEHS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "REFERENTIEL_ATC/UnionSAP_EHS"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sectorisation",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Client_EHS.xlsx",
+				"folderPath": "Client",
+				"container": "data-input"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Client",
+				"type": "String"
+			},
+			{
+				"name": "BrandID",
+				"type": "String"
+			},
+			{
+				"name": "Code Postal",
+				"type": "String"
+			},
+			{
+				"name": "Nom",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

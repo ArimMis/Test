@@ -1,0 +1,28 @@
+{
+	"name": "fuzzyjoinATC",
+	"properties": {
+		"type": "WranglingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "afctationflows",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> afctationflows",
+					"dataset": {
+						"referenceName": "afctationflows",
+						"type": "DatasetReference"
+					}
+				},
+				{
+					"name": "atcc2021",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> atcc2021",
+					"dataset": {
+						"referenceName": "atcc2021",
+						"type": "DatasetReference"
+					}
+				}
+			],
+			"script": "section Section1;\r\nshared afctationflows = let\r\n  AdfDoc = AzureStorage.BlobContents(\"https://dsvaillantfr.blob.core.windows.net/data-warehouse/Temp/atc_affectation_lower\"),\r\n  Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]),\r\n  PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true])\r\nin\r\n  PromotedHeaders;\r\nshared atcc2021 = let\r\n  AdfDoc = AzureStorage.BlobContents(\"https://dsvaillantfr.blob.core.windows.net/data-warehouse/Temp/atc_c2021_lower\"),\r\n  Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]),\r\n  PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true])\r\nin\r\n  PromotedHeaders;\r\nshared UserQuery = let\r\n  Source = afctationflows,\r\n  #\"Choose columns\" = Table.SelectColumns(Source, {\"Clé Référentiel\", \"Marque\", \"Code Postal début\", \"Code Postal fin\", \"Utilisateur\", \"Fonction\", \"Département\", \"DR\"})\r\nin\r\n  #\"Choose columns\";\r\n",
+			"documentLocale": "en-us"
+		}
+	}
+}

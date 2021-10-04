@@ -1,0 +1,39 @@
+{
+	"name": "associationoffre",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "VENTE DIRECT BASE COMM"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "ArticulationSap.xlsx",
+				"folderPath": "Offre",
+				"container": "data-input"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Commande",
+				"type": "String"
+			},
+			{
+				"name": "Référence Offre BA",
+				"type": "String"
+			},
+			{
+				"name": "Qté Cdée",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,170 @@
+{
+	"name": "ecoulement",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "data_mart",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "test_base_commercial"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "uniformee_ecoulement_prix_moy.xlsx",
+				"container": "datawarehouse"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "yearmonth",
+				"type": "String"
+			},
+			{
+				"name": "year",
+				"type": "String"
+			},
+			{
+				"name": "canal",
+				"type": "String"
+			},
+			{
+				"name": "Représentant",
+				"type": "String"
+			},
+			{
+				"name": "month",
+				"type": "String"
+			},
+			{
+				"name": "qte_ecoulement",
+				"type": "String"
+			},
+			{
+				"name": "ca_ecoulement",
+				"type": "String"
+			},
+			{
+				"name": "prix_unitaire_std",
+				"type": "String"
+			},
+			{
+				"name": "POSSAMidString",
+				"type": "String"
+			},
+			{
+				"name": "HubSAPid",
+				"type": "String"
+			},
+			{
+				"name": "reference",
+				"type": "String"
+			},
+			{
+				"name": "cp1",
+				"type": "String"
+			},
+			{
+				"name": "distributeur",
+				"type": "String"
+			},
+			{
+				"name": "marque_file",
+				"type": "String"
+			},
+			{
+				"name": "agence_code",
+				"type": "String"
+			},
+			{
+				"name": "County",
+				"type": "String"
+			},
+			{
+				"name": "sous_famille",
+				"type": "String"
+			},
+			{
+				"name": "departement_id",
+				"type": "String"
+			},
+			{
+				"name": "article",
+				"type": "String"
+			},
+			{
+				"name": "WholeSalerShortName",
+				"type": "String"
+			},
+			{
+				"name": "UnitID",
+				"type": "String"
+			},
+			{
+				"name": "POSdescription",
+				"type": "String"
+			},
+			{
+				"name": "HubName",
+				"type": "String"
+			},
+			{
+				"name": "Nom Agence",
+				"type": "String"
+			},
+			{
+				"name": "Dept",
+				"type": "String"
+			},
+			{
+				"name": "BrandID",
+				"type": "String"
+			},
+			{
+				"name": "marque_num",
+				"type": "String"
+			},
+			{
+				"name": "ca",
+				"type": "String"
+			},
+			{
+				"name": "marque_id",
+				"type": "String"
+			},
+			{
+				"name": "marque",
+				"type": "String"
+			},
+			{
+				"name": "Client",
+				"type": "String"
+			},
+			{
+				"name": "cp2",
+				"type": "String"
+			},
+			{
+				"name": "Org# commerciale",
+				"type": "String"
+			},
+			{
+				"name": "Code postal",
+				"type": "String"
+			},
+			{
+				"name": "marque_name",
+				"type": "String"
+			},
+			{
+				"name": "is_prix_dsc",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

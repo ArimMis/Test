@@ -1,0 +1,75 @@
+{
+	"name": "pricelist_replicated",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "PREPARATION ECOULEMENT/UNION_ALL_DISTRIBUTOR"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "prix_moyen_replicated.xlsx",
+				"folderPath": "Temp",
+				"container": "data-warehouse"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Distributeur",
+				"type": "String"
+			},
+			{
+				"name": "Code produit",
+				"type": "String"
+			},
+			{
+				"name": "Prix standard",
+				"type": "String"
+			},
+			{
+				"name": "N° Période",
+				"type": "String"
+			},
+			{
+				"name": "Mois début",
+				"type": "String"
+			},
+			{
+				"name": "Mois fin",
+				"type": "String"
+			},
+			{
+				"name": "mois1",
+				"type": "String"
+			},
+			{
+				"name": "annee1",
+				"type": "String"
+			},
+			{
+				"name": "mois2",
+				"type": "String"
+			},
+			{
+				"name": "annee2",
+				"type": "String"
+			},
+			{
+				"name": "toreplicate",
+				"type": "String"
+			},
+			{
+				"name": "order",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

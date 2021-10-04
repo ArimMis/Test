@@ -1,0 +1,96 @@
+{
+	"name": "ecoulementUniformAz",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "BASE_COMMERCIAL"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "eccoulementUniforme",
+				"container": "data-warehouse"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "yearmonth",
+				"type": "String"
+			},
+			{
+				"name": "year",
+				"type": "String"
+			},
+			{
+				"name": "month",
+				"type": "String"
+			},
+			{
+				"name": "qte_ecoulement",
+				"type": "String"
+			},
+			{
+				"name": "ca_ecoulement",
+				"type": "String"
+			},
+			{
+				"name": "POSSAMidString",
+				"type": "String"
+			},
+			{
+				"name": "HubSAPid",
+				"type": "String"
+			},
+			{
+				"name": "reference",
+				"type": "String"
+			},
+			{
+				"name": "distributeur",
+				"type": "String"
+			},
+			{
+				"name": "marque_file",
+				"type": "String"
+			},
+			{
+				"name": "agence_code",
+				"type": "String"
+			},
+			{
+				"name": "marque_id",
+				"type": "String"
+			},
+			{
+				"name": "marque",
+				"type": "String"
+			},
+			{
+				"name": "Client",
+				"type": "String"
+			},
+			{
+				"name": "code postal",
+				"type": "String"
+			},
+			{
+				"name": "marque_name",
+				"type": "String"
+			},
+			{
+				"name": "Code produit",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

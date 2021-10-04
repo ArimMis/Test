@@ -1,0 +1,81 @@
+{
+	"name": "MAILLARD_PREPARED",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "PREPARATION ECOULEMENT"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "MAILLARD_ECOUL_PREPARED",
+				"folderPath": "Temp",
+				"container": "data-warehouse"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "distributeur",
+				"type": "String"
+			},
+			{
+				"name": "reference",
+				"type": "String"
+			},
+			{
+				"name": "article",
+				"type": "String"
+			},
+			{
+				"name": "qte_ecoulement",
+				"type": "String"
+			},
+			{
+				"name": "ca_ecoulement",
+				"type": "String"
+			},
+			{
+				"name": "Code postal",
+				"type": "String"
+			},
+			{
+				"name": "year",
+				"type": "String"
+			},
+			{
+				"name": "month",
+				"type": "String"
+			},
+			{
+				"name": "yearmonth",
+				"type": "String"
+			},
+			{
+				"name": "HubSAPid",
+				"type": "String"
+			},
+			{
+				"name": "POSSAMid",
+				"type": "String"
+			},
+			{
+				"name": "marque_id",
+				"type": "String"
+			},
+			{
+				"name": "marque_file",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

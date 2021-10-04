@@ -1,0 +1,65 @@
+{
+	"name": "offreInDiffus",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "REFERENTIEL_OFFRE"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "offreDiffusTemp",
+				"folderPath": "Temp",
+				"container": "data-warehouse"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "DateOffre",
+				"type": "String"
+			},
+			{
+				"name": "Référence",
+				"type": "String"
+			},
+			{
+				"name": "Marque",
+				"type": "String"
+			},
+			{
+				"name": "Quantité",
+				"type": "String"
+			},
+			{
+				"name": "Client",
+				"type": "String"
+			},
+			{
+				"name": "Responsable",
+				"type": "String"
+			},
+			{
+				"name": "Offre",
+				"type": "String"
+			},
+			{
+				"name": "CodeATC",
+				"type": "String"
+			},
+			{
+				"name": "canal",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

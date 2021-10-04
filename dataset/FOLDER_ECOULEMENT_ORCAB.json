@@ -1,0 +1,62 @@
+{
+	"name": "FOLDER_ECOULEMENT_ORCAB",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "PREPARATION ECOULEMENT/ORCAB"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "Ecoulement/ORCAB",
+				"container": "data-input"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Fournisseur",
+				"type": "String"
+			},
+			{
+				"name": "Coopérative",
+				"type": "String"
+			},
+			{
+				"name": "Référence",
+				"type": "String"
+			},
+			{
+				"name": "Désignation",
+				"type": "String"
+			},
+			{
+				"name": "Mois",
+				"type": "String"
+			},
+			{
+				"name": "CA 2020",
+				"type": "String"
+			},
+			{
+				"name": "CA 2019",
+				"type": "String"
+			},
+			{
+				"name": "Qte 2020",
+				"type": "String"
+			},
+			{
+				"name": "Qte 2019",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,73 @@
+{
+	"name": "DV_SAUNC",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "PREPARATION ECOULEMENT/MAILLARD"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "dvSAUNC.csv",
+				"folderPath": "Ecoulement/Maillard",
+				"container": "data-input"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Soci�t�",
+				"type": "String"
+			},
+			{
+				"name": "D�pot",
+				"type": "String"
+			},
+			{
+				"name": "Mois",
+				"type": "String"
+			},
+			{
+				"name": "Code GTAC",
+				"type": "String"
+			},
+			{
+				"name": "R�f�rence",
+				"type": "String"
+			},
+			{
+				"name": "D�signation",
+				"type": "String"
+			},
+			{
+				"name": "Quantit�",
+				"type": "String"
+			},
+			{
+				"name": "Valeur",
+				"type": "String"
+			},
+			{
+				"name": "Quantit� n-1",
+				"type": "String"
+			},
+			{
+				"name": "Valeur n-1",
+				"type": "String"
+			},
+			{
+				"name": "CP D�p�t",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

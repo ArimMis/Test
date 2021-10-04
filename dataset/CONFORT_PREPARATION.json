@@ -1,0 +1,114 @@
+{
+	"name": "CONFORT_PREPARATION",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "PREPARATION ECOULEMENT/VF CONFORT"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "data_93667242-96d5-452f-a1d7-8067052b7662_dae5acec-5029-4dee-949c-75ac3396ac4c.csv",
+				"folderPath": "Temp",
+				"container": "data-warehouse"
+			},
+			"columnDelimiter": ",",
+			"encodingName": "WINDOWS-1252",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Repr�sentant",
+				"type": "String"
+			},
+			{
+				"name": "N� D�partement",
+				"type": "String"
+			},
+			{
+				"name": "D�partement",
+				"type": "String"
+			},
+			{
+				"name": "Code point de vente",
+				"type": "String"
+			},
+			{
+				"name": "Libell� point de vente",
+				"type": "String"
+			},
+			{
+				"name": "Code Depot source",
+				"type": "String"
+			},
+			{
+				"name": "Code client",
+				"type": "String"
+			},
+			{
+				"name": "Client",
+				"type": "String"
+			},
+			{
+				"name": "N� Siret",
+				"type": "String"
+			},
+			{
+				"name": "Code postal",
+				"type": "String"
+			},
+			{
+				"name": "Ville",
+				"type": "String"
+			},
+			{
+				"name": "Ann�e livraison",
+				"type": "String"
+			},
+			{
+				"name": "Mois livraison",
+				"type": "String"
+			},
+			{
+				"name": "code fournisseur",
+				"type": "String"
+			},
+			{
+				"name": "fournisseur principal",
+				"type": "String"
+			},
+			{
+				"name": "Code produit",
+				"type": "String"
+			},
+			{
+				"name": "produit",
+				"type": "String"
+			},
+			{
+				"name": "R�ference",
+				"type": "String"
+			},
+			{
+				"name": "Qte en unit� de vente",
+				"type": "String"
+			},
+			{
+				"name": "Montant prv net",
+				"type": "String"
+			},
+			{
+				"name": "fileName",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

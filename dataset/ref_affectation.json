@@ -1,0 +1,67 @@
+{
+	"name": "ref_affectation",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "REFERENTIEL_ATC"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Data",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Référentiel_Affectation Roles Utilisateurs par Code postaux Nouvelle version.xlsx",
+				"folderPath": "Client",
+				"container": "data-input"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Clé Référentiel",
+				"type": "String"
+			},
+			{
+				"name": "Recherche Clé EPS",
+				"type": "String"
+			},
+			{
+				"name": "Marque",
+				"type": "String"
+			},
+			{
+				"name": "Code Postal début",
+				"type": "String"
+			},
+			{
+				"name": "Code Postal fin",
+				"type": "String"
+			},
+			{
+				"name": "Utilisateur",
+				"type": "String"
+			},
+			{
+				"name": "Fonction",
+				"type": "String"
+			},
+			{
+				"name": "Département",
+				"type": "String"
+			},
+			{
+				"name": "DR",
+				"type": "String"
+			},
+			{
+				"name": "ID SAP",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,97 @@
+{
+	"name": "VFCONFORT_PREPARED",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "PREPARATION ECOULEMENT/VF CONFORT"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "VFCONFORT_ECOUL_PREPARED",
+				"folderPath": "Temp",
+				"container": "data-warehouse"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Code postal",
+				"type": "String"
+			},
+			{
+				"name": "marque_file",
+				"type": "String"
+			},
+			{
+				"name": "article",
+				"type": "String"
+			},
+			{
+				"name": "ca_ecoulement",
+				"type": "String"
+			},
+			{
+				"name": "Représentant",
+				"type": "String"
+			},
+			{
+				"name": "departement_id",
+				"type": "String"
+			},
+			{
+				"name": "reference",
+				"type": "String"
+			},
+			{
+				"name": "qte_ecoulement",
+				"type": "String"
+			},
+			{
+				"name": "yearmonth",
+				"type": "String"
+			},
+			{
+				"name": "year",
+				"type": "String"
+			},
+			{
+				"name": "month",
+				"type": "String"
+			},
+			{
+				"name": "UnitID",
+				"type": "String"
+			},
+			{
+				"name": "County",
+				"type": "String"
+			},
+			{
+				"name": "POSSAMidString",
+				"type": "String"
+			},
+			{
+				"name": "marque_id",
+				"type": "String"
+			},
+			{
+				"name": "HubSAPid",
+				"type": "String"
+			},
+			{
+				"name": "distributeur",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

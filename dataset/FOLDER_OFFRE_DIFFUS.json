@@ -1,0 +1,25 @@
+{
+	"name": "FOLDER_OFFRE_DIFFUS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "REFERENTIEL_OFFRE"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "ExportOffreDet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "Offre/OffresBAD&BAC/Diffus",
+				"container": "data-input"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

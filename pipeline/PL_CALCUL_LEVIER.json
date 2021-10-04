@@ -1,0 +1,37 @@
+{
+	"name": "PL_CALCUL_LEVIER",
+	"properties": {
+		"activities": [
+			{
+				"name": "CALCUL LEVIER",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "CALCUL_LEVIER",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"folder": {
+			"name": "CONTRAT DISTRIBUTION"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-10-04T10:37:09Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

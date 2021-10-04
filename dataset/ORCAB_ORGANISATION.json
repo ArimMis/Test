@@ -1,0 +1,47 @@
+{
+	"name": "ORCAB_ORGANISATION",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "PREPARATION ECOULEMENT/ORCAB"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sectorisation",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Organisation_Orcab.xlsx",
+				"folderPath": "Organisation",
+				"container": "data-input"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Nom Coopérative",
+				"type": "String"
+			},
+			{
+				"name": "CP Coop.",
+				"type": "String"
+			},
+			{
+				"name": "POSSAMid",
+				"type": "String"
+			},
+			{
+				"name": "HubSAPid",
+				"type": "String"
+			},
+			{
+				"name": "BrandID",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

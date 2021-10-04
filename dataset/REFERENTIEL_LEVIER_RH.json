@@ -1,0 +1,71 @@
+{
+	"name": "REFERENTIEL_LEVIER_RH",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "LEVIER RH"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Feuil1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Référentiel - Leviers performance RH.xlsx",
+				"folderPath": "Levier RH",
+				"container": "data-input"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Année",
+				"type": "String"
+			},
+			{
+				"name": "Documentation",
+				"type": "String"
+			},
+			{
+				"name": "Marque",
+				"type": "String"
+			},
+			{
+				"name": "Cible",
+				"type": "String"
+			},
+			{
+				"name": "Périmètre",
+				"type": "String"
+			},
+			{
+				"name": "Levier",
+				"type": "String"
+			},
+			{
+				"name": "Canal",
+				"type": "String"
+			},
+			{
+				"name": "Hiérarchie inclues",
+				"type": "String"
+			},
+			{
+				"name": "Hiérarchies exclues",
+				"type": "String"
+			},
+			{
+				"name": "Type",
+				"type": "String"
+			},
+			{
+				"name": "Valeur Annuelle",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

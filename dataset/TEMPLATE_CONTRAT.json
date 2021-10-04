@@ -1,0 +1,47 @@
+{
+	"name": "TEMPLATE_CONTRAT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "CONTRAT DISTRIBUTION"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Vue contrat",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "0630_template contrats.xlsx",
+				"folderPath": "Levier RH",
+				"container": "data-input"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "ID contrat cadre",
+				"type": "String"
+			},
+			{
+				"name": "ID contrat",
+				"type": "String"
+			},
+			{
+				"name": "ID levier",
+				"type": "String"
+			},
+			{
+				"name": "ID Seuil",
+				"type": "String"
+			},
+			{
+				"name": "Objectif (avec règles de validation)",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

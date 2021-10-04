@@ -1,0 +1,51 @@
+{
+	"name": "ExtractionComptesEPSTypologieSousTypoComptePrincipal",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "BASE_COMMERCIAL"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "report1623684783907",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Extraction comptes EPS_Typologie_Sous Typo_Compte Principal.xlsx",
+				"folderPath": "Client",
+				"container": "data-input"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Numéro du compte",
+				"type": "String"
+			},
+			{
+				"name": "Nom du compte",
+				"type": "String"
+			},
+			{
+				"name": "Groupe cible/Typologie générale",
+				"type": "String"
+			},
+			{
+				"name": "Sous groupe cible/Typologie détaillée",
+				"type": "String"
+			},
+			{
+				"name": "Compte principal: Numéro du compte",
+				"type": "String"
+			},
+			{
+				"name": "Compte principal: Nom du compte",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

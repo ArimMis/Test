@@ -1,0 +1,85 @@
+{
+	"name": "wholesalerOrgat",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "BASE_COMMERCIAL"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "stg_wholesaler_orgat.csv",
+				"folderPath": "staging",
+				"container": "data-warehouse"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "WholeSalerID",
+				"type": "String"
+			},
+			{
+				"name": "WholeSalerShortName",
+				"type": "String"
+			},
+			{
+				"name": "UnitID",
+				"type": "String"
+			},
+			{
+				"name": "POSid",
+				"type": "String"
+			},
+			{
+				"name": "POSdescription",
+				"type": "String"
+			},
+			{
+				"name": "County",
+				"type": "String"
+			},
+			{
+				"name": "POSSAMid",
+				"type": "String"
+			},
+			{
+				"name": "POSSAMidString",
+				"type": "String"
+			},
+			{
+				"name": "SupplierID",
+				"type": "String"
+			},
+			{
+				"name": "BrandID",
+				"type": "String"
+			},
+			{
+				"name": "WholeSalerHubID",
+				"type": "String"
+			},
+			{
+				"name": "HubName",
+				"type": "String"
+			},
+			{
+				"name": "HubSAPid",
+				"type": "String"
+			},
+			{
+				"name": "SectorID",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

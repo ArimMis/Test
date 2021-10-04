@@ -1,0 +1,43 @@
+{
+	"name": "CONTRAT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "CONTRAT DISTRIBUTION"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Contrat",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "0630_template contrats.xlsx",
+				"folderPath": "Levier RH",
+				"container": "data-input"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "ID contrat (unique)",
+				"type": "String"
+			},
+			{
+				"name": "ID contrat cadre",
+				"type": "String"
+			},
+			{
+				"name": "Liste des POS participants",
+				"type": "String"
+			},
+			{
+				"name": "Liste des ATC référents du contrat (pour la visualisation)",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

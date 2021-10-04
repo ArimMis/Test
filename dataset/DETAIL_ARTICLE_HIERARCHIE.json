@@ -1,0 +1,35 @@
+{
+	"name": "DETAIL_ARTICLE_HIERARCHIE",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "REFERENTIEL ARTICLE"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Feuil1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Libellés hiérarchies articles groupe et locale.xlsx",
+				"folderPath": "Reference article",
+				"container": "data-input"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Hiérarch.produits",
+				"type": "String"
+			},
+			{
+				"name": "Désignation",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

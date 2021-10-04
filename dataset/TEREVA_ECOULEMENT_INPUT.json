@@ -1,0 +1,127 @@
+{
+	"name": "TEREVA_ECOULEMENT_INPUT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "PREPARATION ECOULEMENT/TEREVA"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "TEREVA_ECOULEMENT.xlsx",
+				"folderPath": "Temp",
+				"container": "data-warehouse"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "societe",
+				"type": "String"
+			},
+			{
+				"name": "region_lib",
+				"type": "String"
+			},
+			{
+				"name": "sgeo",
+				"type": "String"
+			},
+			{
+				"name": "sgeo_lib",
+				"type": "String"
+			},
+			{
+				"name": "agence",
+				"type": "String"
+			},
+			{
+				"name": "agence_lib",
+				"type": "String"
+			},
+			{
+				"name": "dep_ag",
+				"type": "String"
+			},
+			{
+				"name": "frs",
+				"type": "String"
+			},
+			{
+				"name": "article",
+				"type": "String"
+			},
+			{
+				"name": "article_lib",
+				"type": "String"
+			},
+			{
+				"name": "dm",
+				"type": "String"
+			},
+			{
+				"name": "ref_frs",
+				"type": "String"
+			},
+			{
+				"name": "vva (m) n",
+				"type": "String"
+			},
+			{
+				"name": "vva (m) n-1",
+				"type": "String"
+			},
+			{
+				"name": "qte (m) n",
+				"type": "String"
+			},
+			{
+				"name": "qte (m) n-1",
+				"type": "String"
+			},
+			{
+				"name": "vva (c) n",
+				"type": "String"
+			},
+			{
+				"name": "vva (c) n-1",
+				"type": "String"
+			},
+			{
+				"name": "qte (c) n",
+				"type": "String"
+			},
+			{
+				"name": "qte (c) n-1",
+				"type": "String"
+			},
+			{
+				"name": "var. vva (m)",
+				"type": "String"
+			},
+			{
+				"name": "var. qte (m)",
+				"type": "String"
+			},
+			{
+				"name": "var. vva (c)",
+				"type": "String"
+			},
+			{
+				"name": "var. qte (c)",
+				"type": "String"
+			},
+			{
+				"name": "path",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

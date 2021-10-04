@@ -1,0 +1,42 @@
+{
+	"name": "platforme",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "data_input",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "OTHER"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Feuil1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Plateformes.xlsx",
+				"container": "plateformes"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "WholeSalerID",
+				"type": "String"
+			},
+			{
+				"name": "WholeSalerHubID",
+				"type": "String"
+			},
+			{
+				"name": "HubName",
+				"type": "String"
+			},
+			{
+				"name": "HubSAPid",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

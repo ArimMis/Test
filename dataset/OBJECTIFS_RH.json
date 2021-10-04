@@ -1,0 +1,371 @@
+{
+	"name": "OBJECTIFS_RH",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "OBJECTIF RH"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Objectifs",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "objectifs.xlsx",
+				"folderPath": "Levier RH",
+				"container": "data-input"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Num Org",
+				"type": "String"
+			},
+			{
+				"name": "Nom Org",
+				"type": "String"
+			},
+			{
+				"name": "Nom DR",
+				"type": "String"
+			},
+			{
+				"name": "Num DR",
+				"type": "String"
+			},
+			{
+				"name": "DR",
+				"type": "String"
+			},
+			{
+				"name": "ATC (ATC- DR)",
+				"type": "String"
+			},
+			{
+				"name": "ATC (DR-ATC)",
+				"type": "String"
+			},
+			{
+				"name": "Num ATC",
+				"type": "String"
+			},
+			{
+				"name": "Nom ATC",
+				"type": "String"
+			},
+			{
+				"name": "Dept",
+				"type": "String"
+			},
+			{
+				"name": "Canal Dist",
+				"type": "String"
+			},
+			{
+				"name": "Nom Canal",
+				"type": "String"
+			},
+			{
+				"name": "Flux text",
+				"type": "String"
+			},
+			{
+				"name": "HubSAPiD",
+				"type": "String"
+			},
+			{
+				"name": "Activité",
+				"type": "String"
+			},
+			{
+				"name": "Nom Activité",
+				"type": "String"
+			},
+			{
+				"name": "Art Niv 1",
+				"type": "String"
+			},
+			{
+				"name": "Nom Niv 1",
+				"type": "String"
+			},
+			{
+				"name": "Art Niv 2",
+				"type": "String"
+			},
+			{
+				"name": "Nom Niv 2",
+				"type": "String"
+			},
+			{
+				"name": "Art Niv 3",
+				"type": "String"
+			},
+			{
+				"name": "Nom Niv 3",
+				"type": "String"
+			},
+			{
+				"name": "Art Niv 4",
+				"type": "String"
+			},
+			{
+				"name": "Nom Niv 4",
+				"type": "String"
+			},
+			{
+				"name": "Art Niv 5",
+				"type": "String"
+			},
+			{
+				"name": "Nom Niv 5",
+				"type": "String"
+			},
+			{
+				"name": "Nom Niv Combiné",
+				"type": "String"
+			},
+			{
+				"name": "PMV An",
+				"type": "String"
+			},
+			{
+				"name": "Qté Obj An",
+				"type": "String"
+			},
+			{
+				"name": "CA Obj An",
+				"type": "String"
+			},
+			{
+				"name": "Qté Mois 01",
+				"type": "String"
+			},
+			{
+				"name": "Qté Mois 02",
+				"type": "String"
+			},
+			{
+				"name": "Qté Mois 03",
+				"type": "String"
+			},
+			{
+				"name": "Qté Mois 04",
+				"type": "String"
+			},
+			{
+				"name": "Qté Mois 05",
+				"type": "String"
+			},
+			{
+				"name": "Qté Mois 06",
+				"type": "String"
+			},
+			{
+				"name": "Qté Mois 07",
+				"type": "String"
+			},
+			{
+				"name": "Qté Mois 08",
+				"type": "String"
+			},
+			{
+				"name": "Qté Mois 09",
+				"type": "String"
+			},
+			{
+				"name": "Qté Mois 10",
+				"type": "String"
+			},
+			{
+				"name": "Qté Mois 11",
+				"type": "String"
+			},
+			{
+				"name": "Qté Mois 12",
+				"type": "String"
+			},
+			{
+				"name": "CA Mois 01",
+				"type": "String"
+			},
+			{
+				"name": "CA Mois 02",
+				"type": "String"
+			},
+			{
+				"name": "CA Mois 03",
+				"type": "String"
+			},
+			{
+				"name": "CA Mois 04",
+				"type": "String"
+			},
+			{
+				"name": "CA Mois 05",
+				"type": "String"
+			},
+			{
+				"name": "CA Mois 06",
+				"type": "String"
+			},
+			{
+				"name": "CA Mois 07",
+				"type": "String"
+			},
+			{
+				"name": "CA Mois 08",
+				"type": "String"
+			},
+			{
+				"name": "CA Mois 09",
+				"type": "String"
+			},
+			{
+				"name": "CA Mois 10",
+				"type": "String"
+			},
+			{
+				"name": "CA Mois 11",
+				"type": "String"
+			},
+			{
+				"name": "CA Mois 12",
+				"type": "String"
+			},
+			{
+				"name": "Qté Trim 1",
+				"type": "String"
+			},
+			{
+				"name": "Qté Trim 2",
+				"type": "String"
+			},
+			{
+				"name": "Qté Trim 3",
+				"type": "String"
+			},
+			{
+				"name": "Qté Trim 4",
+				"type": "String"
+			},
+			{
+				"name": "CA Trim 1",
+				"type": "String"
+			},
+			{
+				"name": "CA Trim 2",
+				"type": "String"
+			},
+			{
+				"name": "CA Trim 3",
+				"type": "String"
+			},
+			{
+				"name": "CA Trim 4",
+				"type": "String"
+			},
+			{
+				"name": "Qté Cumul 01",
+				"type": "String"
+			},
+			{
+				"name": "Qté Cumul 02",
+				"type": "String"
+			},
+			{
+				"name": "Qté Cumul 03",
+				"type": "String"
+			},
+			{
+				"name": "Qté Cumul 04",
+				"type": "String"
+			},
+			{
+				"name": "Qté Cumul 05",
+				"type": "String"
+			},
+			{
+				"name": "Qté Cumul 06",
+				"type": "String"
+			},
+			{
+				"name": "Qté Cumul 07",
+				"type": "String"
+			},
+			{
+				"name": "Qté Cumul 08",
+				"type": "String"
+			},
+			{
+				"name": "Qté Cumul 09",
+				"type": "String"
+			},
+			{
+				"name": "Qté Cumul 10",
+				"type": "String"
+			},
+			{
+				"name": "Qté Cumul 11",
+				"type": "String"
+			},
+			{
+				"name": "Qté Cumul 12",
+				"type": "String"
+			},
+			{
+				"name": "CA Cumul 01",
+				"type": "String"
+			},
+			{
+				"name": "CA Cumul 02",
+				"type": "String"
+			},
+			{
+				"name": "CA Cumul 03",
+				"type": "String"
+			},
+			{
+				"name": "CA Cumul 04",
+				"type": "String"
+			},
+			{
+				"name": "CA Cumul 05",
+				"type": "String"
+			},
+			{
+				"name": "CA Cumul 06",
+				"type": "String"
+			},
+			{
+				"name": "CA Cumul 07",
+				"type": "String"
+			},
+			{
+				"name": "CA Cumul 08",
+				"type": "String"
+			},
+			{
+				"name": "CA Cumul 09",
+				"type": "String"
+			},
+			{
+				"name": "CA Cumul 10",
+				"type": "String"
+			},
+			{
+				"name": "CA Cumul 11",
+				"type": "String"
+			},
+			{
+				"name": "CA Cumul 12",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

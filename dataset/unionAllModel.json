@@ -1,0 +1,257 @@
+{
+	"name": "unionAllModel",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "BASE_COMMERCIAL"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "OUnionBasecommercial",
+				"folderPath": "Temp",
+				"container": "data-warehouse"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "yearmonth",
+				"type": "String"
+			},
+			{
+				"name": "marque_code",
+				"type": "String"
+			},
+			{
+				"name": "canal distru",
+				"type": "String"
+			},
+			{
+				"name": "Document de vente",
+				"type": "String"
+			},
+			{
+				"name": "POSSAMidString",
+				"type": "String"
+			},
+			{
+				"name": "reference",
+				"type": "String"
+			},
+			{
+				"name": "Facture",
+				"type": "String"
+			},
+			{
+				"name": "Type de facture",
+				"type": "String"
+			},
+			{
+				"name": "Type poste Facture",
+				"type": "String"
+			},
+			{
+				"name": "Client",
+				"type": "String"
+			},
+			{
+				"name": "Code postal",
+				"type": "String"
+			},
+			{
+				"name": "marque_name",
+				"type": "String"
+			},
+			{
+				"name": "Marque",
+				"type": "String"
+			},
+			{
+				"name": "NomATC",
+				"type": "String"
+			},
+			{
+				"name": "code_postal_atc",
+				"type": "String"
+			},
+			{
+				"name": "no_offre",
+				"type": "String"
+			},
+			{
+				"name": "ATC",
+				"type": "String"
+			},
+			{
+				"name": "Motif commande",
+				"type": "String"
+			},
+			{
+				"name": "ca_final",
+				"type": "String"
+			},
+			{
+				"name": "qt_final",
+				"type": "String"
+			},
+			{
+				"name": "data_origin",
+				"type": "String"
+			},
+			{
+				"name": "distributeur",
+				"type": "String"
+			},
+			{
+				"name": "Matricule",
+				"type": "String"
+			},
+			{
+				"name": "year",
+				"type": "String"
+			},
+			{
+				"name": "month",
+				"type": "String"
+			},
+			{
+				"name": "ca_ecoulement",
+				"type": "String"
+			},
+			{
+				"name": "HubSAPid",
+				"type": "String"
+			},
+			{
+				"name": "sous_famille",
+				"type": "String"
+			},
+			{
+				"name": "article",
+				"type": "String"
+			},
+			{
+				"name": "marque",
+				"type": "String"
+			},
+			{
+				"name": "NoOffre",
+				"type": "String"
+			},
+			{
+				"name": "NoArtVGF",
+				"type": "String"
+			},
+			{
+				"name": "Qte_Validee_VGF",
+				"type": "String"
+			},
+			{
+				"name": "NoCli",
+				"type": "String"
+			},
+			{
+				"name": "PA_Valide_VGF",
+				"type": "String"
+			},
+			{
+				"name": "Mois",
+				"type": "String"
+			},
+			{
+				"name": "Année",
+				"type": "String"
+			},
+			{
+				"name": "CompanyId",
+				"type": "String"
+			},
+			{
+				"name": "id_canal_final",
+				"type": "String"
+			},
+			{
+				"name": "id_canal",
+				"type": "String"
+			},
+			{
+				"name": "canal_final",
+				"type": "String"
+			},
+			{
+				"name": "Offre",
+				"type": "String"
+			},
+			{
+				"name": "ATC Performance",
+				"type": "String"
+			},
+			{
+				"name": "Canal final",
+				"type": "String"
+			},
+			{
+				"name": "right_marque",
+				"type": "String"
+			},
+			{
+				"name": "qte_ecoulement",
+				"type": "String"
+			},
+			{
+				"name": "Canal distribution",
+				"type": "String"
+			},
+			{
+				"name": "Secteur d'activité",
+				"type": "String"
+			},
+			{
+				"name": "Jour calendaire",
+				"type": "String"
+			},
+			{
+				"name": "Agence commerciale corrigé",
+				"type": "String"
+			},
+			{
+				"name": "Donneur d'ordre",
+				"type": "String"
+			},
+			{
+				"name": "Recept de march",
+				"type": "String"
+			},
+			{
+				"name": "Qté facturée",
+				"type": "String"
+			},
+			{
+				"name": "CA facturé",
+				"type": "String"
+			},
+			{
+				"name": "canal",
+				"type": "String"
+			},
+			{
+				"name": "date_id",
+				"type": "String"
+			},
+			{
+				"name": "HubName",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,51 @@
+{
+	"name": "HierarchieMKT_VA",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SORTIE MARKETING"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "VA",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Hiérarchie MKT_SD&VA_2021.06.15.xlsx",
+				"folderPath": "Reference article",
+				"container": "data-input"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Référence article active",
+				"type": "String"
+			},
+			{
+				"name": "Grande famille",
+				"type": "String"
+			},
+			{
+				"name": "Sous-famille",
+				"type": "String"
+			},
+			{
+				"name": "eShop level 1",
+				"type": "String"
+			},
+			{
+				"name": "eShop level 2",
+				"type": "String"
+			},
+			{
+				"name": "eShop level 3",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

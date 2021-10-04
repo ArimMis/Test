@@ -1,0 +1,75 @@
+{
+	"name": "TEMPLATE_CALCUL_REM",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "CONTRAT DISTRIBUTION"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "calcul de rem",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "0630_template contrats.xlsx",
+				"folderPath": "Levier RH",
+				"container": "data-input"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "ID levier",
+				"type": "String"
+			},
+			{
+				"name": "Code produit",
+				"type": "String"
+			},
+			{
+				"name": "Code produits exclus",
+				"type": "String"
+			},
+			{
+				"name": "Famille produit",
+				"type": "String"
+			},
+			{
+				"name": "Famille produit exclus",
+				"type": "String"
+			},
+			{
+				"name": "Canal",
+				"type": "String"
+			},
+			{
+				"name": "Date de début",
+				"type": "String"
+			},
+			{
+				"name": "Date de fin",
+				"type": "String"
+			},
+			{
+				"name": "Type de seuil",
+				"type": "String"
+			},
+			{
+				"name": "Contrepartie seuil",
+				"type": "String"
+			},
+			{
+				"name": "ID seuil",
+				"type": "String"
+			},
+			{
+				"name": "Marque",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

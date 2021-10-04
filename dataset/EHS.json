@@ -1,0 +1,79 @@
+{
+	"name": "EHS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "PREPARATION ECOULEMENT/EHS_Folder"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Feuille1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "EHS.xlsx",
+				"folderPath": "Temp",
+				"container": "data-warehouse"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Marques",
+				"type": "String"
+			},
+			{
+				"name": "Région",
+				"type": "String"
+			},
+			{
+				"name": "Nom Agence",
+				"type": "String"
+			},
+			{
+				"name": "CIA",
+				"type": "String"
+			},
+			{
+				"name": "Département",
+				"type": "String"
+			},
+			{
+				"name": "Référence Article",
+				"type": "String"
+			},
+			{
+				"name": "Description Article",
+				"type": "String"
+			},
+			{
+				"name": "Catégorie Achat",
+				"type": "String"
+			},
+			{
+				"name": "Quantitées livrées",
+				"type": "String"
+			},
+			{
+				"name": "str_mois",
+				"type": "String"
+			},
+			{
+				"name": "year",
+				"type": "String"
+			},
+			{
+				"name": "Gestion entrepôt",
+				"type": "String"
+			},
+			{
+				"name": "Marques/ Constructeur",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

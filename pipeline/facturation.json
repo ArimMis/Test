@@ -1,0 +1,37 @@
+{
+	"name": "facturation",
+	"properties": {
+		"activities": [
+			{
+				"name": "preparation_facturation",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "preparation_facturation",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"folder": {
+			"name": "BASE COMMERCIALE/Test"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-20T12:13:34Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

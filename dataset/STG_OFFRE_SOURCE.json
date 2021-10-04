@@ -1,0 +1,89 @@
+{
+	"name": "STG_OFFRE_SOURCE",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "REFERENTIEL_OFFRE"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "stg_offre",
+				"folderPath": "staging",
+				"container": "data-warehouse"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "DateOffre",
+				"type": "String"
+			},
+			{
+				"name": "Référence",
+				"type": "String"
+			},
+			{
+				"name": "Marque",
+				"type": "String"
+			},
+			{
+				"name": "Quantité",
+				"type": "String"
+			},
+			{
+				"name": "Client",
+				"type": "String"
+			},
+			{
+				"name": "Responsable",
+				"type": "String"
+			},
+			{
+				"name": "Offre",
+				"type": "String"
+			},
+			{
+				"name": "CodeATC",
+				"type": "String"
+			},
+			{
+				"name": "Canal",
+				"type": "String"
+			},
+			{
+				"name": "NbLogement",
+				"type": "String"
+			},
+			{
+				"name": "Produit",
+				"type": "String"
+			},
+			{
+				"name": "Numéro interne 2",
+				"type": "String"
+			},
+			{
+				"name": "Créateur offre",
+				"type": "String"
+			},
+			{
+				"name": "Source",
+				"type": "String"
+			},
+			{
+				"name": "UserLowerCase",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

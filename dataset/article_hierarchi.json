@@ -1,0 +1,184 @@
+{
+	"name": "article_hierarchi",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "PREPARATION ECOULEMENT/UNION_ALL_DISTRIBUTOR"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "HIERARCHIE_ARTICLE",
+				"container": "data-warehouse"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "OrgCm",
+				"type": "String"
+			},
+			{
+				"name": "CDis",
+				"type": "String"
+			},
+			{
+				"name": "Article",
+				"type": "String"
+			},
+			{
+				"name": "Description",
+				"type": "String"
+			},
+			{
+				"name": "Hiérarch.groupe",
+				"type": "String"
+			},
+			{
+				"name": "Hiérarch.locale",
+				"type": "String"
+			},
+			{
+				"name": "Predecessor",
+				"type": "String"
+			},
+			{
+				"name": "Successor",
+				"type": "String"
+			},
+			{
+				"name": "St",
+				"type": "String"
+			},
+			{
+				"name": "Désignation Statut",
+				"type": "String"
+			},
+			{
+				"name": "Déb. val.",
+				"type": "String"
+			},
+			{
+				"name": "N1.groupe",
+				"type": "String"
+			},
+			{
+				"name": "N2.groupe",
+				"type": "String"
+			},
+			{
+				"name": "N3.groupe",
+				"type": "String"
+			},
+			{
+				"name": "N4.groupe",
+				"type": "String"
+			},
+			{
+				"name": "N5.groupe",
+				"type": "String"
+			},
+			{
+				"name": "N6.groupe",
+				"type": "String"
+			},
+			{
+				"name": "N7.groupe",
+				"type": "String"
+			},
+			{
+				"name": "N1.locale",
+				"type": "String"
+			},
+			{
+				"name": "N2.locale",
+				"type": "String"
+			},
+			{
+				"name": "N3.locale",
+				"type": "String"
+			},
+			{
+				"name": "N4.locale",
+				"type": "String"
+			},
+			{
+				"name": "N5.locale",
+				"type": "String"
+			},
+			{
+				"name": "N6.locale",
+				"type": "String"
+			},
+			{
+				"name": "N7.locale",
+				"type": "String"
+			},
+			{
+				"name": "N1.groupe.designation",
+				"type": "String"
+			},
+			{
+				"name": "N2.groupe.designation",
+				"type": "String"
+			},
+			{
+				"name": "N3.groupe.designation",
+				"type": "String"
+			},
+			{
+				"name": "N4.groupe.designation",
+				"type": "String"
+			},
+			{
+				"name": "N5.groupe.designation",
+				"type": "String"
+			},
+			{
+				"name": "N6.groupe.designation",
+				"type": "String"
+			},
+			{
+				"name": "N7.groupe.designation",
+				"type": "String"
+			},
+			{
+				"name": "N1.locale.designation",
+				"type": "String"
+			},
+			{
+				"name": "N2.locale.designation",
+				"type": "String"
+			},
+			{
+				"name": "N3.locale.designation",
+				"type": "String"
+			},
+			{
+				"name": "N4.locale.designation",
+				"type": "String"
+			},
+			{
+				"name": "N5.locale.designation",
+				"type": "String"
+			},
+			{
+				"name": "N6.locale.designation",
+				"type": "String"
+			},
+			{
+				"name": "N7.locale.designation",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,82 @@
+{
+	"name": "PL_MAIN_RH",
+	"properties": {
+		"activities": [
+			{
+				"name": "LEVIER RH",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_LEVIER_RH",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PREPARATION OBJECTIF RH",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_OBJECTIF_RH",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "OBJECTIF RH",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [
+					{
+						"activity": "LEVIER RH",
+						"dependencyConditions": [
+							"Failed"
+						]
+					},
+					{
+						"activity": "PREPARATION OBJECTIF RH",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "AF_OBJECTIF_RH",
+					"method": "POST",
+					"body": {
+						"objectif_container": "data-warehouse",
+						"objectif_path": "Temp/OBJECTIF_RH_PREPARED.xlsx",
+						"levier_container": "data-mart",
+						"levier_path": "RH/LEVIER_RH.xlsx",
+						"output_container": "data-mart",
+						"output_path": "RH/OBJECTIFS.xlsx",
+						"yearToCalculate": "2020"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "data transformation azure function",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"folder": {
+			"name": "RH"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-10-04T08:58:46Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

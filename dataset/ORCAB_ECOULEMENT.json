@@ -1,0 +1,66 @@
+{
+	"name": "ORCAB_ECOULEMENT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "PREPARATION ECOULEMENT/ORCAB"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "data_4ff7fba4-15c0-4a45-bb38-971aaa6bfaaa_985cc61b-ecb2-41f3-9b06-2f13a0c784d4.csv",
+				"folderPath": "Temp",
+				"container": "data-warehouse"
+			},
+			"columnDelimiter": ",",
+			"encodingName": "WINDOWS-1252",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Coopérative",
+				"type": "String"
+			},
+			{
+				"name": "Référence",
+				"type": "String"
+			},
+			{
+				"name": "Désignation",
+				"type": "String"
+			},
+			{
+				"name": "Mois",
+				"type": "String"
+			},
+			{
+				"name": "CA 2020",
+				"type": "String"
+			},
+			{
+				"name": "CA 2019",
+				"type": "String"
+			},
+			{
+				"name": "Qte 2020",
+				"type": "String"
+			},
+			{
+				"name": "Qte 2019",
+				"type": "String"
+			},
+			{
+				"name": "filename",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,35 @@
+{
+	"name": "CONTRAT_CADRE",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "CONTRAT DISTRIBUTION"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Contrat cadre",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "0630_template contrats.xlsx",
+				"folderPath": "Levier RH",
+				"container": "data-input"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "ID contrat cadre",
+				"type": "String"
+			},
+			{
+				"name": "Leviers",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

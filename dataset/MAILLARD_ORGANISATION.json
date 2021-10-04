@@ -1,0 +1,47 @@
+{
+	"name": "MAILLARD_ORGANISATION",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "PREPARATION ECOULEMENT/MAILLARD"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Organisation",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Organisation_Maillard.xlsx",
+				"folderPath": "Organisation",
+				"container": "data-input"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Nom Agence (Code)",
+				"type": "String"
+			},
+			{
+				"name": "CP Agence",
+				"type": "String"
+			},
+			{
+				"name": "POSSAMid",
+				"type": "String"
+			},
+			{
+				"name": "HubSAPid",
+				"type": "String"
+			},
+			{
+				"name": "BrandID",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,117 @@
+{
+	"name": "VF_CONFORT_PREPARATION",
+	"properties": {
+		"folder": {
+			"name": "PREPARATION ECOULEMENT"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "CONFORT_PREPARATION",
+						"type": "DatasetReference"
+					},
+					"name": "ecoulement"
+				},
+				{
+					"dataset": {
+						"referenceName": "CONFORT_ORGANISATION",
+						"type": "DatasetReference"
+					},
+					"name": "organisation"
+				},
+				{
+					"dataset": {
+						"referenceName": "VENTES_DIRECTES",
+						"type": "DatasetReference"
+					},
+					"name": "ventesDirectes"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "CONFORT_QTE_NULL",
+						"type": "DatasetReference"
+					},
+					"name": "outputQuantityNull"
+				},
+				{
+					"dataset": {
+						"referenceName": "VFCONFORT_ECOULEMENT_PREPARED",
+						"type": "DatasetReference"
+					},
+					"name": "output"
+				}
+			],
+			"transformations": [
+				{
+					"name": "yearmonth"
+				},
+				{
+					"name": "yearAndMonth"
+				},
+				{
+					"name": "quantityNull"
+				},
+				{
+					"name": "quantityNotNull"
+				},
+				{
+					"name": "MapDrifted1",
+					"description": "Creates an explicit mapping for each drifted column"
+				},
+				{
+					"name": "Select1"
+				},
+				{
+					"name": "codePointVenteNotNull"
+				},
+				{
+					"name": "cleansing"
+				},
+				{
+					"name": "posidNotNull"
+				},
+				{
+					"name": "uniqueOrganisation"
+				},
+				{
+					"name": "innerOrganisation"
+				},
+				{
+					"name": "cleansingVentesDirectes"
+				},
+				{
+					"name": "Aggregate1"
+				},
+				{
+					"name": "RenameVentesDirectes"
+				},
+				{
+					"name": "innerVentesDirectes"
+				},
+				{
+					"name": "leftVentesDirectes"
+				},
+				{
+					"name": "enleverVentesDirectes"
+				},
+				{
+					"name": "outerleftVentesDirectes"
+				},
+				{
+					"name": "uniformisation"
+				},
+				{
+					"name": "Union1"
+				},
+				{
+					"name": "Addcolumn"
+				}
+			],
+			"script": "source(output(\n\t\t{Repr�sentant} as string,\n\t\t{N� D�partement} as string,\n\t\t{D�partement} as string,\n\t\t{Code point de vente} as string,\n\t\t{Libell� point de vente} as string,\n\t\t{Code Depot source} as string,\n\t\t{Code client} as string,\n\t\tClient as string,\n\t\t{N� Siret} as string,\n\t\t{Code postal} as string,\n\t\tVille as string,\n\t\t{Ann�e livraison} as string,\n\t\t{Mois livraison} as string,\n\t\t{code fournisseur} as string,\n\t\t{fournisseur principal} as string,\n\t\t{Code produit} as string,\n\t\tproduit as string,\n\t\t{R�ference} as string,\n\t\t{Qte en unit� de vente} as string,\n\t\t{Montant prv net} as string,\n\t\tfileName as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> ecoulement\nsource(output(\n\t\tWholeSalerID as string,\n\t\tWholeSalerShortName as string,\n\t\tUnitID as string,\n\t\tPOSid as string,\n\t\tPOSdescription as string,\n\t\tCounty as string,\n\t\tPOSSAMid as string,\n\t\tPOSSAMidString as string,\n\t\tSupplierID as string,\n\t\tBrandID as string,\n\t\tWholeSalerHubID as string,\n\t\tHubName as string,\n\t\tHubSAPid as string,\n\t\tSectorID as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> organisation\nsource(output(\n\t\t{Org. commerciale} as string,\n\t\t{Canal distribution} as string,\n\t\t{Secteur d'activité} as string,\n\t\t{Document de vente} as string,\n\t\tPoste as string,\n\t\t{Jour calendaire} as string,\n\t\t{Agence commerciale corrigé} as string,\n\t\t{ATC Corrigé} as string,\n\t\t{Donneur d'ordre} as string,\n\t\t{Code client} as string,\n\t\t{Destinataire facture} as string,\n\t\tArticle as string,\n\t\t{Type doc. vente} as string,\n\t\t{Type de poste} as string,\n\t\tLivraison as string,\n\t\t{Type de livraison} as string,\n\t\t{Type poste Livraison} as string,\n\t\tFacture as string,\n\t\t{Type poste Facture} as string,\n\t\t{Mois calendrier} as string,\n\t\t{Année civile} as string,\n\t\t{Motif commande} as string,\n\t\t{Qté cdée} as string,\n\t\t{CA cdé} as string,\n\t\t{Qté livrée} as string,\n\t\t{CA livré} as string,\n\t\t{Qté facturée} as string,\n\t\t{CA facturé} as string,\n\t\t{Cout standard cdé} as string,\n\t\t{Cout fabrication} as string,\n\t\t{Cout standard livré} as string,\n\t\t{Cout standard facturé} as string,\n\t\tdate_id as string,\n\t\tyear as string,\n\t\tyearmonth as string,\n\t\tqt_cd_e as string,\n\t\tca_cd_ as string,\n\t\tqt_livr_e as string,\n\t\tca_livr_ as string,\n\t\tqt_factur_e as string,\n\t\tca_factur_ as string,\n\t\tcout_standard_cd_ as string,\n\t\tcout_fabrication as string,\n\t\tcout_standard_livr_ as string,\n\t\tcout_standard_factur_ as string,\n\t\tyear_month as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> ventesDirectes\nSelect1 derive(yearmonth = regexExtract(fileName , '(\\\\d+)'),\n\t\tqte_ecoulement = toDouble(qte_ecoulement)) ~> yearmonth\nyearmonth derive(year = substring(yearmonth, 1, 5),\n\t\tmonth = substring(yearmonth, 6 ,2)) ~> yearAndMonth\nyearAndMonth filter(isNull(qte_ecoulement)) ~> quantityNull\nyearAndMonth filter(!isNull(qte_ecoulement)) ~> quantityNotNull\necoulement derive({Représentant} = toString(byName('Représentant')),\n\t\t{N° Département} = toString(byName('N° Département')),\n\t\t{Département} = toString(byName('Département')),\n\t\t{Libellé point de vente} = toString(byName('Libellé point de vente')),\n\t\t{N° Siret} = toString(byName('N° Siret')),\n\t\t{Année livraison} = toString(byName('Année livraison')),\n\t\t{Réference} = toString(byName('Réference')),\n\t\t{Qte en unité de vente} = toString(byName('Qte en unité de vente'))) ~> MapDrifted1\nMapDrifted1 select(mapColumn(\n\t\t{Code point de vente},\n\t\t{Code Depot source},\n\t\t{Code client},\n\t\tClient,\n\t\t{Code postal},\n\t\tVille,\n\t\t{Mois livraison},\n\t\t{code fournisseur},\n\t\t{fournisseur principal},\n\t\t{Code produit},\n\t\tproduit,\n\t\t{Montant prv net},\n\t\tfileName,\n\t\t{Représentant},\n\t\t{N° Département},\n\t\t{Département},\n\t\t{Libellé point de vente},\n\t\t{N° Siret},\n\t\t{Année livraison},\n\t\t{Réference},\n\t\tqte_ecoulement = {Qte en unité de vente}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nquantityNotNull filter(!isNull({Code point de vente})) ~> codePointVenteNotNull\norganisation derive(POSid = trim(POSid, \" \"),\n\t\tHubSAPid = trim(HubSAPid, \" \")) ~> cleansing\ncleansing filter(!isNull(POSid)) ~> posidNotNull\nposidNotNull aggregate(groupBy(POSid,\n\t\tHubSAPid),\n\tWholeSalerID = max(WholeSalerID),\n\t\tWholeSalerShortName = max(WholeSalerShortName),\n\t\tUnitID = max(UnitID),\n\t\tPOSdescription = max(POSdescription),\n\t\tCounty = max(County),\n\t\tPOSSAMid = max(POSSAMid),\n\t\tPOSSAMidString = max(POSSAMidString),\n\t\tSupplierID = max(SupplierID),\n\t\tBrandID = max(BrandID),\n\t\tWholeSalerHubID = max(WholeSalerHubID),\n\t\tHubName = max(HubName),\n\t\tSectorID = max(SectorID)) ~> uniqueOrganisation\ncodePointVenteNotNull, organisation join({Code point de vente} == POSid,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> innerOrganisation\nventesDirectes derive({Code client} = trim({Code client}, \" \"),\n\t\t{Qté facturée} = toDouble({Qté facturée}),\n\t\tyearmonth = trim(yearmonth, \" \")) ~> cleansingVentesDirectes\ncleansingVentesDirectes aggregate(groupBy(yearmonth,\n\t\tArticle,\n\t\t{Code client}),\n\t{Qté facturée} = sum({Qté facturée})) ~> Aggregate1\nAggregate1 select(mapColumn(\n\t\tyearmonth_right = yearmonth,\n\t\tArticle,\n\t\t{Code client_right} = {Code client},\n\t\t{Qté ventes directes} = {Qté facturée}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> RenameVentesDirectes\ninnerOrganisation, RenameVentesDirectes join(yearmonth == yearmonth_right\n\t&& {Réference} == Article\n\t&& POSSAMid == {Code client_right},\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> innerVentesDirectes\ninnerOrganisation, RenameVentesDirectes join(yearmonth == yearmonth_right\n\t&& {Réference} == Article\n\t&& POSSAMid == {Code client_right},\n\tjoinType:'left',\n\tbroadcast: 'auto')~> leftVentesDirectes\ninnerVentesDirectes derive(qte_ecoulement = qte_ecoulement-{Qté ventes directes}) ~> enleverVentesDirectes\nleftVentesDirectes filter(isNull(yearmonth) || isNull(Article) || isNull({Code client_right})) ~> outerleftVentesDirectes\nAddcolumn select(mapColumn(\n\t\t{Code postal},\n\t\tmarque_file = {fournisseur principal},\n\t\tarticle = produit,\n\t\tca_ecoulement = {Montant prv net},\n\t\t{Représentant},\n\t\tdepartement_id = {N° Département},\n\t\treference = {Réference},\n\t\tqte_ecoulement,\n\t\tyearmonth,\n\t\tyear,\n\t\tmonth,\n\t\tUnitID,\n\t\tCounty,\n\t\tPOSSAMidString,\n\t\tmarque_id = BrandID,\n\t\tHubSAPid,\n\t\tdistributeur\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> uniformisation\nenleverVentesDirectes, outerleftVentesDirectes union(byName: true)~> Union1\nUnion1 derive(canal = '',\n\t\tdistributeur = \"vf_confort\") ~> Addcolumn\nquantityNull sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['VFCONFORT_QTE_NULL'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> outputQuantityNull\nuniformisation sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\t{Région Statistique} as string,\n\t\tEnseigne as string,\n\t\t{Marque DESC} as string,\n\t\t{Marque Code} as string,\n\t\t{Sous Famille} as string,\n\t\t{Référence Article Fournisseur} as string,\n\t\t{Article National DESC} as string,\n\t\t{Article National Code} as string,\n\t\t{Agence Code} as string,\n\t\t{Agence DESC} as string,\n\t\t{Département DESC} as string,\n\t\t{Département ID} as string,\n\t\tSecteur as string,\n\t\t{Quantité en UV BL} as string,\n\t\t{Année Précédente (Quantité en UV BL)} as string,\n\t\t{Cumul Exercice (Quantité en UV BL)} as string,\n\t\t{Cumul Exercice A-1 (Quantité en UV BL)} as string,\n\t\t{MOIS CA PRR N} as string,\n\t\t{MOIS CA PRR N-1} as string,\n\t\t{CA PRR au cumul} as string,\n\t\t{CA PRR au cumul N-1} as string,\n\t\tfileName as string\n\t),\n\tpartitionFileNames:['VFCONFORT_ECOUL_PREPARED'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> output"
+		}
+	}
+}
