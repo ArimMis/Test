@@ -4,44 +4,44 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Data Factory name",
+			"metadata": "Nom de fabrique de données",
 			"defaultValue": "DF-VAILLANT"
 		},
 		"AzureBlobStorage1_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
+			"metadata": "Chaîne sécurisée pour « connectionString » de « AzureBlobStorage1 »"
 		},
 		"BASE COMMERCIALE_password": {
 			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'BASE COMMERCIALE'"
+			"metadata": "Chaîne sécurisée pour « password » de « BASE COMMERCIALE »"
 		},
 		"BLOB_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'BLOB'"
+			"metadata": "Chaîne sécurisée pour « connectionString » de « BLOB »"
 		},
 		"VAILLANT_ARCHITECTURE_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'VAILLANT_ARCHITECTURE'"
+			"metadata": "Chaîne sécurisée pour « connectionString » de « VAILLANT_ARCHITECTURE »"
 		},
 		"data transformation azure function_functionKey": {
 			"type": "secureString",
-			"metadata": "Secure string for 'functionKey' of 'data transformation azure function'"
+			"metadata": "Chaîne sécurisée pour « functionKey » de « data transformation azure function »"
 		},
 		"data_input_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'data_input'"
+			"metadata": "Chaîne sécurisée pour « connectionString » de « data_input »"
 		},
 		"data_mart_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'data_mart'"
+			"metadata": "Chaîne sécurisée pour « connectionString » de « data_mart »"
 		},
 		"datawarehouse_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'datawarehouse'"
+			"metadata": "Chaîne sécurisée pour « connectionString » de « datawarehouse »"
 		},
 		"entrydata_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'entrydata'"
+			"metadata": "Chaîne sécurisée pour « connectionString » de « entrydata »"
 		},
 		"BASE COMMERCIALE_properties_typeProperties_host": {
 			"type": "string",

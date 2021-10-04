@@ -4,44 +4,44 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Data Factory name",
+			"metadata": "Nom de fabrique de données",
 			"defaultValue": "DF-VAILLANT"
 		},
 		"AzureBlobStorage1_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
+			"metadata": "Chaîne sécurisée pour « connectionString » de « AzureBlobStorage1 »"
 		},
 		"BASE COMMERCIALE_password": {
 			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'BASE COMMERCIALE'"
+			"metadata": "Chaîne sécurisée pour « password » de « BASE COMMERCIALE »"
 		},
 		"BLOB_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'BLOB'"
+			"metadata": "Chaîne sécurisée pour « connectionString » de « BLOB »"
 		},
 		"VAILLANT_ARCHITECTURE_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'VAILLANT_ARCHITECTURE'"
+			"metadata": "Chaîne sécurisée pour « connectionString » de « VAILLANT_ARCHITECTURE »"
 		},
 		"data transformation azure function_functionKey": {
 			"type": "secureString",
-			"metadata": "Secure string for 'functionKey' of 'data transformation azure function'"
+			"metadata": "Chaîne sécurisée pour « functionKey » de « data transformation azure function »"
 		},
 		"data_input_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'data_input'"
+			"metadata": "Chaîne sécurisée pour « connectionString » de « data_input »"
 		},
 		"data_mart_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'data_mart'"
+			"metadata": "Chaîne sécurisée pour « connectionString » de « data_mart »"
 		},
 		"datawarehouse_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'datawarehouse'"
+			"metadata": "Chaîne sécurisée pour « connectionString » de « datawarehouse »"
 		},
 		"entrydata_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'entrydata'"
+			"metadata": "Chaîne sécurisée pour « connectionString » de « entrydata »"
 		},
 		"BASE COMMERCIALE_properties_typeProperties_host": {
 			"type": "string",
@@ -241,27 +241,6 @@
 							"waitOnCompletion": true,
 							"parameters": {}
 						}
-					},
-					{
-						"name": "CONTRAT DISTRIBUTION",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "PL_MAIN_BASE_COMMERCIAL",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "PL_CONTRAT_DISTRIBUTION",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
 					}
 				],
 				"policy": {
@@ -278,8 +257,7 @@
 				"[concat(variables('factoryId'), '/pipelines/MAIN_LOGISTIQUE')]",
 				"[concat(variables('factoryId'), '/dataflows/preparation_facturation')]",
 				"[concat(variables('factoryId'), '/pipelines/PL_MAIN_RH')]",
-				"[concat(variables('factoryId'), '/pipelines/SORTIE MARKETING')]",
-				"[concat(variables('factoryId'), '/pipelines/PL_CONTRAT_DISTRIBUTION')]"
+				"[concat(variables('factoryId'), '/pipelines/SORTIE MARKETING')]"
 			]
 		},
 		{
@@ -1077,50 +1055,6 @@
 							},
 							"traceLevel": "Fine"
 						}
-					},
-					{
-						"name": "CONTRAT DISTRIBUTION",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [
-							{
-								"activity": "CALCUL SEUIL",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "CALCUL REMUNERATION",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "CONTRAT_DISTRIBUTION",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"seuil": {},
-									"remuneration": {},
-									"output": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
 					}
 				],
 				"policy": {
@@ -1135,8 +1069,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/dataflows/CALCUL_SEUIL')]",
-				"[concat(variables('factoryId'), '/dataflows/CALCUL_REMUNERATION')]",
-				"[concat(variables('factoryId'), '/dataflows/CONTRAT_DISTRIBUTION')]"
+				"[concat(variables('factoryId'), '/dataflows/CALCUL_REMUNERATION')]"
 			]
 		},
 		{
@@ -5646,39 +5579,14 @@
 						"folderPath": "Temp",
 						"container": "data-warehouse"
 					},
-					"columnDelimiter": ";",
-					"encodingName": "WINDOWS-1252",
+					"columnDelimiter": ",",
 					"escapeChar": "\\",
 					"firstRowAsHeader": true,
 					"quoteChar": "\""
 				},
 				"schema": [
 					{
-						"name": "ID contrat cadre",
-						"type": "String"
-					},
-					{
-						"name": "ID contrat",
-						"type": "String"
-					},
-					{
-						"name": "ID levier",
-						"type": "String"
-					},
-					{
-						"name": "year",
-						"type": "String"
-					},
-					{
-						"name": "ca",
-						"type": "String"
-					},
-					{
-						"name": "Réalisé",
-						"type": "String"
-					},
-					{
-						"name": "Somme quantité",
+						"name": "ID contrat cadre;ID contrat;ID levier;year;ca;R�alis�;Somme quantit�",
 						"type": "String"
 					}
 				]
@@ -30229,18 +30137,8 @@
 							"name": "output"
 						}
 					],
-					"transformations": [
-						{
-							"name": "innerJoin"
-						},
-						{
-							"name": "remunerationColumn"
-						},
-						{
-							"name": "Select1"
-						}
-					],
-					"script": "source(output(\n\t\tyear as string,\n\t\t{ID contrat cadre} as string,\n\t\t{ID contrat} as string,\n\t\t{ID levier} as string,\n\t\t{Max ID Seuil} as string,\n\t\t{Contrepartie seuil} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> seuil\nsource(output(\n\t\t{ID contrat cadre} as string,\n\t\t{ID contrat} as string,\n\t\t{ID levier} as string,\n\t\tyear as string,\n\t\tca as string,\n\t\t{Réalisé} as string,\n\t\t{Somme quantité} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> remuneration\nseuil, remuneration join(seuil@{ID contrat cadre} == remuneration@{ID contrat cadre}\n\t&& seuil@{ID contrat} == remuneration@{ID contrat}\n\t&& seuil@{ID levier} == remuneration@{ID levier},\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> innerJoin\nSelect1 derive({Rémunération} = toDouble({Réalisé})*toDouble({Contrepartie seuil})) ~> remunerationColumn\ninnerJoin select(mapColumn(\n\t\tyear = seuil@year,\n\t\t{ID contrat cadre} = seuil@{ID contrat cadre},\n\t\t{ID contrat} = seuil@{ID contrat},\n\t\t{ID levier} = seuil@{ID levier},\n\t\t{ID Seuil} = {Max ID Seuil},\n\t\t{Contrepartie seuil},\n\t\tca,\n\t\t{Réalisé},\n\t\t{Somme quantité}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nremunerationColumn sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['CONTRAT_DISTRIBUTION.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> output"
+					"transformations": [],
+					"script": "source(output(\n\t\tyear as string,\n\t\t{ID contrat cadre} as string,\n\t\t{ID contrat} as string,\n\t\t{ID levier} as string,\n\t\t{Max ID Seuil} as string,\n\t\t{Contrepartie seuil} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> seuil\nsource(output(\n\t\t{ID contrat cadre;ID contrat;ID levier;year;ca;R�alis�;Somme quantit�} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> remuneration\nseuil sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['CONTRAT_DISTRIBUTION.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> output"
 				}
 			},
 			"dependsOn": [

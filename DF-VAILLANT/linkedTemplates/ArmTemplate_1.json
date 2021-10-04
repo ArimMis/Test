@@ -4,7 +4,7 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Data Factory name",
+			"metadata": "Nom de fabrique de données",
 			"defaultValue": "DF-VAILLANT"
 		}
 	},
@@ -33,39 +33,14 @@
 						"folderPath": "Temp",
 						"container": "data-warehouse"
 					},
-					"columnDelimiter": ";",
-					"encodingName": "WINDOWS-1252",
+					"columnDelimiter": ",",
 					"escapeChar": "\\",
 					"firstRowAsHeader": true,
 					"quoteChar": "\""
 				},
 				"schema": [
 					{
-						"name": "ID contrat cadre",
-						"type": "String"
-					},
-					{
-						"name": "ID contrat",
-						"type": "String"
-					},
-					{
-						"name": "ID levier",
-						"type": "String"
-					},
-					{
-						"name": "year",
-						"type": "String"
-					},
-					{
-						"name": "ca",
-						"type": "String"
-					},
-					{
-						"name": "Réalisé",
-						"type": "String"
-					},
-					{
-						"name": "Somme quantité",
+						"name": "ID contrat cadre;ID contrat;ID levier;year;ca;R�alis�;Somme quantit�",
 						"type": "String"
 					}
 				]
