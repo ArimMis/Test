@@ -2,7 +2,7 @@
 	"name": "VerifBC",
 	"properties": {
 		"folder": {
-			"name": "Verification"
+			"name": "VERIFICATION"
 		},
 		"type": "MappingDataFlow",
 		"typeProperties": {

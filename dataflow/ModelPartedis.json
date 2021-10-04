@@ -2,7 +2,7 @@
 	"name": "ModelPartedis",
 	"properties": {
 		"folder": {
-			"name": "Verification/bkp"
+			"name": "VERIFICATION/bkp"
 		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
