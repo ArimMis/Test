@@ -17,15 +17,15 @@
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
-			"columnDelimiter": "|",
-			"encodingName": "WINDOWS-1252",
+			"columnDelimiter": ",",
+			"encodingName": "UTF-8",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": [
 			{
-				"name": " Org commerciale",
+				"name": " Org. commerciale",
 				"type": "String"
 			},
 			{
@@ -33,7 +33,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Secteur d'activité",
+				"name": "Secteur d'activitÃ©",
 				"type": "String"
 			},
 			{
@@ -49,11 +49,11 @@
 				"type": "String"
 			},
 			{
-				"name": "Agence commerciale corrigé",
+				"name": "Agence commerciale corrigÃ©",
 				"type": "String"
 			},
 			{
-				"name": "ATC Corrigé",
+				"name": "ATC CorrigÃ©",
 				"type": "String"
 			},
 			{
@@ -61,7 +61,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Recept de march",
+				"name": "RÃ©cept. de march.",
 				"type": "String"
 			},
 			{
@@ -69,11 +69,11 @@
 				"type": "String"
 			},
 			{
-				"name": "Type doc vente",
+				"name": " vente",
 				"type": "String"
 			},
 			{
-				"name": "Type de poste livraison",
+				"name": "Type de poste",
 				"type": "String"
 			},
 			{
@@ -105,7 +105,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Année civile",
+				"name": "AnnÃ©e civile",
 				"type": "String"
 			},
 			{
@@ -113,31 +113,31 @@
 				"type": "String"
 			},
 			{
-				"name": "Qté cdée",
+				"name": "QtÃ© cdÃ©e",
 				"type": "String"
 			},
 			{
-				"name": "CA cdé",
+				"name": "CA cdÃ©",
 				"type": "String"
 			},
 			{
-				"name": "Qté livrée",
+				"name": "QtÃ© livrÃ©e",
 				"type": "String"
 			},
 			{
-				"name": "CA livré",
+				"name": "CA livrÃ©",
 				"type": "String"
 			},
 			{
-				"name": "Qté facturée",
+				"name": "QtÃ© facturÃ©e",
 				"type": "String"
 			},
 			{
-				"name": "CA facturé",
+				"name": "CA facturÃ©",
 				"type": "String"
 			},
 			{
-				"name": "Cout standard cdé",
+				"name": "Cout standard cdÃ©",
 				"type": "String"
 			},
 			{
@@ -145,11 +145,11 @@
 				"type": "String"
 			},
 			{
-				"name": "Cout standard livré",
+				"name": "Cout standard livrÃ©",
 				"type": "String"
 			},
 			{
-				"name": "Cout standard facturé",
+				"name": "Cout standard facturÃ©",
 				"type": "String"
 			},
 			{
@@ -162,6 +162,10 @@
 			},
 			{
 				"name": "yearmonth",
+				"type": "String"
+			},
+			{
+				"name": "fact_filter",
 				"type": "String"
 			},
 			{
@@ -189,23 +193,27 @@
 				"type": "String"
 			},
 			{
+				"name": "cout_standard_cd_",
+				"type": "String"
+			},
+			{
+				"name": "cout_fabrication",
+				"type": "String"
+			},
+			{
+				"name": "cout_standard_livr_",
+				"type": "String"
+			},
+			{
+				"name": "cout_standard_factur_",
+				"type": "String"
+			},
+			{
 				"name": "year_month",
 				"type": "String"
 			},
 			{
 				"name": "reference",
-				"type": "String"
-			},
-			{
-				"name": "article",
-				"type": "String"
-			},
-			{
-				"name": "prix_unitaire_std",
-				"type": "String"
-			},
-			{
-				"name": "date_upload",
 				"type": "String"
 			},
 			{
