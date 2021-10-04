@@ -1,0 +1,27 @@
+{
+	"name": "VanMarkes",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "entreVan1"
+				},
+				{
+					"name": "entreeVan"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SVanMarkes",
+						"type": "DatasetReference"
+					},
+					"name": "SortieVanMarkes"
+				}
+			],
+			"transformations": [],
+			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false) ~> entreVan1\nsource(allowSchemaDrift: true,\n\tvalidateSchema: false) ~> entreeVan\nentreVan1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SortieVanMarkes"
+		}
+	}
+}
