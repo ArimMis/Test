@@ -1,0 +1,426 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Nom de fabrique de données",
+			"defaultValue": "DF-VAILLANT"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"type": "secureString",
+			"metadata": "Chaîne sécurisée pour « connectionString » de « AzureBlobStorage1 »"
+		},
+		"BASE COMMERCIALE_password": {
+			"type": "secureString",
+			"metadata": "Chaîne sécurisée pour « password » de « BASE COMMERCIALE »"
+		},
+		"BLOB_connectionString": {
+			"type": "secureString",
+			"metadata": "Chaîne sécurisée pour « connectionString » de « BLOB »"
+		},
+		"VAILLANT_ARCHITECTURE_connectionString": {
+			"type": "secureString",
+			"metadata": "Chaîne sécurisée pour « connectionString » de « VAILLANT_ARCHITECTURE »"
+		},
+		"data transformation azure function_functionKey": {
+			"type": "secureString",
+			"metadata": "Chaîne sécurisée pour « functionKey » de « data transformation azure function »"
+		},
+		"data_input_connectionString": {
+			"type": "secureString",
+			"metadata": "Chaîne sécurisée pour « connectionString » de « data_input »"
+		},
+		"data_mart_connectionString": {
+			"type": "secureString",
+			"metadata": "Chaîne sécurisée pour « connectionString » de « data_mart »"
+		},
+		"datawarehouse_connectionString": {
+			"type": "secureString",
+			"metadata": "Chaîne sécurisée pour « connectionString » de « datawarehouse »"
+		},
+		"entrydata_connectionString": {
+			"type": "secureString",
+			"metadata": "Chaîne sécurisée pour « connectionString » de « entrydata »"
+		},
+		"BASE COMMERCIALE_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "C:\\Users\\h4h\\Desktop\\Projet H4H\\VAILLANT\\ALTERYX\\-vaillant_pilotage_commerciale\\data_warehouse"
+		},
+		"BASE COMMERCIALE_properties_typeProperties_userId": {
+			"type": "string",
+			"defaultValue": "MiradoMick"
+		},
+		"data transformation azure function_properties_typeProperties_functionAppUrl": {
+			"type": "string",
+			"defaultValue": "https://fa-datafacto-transfo-fr.azurewebsites.net"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI pour le compte de stockage contenant des modèles ARM liés"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Jeton SAS pour le compte de stockage contenant des modèles ARM liés"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "DF-VAILLANT_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorage1_connectionString": {
+						"value": "[parameters('AzureBlobStorage1_connectionString')]"
+					},
+					"BASE COMMERCIALE_password": {
+						"value": "[parameters('BASE COMMERCIALE_password')]"
+					},
+					"BLOB_connectionString": {
+						"value": "[parameters('BLOB_connectionString')]"
+					},
+					"VAILLANT_ARCHITECTURE_connectionString": {
+						"value": "[parameters('VAILLANT_ARCHITECTURE_connectionString')]"
+					},
+					"data transformation azure function_functionKey": {
+						"value": "[parameters('data transformation azure function_functionKey')]"
+					},
+					"data_input_connectionString": {
+						"value": "[parameters('data_input_connectionString')]"
+					},
+					"data_mart_connectionString": {
+						"value": "[parameters('data_mart_connectionString')]"
+					},
+					"datawarehouse_connectionString": {
+						"value": "[parameters('datawarehouse_connectionString')]"
+					},
+					"entrydata_connectionString": {
+						"value": "[parameters('entrydata_connectionString')]"
+					},
+					"BASE COMMERCIALE_properties_typeProperties_host": {
+						"value": "[parameters('BASE COMMERCIALE_properties_typeProperties_host')]"
+					},
+					"BASE COMMERCIALE_properties_typeProperties_userId": {
+						"value": "[parameters('BASE COMMERCIALE_properties_typeProperties_userId')]"
+					},
+					"data transformation azure function_properties_typeProperties_functionAppUrl": {
+						"value": "[parameters('data transformation azure function_properties_typeProperties_functionAppUrl')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "DF-VAILLANT_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'DF-VAILLANT_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "DF-VAILLANT_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'DF-VAILLANT_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "DF-VAILLANT_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'DF-VAILLANT_ArmTemplate_2')]"
+			]
+		},
+		{
+			"name": "DF-VAILLANT_ArmTemplate_4",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_4.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'DF-VAILLANT_ArmTemplate_3')]"
+			]
+		},
+		{
+			"name": "DF-VAILLANT_ArmTemplate_5",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_5.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'DF-VAILLANT_ArmTemplate_4')]"
+			]
+		},
+		{
+			"name": "DF-VAILLANT_ArmTemplate_6",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_6.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'DF-VAILLANT_ArmTemplate_5')]"
+			]
+		},
+		{
+			"name": "DF-VAILLANT_ArmTemplate_7",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_7.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'DF-VAILLANT_ArmTemplate_6')]"
+			]
+		},
+		{
+			"name": "DF-VAILLANT_ArmTemplate_8",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_8.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'DF-VAILLANT_ArmTemplate_7')]"
+			]
+		},
+		{
+			"name": "DF-VAILLANT_ArmTemplate_9",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_9.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'DF-VAILLANT_ArmTemplate_8')]"
+			]
+		},
+		{
+			"name": "DF-VAILLANT_ArmTemplate_10",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_10.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'DF-VAILLANT_ArmTemplate_9')]"
+			]
+		},
+		{
+			"name": "DF-VAILLANT_ArmTemplate_11",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_11.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'DF-VAILLANT_ArmTemplate_10')]"
+			]
+		},
+		{
+			"name": "DF-VAILLANT_ArmTemplate_12",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_12.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'DF-VAILLANT_ArmTemplate_11')]"
+			]
+		},
+		{
+			"name": "DF-VAILLANT_ArmTemplate_13",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_13.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'DF-VAILLANT_ArmTemplate_12')]"
+			]
+		},
+		{
+			"name": "DF-VAILLANT_ArmTemplate_14",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_14.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'DF-VAILLANT_ArmTemplate_13')]"
+			]
+		},
+		{
+			"name": "DF-VAILLANT_ArmTemplate_15",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_15.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'DF-VAILLANT_ArmTemplate_14')]"
+			]
+		}
+	]
+}

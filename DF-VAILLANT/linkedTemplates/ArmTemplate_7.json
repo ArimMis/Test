@@ -1,0 +1,2394 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Nom de fabrique de données",
+			"defaultValue": "DF-VAILLANT"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/VENTES_DIRECTES_PREPARED')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "VENTES DIRECTES"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "VENTES_DIRECTES_PREPARATION",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "yearmonth",
+						"type": "String"
+					},
+					{
+						"name": "Article",
+						"type": "String"
+					},
+					{
+						"name": "Code client",
+						"type": "String"
+					},
+					{
+						"name": "Qt� vente directe",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/VFCONFORT_ECOULEMENT_PREPARED')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT/VF CONFORT"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Région Statistique",
+						"type": "String"
+					},
+					{
+						"name": "Enseigne",
+						"type": "String"
+					},
+					{
+						"name": "Marque DESC",
+						"type": "String"
+					},
+					{
+						"name": "Marque Code",
+						"type": "String"
+					},
+					{
+						"name": "Sous Famille",
+						"type": "String"
+					},
+					{
+						"name": "Référence Article Fournisseur",
+						"type": "String"
+					},
+					{
+						"name": "Article National DESC",
+						"type": "String"
+					},
+					{
+						"name": "Article National Code",
+						"type": "String"
+					},
+					{
+						"name": "Agence Code",
+						"type": "String"
+					},
+					{
+						"name": "Agence DESC",
+						"type": "String"
+					},
+					{
+						"name": "Département DESC",
+						"type": "String"
+					},
+					{
+						"name": "Département ID",
+						"type": "String"
+					},
+					{
+						"name": "Secteur",
+						"type": "String"
+					},
+					{
+						"name": "Quantité en UV BL",
+						"type": "String"
+					},
+					{
+						"name": "Année Précédente (Quantité en UV BL)",
+						"type": "String"
+					},
+					{
+						"name": "Cumul Exercice (Quantité en UV BL)",
+						"type": "String"
+					},
+					{
+						"name": "Cumul Exercice A-1 (Quantité en UV BL)",
+						"type": "String"
+					},
+					{
+						"name": "MOIS CA PRR N",
+						"type": "String"
+					},
+					{
+						"name": "MOIS CA PRR N-1",
+						"type": "String"
+					},
+					{
+						"name": "CA PRR au cumul",
+						"type": "String"
+					},
+					{
+						"name": "CA PRR au cumul N-1",
+						"type": "String"
+					},
+					{
+						"name": "fileName",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/VFCONFORT_PREPARED')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT/VF CONFORT"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "VFCONFORT_ECOUL_PREPARED",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Code postal",
+						"type": "String"
+					},
+					{
+						"name": "marque_file",
+						"type": "String"
+					},
+					{
+						"name": "article",
+						"type": "String"
+					},
+					{
+						"name": "ca_ecoulement",
+						"type": "String"
+					},
+					{
+						"name": "Représentant",
+						"type": "String"
+					},
+					{
+						"name": "departement_id",
+						"type": "String"
+					},
+					{
+						"name": "reference",
+						"type": "String"
+					},
+					{
+						"name": "qte_ecoulement",
+						"type": "String"
+					},
+					{
+						"name": "yearmonth",
+						"type": "String"
+					},
+					{
+						"name": "year",
+						"type": "String"
+					},
+					{
+						"name": "month",
+						"type": "String"
+					},
+					{
+						"name": "UnitID",
+						"type": "String"
+					},
+					{
+						"name": "County",
+						"type": "String"
+					},
+					{
+						"name": "POSSAMidString",
+						"type": "String"
+					},
+					{
+						"name": "marque_id",
+						"type": "String"
+					},
+					{
+						"name": "HubSAPid",
+						"type": "String"
+					},
+					{
+						"name": "distributeur",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/VenteDirect')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "VENTE DIRECT BASE COMM"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Sheet1",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "ventedirectTemp.xlsx",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Org. commerciale",
+						"type": "String"
+					},
+					{
+						"name": "Canal distribution",
+						"type": "String"
+					},
+					{
+						"name": "Secteur d'activité",
+						"type": "String"
+					},
+					{
+						"name": "Document de vente",
+						"type": "String"
+					},
+					{
+						"name": "Poste",
+						"type": "String"
+					},
+					{
+						"name": "Jour calendaire",
+						"type": "String"
+					},
+					{
+						"name": "Agence commerciale corrigé",
+						"type": "String"
+					},
+					{
+						"name": "ATC Corrigé",
+						"type": "String"
+					},
+					{
+						"name": "Donneur d'ordre",
+						"type": "String"
+					},
+					{
+						"name": "Récept. de march.",
+						"type": "String"
+					},
+					{
+						"name": "Destinataire facture",
+						"type": "String"
+					},
+					{
+						"name": "Article",
+						"type": "String"
+					},
+					{
+						"name": "Type doc. vente",
+						"type": "String"
+					},
+					{
+						"name": "Type de poste",
+						"type": "String"
+					},
+					{
+						"name": "Livraison",
+						"type": "String"
+					},
+					{
+						"name": "Type de livraison",
+						"type": "String"
+					},
+					{
+						"name": "Type poste Livraison",
+						"type": "String"
+					},
+					{
+						"name": "Facture",
+						"type": "String"
+					},
+					{
+						"name": "Type de facture",
+						"type": "String"
+					},
+					{
+						"name": "Type poste Facture",
+						"type": "String"
+					},
+					{
+						"name": "Mois calendrier",
+						"type": "String"
+					},
+					{
+						"name": "Année civile",
+						"type": "String"
+					},
+					{
+						"name": "Motif commande",
+						"type": "String"
+					},
+					{
+						"name": "Qté cdée",
+						"type": "String"
+					},
+					{
+						"name": "CA cdé",
+						"type": "String"
+					},
+					{
+						"name": "Qté livrée",
+						"type": "String"
+					},
+					{
+						"name": "CA livré",
+						"type": "String"
+					},
+					{
+						"name": "Qté facturée",
+						"type": "String"
+					},
+					{
+						"name": "CA facturé",
+						"type": "String"
+					},
+					{
+						"name": "Cout standard cdé",
+						"type": "String"
+					},
+					{
+						"name": "Cout fabrication",
+						"type": "String"
+					},
+					{
+						"name": "Cout standard livré",
+						"type": "String"
+					},
+					{
+						"name": "Cout standard facturé",
+						"type": "String"
+					},
+					{
+						"name": "date_id",
+						"type": "String"
+					},
+					{
+						"name": "year",
+						"type": "String"
+					},
+					{
+						"name": "yearmonth",
+						"type": "String"
+					},
+					{
+						"name": "qt_cd_e",
+						"type": "String"
+					},
+					{
+						"name": "ca_cd_",
+						"type": "String"
+					},
+					{
+						"name": "qt_livr_e",
+						"type": "String"
+					},
+					{
+						"name": "ca_livr_",
+						"type": "String"
+					},
+					{
+						"name": "qt_factur_e",
+						"type": "String"
+					},
+					{
+						"name": "ca_factur_",
+						"type": "String"
+					},
+					{
+						"name": "year_month",
+						"type": "String"
+					},
+					{
+						"name": "reference",
+						"type": "String"
+					},
+					{
+						"name": "prix_unitaire_std",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/afctationflows')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "atc_affectation_lower",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Clé Référentiel",
+						"type": "String"
+					},
+					{
+						"name": "Recherche Clé EPS",
+						"type": "String"
+					},
+					{
+						"name": "Marque",
+						"type": "String"
+					},
+					{
+						"name": "Code Postal début",
+						"type": "String"
+					},
+					{
+						"name": "Code Postal fin",
+						"type": "String"
+					},
+					{
+						"name": "Utilisateur",
+						"type": "String"
+					},
+					{
+						"name": "Fonction",
+						"type": "String"
+					},
+					{
+						"name": "Département",
+						"type": "String"
+					},
+					{
+						"name": "DR",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/allECoulementPrepared')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "BASE_COMMERCIAL"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Fournisseur",
+						"type": "String"
+					},
+					{
+						"name": "Coopérative",
+						"type": "String"
+					},
+					{
+						"name": "Référence",
+						"type": "String"
+					},
+					{
+						"name": "Désignation",
+						"type": "String"
+					},
+					{
+						"name": "Mois",
+						"type": "String"
+					},
+					{
+						"name": "path",
+						"type": "String"
+					},
+					{
+						"name": "qte_ecoulement",
+						"type": "String"
+					},
+					{
+						"name": "REFFOURNISSEUR",
+						"type": "String"
+					},
+					{
+						"name": "year",
+						"type": "String"
+					},
+					{
+						"name": "month",
+						"type": "String"
+					},
+					{
+						"name": "yearmonth",
+						"type": "String"
+					},
+					{
+						"name": "Nom Coopérative",
+						"type": "String"
+					},
+					{
+						"name": "HubSAPid",
+						"type": "String"
+					},
+					{
+						"name": "POSSAMid",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/allUnionedDistributor')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "OTHER"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Région Statistique",
+						"type": "String"
+					},
+					{
+						"name": "Enseigne",
+						"type": "String"
+					},
+					{
+						"name": "Marque DESC",
+						"type": "String"
+					},
+					{
+						"name": "Marque Code",
+						"type": "String"
+					},
+					{
+						"name": "Sous Famille",
+						"type": "String"
+					},
+					{
+						"name": "Référence Article Fournisseur",
+						"type": "String"
+					},
+					{
+						"name": "Article National DESC",
+						"type": "String"
+					},
+					{
+						"name": "Article National Code",
+						"type": "String"
+					},
+					{
+						"name": "Agence Code",
+						"type": "String"
+					},
+					{
+						"name": "Agence DESC",
+						"type": "String"
+					},
+					{
+						"name": "Département DESC",
+						"type": "String"
+					},
+					{
+						"name": "Département ID",
+						"type": "String"
+					},
+					{
+						"name": "Secteur",
+						"type": "String"
+					},
+					{
+						"name": "Quantité en UV BL",
+						"type": "String"
+					},
+					{
+						"name": "Année Précédente (Quantité en UV BL)",
+						"type": "String"
+					},
+					{
+						"name": "Cumul Exercice (Quantité en UV BL)",
+						"type": "String"
+					},
+					{
+						"name": "Cumul Exercice A-1 (Quantité en UV BL)",
+						"type": "String"
+					},
+					{
+						"name": "MOIS CA PRR N",
+						"type": "String"
+					},
+					{
+						"name": "MOIS CA PRR N-1",
+						"type": "String"
+					},
+					{
+						"name": "CA PRR au cumul",
+						"type": "String"
+					},
+					{
+						"name": "CA PRR au cumul N-1",
+						"type": "String"
+					},
+					{
+						"name": "fileName",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/article_hierarchi')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT/UNION_ALL_DISTRIBUTOR"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "HIERARCHIE_ARTICLE",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "OrgCm",
+						"type": "String"
+					},
+					{
+						"name": "CDis",
+						"type": "String"
+					},
+					{
+						"name": "Article",
+						"type": "String"
+					},
+					{
+						"name": "Description",
+						"type": "String"
+					},
+					{
+						"name": "Hiérarch.groupe",
+						"type": "String"
+					},
+					{
+						"name": "Hiérarch.locale",
+						"type": "String"
+					},
+					{
+						"name": "Predecessor",
+						"type": "String"
+					},
+					{
+						"name": "Successor",
+						"type": "String"
+					},
+					{
+						"name": "St",
+						"type": "String"
+					},
+					{
+						"name": "Désignation Statut",
+						"type": "String"
+					},
+					{
+						"name": "Déb. val.",
+						"type": "String"
+					},
+					{
+						"name": "N1.groupe",
+						"type": "String"
+					},
+					{
+						"name": "N2.groupe",
+						"type": "String"
+					},
+					{
+						"name": "N3.groupe",
+						"type": "String"
+					},
+					{
+						"name": "N4.groupe",
+						"type": "String"
+					},
+					{
+						"name": "N5.groupe",
+						"type": "String"
+					},
+					{
+						"name": "N6.groupe",
+						"type": "String"
+					},
+					{
+						"name": "N7.groupe",
+						"type": "String"
+					},
+					{
+						"name": "N1.locale",
+						"type": "String"
+					},
+					{
+						"name": "N2.locale",
+						"type": "String"
+					},
+					{
+						"name": "N3.locale",
+						"type": "String"
+					},
+					{
+						"name": "N4.locale",
+						"type": "String"
+					},
+					{
+						"name": "N5.locale",
+						"type": "String"
+					},
+					{
+						"name": "N6.locale",
+						"type": "String"
+					},
+					{
+						"name": "N7.locale",
+						"type": "String"
+					},
+					{
+						"name": "N1.groupe.designation",
+						"type": "String"
+					},
+					{
+						"name": "N2.groupe.designation",
+						"type": "String"
+					},
+					{
+						"name": "N3.groupe.designation",
+						"type": "String"
+					},
+					{
+						"name": "N4.groupe.designation",
+						"type": "String"
+					},
+					{
+						"name": "N5.groupe.designation",
+						"type": "String"
+					},
+					{
+						"name": "N6.groupe.designation",
+						"type": "String"
+					},
+					{
+						"name": "N7.groupe.designation",
+						"type": "String"
+					},
+					{
+						"name": "N1.locale.designation",
+						"type": "String"
+					},
+					{
+						"name": "N2.locale.designation",
+						"type": "String"
+					},
+					{
+						"name": "N3.locale.designation",
+						"type": "String"
+					},
+					{
+						"name": "N4.locale.designation",
+						"type": "String"
+					},
+					{
+						"name": "N5.locale.designation",
+						"type": "String"
+					},
+					{
+						"name": "N6.locale.designation",
+						"type": "String"
+					},
+					{
+						"name": "N7.locale.designation",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/associationoffre')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "VENTE DIRECT BASE COMM"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Sheet1",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "ArticulationSap.xlsx",
+						"folderPath": "Offre",
+						"container": "data-input"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Commande",
+						"type": "String"
+					},
+					{
+						"name": "Référence Offre BA",
+						"type": "String"
+					},
+					{
+						"name": "Qté Cdée",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/atc_affectation_lower')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "REFERENTIEL_ATC"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/atc_c2021_lower')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "REFERENTIEL_ATC"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/atc_joined')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "REFERENTIEL_ATC"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Sheet1",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "atc_fuzzyjoined.xlsx",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Clé Référentiel",
+						"type": "String"
+					},
+					{
+						"name": "Recherche Clé EPS",
+						"type": "String"
+					},
+					{
+						"name": "Marque",
+						"type": "String"
+					},
+					{
+						"name": "Code Postal début",
+						"type": "String"
+					},
+					{
+						"name": "Code Postal fin",
+						"type": "String"
+					},
+					{
+						"name": "Utilisateur",
+						"type": "String"
+					},
+					{
+						"name": "Fonction",
+						"type": "String"
+					},
+					{
+						"name": "Département",
+						"type": "String"
+					},
+					{
+						"name": "DR_x",
+						"type": "String"
+					},
+					{
+						"name": "matches",
+						"type": "String"
+					},
+					{
+						"name": "ATC",
+						"type": "String"
+					},
+					{
+						"name": "NomATC",
+						"type": "String"
+					},
+					{
+						"name": "Plan primes",
+						"type": "String"
+					},
+					{
+						"name": "DR_y",
+						"type": "String"
+					},
+					{
+						"name": "Secteur prime",
+						"type": "String"
+					},
+					{
+						"name": "Matricule",
+						"type": "String"
+					},
+					{
+						"name": "Secteur DEC",
+						"type": "String"
+					},
+					{
+						"name": "Rallye",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/atc_replicated')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "REFERENTIEL_ATC"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Sheet1",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "atc_replicated.xlsx",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Clé Référentiel",
+						"type": "String"
+					},
+					{
+						"name": "Recherche Clé EPS",
+						"type": "String"
+					},
+					{
+						"name": "Marque",
+						"type": "String"
+					},
+					{
+						"name": "Code Postal début",
+						"type": "String"
+					},
+					{
+						"name": "Code Postal fin",
+						"type": "String"
+					},
+					{
+						"name": "Utilisateur",
+						"type": "String"
+					},
+					{
+						"name": "Fonction",
+						"type": "String"
+					},
+					{
+						"name": "Département",
+						"type": "String"
+					},
+					{
+						"name": "DR_x",
+						"type": "String"
+					},
+					{
+						"name": "matches",
+						"type": "String"
+					},
+					{
+						"name": "ATC",
+						"type": "String"
+					},
+					{
+						"name": "NomATC",
+						"type": "String"
+					},
+					{
+						"name": "Plan primes",
+						"type": "String"
+					},
+					{
+						"name": "DR_y",
+						"type": "String"
+					},
+					{
+						"name": "Secteur prime",
+						"type": "String"
+					},
+					{
+						"name": "Matricule",
+						"type": "String"
+					},
+					{
+						"name": "Secteur DEC",
+						"type": "String"
+					},
+					{
+						"name": "Rallye",
+						"type": "String"
+					},
+					{
+						"name": "Canal final",
+						"type": "String"
+					},
+					{
+						"name": "toreplicate",
+						"type": "String"
+					},
+					{
+						"name": "order",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/atcc2021')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "atc_c2021_lower",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "ATC",
+						"type": "String"
+					},
+					{
+						"name": "NomATC",
+						"type": "String"
+					},
+					{
+						"name": "Plan primes",
+						"type": "String"
+					},
+					{
+						"name": "DR",
+						"type": "String"
+					},
+					{
+						"name": "Secteur prime",
+						"type": "String"
+					},
+					{
+						"name": "Matricule",
+						"type": "String"
+					},
+					{
+						"name": "Secteur DEC",
+						"type": "String"
+					},
+					{
+						"name": "Rallye",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/avoir')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "data_mart",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "test_base_commercial"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "4.Avoirs validés",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Avoir Validés.xlsx",
+						"container": "datawarehouse"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Clé",
+						"type": "String"
+					},
+					{
+						"name": "Marque",
+						"type": "String"
+					},
+					{
+						"name": "Mois_Selection",
+						"type": "String"
+					},
+					{
+						"name": "Code_depot",
+						"type": "String"
+					},
+					{
+						"name": "Depot",
+						"type": "String"
+					},
+					{
+						"name": "NoFrs",
+						"type": "String"
+					},
+					{
+						"name": "FOUR2",
+						"type": "String"
+					},
+					{
+						"name": "C_Four",
+						"type": "String"
+					},
+					{
+						"name": "Lib_Four",
+						"type": "String"
+					},
+					{
+						"name": "Categorie",
+						"type": "String"
+					},
+					{
+						"name": "Canal",
+						"type": "String"
+					},
+					{
+						"name": "Financement",
+						"type": "String"
+					},
+					{
+						"name": "NoOffre",
+						"type": "String"
+					},
+					{
+						"name": "Date_Debut",
+						"type": "String"
+					},
+					{
+						"name": "Date_Fin",
+						"type": "String"
+					},
+					{
+						"name": "NoArtDSC",
+						"type": "String"
+					},
+					{
+						"name": "LibArt",
+						"type": "String"
+					},
+					{
+						"name": "NoArtVGF",
+						"type": "String"
+					},
+					{
+						"name": "Agence",
+						"type": "String"
+					},
+					{
+						"name": "LIB AGENCE",
+						"type": "String"
+					},
+					{
+						"name": "Qté_Ini",
+						"type": "String"
+					},
+					{
+						"name": "Solde_Qte",
+						"type": "String"
+					},
+					{
+						"name": "Qte_Tot",
+						"type": "String"
+					},
+					{
+						"name": "Qte_Retenue",
+						"type": "String"
+					},
+					{
+						"name": "Qte_Validee_VGF",
+						"type": "String"
+					},
+					{
+						"name": "NoCli",
+						"type": "String"
+					},
+					{
+						"name": "NomCli",
+						"type": "String"
+					},
+					{
+						"name": "PRR",
+						"type": "String"
+					},
+					{
+						"name": "PRS_ligne_BL",
+						"type": "String"
+					},
+					{
+						"name": "PA_Ref",
+						"type": "String"
+					},
+					{
+						"name": "PA_D",
+						"type": "String"
+					},
+					{
+						"name": "PA_Valide_VGF",
+						"type": "String"
+					},
+					{
+						"name": "Ecart",
+						"type": "String"
+					},
+					{
+						"name": "Aide",
+						"type": "String"
+					},
+					{
+						"name": "Aide_Retenue",
+						"type": "String"
+					},
+					{
+						"name": "Aide_Validée_VGF",
+						"type": "String"
+					},
+					{
+						"name": "Date_Num",
+						"type": "String"
+					},
+					{
+						"name": "P_Fact",
+						"type": "String"
+					},
+					{
+						"name": "Clé_Offre_Article",
+						"type": "String"
+					},
+					{
+						"name": "Motif_Commentaire",
+						"type": "String"
+					},
+					{
+						"name": "Qté_Campagne",
+						"type": "String"
+					},
+					{
+						"name": "Prix_Campagne",
+						"type": "String"
+					},
+					{
+						"name": "Mois",
+						"type": "String"
+					},
+					{
+						"name": "Année",
+						"type": "String"
+					},
+					{
+						"name": "Montant_Avoir",
+						"type": "String"
+					},
+					{
+						"name": "NoDocRefac",
+						"type": "String"
+					},
+					{
+						"name": "NoLigneDocRefac",
+						"type": "String"
+					},
+					{
+						"name": "Contrôle",
+						"type": "String"
+					},
+					{
+						"name": "Date_Ctrl",
+						"type": "String"
+					},
+					{
+						"name": "Code_Motif_Refus",
+						"type": "String"
+					},
+					{
+						"name": "CompanyId",
+						"type": "String"
+					},
+					{
+						"name": "ValidéPar",
+						"type": "String"
+					},
+					{
+						"name": "DateAjout",
+						"type": "String"
+					},
+					{
+						"name": "ID ATC",
+						"type": "String"
+					},
+					{
+						"name": "Nom ATC",
+						"type": "String"
+					},
+					{
+						"name": "HubSAPid",
+						"type": "String"
+					},
+					{
+						"name": "Nouveau Prix vente unitaire",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/avoirReplicated')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "OTHER"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Sheet1",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "avoir_replicated.xlsx",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Mois_Selection",
+						"type": "String"
+					},
+					{
+						"name": "NoOffre",
+						"type": "String"
+					},
+					{
+						"name": "NoArtVGF",
+						"type": "String"
+					},
+					{
+						"name": "Agence",
+						"type": "String"
+					},
+					{
+						"name": "Qte_Validee_VGF",
+						"type": "String"
+					},
+					{
+						"name": "NoCli",
+						"type": "String"
+					},
+					{
+						"name": "PA_Valide_VGF",
+						"type": "String"
+					},
+					{
+						"name": "Mois",
+						"type": "String"
+					},
+					{
+						"name": "Année",
+						"type": "String"
+					},
+					{
+						"name": "CompanyId",
+						"type": "String"
+					},
+					{
+						"name": "HubSAPid",
+						"type": "String"
+					},
+					{
+						"name": "toreplicate",
+						"type": "String"
+					},
+					{
+						"name": "ca_avoir",
+						"type": "String"
+					},
+					{
+						"name": "yearmonth",
+						"type": "String"
+					},
+					{
+						"name": "POSid",
+						"type": "String"
+					},
+					{
+						"name": "WholeSalerID",
+						"type": "String"
+					},
+					{
+						"name": "order",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/avoirToReplicate')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "MODEL PARTEDIS"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "yearmonth",
+						"type": "String"
+					},
+					{
+						"name": "qte_ecoulement",
+						"type": "String"
+					},
+					{
+						"name": "ca_ecoulement",
+						"type": "String"
+					},
+					{
+						"name": "POSSAMidString",
+						"type": "String"
+					},
+					{
+						"name": "HubSAPid",
+						"type": "String"
+					},
+					{
+						"name": "reference",
+						"type": "String"
+					},
+					{
+						"name": "distributeur",
+						"type": "String"
+					},
+					{
+						"name": "Code postal",
+						"type": "String"
+					},
+					{
+						"name": "marque_name",
+						"type": "String"
+					},
+					{
+						"name": "is_prix_dsc",
+						"type": "String"
+					},
+					{
+						"name": "qte_ecc",
+						"type": "String"
+					},
+					{
+						"name": "Canal distribution",
+						"type": "String"
+					},
+					{
+						"name": "Secteur d'activit�",
+						"type": "String"
+					},
+					{
+						"name": "document_vente",
+						"type": "String"
+					},
+					{
+						"name": "Jour calendaire",
+						"type": "String"
+					},
+					{
+						"name": "Agence commerciale corrig�",
+						"type": "String"
+					},
+					{
+						"name": "Donneur d'ordre",
+						"type": "String"
+					},
+					{
+						"name": "R�cept. de march.",
+						"type": "String"
+					},
+					{
+						"name": "Right_reference",
+						"type": "String"
+					},
+					{
+						"name": "Facture",
+						"type": "String"
+					},
+					{
+						"name": "Type poste Facture",
+						"type": "String"
+					},
+					{
+						"name": "Qt� factur�e",
+						"type": "String"
+					},
+					{
+						"name": "CA factur�",
+						"type": "String"
+					},
+					{
+						"name": "Right_HubSAPid",
+						"type": "String"
+					},
+					{
+						"name": "Type_Facturation�",
+						"type": "String"
+					},
+					{
+						"name": "qt_fact",
+						"type": "String"
+					},
+					{
+						"name": "ca_final",
+						"type": "String"
+					},
+					{
+						"name": "qt_final",
+						"type": "String"
+					},
+					{
+						"name": "data_origin",
+						"type": "String"
+					},
+					{
+						"name": "canal_final",
+						"type": "String"
+					},
+					{
+						"name": "Commande",
+						"type": "String"
+					},
+					{
+						"name": "no_offre",
+						"type": "String"
+					},
+					{
+						"name": "ATC Performance",
+						"type": "String"
+					},
+					{
+						"name": "canal",
+						"type": "String"
+					},
+					{
+						"name": "RowCount",
+						"type": "String"
+					},
+					{
+						"name": "ATC",
+						"type": "String"
+					},
+					{
+						"name": "Canal final",
+						"type": "String"
+					},
+					{
+						"name": "code_postal_atc",
+						"type": "String"
+					},
+					{
+						"name": "NomATC",
+						"type": "String"
+					},
+					{
+						"name": "Matricule",
+						"type": "String"
+					},
+					{
+						"name": "date_id",
+						"type": "String"
+					},
+					{
+						"name": "HubName",
+						"type": "String"
+					},
+					{
+						"name": "id_canal_final",
+						"type": "String"
+					},
+					{
+						"name": "qte plateforme final",
+						"type": "String"
+					},
+					{
+						"name": "ca plateforme final",
+						"type": "String"
+					},
+					{
+						"name": "Sum_qt_factur_e",
+						"type": "String"
+					},
+					{
+						"name": "Sum_ca_factur_",
+						"type": "String"
+					},
+					{
+						"name": "Sum_ca_ecoulement",
+						"type": "String"
+					},
+					{
+						"name": "Sum_qte_ecoulement",
+						"type": "String"
+					},
+					{
+						"name": "code_depot",
+						"type": "String"
+					},
+					{
+						"name": "id_canal",
+						"type": "String"
+					},
+					{
+						"name": "marque_code",
+						"type": "String"
+					},
+					{
+						"name": "Document de vente",
+						"type": "String"
+					},
+					{
+						"name": "Type de facture",
+						"type": "String"
+					},
+					{
+						"name": "Client",
+						"type": "String"
+					},
+					{
+						"name": "Marque",
+						"type": "String"
+					},
+					{
+						"name": "ATC Corrig�",
+						"type": "String"
+					},
+					{
+						"name": "Motif commande",
+						"type": "String"
+					},
+					{
+						"name": "Org. commerciale",
+						"type": "String"
+					},
+					{
+						"name": "marque_id",
+						"type": "String"
+					},
+					{
+						"name": "Offre",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/baseCommercialOut')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ";",
+					"encodingName": "WINDOWS-1252",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Clé Référentiel",
+						"type": "String"
+					},
+					{
+						"name": "Recherche Clé EPS",
+						"type": "String"
+					},
+					{
+						"name": "Marque",
+						"type": "String"
+					},
+					{
+						"name": "Code Postal début",
+						"type": "String"
+					},
+					{
+						"name": "Code Postal fin",
+						"type": "String"
+					},
+					{
+						"name": "Utilisateur",
+						"type": "String"
+					},
+					{
+						"name": "Fonction",
+						"type": "String"
+					},
+					{
+						"name": "Département",
+						"type": "String"
+					},
+					{
+						"name": "DR_x",
+						"type": "String"
+					},
+					{
+						"name": "matches",
+						"type": "String"
+					},
+					{
+						"name": "ATC",
+						"type": "String"
+					},
+					{
+						"name": "NomATC",
+						"type": "String"
+					},
+					{
+						"name": "Plan primes",
+						"type": "String"
+					},
+					{
+						"name": "DR_y",
+						"type": "String"
+					},
+					{
+						"name": "Secteur prime",
+						"type": "String"
+					},
+					{
+						"name": "Matricule",
+						"type": "String"
+					},
+					{
+						"name": "Secteur DEC",
+						"type": "String"
+					},
+					{
+						"name": "Rallye",
+						"type": "String"
+					},
+					{
+						"name": "Canal final",
+						"type": "String"
+					},
+					{
+						"name": "toreplicate",
+						"type": "String"
+					},
+					{
+						"name": "dd",
+						"type": "String"
+					},
+					{
+						"name": "Code postal",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/basecommercialUnion')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "BASE_COMMERCIAL"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "basecommercialUnion .csv",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "yearmonth",
+						"type": "String"
+					},
+					{
+						"name": "qte_ecoulement",
+						"type": "String"
+					},
+					{
+						"name": "ca_ecoulement",
+						"type": "String"
+					},
+					{
+						"name": "POSSAMidString",
+						"type": "String"
+					},
+					{
+						"name": "HubSAPid",
+						"type": "String"
+					},
+					{
+						"name": "reference",
+						"type": "String"
+					},
+					{
+						"name": "distributeur",
+						"type": "String"
+					},
+					{
+						"name": "Code postal",
+						"type": "String"
+					},
+					{
+						"name": "marque_name",
+						"type": "String"
+					},
+					{
+						"name": "is_prix_dsc",
+						"type": "String"
+					},
+					{
+						"name": "qte_ecc",
+						"type": "String"
+					},
+					{
+						"name": "Canal distribution",
+						"type": "String"
+					},
+					{
+						"name": "Secteur d'activit�",
+						"type": "String"
+					},
+					{
+						"name": "document_vente",
+						"type": "String"
+					},
+					{
+						"name": "Jour calendaire",
+						"type": "String"
+					},
+					{
+						"name": "Agence commerciale corrig�",
+						"type": "String"
+					},
+					{
+						"name": "Donneur d'ordre",
+						"type": "String"
+					},
+					{
+						"name": "R�cept. de march.",
+						"type": "String"
+					},
+					{
+						"name": "Right_reference",
+						"type": "String"
+					},
+					{
+						"name": "Facture",
+						"type": "String"
+					},
+					{
+						"name": "Type poste Facture",
+						"type": "String"
+					},
+					{
+						"name": "Qt� factur�e",
+						"type": "String"
+					},
+					{
+						"name": "CA factur�",
+						"type": "String"
+					},
+					{
+						"name": "Right_HubSAPid",
+						"type": "String"
+					},
+					{
+						"name": "Type_Facturation�",
+						"type": "String"
+					},
+					{
+						"name": "qt_fact",
+						"type": "String"
+					},
+					{
+						"name": "ca_final",
+						"type": "String"
+					},
+					{
+						"name": "qt_final",
+						"type": "String"
+					},
+					{
+						"name": "data_origin",
+						"type": "String"
+					},
+					{
+						"name": "canal_final",
+						"type": "String"
+					},
+					{
+						"name": "Commande",
+						"type": "String"
+					},
+					{
+						"name": "no_offre",
+						"type": "String"
+					},
+					{
+						"name": "ATC Performance",
+						"type": "String"
+					},
+					{
+						"name": "canal",
+						"type": "String"
+					},
+					{
+						"name": "RowCount",
+						"type": "String"
+					},
+					{
+						"name": "ATC",
+						"type": "String"
+					},
+					{
+						"name": "Canal final",
+						"type": "String"
+					},
+					{
+						"name": "code_postal_atc",
+						"type": "String"
+					},
+					{
+						"name": "NomATC",
+						"type": "String"
+					},
+					{
+						"name": "Matricule",
+						"type": "String"
+					},
+					{
+						"name": "date_id",
+						"type": "String"
+					},
+					{
+						"name": "HubName",
+						"type": "String"
+					},
+					{
+						"name": "id_canal_final",
+						"type": "String"
+					},
+					{
+						"name": "qte plateforme final",
+						"type": "String"
+					},
+					{
+						"name": "ca plateforme final",
+						"type": "String"
+					},
+					{
+						"name": "Sum_qt_factur_e",
+						"type": "String"
+					},
+					{
+						"name": "Sum_ca_factur_",
+						"type": "String"
+					},
+					{
+						"name": "Sum_ca_ecoulement",
+						"type": "String"
+					},
+					{
+						"name": "Sum_qte_ecoulement",
+						"type": "String"
+					},
+					{
+						"name": "code_depot",
+						"type": "String"
+					},
+					{
+						"name": "id_canal",
+						"type": "String"
+					},
+					{
+						"name": "marque_code",
+						"type": "String"
+					},
+					{
+						"name": "Document de vente",
+						"type": "String"
+					},
+					{
+						"name": "Type de facture",
+						"type": "String"
+					},
+					{
+						"name": "Client",
+						"type": "String"
+					},
+					{
+						"name": "Marque",
+						"type": "String"
+					},
+					{
+						"name": "ATC Corrig�",
+						"type": "String"
+					},
+					{
+						"name": "Motif commande",
+						"type": "String"
+					},
+					{
+						"name": "Org. commerciale",
+						"type": "String"
+					},
+					{
+						"name": "marque_id",
+						"type": "String"
+					},
+					{
+						"name": "Offre",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/clientehsOut')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "REFERENTIEL_ATC"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "ATC",
+						"type": "String"
+					},
+					{
+						"name": "NomATC",
+						"type": "String"
+					},
+					{
+						"name": "Plan primes",
+						"type": "String"
+					},
+					{
+						"name": "DR",
+						"type": "String"
+					},
+					{
+						"name": "Secteur prime",
+						"type": "String"
+					},
+					{
+						"name": "Matricule",
+						"type": "String"
+					},
+					{
+						"name": "Secteur DEC",
+						"type": "String"
+					},
+					{
+						"name": "Rallye",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		}
+	]
+}

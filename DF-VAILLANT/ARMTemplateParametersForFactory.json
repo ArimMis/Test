@@ -1,0 +1,45 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "DF-VAILLANT"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"value": ""
+		},
+		"BASE COMMERCIALE_password": {
+			"value": ""
+		},
+		"BLOB_connectionString": {
+			"value": ""
+		},
+		"VAILLANT_ARCHITECTURE_connectionString": {
+			"value": ""
+		},
+		"data transformation azure function_functionKey": {
+			"value": ""
+		},
+		"data_input_connectionString": {
+			"value": ""
+		},
+		"data_mart_connectionString": {
+			"value": ""
+		},
+		"datawarehouse_connectionString": {
+			"value": ""
+		},
+		"entrydata_connectionString": {
+			"value": ""
+		},
+		"BASE COMMERCIALE_properties_typeProperties_host": {
+			"value": "C:\\Users\\h4h\\Desktop\\Projet H4H\\VAILLANT\\ALTERYX\\-vaillant_pilotage_commerciale\\data_warehouse"
+		},
+		"BASE COMMERCIALE_properties_typeProperties_userId": {
+			"value": "MiradoMick"
+		},
+		"data transformation azure function_properties_typeProperties_functionAppUrl": {
+			"value": "https://fa-datafacto-transfo-fr.azurewebsites.net"
+		}
+	}
+}

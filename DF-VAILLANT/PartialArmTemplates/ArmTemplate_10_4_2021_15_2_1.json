@@ -1,0 +1,366 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Nom de fabrique de données",
+			"defaultValue": "DF-VAILLANT"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/InFacturationForVenteDirect')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "BASE_COMMERCIAL"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "facturationForVenteDirect",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"encodingName": "UTF-8",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": " Org. commerciale",
+						"type": "String"
+					},
+					{
+						"name": "Canal distribution",
+						"type": "String"
+					},
+					{
+						"name": "Secteur d'activitÃ©",
+						"type": "String"
+					},
+					{
+						"name": "Document de vente",
+						"type": "String"
+					},
+					{
+						"name": "Poste",
+						"type": "String"
+					},
+					{
+						"name": "Jour calendaire",
+						"type": "String"
+					},
+					{
+						"name": "Agence commerciale corrigÃ©",
+						"type": "String"
+					},
+					{
+						"name": "ATC CorrigÃ©",
+						"type": "String"
+					},
+					{
+						"name": "Donneur d'ordre",
+						"type": "String"
+					},
+					{
+						"name": "RÃ©cept. de march.",
+						"type": "String"
+					},
+					{
+						"name": "Destinataire facture",
+						"type": "String"
+					},
+					{
+						"name": " vente",
+						"type": "String"
+					},
+					{
+						"name": "Type de poste",
+						"type": "String"
+					},
+					{
+						"name": "Livraison",
+						"type": "String"
+					},
+					{
+						"name": "Type de livraison",
+						"type": "String"
+					},
+					{
+						"name": "Type poste Livraison",
+						"type": "String"
+					},
+					{
+						"name": "Facture",
+						"type": "String"
+					},
+					{
+						"name": "Type de facture",
+						"type": "String"
+					},
+					{
+						"name": "Type poste Facture",
+						"type": "String"
+					},
+					{
+						"name": "Mois calendrier",
+						"type": "String"
+					},
+					{
+						"name": "AnnÃ©e civile",
+						"type": "String"
+					},
+					{
+						"name": "Motif commande",
+						"type": "String"
+					},
+					{
+						"name": "QtÃ© cdÃ©e",
+						"type": "String"
+					},
+					{
+						"name": "CA cdÃ©",
+						"type": "String"
+					},
+					{
+						"name": "QtÃ© livrÃ©e",
+						"type": "String"
+					},
+					{
+						"name": "CA livrÃ©",
+						"type": "String"
+					},
+					{
+						"name": "QtÃ© facturÃ©e",
+						"type": "String"
+					},
+					{
+						"name": "CA facturÃ©",
+						"type": "String"
+					},
+					{
+						"name": "Cout standard cdÃ©",
+						"type": "String"
+					},
+					{
+						"name": "Cout fabrication",
+						"type": "String"
+					},
+					{
+						"name": "Cout standard livrÃ©",
+						"type": "String"
+					},
+					{
+						"name": "Cout standard facturÃ©",
+						"type": "String"
+					},
+					{
+						"name": "date_id",
+						"type": "String"
+					},
+					{
+						"name": "year",
+						"type": "String"
+					},
+					{
+						"name": "yearmonth",
+						"type": "String"
+					},
+					{
+						"name": "fact_filter",
+						"type": "String"
+					},
+					{
+						"name": "qt_cd_e",
+						"type": "String"
+					},
+					{
+						"name": "ca_cd_",
+						"type": "String"
+					},
+					{
+						"name": "qt_livr_e",
+						"type": "String"
+					},
+					{
+						"name": "ca_livr_",
+						"type": "String"
+					},
+					{
+						"name": "qt_factur_e",
+						"type": "String"
+					},
+					{
+						"name": "ca_factur_",
+						"type": "String"
+					},
+					{
+						"name": "cout_standard_cd_",
+						"type": "String"
+					},
+					{
+						"name": "cout_fabrication",
+						"type": "String"
+					},
+					{
+						"name": "cout_standard_livr_",
+						"type": "String"
+					},
+					{
+						"name": "cout_standard_factur_",
+						"type": "String"
+					},
+					{
+						"name": "year_month",
+						"type": "String"
+					},
+					{
+						"name": "reference",
+						"type": "String"
+					},
+					{
+						"name": "WholeSalerID",
+						"type": "String"
+					},
+					{
+						"name": "WholeSalerHubID",
+						"type": "String"
+					},
+					{
+						"name": "HubName",
+						"type": "String"
+					},
+					{
+						"name": "HubSAPid",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ModelVenteDirecte')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "BASE COMMERCIALE"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "InFacturationForVenteDirect",
+								"type": "DatasetReference"
+							},
+							"name": "ventedirecte"
+						},
+						{
+							"dataset": {
+								"referenceName": "compteSap",
+								"type": "DatasetReference"
+							},
+							"name": "comptesap"
+						},
+						{
+							"dataset": {
+								"referenceName": "ref_atc",
+								"type": "DatasetReference"
+							},
+							"name": "refAtc"
+						},
+						{
+							"dataset": {
+								"referenceName": "associationoffre",
+								"type": "DatasetReference"
+							},
+							"name": "associationoffre"
+						},
+						{
+							"dataset": {
+								"referenceName": "STG_OFFRE_SOURCE",
+								"type": "DatasetReference"
+							},
+							"name": "offre"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "venteDirectePrepared",
+								"type": "DatasetReference"
+							},
+							"name": "oVenteDirect"
+						}
+					],
+					"transformations": [
+						{
+							"name": "addCols"
+						},
+						{
+							"name": "projection"
+						},
+						{
+							"name": "dropDuplicade"
+						},
+						{
+							"name": "sapJoin"
+						},
+						{
+							"name": "Select1"
+						},
+						{
+							"name": "joinAtc"
+						},
+						{
+							"name": "Select2"
+						},
+						{
+							"name": "atcDropDuplicate"
+						},
+						{
+							"name": "joinAssociation"
+						},
+						{
+							"name": "Select3"
+						},
+						{
+							"name": "offreDropDuplicade"
+						},
+						{
+							"name": "joinOffre"
+						},
+						{
+							"name": "Select4"
+						},
+						{
+							"name": "mapping"
+						},
+						{
+							"name": "Select5"
+						}
+					],
+					"script": "source(output(\n\t\t{ Org. commerciale} as string,\n\t\t{Canal distribution} as string,\n\t\t{Secteur d'activitÃ©} as string,\n\t\t{Document de vente} as string,\n\t\tPoste as string,\n\t\t{Jour calendaire} as string,\n\t\t{Agence commerciale corrigÃ©} as string,\n\t\t{ATC CorrigÃ©} as string,\n\t\t{Donneur d'ordre} as string,\n\t\t{RÃ©cept. de march.} as string,\n\t\t{Destinataire facture} as string,\n\t\t{ vente} as string,\n\t\t{Type de poste} as string,\n\t\tLivraison as string,\n\t\t{Type de livraison} as string,\n\t\t{Type poste Livraison} as string,\n\t\tFacture as string,\n\t\t{Type de facture} as string,\n\t\t{Type poste Facture} as string,\n\t\t{Mois calendrier} as string,\n\t\t{AnnÃ©e civile} as string,\n\t\t{Motif commande} as string,\n\t\t{QtÃ© cdÃ©e} as string,\n\t\t{CA cdÃ©} as string,\n\t\t{QtÃ© livrÃ©e} as string,\n\t\t{CA livrÃ©} as string,\n\t\t{QtÃ© facturÃ©e} as string,\n\t\t{CA facturÃ©} as string,\n\t\t{Cout standard cdÃ©} as string,\n\t\t{Cout fabrication} as string,\n\t\t{Cout standard livrÃ©} as string,\n\t\t{Cout standard facturÃ©} as string,\n\t\tdate_id as string,\n\t\tyear as string,\n\t\tyearmonth as string,\n\t\tfact_filter as string,\n\t\tqt_cd_e as string,\n\t\tca_cd_ as string,\n\t\tqt_livr_e as string,\n\t\tca_livr_ as string,\n\t\tqt_factur_e as string,\n\t\tca_factur_ as string,\n\t\tcout_standard_cd_ as string,\n\t\tcout_fabrication as string,\n\t\tcout_standard_livr_ as string,\n\t\tcout_standard_factur_ as string,\n\t\tyear_month as string,\n\t\treference as string,\n\t\tWholeSalerID as string,\n\t\tWholeSalerHubID as string,\n\t\tHubName as string,\n\t\tHubSAPid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> ventedirecte\nsource(output(\n\t\t{Agence commerciale} as string,\n\t\t{ATC Client} as string,\n\t\tColumn_3 as string,\n\t\t{Niveau 1} as string,\n\t\tColumn_5 as string,\n\t\t{Niveau 2} as string,\n\t\tColumn_7 as string,\n\t\t{Niveau 3} as string,\n\t\tColumn_9 as string,\n\t\tClient as string,\n\t\tColumn_11 as string,\n\t\tRue as string,\n\t\t{Dép} as string,\n\t\t{Code postal} as string,\n\t\t{Localité} as string,\n\t\t{Téléphone 1} as string,\n\t\t{Numéro de télécopie} as string,\n\t\t{Attribut 2} as string,\n\t\tColumn_19 as string,\n\t\tEmail as string,\n\t\tSIRET as string,\n\t\t{Niveau 4} as string,\n\t\tColumn_23 as string,\n\t\t{Groupe de clients} as string,\n\t\tColumn_25 as string,\n\t\t{Groupe de clients 5} as string,\n\t\tColumn_27 as string,\n\t\t{Attribut 1} as string,\n\t\tColumn_29 as string,\n\t\t{Attribut 3} as string,\n\t\tColumn_31 as string,\n\t\t{Récept. de march.} as string,\n\t\tColumn_33 as string,\n\t\t{Destinataire facture} as string,\n\t\tColumn_35 as string,\n\t\tPayeur as string,\n\t\tColumn_37 as string,\n\t\t{Témoin suppr. Tous domaines} as string,\n\t\t{Org. commerciale} as string,\n\t\tColumn_40 as string,\n\t\t{Canal distribution} as string,\n\t\tColumn_42 as string,\n\t\t{Secteur d'activité} as string,\n\t\tColumn_44 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> comptesap\nsource(output(\n\t\t{Cl� R�f�rentiel} as string,\n\t\t{Recherche Cl� EPS} as string,\n\t\tMarque as string,\n\t\t{Code Postal d�but} as string,\n\t\t{Code Postal fin} as string,\n\t\tUtilisateur as string,\n\t\tFonction as string,\n\t\t{D�partement} as string,\n\t\tDR as string,\n\t\tUser_lowerCase as string,\n\t\tsource as string,\n\t\tRight_DR as string,\n\t\tRight_User_lowerCase as string,\n\t\tATC as string,\n\t\tNomATC as string,\n\t\t{Plan primes} as string,\n\t\t{Secteur prime} as string,\n\t\tMatricule as string,\n\t\t{Secteur DEC} as string,\n\t\tRallye as string,\n\t\t{Canal final} as string,\n\t\tcode_postal_atc as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> refAtc\nsource(output(\n\t\tCommande as string,\n\t\t{Référence Offre BA} as string,\n\t\t{Qté Cdée} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> associationoffre\nsource(output(\n\t\tDateOffre as string,\n\t\t{Référence} as string,\n\t\tMarque as string,\n\t\t{Quantité} as string,\n\t\tClient as string,\n\t\tResponsable as string,\n\t\tOffre as string,\n\t\tCodeATC as string,\n\t\tCanal as string,\n\t\tNbLogement as string,\n\t\tProduit as string,\n\t\t{Numéro interne 2} as string,\n\t\t{Créateur offre} as string,\n\t\tSource as string,\n\t\tUserLowerCase as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> offre\nSelect5 derive(distributeur = \"vente directe\",\n\t\t{Diffus/chantier} = iif( {Canal distribution}==\"43\", \"Chantier\", \"Diffus\"),\n\t\t{marque(SD/vaillant)} = iif({Org commerciale}==\"1604\", \"SaunierDuval\", \"Vaillant\")) ~> addCols\ncomptesap select(mapColumn(\n\t\t{Agence commerciale},\n\t\tClient,\n\t\t{Code postal}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> projection\nprojection aggregate(groupBy(Client,\n\t\t{Code postal}),\n\t{Agence commerciale} = max({Agence commerciale})) ~> dropDuplicade\nSelect1, dropDuplicade join({Code client} == Client,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> sapJoin\naddCols select(mapColumn(\n\t\t{Org commerciale},\n\t\t{Canal distribution},\n\t\t{Secteur d'activité},\n\t\t{Document de vente},\n\t\t{ATC Corrigé},\n\t\t{Donneur d'ordre},\n\t\t{Code client} = {Recept de march},\n\t\t{Destinataire facture},\n\t\tArticle = reference,\n\t\tFacture,\n\t\t{Type de facture},\n\t\t{Type poste Facture},\n\t\t{Motif commande},\n\t\t{Qté facturée},\n\t\t{CA facturé},\n\t\tyearmonth,\n\t\treference,\n\t\tdistributeur,\n\t\t{Diffus/chantier},\n\t\t{marque(SD/vaillant)}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nsapJoin, atcDropDuplicate join({Diffus/chantier} == {Canal final}\n\t&& {Code postal} == code_postal_atc\n\t&& {marque(SD/vaillant)} == Marque,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> joinAtc\nrefAtc select(mapColumn(\n\t\tMarque,\n\t\tATC,\n\t\tNomATC,\n\t\tMatricule,\n\t\t{Canal final},\n\t\tcode_postal_atc\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select2\nSelect2 aggregate(groupBy({Canal final},\n\t\tcode_postal_atc,\n\t\tMarque,\n\t\tATC,\n\t\tNomATC),\n\tMatricule = max(Matricule)) ~> atcDropDuplicate\njoinAtc, associationoffre join({Document de vente} == Commande,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> joinAssociation\noffre select(mapColumn(\n\t\tResponsable,\n\t\tOffre,\n\t\t{ATC performance} = CodeATC,\n\t\tcanal = Canal\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select3\nSelect3 aggregate(groupBy(Offre,\n\t\t{ATC performance},\n\t\tcanal),\n\tResponsable = max(Responsable)) ~> offreDropDuplicade\njoinAssociation, offreDropDuplicade join({Référence Offre BA} == Offre\n\t&& {Canal final} == canal,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> joinOffre\nmapping select(mapColumn(\n\t\tmarque_id = {Org commerciale},\n\t\tmarque_name = {marque(SD/vaillant)},\n\t\tcanal_final = {Diffus/chantier},\n\t\t{Canal distribution},\n\t\t{Secteur d'activité},\n\t\t{Document de vente},\n\t\tPOSSAMidString = {Code client},\n\t\treference = Article,\n\t\tFacture,\n\t\t{Type de facture},\n\t\t{Type poste Facture},\n\t\t{Motif commande},\n\t\tyearmonth,\n\t\tdistributeur,\n\t\t{Code postal},\n\t\t{Agence commerciale},\n\t\t{ATC Corrigé},\n\t\t{ATC performance},\n\t\tATC,\n\t\tNomATC,\n\t\tMatricule,\n\t\tno_offre = {Référence Offre BA},\n\t\tca_final,\n\t\tqt_final,\n\t\tdata_origin\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select4\njoinOffre derive(ca_final = {CA facturé},\n\t\tqt_final = {Qté facturée},\n\t\tdata_origin = \"facturation\") ~> mapping\nventedirecte select(mapColumn(\n\t\t{Org commerciale} = { Org. commerciale},\n\t\t{Canal distribution},\n\t\t{Secteur d'activité} = {Secteur d'activitÃ©},\n\t\t{Document de vente},\n\t\tPoste,\n\t\t{Jour calendaire},\n\t\t{Agence commerciale corrigé} = {Agence commerciale corrigÃ©},\n\t\t{ATC Corrigé} = {ATC CorrigÃ©},\n\t\t{Donneur d'ordre},\n\t\t{Recept de march} = {RÃ©cept. de march.},\n\t\t{Destinataire facture},\n\t\t{Type doc vente} = { vente},\n\t\tLivraison,\n\t\t{Type de livraison},\n\t\t{Type poste Livraison},\n\t\tFacture,\n\t\t{Type de facture},\n\t\t{Type poste Facture},\n\t\t{Mois calendrier},\n\t\t{Année civile} = {AnnÃ©e civile},\n\t\t{Motif commande},\n\t\t{Qté cdée} = {QtÃ© cdÃ©e},\n\t\t{CA cdé} = {CA cdÃ©},\n\t\t{Qté livrée} = {QtÃ© livrÃ©e},\n\t\t{CA livré} = {CA livrÃ©},\n\t\t{Qté facturée} = {QtÃ© facturÃ©e},\n\t\t{CA facturé} = {CA facturÃ©},\n\t\t{Cout standard cdé} = {Cout standard cdÃ©},\n\t\t{Cout fabrication},\n\t\t{Cout standard livré} = {Cout standard livrÃ©},\n\t\t{Cout standard facturé} = {Cout standard facturÃ©},\n\t\tdate_id,\n\t\tyear,\n\t\tyearmonth,\n\t\tfact_filter,\n\t\tqt_cd_e,\n\t\tca_cd_,\n\t\tqt_livr_e,\n\t\tca_livr_,\n\t\tqt_factur_e,\n\t\tca_factur_,\n\t\tcout_standard_cd_,\n\t\tcout_fabrication,\n\t\tcout_standard_livr_,\n\t\tcout_standard_factur_,\n\t\tyear_month,\n\t\treference,\n\t\tWholeSalerID,\n\t\tWholeSalerHubID,\n\t\tHubName,\n\t\tHubSAPid\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select5\nSelect4 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tyearmonth as string,\n\t\tqte_ecoulement as string,\n\t\tca_ecoulement as string,\n\t\tPOSSAMidString as string,\n\t\tHubSAPid as string,\n\t\treference as string,\n\t\tdistributeur as string,\n\t\t{Code postal} as string,\n\t\tmarque_name as string,\n\t\tis_prix_dsc as string,\n\t\tqte_ecc as string,\n\t\t{Canal distribution} as string,\n\t\t{Secteur d'activit�} as string,\n\t\tdocument_vente as string,\n\t\t{Jour calendaire} as string,\n\t\t{Agence commerciale corrig�} as string,\n\t\t{Donneur d'ordre} as string,\n\t\t{R�cept. de march.} as string,\n\t\tRight_reference as string,\n\t\tFacture as string,\n\t\t{Type poste Facture} as string,\n\t\t{Qt� factur�e} as string,\n\t\t{CA factur�} as string,\n\t\tRight_HubSAPid as string,\n\t\t{Type_Facturation�} as string,\n\t\tqt_fact as string,\n\t\tca_final as string,\n\t\tqt_final as string,\n\t\tdata_origin as string,\n\t\tcanal_final as string,\n\t\tCommande as string,\n\t\tno_offre as string,\n\t\t{ATC Performance} as string,\n\t\tcanal as string,\n\t\tRowCount as string,\n\t\tATC as string,\n\t\t{Canal final} as string,\n\t\tcode_postal_atc as string,\n\t\tNomATC as string,\n\t\tMatricule as string,\n\t\tdate_id as string,\n\t\tHubName as string,\n\t\tid_canal_final as string,\n\t\t{qte plateforme final} as string,\n\t\t{ca plateforme final} as string,\n\t\tSum_qt_factur_e as string,\n\t\tSum_ca_factur_ as string,\n\t\tSum_ca_ecoulement as string,\n\t\tSum_qte_ecoulement as string,\n\t\tcode_depot as string,\n\t\tid_canal as string,\n\t\tmarque_code as string,\n\t\t{Document de vente} as string,\n\t\t{Type de facture} as string,\n\t\tClient as string,\n\t\tMarque as string,\n\t\t{ATC Corrig�} as string,\n\t\t{Motif commande} as string,\n\t\t{Org. commerciale} as string,\n\t\tmarque_id as string,\n\t\tOffre as string\n\t),\n\tpartitionFileNames:['OVenteDirectePrepared'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> oVenteDirect"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/InFacturationForVenteDirect')]"
+			]
+		}
+	]
+}
