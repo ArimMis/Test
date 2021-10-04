@@ -197,6 +197,50 @@
 							},
 							"traceLevel": "Fine"
 						}
+					},
+					{
+						"name": "CONTRAT DISTRIBUTION",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "CALCUL SEUIL",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "CALCUL REMUNERATION",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "CONTRAT_DISTRIBUTION",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"seuil": {},
+									"remuneration": {},
+									"output": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
 					}
 				],
 				"policy": {

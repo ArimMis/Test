@@ -683,8 +683,15 @@
 							"name": "SortieVanMarkes"
 						}
 					],
-					"transformations": [],
-					"script": "source(output(\n\t\tWholeSalerID as string,\n\t\tWholeSalerHubID as string,\n\t\tHubName as string,\n\t\tHubSAPid as string,\n\t\tF5 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> entreVan1\nsource(output(\n\t\tMois_Selection as string,\n\t\tCode_depot as string,\n\t\tNoOffre as string,\n\t\tNoArtVGF as string,\n\t\tAgence as string,\n\t\tQte_Validee_VGF as string,\n\t\tNoCli as string,\n\t\tPA_Valide_VGF as string,\n\t\tMois as string,\n\t\t{Année} as string,\n\t\tCompanyId as string,\n\t\tHubSAPid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> entreeVan\nentreVan1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SortieVanMarkes"
+					"transformations": [
+						{
+							"name": "select"
+						},
+						{
+							"name": "JoinHubsApID"
+						}
+					],
+					"script": "source(output(\n\t\tWholeSalerID as string,\n\t\tWholeSalerHubID as string,\n\t\tHubName as string,\n\t\tHubSAPid as string,\n\t\tF5 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> entreVan1\nsource(output(\n\t\tMois_Selection as string,\n\t\tCode_depot as string,\n\t\tNoOffre as string,\n\t\tNoArtVGF as string,\n\t\tAgence as string,\n\t\tQte_Validee_VGF as string,\n\t\tNoCli as string,\n\t\tPA_Valide_VGF as string,\n\t\tMois as string,\n\t\t{Année} as string,\n\t\tCompanyId as string,\n\t\tHubSAPid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> entreeVan\nentreeVan select(mapColumn(\n\t\tMois_Selection,\n\t\tCode_depot,\n\t\tNoOffre,\n\t\tNoArtVGF,\n\t\tAgence,\n\t\tQte_Validee_VGF,\n\t\tNoCli,\n\t\tPA_Valide_VGF,\n\t\tMois,\n\t\t{Année},\n\t\tCompanyId,\n\t\tHubSAPid\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> select\nentreVan1, select join(entreVan1@HubSAPid == select@HubSAPid,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> JoinHubsApID\nentreVan1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SortieVanMarkes"
 				}
 			},
 			"dependsOn": []

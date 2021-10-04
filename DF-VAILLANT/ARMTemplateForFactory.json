@@ -241,6 +241,27 @@
 							"waitOnCompletion": true,
 							"parameters": {}
 						}
+					},
+					{
+						"name": "CONTRAT DISTRIBUTION",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "PL_MAIN_BASE_COMMERCIAL",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "PL_CONTRAT_DISTRIBUTION",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
 					}
 				],
 				"policy": {
@@ -257,7 +278,8 @@
 				"[concat(variables('factoryId'), '/pipelines/MAIN_LOGISTIQUE')]",
 				"[concat(variables('factoryId'), '/dataflows/preparation_facturation')]",
 				"[concat(variables('factoryId'), '/pipelines/PL_MAIN_RH')]",
-				"[concat(variables('factoryId'), '/pipelines/SORTIE MARKETING')]"
+				"[concat(variables('factoryId'), '/pipelines/SORTIE MARKETING')]",
+				"[concat(variables('factoryId'), '/pipelines/PL_CONTRAT_DISTRIBUTION')]"
 			]
 		},
 		{
@@ -1055,6 +1077,50 @@
 							},
 							"traceLevel": "Fine"
 						}
+					},
+					{
+						"name": "CONTRAT DISTRIBUTION",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "CALCUL SEUIL",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "CALCUL REMUNERATION",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "CONTRAT_DISTRIBUTION",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"seuil": {},
+									"remuneration": {},
+									"output": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
 					}
 				],
 				"policy": {
@@ -1069,7 +1135,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/dataflows/CALCUL_SEUIL')]",
-				"[concat(variables('factoryId'), '/dataflows/CALCUL_REMUNERATION')]"
+				"[concat(variables('factoryId'), '/dataflows/CALCUL_REMUNERATION')]",
+				"[concat(variables('factoryId'), '/dataflows/CONTRAT_DISTRIBUTION')]"
 			]
 		},
 		{
@@ -5579,14 +5646,39 @@
 						"folderPath": "Temp",
 						"container": "data-warehouse"
 					},
-					"columnDelimiter": ",",
+					"columnDelimiter": ";",
+					"encodingName": "WINDOWS-1252",
 					"escapeChar": "\\",
 					"firstRowAsHeader": true,
 					"quoteChar": "\""
 				},
 				"schema": [
 					{
-						"name": "ID contrat cadre;ID contrat;ID levier;year;ca;R�alis�;Somme quantit�",
+						"name": "ID contrat cadre",
+						"type": "String"
+					},
+					{
+						"name": "ID contrat",
+						"type": "String"
+					},
+					{
+						"name": "ID levier",
+						"type": "String"
+					},
+					{
+						"name": "year",
+						"type": "String"
+					},
+					{
+						"name": "ca",
+						"type": "String"
+					},
+					{
+						"name": "Réalisé",
+						"type": "String"
+					},
+					{
+						"name": "Somme quantité",
 						"type": "String"
 					}
 				]
@@ -30137,8 +30229,18 @@
 							"name": "output"
 						}
 					],
-					"transformations": [],
-					"script": "source(output(\n\t\tyear as string,\n\t\t{ID contrat cadre} as string,\n\t\t{ID contrat} as string,\n\t\t{ID levier} as string,\n\t\t{Max ID Seuil} as string,\n\t\t{Contrepartie seuil} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> seuil\nsource(output(\n\t\t{ID contrat cadre;ID contrat;ID levier;year;ca;R�alis�;Somme quantit�} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> remuneration\nseuil sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['CONTRAT_DISTRIBUTION.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> output"
+					"transformations": [
+						{
+							"name": "innerJoin"
+						},
+						{
+							"name": "remunerationColumn"
+						},
+						{
+							"name": "Select1"
+						}
+					],
+					"script": "source(output(\n\t\tyear as string,\n\t\t{ID contrat cadre} as string,\n\t\t{ID contrat} as string,\n\t\t{ID levier} as string,\n\t\t{Max ID Seuil} as string,\n\t\t{Contrepartie seuil} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> seuil\nsource(output(\n\t\t{ID contrat cadre} as string,\n\t\t{ID contrat} as string,\n\t\t{ID levier} as string,\n\t\tyear as string,\n\t\tca as string,\n\t\t{Réalisé} as string,\n\t\t{Somme quantité} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> remuneration\nseuil, remuneration join(seuil@{ID contrat cadre} == remuneration@{ID contrat cadre}\n\t&& seuil@{ID contrat} == remuneration@{ID contrat}\n\t&& seuil@{ID levier} == remuneration@{ID levier},\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> innerJoin\nSelect1 derive({Rémunération} = toDouble({Réalisé})*toDouble({Contrepartie seuil})) ~> remunerationColumn\ninnerJoin select(mapColumn(\n\t\tyear = seuil@year,\n\t\t{ID contrat cadre} = seuil@{ID contrat cadre},\n\t\t{ID contrat} = seuil@{ID contrat},\n\t\t{ID levier} = seuil@{ID levier},\n\t\t{ID Seuil} = {Max ID Seuil},\n\t\t{Contrepartie seuil},\n\t\tca,\n\t\t{Réalisé},\n\t\t{Somme quantité}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nremunerationColumn sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['CONTRAT_DISTRIBUTION.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> output"
 				}
 			},
 			"dependsOn": [
@@ -33883,8 +33985,15 @@
 							"name": "SortieVanMarkes"
 						}
 					],
-					"transformations": [],
-					"script": "source(output(\n\t\tWholeSalerID as string,\n\t\tWholeSalerHubID as string,\n\t\tHubName as string,\n\t\tHubSAPid as string,\n\t\tF5 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> entreVan1\nsource(output(\n\t\tMois_Selection as string,\n\t\tCode_depot as string,\n\t\tNoOffre as string,\n\t\tNoArtVGF as string,\n\t\tAgence as string,\n\t\tQte_Validee_VGF as string,\n\t\tNoCli as string,\n\t\tPA_Valide_VGF as string,\n\t\tMois as string,\n\t\t{Année} as string,\n\t\tCompanyId as string,\n\t\tHubSAPid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> entreeVan\nentreVan1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SortieVanMarkes"
+					"transformations": [
+						{
+							"name": "select"
+						},
+						{
+							"name": "JoinHubsApID"
+						}
+					],
+					"script": "source(output(\n\t\tWholeSalerID as string,\n\t\tWholeSalerHubID as string,\n\t\tHubName as string,\n\t\tHubSAPid as string,\n\t\tF5 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> entreVan1\nsource(output(\n\t\tMois_Selection as string,\n\t\tCode_depot as string,\n\t\tNoOffre as string,\n\t\tNoArtVGF as string,\n\t\tAgence as string,\n\t\tQte_Validee_VGF as string,\n\t\tNoCli as string,\n\t\tPA_Valide_VGF as string,\n\t\tMois as string,\n\t\t{Année} as string,\n\t\tCompanyId as string,\n\t\tHubSAPid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> entreeVan\nentreeVan select(mapColumn(\n\t\tMois_Selection,\n\t\tCode_depot,\n\t\tNoOffre,\n\t\tNoArtVGF,\n\t\tAgence,\n\t\tQte_Validee_VGF,\n\t\tNoCli,\n\t\tPA_Valide_VGF,\n\t\tMois,\n\t\t{Année},\n\t\tCompanyId,\n\t\tHubSAPid\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> select\nentreVan1, select join(entreVan1@HubSAPid == select@HubSAPid,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> JoinHubsApID\nentreVan1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SortieVanMarkes"
 				}
 			},
 			"dependsOn": [
