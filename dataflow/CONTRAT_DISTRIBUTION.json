@@ -13,6 +13,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "seuil"
+				},
+				{
+					"dataset": {
+						"referenceName": "CALCUL_REMUNERATION",
+						"type": "DatasetReference"
+					},
+					"name": "remuneration"
 				}
 			],
 			"sinks": [
@@ -25,7 +32,7 @@
 				}
 			],
 			"transformations": [],
-			"script": "source(output(\n\t\tyear as string,\n\t\t{ID contrat cadre} as string,\n\t\t{ID contrat} as string,\n\t\t{ID levier} as string,\n\t\t{Max ID Seuil} as string,\n\t\t{Contrepartie seuil} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> seuil\nseuil sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['CONTRAT_DISTRIBUTION.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> output"
+			"script": "source(output(\n\t\tyear as string,\n\t\t{ID contrat cadre} as string,\n\t\t{ID contrat} as string,\n\t\t{ID levier} as string,\n\t\t{Max ID Seuil} as string,\n\t\t{Contrepartie seuil} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> seuil\nsource(output(\n\t\t{ID contrat cadre;ID contrat;ID levier;year;ca;R�alis�;Somme quantit�} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> remuneration\nseuil sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['CONTRAT_DISTRIBUTION.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> output"
 		}
 	}
 }
