@@ -2139,7 +2139,7 @@
 						"type": "String"
 					},
 					{
-						"name": "Secteur d'activitÃ©",
+						"name": "Secteur d'activité",
 						"type": "String"
 					},
 					{
@@ -2155,11 +2155,11 @@
 						"type": "String"
 					},
 					{
-						"name": "Agence commerciale corrigÃ©",
+						"name": "Agence commerciale corrigé",
 						"type": "String"
 					},
 					{
-						"name": "ATC CorrigÃ©",
+						"name": "ATC Corrigé",
 						"type": "String"
 					},
 					{
@@ -2167,7 +2167,7 @@
 						"type": "String"
 					},
 					{
-						"name": "RÃ©cept. de march.",
+						"name": "Récept. de march.",
 						"type": "String"
 					},
 					{
@@ -2211,7 +2211,7 @@
 						"type": "String"
 					},
 					{
-						"name": "AnnÃ©e civile",
+						"name": "Année civile",
 						"type": "String"
 					},
 					{
@@ -2219,31 +2219,31 @@
 						"type": "String"
 					},
 					{
-						"name": "QtÃ© cdÃ©e",
+						"name": "Qté cdée",
 						"type": "String"
 					},
 					{
-						"name": "CA cdÃ©",
+						"name": "CA cdé",
 						"type": "String"
 					},
 					{
-						"name": "QtÃ© livrÃ©e",
+						"name": "Qté livrée",
 						"type": "String"
 					},
 					{
-						"name": "CA livrÃ©",
+						"name": "CA livré",
 						"type": "String"
 					},
 					{
-						"name": "QtÃ© facturÃ©e",
+						"name": "Qté facturée",
 						"type": "String"
 					},
 					{
-						"name": "CA facturÃ©",
+						"name": "CA facturé",
 						"type": "String"
 					},
 					{
-						"name": "Cout standard cdÃ©",
+						"name": "Cout standard cdé",
 						"type": "String"
 					},
 					{
@@ -2251,11 +2251,11 @@
 						"type": "String"
 					},
 					{
-						"name": "Cout standard livrÃ©",
+						"name": "Cout standard livré",
 						"type": "String"
 					},
 					{
-						"name": "Cout standard facturÃ©",
+						"name": "Cout standard facturé",
 						"type": "String"
 					},
 					{
