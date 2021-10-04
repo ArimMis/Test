@@ -1,0 +1,46 @@
+{
+	"name": "EVanMarkes1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "VanMarkes"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Feuille1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "EntreVanMarkes1.xlsx",
+				"folderPath": "Temp",
+				"container": "data-warehouse"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "WholeSalerID",
+				"type": "String"
+			},
+			{
+				"name": "WholeSalerHubID",
+				"type": "String"
+			},
+			{
+				"name": "HubName",
+				"type": "String"
+			},
+			{
+				"name": "HubSAPid",
+				"type": "String"
+			},
+			{
+				"name": "F5",
+				"type": "String"
+			}
+		]
+	}
+}

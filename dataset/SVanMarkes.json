@@ -5,12 +5,16 @@
 			"referenceName": "VAILLANT_ARCHITECTURE",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "VanMarkes"
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"container": "data-mart"
+				"folderPath": "Temp",
+				"container": "data-warehouse"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

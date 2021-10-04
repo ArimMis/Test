@@ -5,9 +5,17 @@
 		"typeProperties": {
 			"sources": [
 				{
+					"dataset": {
+						"referenceName": "EVanMarkes1",
+						"type": "DatasetReference"
+					},
 					"name": "entreVan1"
 				},
 				{
+					"dataset": {
+						"referenceName": "EVanMarkes2",
+						"type": "DatasetReference"
+					},
 					"name": "entreeVan"
 				}
 			],
@@ -21,7 +29,7 @@
 				}
 			],
 			"transformations": [],
-			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false) ~> entreVan1\nsource(allowSchemaDrift: true,\n\tvalidateSchema: false) ~> entreeVan\nentreVan1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SortieVanMarkes"
+			"script": "source(output(\n\t\tWholeSalerID as string,\n\t\tWholeSalerHubID as string,\n\t\tHubName as string,\n\t\tHubSAPid as string,\n\t\tF5 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> entreVan1\nsource(output(\n\t\tMois_Selection as string,\n\t\tCode_depot as string,\n\t\tNoOffre as string,\n\t\tNoArtVGF as string,\n\t\tAgence as string,\n\t\tQte_Validee_VGF as string,\n\t\tNoCli as string,\n\t\tPA_Valide_VGF as string,\n\t\tMois as string,\n\t\t{Année} as string,\n\t\tCompanyId as string,\n\t\tHubSAPid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> entreeVan\nentreVan1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SortieVanMarkes"
 		}
 	}
 }

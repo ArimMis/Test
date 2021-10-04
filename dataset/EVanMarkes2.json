@@ -1,0 +1,74 @@
+{
+	"name": "EVanMarkes2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "VanMarkes"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Feuille1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "EntreVanMarkes2.xlsx",
+				"folderPath": "Temp",
+				"container": "data-warehouse"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Mois_Selection",
+				"type": "String"
+			},
+			{
+				"name": "Code_depot",
+				"type": "String"
+			},
+			{
+				"name": "NoOffre",
+				"type": "String"
+			},
+			{
+				"name": "NoArtVGF",
+				"type": "String"
+			},
+			{
+				"name": "Agence",
+				"type": "String"
+			},
+			{
+				"name": "Qte_Validee_VGF",
+				"type": "String"
+			},
+			{
+				"name": "NoCli",
+				"type": "String"
+			},
+			{
+				"name": "PA_Valide_VGF",
+				"type": "String"
+			},
+			{
+				"name": "Mois",
+				"type": "String"
+			},
+			{
+				"name": "Année",
+				"type": "String"
+			},
+			{
+				"name": "CompanyId",
+				"type": "String"
+			},
+			{
+				"name": "HubSAPid",
+				"type": "String"
+			}
+		]
+	}
+}
