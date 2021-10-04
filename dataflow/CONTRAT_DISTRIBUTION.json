@@ -1,0 +1,23 @@
+{
+	"name": "CONTRAT_DISTRIBUTION",
+	"properties": {
+		"folder": {
+			"name": "CONTRAT_DISTRIBUTION"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "CALCUL_SEUIL",
+						"type": "DatasetReference"
+					},
+					"name": "seuil"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"script": "source(output(\n\t\tyear as string,\n\t\t{ID contrat cadre} as string,\n\t\t{ID contrat} as string,\n\t\t{ID levier} as string,\n\t\t{Max ID Seuil} as string,\n\t\t{Contrepartie seuil} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> seuil"
+		}
+	}
+}

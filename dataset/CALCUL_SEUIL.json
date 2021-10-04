@@ -25,7 +25,27 @@
 		},
 		"schema": [
 			{
-				"name": "year;ID contrat cadre;ID contrat;ID levier;Max ID Seuil;Contrepartie seuil",
+				"name": "year",
+				"type": "String"
+			},
+			{
+				"name": "ID contrat cadre",
+				"type": "String"
+			},
+			{
+				"name": "ID contrat",
+				"type": "String"
+			},
+			{
+				"name": "ID levier",
+				"type": "String"
+			},
+			{
+				"name": "Max ID Seuil",
+				"type": "String"
+			},
+			{
+				"name": "Contrepartie seuil",
 				"type": "String"
 			}
 		]
