@@ -13,8 +13,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": "Temp",
-				"container": "data-warehouse"
+				"folderPath": "Logistique",
+				"container": "data-mart"
 			},
 			"columnDelimiter": "|",
 			"encodingName": "WINDOWS-1252",
