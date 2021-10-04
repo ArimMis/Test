@@ -17,14 +17,39 @@
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": ";",
+			"encodingName": "WINDOWS-1252",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": [
 			{
-				"name": "ID contrat cadre;ID contrat;ID levier;year;ca;R�alis�;Somme quantit�",
+				"name": "ID contrat cadre",
+				"type": "String"
+			},
+			{
+				"name": "ID contrat",
+				"type": "String"
+			},
+			{
+				"name": "ID levier",
+				"type": "String"
+			},
+			{
+				"name": "year",
+				"type": "String"
+			},
+			{
+				"name": "ca",
+				"type": "String"
+			},
+			{
+				"name": "Réalisé",
+				"type": "String"
+			},
+			{
+				"name": "Somme quantité",
 				"type": "String"
 			}
 		]
