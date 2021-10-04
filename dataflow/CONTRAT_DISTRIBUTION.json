@@ -15,9 +15,17 @@
 					"name": "seuil"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "CONTRAT_DISTRIBUTION",
+						"type": "DatasetReference"
+					},
+					"name": "output"
+				}
+			],
 			"transformations": [],
-			"script": "source(output(\n\t\tyear as string,\n\t\t{ID contrat cadre} as string,\n\t\t{ID contrat} as string,\n\t\t{ID levier} as string,\n\t\t{Max ID Seuil} as string,\n\t\t{Contrepartie seuil} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> seuil"
+			"script": "source(output(\n\t\tyear as string,\n\t\t{ID contrat cadre} as string,\n\t\t{ID contrat} as string,\n\t\t{ID levier} as string,\n\t\t{Max ID Seuil} as string,\n\t\t{Contrepartie seuil} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> seuil\nseuil sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['CONTRAT_DISTRIBUTION.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> output"
 		}
 	}
 }
