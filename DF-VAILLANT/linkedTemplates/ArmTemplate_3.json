@@ -4,7 +4,7 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Nom de fabrique de données",
+			"metadata": "Data Factory name",
 			"defaultValue": "DF-VAILLANT"
 		}
 	},
@@ -1988,18 +1988,16 @@
 					"name": "PREPARATION ECOULEMENT/MABILE"
 				},
 				"annotations": [],
-				"type": "DelimitedText",
+				"type": "Excel",
 				"typeProperties": {
+					"sheetName": "Sheet1",
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "data_6064edb8-6f2b-4dd7-95ff-3bb4f97b4a96_21e00391-019b-426b-ba6b-b188d63d8e68.csv",
+						"fileName": "MABILE_ECOULEMENT.xlsx",
 						"folderPath": "Temp",
 						"container": "data-warehouse"
 					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
+					"firstRowAsHeader": true
 				},
 				"schema": [
 					{
@@ -2047,6 +2045,22 @@
 						"type": "String"
 					},
 					{
+						"name": "CA Mois A-1",
+						"type": "String"
+					},
+					{
+						"name": "CA Cumul A-1",
+						"type": "String"
+					},
+					{
+						"name": "MB Mois A-1",
+						"type": "String"
+					},
+					{
+						"name": "MB Cumul A-1",
+						"type": "String"
+					},
+					{
 						"name": "VVA Mois A-1",
 						"type": "String"
 					},
@@ -2063,6 +2077,22 @@
 						"type": "String"
 					},
 					{
+						"name": "CA Mois A",
+						"type": "String"
+					},
+					{
+						"name": "CA Cumul A",
+						"type": "String"
+					},
+					{
+						"name": "MB Mois A",
+						"type": "String"
+					},
+					{
+						"name": "MB Cumul A",
+						"type": "String"
+					},
+					{
 						"name": "VVA Mois A",
 						"type": "String"
 					},
@@ -2071,7 +2101,7 @@
 						"type": "String"
 					},
 					{
-						"name": "fileName",
+						"name": "yearmonth",
 						"type": "String"
 					}
 				]
