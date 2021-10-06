@@ -110,10 +110,10 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"functionName": "concatAllFile",
+					"functionName": "AF_IMPORT_ECOUL_VFCONFORT",
 					"method": "POST",
 					"body": {
-						"containername": "data-input",
+						"inputcontainer": "data-input",
 						"folderpath": "Ecoulement/VF Confort",
 						"outputContainer": "data-warehouse",
 						"outputpath": "Temp/CONFORT_ECOULEMENT.xlsx"
