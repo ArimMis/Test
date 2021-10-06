@@ -115,7 +115,7 @@
 					"body": {
 						"inputcontainer": "data-input",
 						"folderpath": "Ecoulement/VF Confort",
-						"outputContainer": "data-warehouse",
+						"outputcontainer": "data-warehouse",
 						"outputpath": "Temp/CONFORT_ECOULEMENT.xlsx"
 					}
 				},
