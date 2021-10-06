@@ -47,10 +47,13 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"functionName": "HelloWord",
+					"functionName": "AF_IMPORT_ECOUL_MABILE",
 					"method": "POST",
 					"body": {
-						"name": "bobl"
+						"containername": "data-input",
+						"folderpath": "Ecoulement/Mabile",
+						"outputContainer": "data-warehouse",
+						"outputpath": "Temp/MABILE_ECOULEMENT.xlsx"
 					}
 				},
 				"linkedServiceName": {

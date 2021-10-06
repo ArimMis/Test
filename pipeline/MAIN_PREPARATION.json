@@ -75,54 +75,6 @@
 				}
 			},
 			{
-				"name": "PARTEDIS_PREPARATION",
-				"type": "ExecuteDataFlow",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "1.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataflow": {
-						"referenceName": "PARTEDIS_PREPARATION",
-						"type": "DataFlowReference"
-					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
-				}
-			},
-			{
-				"name": "MAILLARD_PREPARATION",
-				"type": "ExecuteDataFlow",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "1.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataflow": {
-						"referenceName": "MAILLARD_PREPARATION",
-						"type": "DataFlowReference"
-					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
-				}
-			},
-			{
 				"name": "PL_TEREVA",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
@@ -164,18 +116,6 @@
 						]
 					},
 					{
-						"activity": "PARTEDIS_PREPARATION",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "MAILLARD_PREPARATION",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
 						"activity": "PL_TEREVA",
 						"dependencyConditions": [
 							"Succeeded"
@@ -183,6 +123,12 @@
 					},
 					{
 						"activity": "EHS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "PL_PARTEDIS",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -230,6 +176,19 @@
 						"computeType": "General"
 					},
 					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "PL_PARTEDIS",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_PARTEDIS",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
 				}
 			}
 		],
