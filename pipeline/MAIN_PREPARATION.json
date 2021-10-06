@@ -122,13 +122,19 @@
 						]
 					},
 					{
-						"activity": "EHS",
+						"activity": "PL_PARTEDIS",
 						"dependencyConditions": [
 							"Succeeded"
 						]
 					},
 					{
-						"activity": "PL_PARTEDIS",
+						"activity": "PL_MAILLARD",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "PL_EHS",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -155,30 +161,6 @@
 				}
 			},
 			{
-				"name": "EHS",
-				"type": "ExecuteDataFlow",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "1.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataflow": {
-						"referenceName": "EHS",
-						"type": "DataFlowReference"
-					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
-				}
-			},
-			{
 				"name": "PL_PARTEDIS",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
@@ -186,6 +168,32 @@
 				"typeProperties": {
 					"pipeline": {
 						"referenceName": "PL_PARTEDIS",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PL_MAILLARD",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_MAILLARD",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PL_EHS",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_EHS",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true
