@@ -110,13 +110,13 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"functionName": "AF_IMPORT_ECOUL_MABILE",
+					"functionName": "concatAllFile",
 					"method": "POST",
 					"body": {
 						"containername": "data-input",
-						"folderpath": "Ecoulement/Mabile",
+						"folderpath": "Ecoulement/VF Confort",
 						"outputContainer": "data-warehouse",
-						"outputpath": "Temp/MABILE_ECOULEMENT.xlsx"
+						"outputpath": "Temp/CONFORT_ECOULEMENT.xlsx"
 					}
 				},
 				"linkedServiceName": {
