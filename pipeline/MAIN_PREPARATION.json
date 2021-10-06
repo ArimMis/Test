@@ -45,14 +45,7 @@
 			{
 				"name": "PL_ORCAB",
 				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "PL_TRAITEMENT_DSC",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
@@ -65,7 +58,14 @@
 			{
 				"name": "PL_TRAITEMENT_DSC",
 				"type": "ExecutePipeline",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "PL_EHS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
@@ -120,7 +120,7 @@
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "PL_EHS",
+						"activity": "PL_TRAITEMENT_DSC",
 						"dependencyConditions": [
 							"Succeeded"
 						]
