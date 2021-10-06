@@ -75,14 +75,7 @@
 			{
 				"name": "DSC_PREPARATION",
 				"type": "ExecuteDataFlow",
-				"dependsOn": [
-					{
-						"activity": "importData",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "1.00:00:00",
 					"retry": 0,
@@ -117,13 +110,13 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"functionName": "AF_IMPORT_ECOUL_MABILE",
+					"functionName": "AF_IMPORT_ECOUL_DSC",
 					"method": "POST",
 					"body": {
 						"containername": "data-input",
-						"folderpath": "Ecoulement/Mabile",
+						"folderpath": "Ecoulement/DSC",
 						"outputContainer": "data-warehouse",
-						"outputpath": "Temp/MABILE_ECOULEMENT.xlsx"
+						"outputpath": "Temp/DSC_ECOULEMENT.xlsx"
 					}
 				},
 				"linkedServiceName": {
