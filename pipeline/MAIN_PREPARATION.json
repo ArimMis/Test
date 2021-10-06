@@ -51,7 +51,14 @@
 			{
 				"name": "PL_TRAITEMENT_DSC",
 				"type": "ExecutePipeline",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "PL_MABILLE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
@@ -80,12 +87,6 @@
 				"dependsOn": [
 					{
 						"activity": "PL_ORCAB",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "PL_MABILLE",
 						"dependencyConditions": [
 							"Succeeded"
 						]
