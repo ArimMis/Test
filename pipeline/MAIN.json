@@ -15,10 +15,6 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"pipeline": {
-						"referenceName": "MAIN_PREPARATION",
-						"type": "PipelineReference"
-					},
 					"waitOnCompletion": true
 				}
 			},
@@ -35,10 +31,6 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"pipeline": {
-						"referenceName": "PL_MAIN_BASE_COMMERCIALE",
-						"type": "PipelineReference"
-					},
 					"waitOnCompletion": true
 				}
 			},
@@ -88,10 +80,6 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"dataflow": {
-						"referenceName": "preparation_facturation",
-						"type": "DataFlowReference"
-					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"
