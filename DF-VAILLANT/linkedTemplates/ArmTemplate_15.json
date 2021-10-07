@@ -4,7 +4,7 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Data Factory name",
+			"metadata": "Nom de fabrique de données",
 			"defaultValue": "DF-VAILLANT"
 		}
 	},
@@ -12,6 +12,96 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_PARTEDIS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DATA IMPORT",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "PREPARATION",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "AF_IMPORT_ECOUL_PARTEDIS",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"inputcontainer": "data-input",
+								"folderpath": "Ecoulement/Partedis",
+								"outputcontainer": "data-warehouse",
+								"outputpath": "Temp/PARTEDIS_ECOULEMENT.xlsx"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "data transformation azure function",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "PREPARATION",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "PARTEDIS_PREPARATION",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"ecoulement": {},
+									"organisation": {},
+									"venteDirecte": {},
+									"partedisPrixStd": {},
+									"prixParPeriode": {},
+									"organisationNotFound": {},
+									"quantityNullOutput": {},
+									"output": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-14T08:05:27Z"
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/PL_POST_UNION')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
@@ -1584,7 +1674,8 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/PL_POST_UNION')]",
 				"[concat(variables('factoryId'), '/pipelines/PL_VF_CONFORT')]",
-				"[concat(variables('factoryId'), '/pipelines/PL_TEREVA')]"
+				"[concat(variables('factoryId'), '/pipelines/PL_TEREVA')]",
+				"[concat(variables('factoryId'), '/pipelines/PL_PARTEDIS')]"
 			]
 		},
 		{
