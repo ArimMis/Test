@@ -25,6 +25,40 @@
 					},
 					"traceLevel": "Fine"
 				}
+			},
+			{
+				"name": "CALCUL PERIODE",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [
+					{
+						"activity": "DUREE PERIODE",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "AF_CALCUL_PERIODE",
+					"method": "POST",
+					"body": {
+						"inputcontainer": "data-warehouse",
+						"inputpath": "Temp/TEMP_PRIX_PAR_PERIODE",
+						"outputcontainer": "data-warehouse",
+						"outputpath": "PRIX_PAR_PERIODEV3.xlsx"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "data transformation azure function",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"folder": {
