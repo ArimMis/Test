@@ -58,6 +58,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
+						"folderPath": "Temp",
 						"container": "data-warehouse"
 					},
 					"columnDelimiter": ",",
