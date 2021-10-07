@@ -17,7 +17,8 @@
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": "|",
+			"encodingName": "WINDOWS-1252",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
@@ -193,10 +194,6 @@
 			},
 			{
 				"name": "reference",
-				"type": "String"
-			},
-			{
-				"name": "article",
 				"type": "String"
 			},
 			{
