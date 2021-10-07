@@ -13,6 +13,308 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/PL_REFERENTIEL_PRIX')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DUREE PERIODE",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "REFERENTIEL_PRIX_MOYEN",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"facturation": {},
+									"plateforme": {},
+									"dureePeriodeOutput": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "CALCUL PERIODE",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "DUREE PERIODE",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "AF_CALCUL_PERIODE",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"inputcontainer": "data-warehouse",
+								"inputpath": "Temp/TEMP_PRIX_PAR_PERIODE",
+								"outputcontainer": "data-warehouse",
+								"outputpath": "PRIX_PAR_PERIODEV3.xlsx"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "data transformation azure function",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "REFERENTIEL"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-07T07:24:29Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_SUIVIE_OFFRE')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DIFFUS",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "SUIVIE_OFFRE_DIFFUS",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"stgOffre": {},
+									"baseCommerciale": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "CHANTIER",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "SUIVIE_OFFRE_CHANTIER",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"stgOffre": {},
+									"baseCommerciale": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "SUIVI DES OFFRES"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-10-04T10:13:39Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_TEREVA')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "PREPARATION",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "importData",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "TEREVA_PREPARATION",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"ECOULEMENT": {},
+									"organisation": {},
+									"ventesDirectes": {},
+									"output": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "importData",
+						"description": "import all file un folder",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "AF_IMPORT_ECOUL_TEREVA",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"inputcontainer": "data-input",
+								"folderpath": "Ecoulement/Téréva",
+								"outputcontainer": "data-warehouse",
+								"outputpath": "Temp/TEREVA_ECOULEMENT.xlsx"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "data transformation azure function",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-28T07:36:55Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_VENTES_DIRECTES')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "PREPARATION",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "VENTES_DIRECTES_PREPARATION",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"ventesDirectes": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-07T13:24:24Z"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/PL_VF_CONFORT')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -86,7 +388,14 @@
 					{
 						"name": "VF_CONFORT_PREPARATION",
 						"type": "ExecuteDataFlow",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "importData",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "1.00:00:00",
 							"retry": 0,
@@ -114,6 +423,35 @@
 								"computeType": "General"
 							},
 							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "importData",
+						"description": "import all file un folder",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "AF_IMPORT_ECOUL_VFCONFORT",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"inputcontainer": "data-input",
+								"folderpath": "Ecoulement/VF Confort",
+								"outputcontainer": "data-warehouse",
+								"outputpath": "Temp/CONFORT_ECOULEMENT.xlsx"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "data transformation azure function",
+							"type": "LinkedServiceReference"
 						}
 					}
 				],
@@ -753,7 +1091,14 @@
 					{
 						"name": "PL_TRAITEMENT_DSC",
 						"type": "ExecutePipeline",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "PL_MABILLE",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"userProperties": [],
 						"typeProperties": {
 							"pipeline": {
@@ -779,78 +1124,22 @@
 						}
 					},
 					{
-						"name": "PARTEDIS_PREPARATION",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "PARTEDIS_PREPARATION",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"ecoulement": {},
-									"organisation": {},
-									"venteDirecte": {},
-									"partedisPrixStd": {},
-									"prixParPeriode": {},
-									"organisationNotFound": {},
-									"quantityNullOutput": {},
-									"output": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "MAILLARD_PREPARATION",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "MAILLARD_PREPARATION",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"ecoulement": {},
-									"organisation": {},
-									"ventesDirectes": {},
-									"output": {},
-									"organisationNotFound": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
 						"name": "PL_TEREVA",
 						"type": "ExecutePipeline",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "PL_ORCAB",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "PL_VF_CONFORT",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"userProperties": [],
 						"typeProperties": {
 							"pipeline": {
@@ -866,49 +1155,13 @@
 						"type": "ExecuteDataFlow",
 						"dependsOn": [
 							{
-								"activity": "PL_MABILLE",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "PL_ORCAB",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
 								"activity": "PL_TRAITEMENT_DSC",
 								"dependencyConditions": [
 									"Succeeded"
 								]
 							},
 							{
-								"activity": "PL_VF_CONFORT",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "PARTEDIS_PREPARATION",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "MAILLARD_PREPARATION",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "PL_TEREVA",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "EHS",
+								"activity": "PL_MAILLARD",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -948,36 +1201,65 @@
 						}
 					},
 					{
-						"name": "EHS",
-						"type": "ExecuteDataFlow",
+						"name": "PL_PARTEDIS",
+						"type": "ExecutePipeline",
 						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
 						"userProperties": [],
 						"typeProperties": {
-							"dataflow": {
-								"referenceName": "EHS",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"source1": {},
-									"OrganisationEHS": {},
-									"VenteDirecte": {},
-									"SoriteEHS": {},
-									"EHSOrganisationNotfound": {}
-								}
+							"pipeline": {
+								"referenceName": "PL_PARTEDIS",
+								"type": "PipelineReference"
 							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "PL_MAILLARD",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "PL_EHS",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "PL_MAILLARD",
+								"type": "PipelineReference"
 							},
-							"traceLevel": "Fine"
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "PL_EHS",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "PL_PARTEDIS",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "PL_TEREVA",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "PL_EHS",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
 						}
 					}
 				],
@@ -992,7 +1274,8 @@
 				"lastPublishTime": "2021-09-27T09:12:55Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/PL_VF_CONFORT')]"
+				"[concat(variables('factoryId'), '/pipelines/PL_VF_CONFORT')]",
+				"[concat(variables('factoryId'), '/pipelines/PL_TEREVA')]"
 			]
 		},
 		{
@@ -1068,7 +1351,9 @@
 				"annotations": [],
 				"lastPublishTime": "2021-09-13T07:58:57Z"
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PL_REFERENTIEL_PRIX')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/PL_MAIN_RH')]",
@@ -1170,14 +1455,7 @@
 					{
 						"name": "MAIN_PREPARATION_ECOULEMENT",
 						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "preparation_facturation",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
+						"dependsOn": [],
 						"userProperties": [],
 						"typeProperties": {
 							"pipeline": {
@@ -1194,6 +1472,12 @@
 						"dependsOn": [
 							{
 								"activity": "MAIN_PREPARATION_ECOULEMENT",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "preparation_facturation",
 								"dependencyConditions": [
 									"Succeeded"
 								]

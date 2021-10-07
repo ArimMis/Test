@@ -13,6 +13,79 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/REFERENTIEL_LEVIER_RH')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "LEVIER RH"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Feuil1",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Référentiel - Leviers performance RH.xlsx",
+						"folderPath": "Levier RH",
+						"container": "data-input"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Année",
+						"type": "String"
+					},
+					{
+						"name": "Documentation",
+						"type": "String"
+					},
+					{
+						"name": "Marque",
+						"type": "String"
+					},
+					{
+						"name": "Cible",
+						"type": "String"
+					},
+					{
+						"name": "Périmètre",
+						"type": "String"
+					},
+					{
+						"name": "Levier",
+						"type": "String"
+					},
+					{
+						"name": "Canal",
+						"type": "String"
+					},
+					{
+						"name": "Hiérarchie inclues",
+						"type": "String"
+					},
+					{
+						"name": "Hiérarchies exclues",
+						"type": "String"
+					},
+					{
+						"name": "Type",
+						"type": "String"
+					},
+					{
+						"name": "Valeur Annuelle",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SORTIE_MARKETING')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1845,34 +1918,6 @@
 					"location": {
 						"type": "AzureBlobStorageLocation",
 						"folderPath": "Temp",
-						"container": "data-warehouse"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/TEMP_PRIX_PAR_PERIODE')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "REFERENTIEL_PRIX"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
 						"container": "data-warehouse"
 					},
 					"columnDelimiter": ",",

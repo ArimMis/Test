@@ -13,6 +13,136 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/MABILLE_ECOULEMENT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Sheet1",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "MABILE_ECOULEMENT.xlsx",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Activité",
+						"type": "String"
+					},
+					{
+						"name": "Fournisseur Groupe",
+						"type": "String"
+					},
+					{
+						"name": "Société",
+						"type": "String"
+					},
+					{
+						"name": "Code",
+						"type": "String"
+					},
+					{
+						"name": "Fournisseur",
+						"type": "String"
+					},
+					{
+						"name": "Agence du client",
+						"type": "String"
+					},
+					{
+						"name": "Code article",
+						"type": "String"
+					},
+					{
+						"name": "Libellé article",
+						"type": "String"
+					},
+					{
+						"name": "Ref fournisseur",
+						"type": "String"
+					},
+					{
+						"name": "Qté Mois A-1",
+						"type": "String"
+					},
+					{
+						"name": "Qté Cumul A-1",
+						"type": "String"
+					},
+					{
+						"name": "CA Mois A-1",
+						"type": "String"
+					},
+					{
+						"name": "CA Cumul A-1",
+						"type": "String"
+					},
+					{
+						"name": "MB Mois A-1",
+						"type": "String"
+					},
+					{
+						"name": "MB Cumul A-1",
+						"type": "String"
+					},
+					{
+						"name": "VVA Mois A-1",
+						"type": "String"
+					},
+					{
+						"name": "VVA Cumul A-1",
+						"type": "String"
+					},
+					{
+						"name": "Qté Mois A",
+						"type": "String"
+					},
+					{
+						"name": "Qté Cumul A",
+						"type": "String"
+					},
+					{
+						"name": "CA Mois A",
+						"type": "String"
+					},
+					{
+						"name": "CA Cumul A",
+						"type": "String"
+					},
+					{
+						"name": "MB Mois A",
+						"type": "String"
+					},
+					{
+						"name": "MB Cumul A",
+						"type": "String"
+					},
+					{
+						"name": "VVA Mois A",
+						"type": "String"
+					},
+					{
+						"name": "VVA Cumul A",
+						"type": "String"
+					},
+					{
+						"name": "yearmonth",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/MAILLARD_ECOULEMENT')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1899,105 +2029,6 @@
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/OUTPUT_CALCUL_REMUNERATION')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "CONTRAT DISTRIBUTION"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "Temp",
-						"container": "data-warehouse"
-					},
-					"columnDelimiter": ";",
-					"encodingName": "WINDOWS-1252",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "Article",
-						"type": "String"
-					},
-					{
-						"name": "NoCanalDist",
-						"type": "String"
-					},
-					{
-						"name": "NoArt",
-						"type": "String"
-					},
-					{
-						"name": "NoNiv1",
-						"type": "String"
-					},
-					{
-						"name": "NoNiv2",
-						"type": "String"
-					},
-					{
-						"name": "NoNiv3",
-						"type": "String"
-					},
-					{
-						"name": "NoNiv4",
-						"type": "String"
-					},
-					{
-						"name": "NoNiv5",
-						"type": "String"
-					},
-					{
-						"name": "NoNiv6",
-						"type": "String"
-					},
-					{
-						"name": "NoNiv7",
-						"type": "String"
-					},
-					{
-						"name": "Niv1",
-						"type": "String"
-					},
-					{
-						"name": "Niv2",
-						"type": "String"
-					},
-					{
-						"name": "Niv3",
-						"type": "String"
-					},
-					{
-						"name": "Niv4",
-						"type": "String"
-					},
-					{
-						"name": "Niv6",
-						"type": "String"
-					},
-					{
-						"name": "Niv7",
-						"type": "String"
-					},
-					{
-						"name": "CanalDist",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OUTPUT_CALCUL_SEUIL')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {

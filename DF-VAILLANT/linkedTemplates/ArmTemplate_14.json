@@ -13,6 +13,105 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/NOMENCLATURE_CLIENT')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "NomenclatureClient",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "NOMENCLATURE_CLIENT",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"EXtractionSAP": {},
+									"ReferentielAtc4": {},
+									"SortieNomenclatureClient": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "SORTIE LOGISTIQUE"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-28T09:12:25Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/NOMENCLATURE_PRODUIT')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "NomenclatureProduit",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "NOMENCLATURE_PRODUIT",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"hierarchieArticle": {},
+									"nomenclatureProduit": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "SORTIE LOGISTIQUE"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-28T07:36:55Z"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/PL_CALCUL_REM')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -367,6 +466,42 @@
 							},
 							"traceLevel": "Fine"
 						}
+					},
+					{
+						"name": "importData",
+						"description": "import all file un folder",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "DSC_PREPARATION",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "AF_IMPORT_ECOUL_DSC",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"containername": "data-input",
+								"folderpath": "Ecoulement/DSC",
+								"outputContainer": "data-warehouse",
+								"outputpath": "Temp/DSC_ECOULEMENT.xlsx"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "data transformation azure function",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
 				"policy": {
@@ -378,6 +513,57 @@
 				},
 				"annotations": [],
 				"lastPublishTime": "2021-09-14T08:09:26Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_EHS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "EHS",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "EHS",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"source1": {},
+									"OrganisationEHS": {},
+									"VenteDirecte": {},
+									"SoriteEHS": {},
+									"EHSOrganisationNotfound": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT"
+				},
+				"annotations": []
 			},
 			"dependsOn": []
 		},
@@ -584,76 +770,11 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "IMPORT DATA",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "ExcelSource",
-								"additionalColumns": [
-									{
-										"name": "fileName",
-										"value": "$$FILEPATH"
-									}
-								],
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
-									"wildcardFileName": "*",
-									"enablePartitionDiscovery": false
-								}
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings",
-									"copyBehavior": "MergeFiles"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".csv"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "FOLDER_ECOULEMENT_MABILE",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "MABILE_ECOULEMENT_OUTPUT",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
 						"name": "MABILE_PREPARATION",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [
 							{
-								"activity": "IMPORT DATA",
+								"activity": "importData",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -688,6 +809,35 @@
 							},
 							"traceLevel": "Fine"
 						}
+					},
+					{
+						"name": "importData",
+						"description": "import all file un folder",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "AF_IMPORT_ECOUL_MABILE",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"containername": "data-input",
+								"folderpath": "Ecoulement/Mabile",
+								"outputContainer": "data-warehouse",
+								"outputpath": "Temp/MABILE_ECOULEMENT.xlsx"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "data transformation azure function",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
 				"policy": {
@@ -699,6 +849,92 @@
 				},
 				"annotations": [],
 				"lastPublishTime": "2021-09-13T20:37:13Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_MAILLARD')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "MAILLARD_PREPARATION",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "DATA IMPORT",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "MAILLARD_PREPARATION",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"ecoulement": {},
+									"organisation": {},
+									"ventesDirectes": {},
+									"output": {},
+									"organisationNotFound": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "DATA IMPORT",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "AF_IMPORT_ECOUL_PARTEDIS",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"inputcontainer": "data-input",
+								"folderpath": "Ecoulement/Partedis",
+								"outputcontainer": "data-warehouse",
+								"outputpath": "Temp/PARTEDIS_ECOULEMENT.xlsx"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "data transformation azure function",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT"
+				},
+				"annotations": []
 			},
 			"dependsOn": []
 		},
@@ -1254,7 +1490,14 @@
 					{
 						"name": "ORCAB_PREPARATION",
 						"type": "ExecuteDataFlow",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "import orcab",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "1.00:00:00",
 							"retry": 0,
@@ -1283,6 +1526,35 @@
 								"computeType": "General"
 							},
 							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "import orcab",
+						"description": "import data from orcab",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "AF_IMPORT_ECOUL_ORCAB",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"containername": "data-input",
+								"folderpath": "Ecoulement/ORCAB",
+								"outputContainer": "data-warehouse",
+								"outputpath": "Temp/ORCAB_ECOULEMENT.xlsx"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "data transformation azure function",
+							"type": "LinkedServiceReference"
 						}
 					}
 				],
@@ -1317,7 +1589,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"functionName": " AF_IMPORT_ECOUL_PARTEDIS",
+							"functionName": "AF_IMPORT_ECOUL_PARTEDIS",
 							"method": "POST",
 							"headers": {},
 							"body": {
@@ -1685,237 +1957,6 @@
 				},
 				"annotations": [],
 				"lastPublishTime": "2021-09-30T13:33:24Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PL_REFERENTIEL_PRIX')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "DUREE PERIODE",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "REFERENTIEL_PRIX_MOYEN",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"facturation": {},
-									"plateforme": {},
-									"dureePeriodeOutput": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "REFERENTIEL"
-				},
-				"annotations": [],
-				"lastPublishTime": "2021-09-07T07:24:29Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PL_SUIVIE_OFFRE')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "DIFFUS",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "SUIVIE_OFFRE_DIFFUS",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"stgOffre": {},
-									"baseCommerciale": {},
-									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "CHANTIER",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "SUIVIE_OFFRE_CHANTIER",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"stgOffre": {},
-									"baseCommerciale": {},
-									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "SUIVI DES OFFRES"
-				},
-				"annotations": [],
-				"lastPublishTime": "2021-10-04T10:13:39Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PL_TEREVA')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "PREPARATION",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "TEREVA_PREPARATION",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"ECOULEMENT": {},
-									"organisation": {},
-									"ventesDirectes": {},
-									"output": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "PREPARATION ECOULEMENT"
-				},
-				"annotations": [],
-				"lastPublishTime": "2021-09-28T07:36:55Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PL_VENTES_DIRECTES')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "PREPARATION",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "VENTES_DIRECTES_PREPARATION",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"ventesDirectes": {},
-									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "PREPARATION ECOULEMENT"
-				},
-				"annotations": [],
-				"lastPublishTime": "2021-09-07T13:24:24Z"
 			},
 			"dependsOn": []
 		}
