@@ -25,7 +25,14 @@
 			{
 				"name": "PL_MABILLE",
 				"type": "ExecutePipeline",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "PL_EHS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
@@ -53,7 +60,7 @@
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
-						"activity": "PL_MABILLE",
+						"activity": "PL_MAILLARD",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -71,7 +78,14 @@
 			{
 				"name": "PL_VF_CONFORT",
 				"type": "ExecutePipeline",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "PL_ORCAB",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
@@ -85,12 +99,6 @@
 				"name": "PL_TEREVA",
 				"type": "ExecutePipeline",
 				"dependsOn": [
-					{
-						"activity": "PL_ORCAB",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
 					{
 						"activity": "PL_VF_CONFORT",
 						"dependencyConditions": [
@@ -113,12 +121,6 @@
 				"dependsOn": [
 					{
 						"activity": "PL_TRAITEMENT_DSC",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "PL_MAILLARD",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -147,7 +149,14 @@
 			{
 				"name": "PL_PARTEDIS",
 				"type": "ExecutePipeline",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "PL_TEREVA",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
@@ -162,7 +171,7 @@
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
-						"activity": "PL_EHS",
+						"activity": "PL_MABILLE",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -183,12 +192,6 @@
 				"dependsOn": [
 					{
 						"activity": "PL_PARTEDIS",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "PL_TEREVA",
 						"dependencyConditions": [
 							"Succeeded"
 						]
