@@ -5,14 +5,7 @@
 			{
 				"name": "MAIN_PREPARATION_ECOULEMENT",
 				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "preparation_facturation",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
@@ -28,6 +21,12 @@
 				"dependsOn": [
 					{
 						"activity": "MAIN_PREPARATION_ECOULEMENT",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "preparation_facturation",
 						"dependencyConditions": [
 							"Succeeded"
 						]
