@@ -4,7 +4,7 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Nom de fabrique de données",
+			"metadata": "Data Factory name",
 			"defaultValue": "DF-VAILLANT"
 		}
 	},
@@ -12,6 +12,226 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_OFFRE')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "PREPARATION",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "PREPARATION",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"offreDiffusInput": {},
+									"offreChantierInput": {},
+									"referentielATCinput": {},
+									"stagingDiffus": {},
+									"stagingChantier": {},
+									"outTemp": {},
+									"sink1": {},
+									"sink2": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "fuzzyjoin",
+						"description": "fuzzy join: atc 2020 2021 and  atc affectation",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "PREPARATION",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "fuzzyjoin",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"leftfilepath": "Temp/atc_affectation_lower",
+								"rightfilepath": "Temp/atc_c2021_lower",
+								"leftkey": "Utilisateur",
+								"rightkey": "NomATC",
+								"outputpath": "Temp/atc_fuzzyjoined.xlsx",
+								"containername": "data-warehouse"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "data transformation azure function",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "FINITION",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "PREPARATION",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "FINITION",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"diffus": {},
+									"chantier": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "REFERENTIEL"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-13T07:55:19Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_ORCAB')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ORCAB_PREPARATION",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "ORCAB_PREPARATION",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"ecoulement": {},
+									"organisation": {},
+									"ventesDirectes": {},
+									"OUTPUT": {},
+									"quantityNullOutput": {},
+									"organisationNotFound": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "import orcab",
+						"description": "import data from orcab",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "ORCAB_PREPARATION",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "AF_IMPORT_ECOUL_ORCAB",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"containername": "data-input",
+								"folderpath": "Ecoulement/ORCAB",
+								"outputContainer": "data-warehouse",
+								"outputpath": "Temp/ORCAB_ECOULEMENT.xlsx"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "data transformation azure function",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-10T11:58:57Z"
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/PL_PARTEDIS')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
@@ -1178,6 +1398,7 @@
 									"venteDirect": {},
 									"DSCModel": {},
 									"PartedisModel": {},
+									"VanMarkes": {},
 									"sink1": {}
 								}
 							},
@@ -1666,6 +1887,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/PL_POST_UNION')]",
+				"[concat(variables('factoryId'), '/pipelines/PL_ORCAB')]",
 				"[concat(variables('factoryId'), '/pipelines/PL_VF_CONFORT')]",
 				"[concat(variables('factoryId'), '/pipelines/PL_TEREVA')]",
 				"[concat(variables('factoryId'), '/pipelines/PL_PARTEDIS')]"
@@ -1745,6 +1967,7 @@
 				"lastPublishTime": "2021-09-13T07:58:57Z"
 			},
 			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PL_OFFRE')]",
 				"[concat(variables('factoryId'), '/pipelines/PL_REFERENTIEL_ATC')]",
 				"[concat(variables('factoryId'), '/pipelines/PL_REFERENTIEL_PRIX')]"
 			]
@@ -1839,224 +2062,6 @@
 				"lastPublishTime": "2021-10-04T08:58:46Z"
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/MAIN')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "MAIN_PREPARATION_ECOULEMENT",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "preparation_facturation",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "MAIN_PREPARATION",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					},
-					{
-						"name": "PL_MAIN_BASE_COMMERCIAL",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "MAIN_PREPARATION_ECOULEMENT",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "PL_MAIN_BASE_COMMERCIALE",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					},
-					{
-						"name": "MAIN_REFERENTIEL",
-						"type": "ExecutePipeline",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "MAIN_REFERENTIEL",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					},
-					{
-						"name": "MAIN_LOGISTIQUE",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "MAIN_REFERENTIEL",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "MAIN_LOGISTIQUE",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					},
-					{
-						"name": "preparation_facturation",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "preparation_facturation",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"facturationbw": {},
-									"PLATEFORMES": {},
-									"facturationForDSCTEREVA": {},
-									"facturationForOtherPlateform": {},
-									"notDSCTerevaPlateform": {},
-									"facturationForVanMarkes": {},
-									"venteDirect": {},
-									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "CALCUL OBJECTIF RH",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "PL_MAIN_BASE_COMMERCIAL",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "PL_MAIN_RH",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					},
-					{
-						"name": "SORTIE MARKETING",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "PL_MAIN_BASE_COMMERCIAL",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "SORTIE MARKETING",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					},
-					{
-						"name": "MAIN_LOGISTIQUE1",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "PL_MAIN_BASE_COMMERCIAL",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "MAIN_LOGISTIQUE",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					},
-					{
-						"name": "CONTRAT DISTRIBUTION",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "PL_MAIN_BASE_COMMERCIAL",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "PL_CONTRAT_DISTRIBUTION",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2021-10-04T10:59:39Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/MAIN_PREPARATION')]",
-				"[concat(variables('factoryId'), '/pipelines/MAIN_REFERENTIEL')]",
-				"[concat(variables('factoryId'), '/pipelines/PL_MAIN_RH')]",
-				"[concat(variables('factoryId'), '/pipelines/SORTIE MARKETING')]"
-			]
 		}
 	]
 }

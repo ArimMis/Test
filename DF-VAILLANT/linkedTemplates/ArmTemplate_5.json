@@ -4,7 +4,7 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Nom de fabrique de données",
+			"metadata": "Data Factory name",
 			"defaultValue": "DF-VAILLANT"
 		}
 	},
@@ -594,6 +594,91 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/OutpoutVanMarkes')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "OutpoutVanMarkes",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"encodingName": "WINDOWS-1252",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "reference",
+						"type": "String"
+					},
+					{
+						"name": "yearmonth",
+						"type": "String"
+					},
+					{
+						"name": "HubSAPid",
+						"type": "String"
+					},
+					{
+						"name": "ca_final",
+						"type": "String"
+					},
+					{
+						"name": "qt_final",
+						"type": "String"
+					},
+					{
+						"name": "canal",
+						"type": "String"
+					},
+					{
+						"name": "id_canal_final",
+						"type": "String"
+					},
+					{
+						"name": "ATC Corrigé",
+						"type": "String"
+					},
+					{
+						"name": "marque_id",
+						"type": "String"
+					},
+					{
+						"name": "POSSAMidString",
+						"type": "String"
+					},
+					{
+						"name": "Donneur d ordre",
+						"type": "String"
+					},
+					{
+						"name": "Document de vente",
+						"type": "String"
+					},
+					{
+						"name": "data_origin",
+						"type": "String"
+					},
+					{
+						"name": "NoOffre",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/OutpuVanMarkes')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -610,7 +695,7 @@
 						"folderPath": "Temp",
 						"container": "data-warehouse"
 					},
-					"columnDelimiter": "|",
+					"columnDelimiter": ",",
 					"encodingName": "WINDOWS-1252",
 					"escapeChar": "\\",
 					"firstRowAsHeader": true,
@@ -1671,71 +1756,6 @@
 					},
 					{
 						"name": "date_upload",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/REFERENTIEL_ATC')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "REFERENTIEL_OFFRE"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "Bareme",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "Copie de referentiel ATC 2021 2020.xlsx",
-						"folderPath": "Client",
-						"container": "data-input"
-					},
-					"firstRowAsHeader": true
-				},
-				"schema": [
-					{
-						"name": "ATC",
-						"type": "String"
-					},
-					{
-						"name": "NomATC",
-						"type": "String"
-					},
-					{
-						"name": "Plan primes",
-						"type": "String"
-					},
-					{
-						"name": "DR",
-						"type": "String"
-					},
-					{
-						"name": "Secteur prime",
-						"type": "String"
-					},
-					{
-						"name": "Matricule",
-						"type": "String"
-					},
-					{
-						"name": "Secteur DEC",
-						"type": "String"
-					},
-					{
-						"name": "Rallye",
-						"type": "String"
-					},
-					{
-						"name": "NomATC",
 						"type": "String"
 					}
 				]

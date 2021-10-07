@@ -4,7 +4,7 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Nom de fabrique de données",
+			"metadata": "Data Factory name",
 			"defaultValue": "DF-VAILLANT"
 		}
 	},
@@ -12,6 +12,97 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/cleaning')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "cleaning process after join",
+				"folder": {
+					"name": "REFERENTIEL/ATC"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "atc_joined",
+								"type": "DatasetReference"
+							},
+							"name": "atcJoined"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "outReferentielATC",
+								"type": "DatasetReference"
+							},
+							"name": "AtcprepareForReplicate"
+						}
+					],
+					"transformations": [
+						{
+							"name": "Filter1"
+						},
+						{
+							"name": "Select1"
+						},
+						{
+							"name": "DerivedColumn1"
+						},
+						{
+							"name": "Filter2"
+						},
+						{
+							"name": "DerivedColumn2"
+						},
+						{
+							"name": "Flatten1"
+						},
+						{
+							"name": "DerivedColumn3"
+						},
+						{
+							"name": "DerivedColumn4"
+						}
+					],
+					"script": "source(output(\n\t\t{Clé Référentiel} as string,\n\t\t{Recherche Clé EPS} as string,\n\t\tMarque as string,\n\t\t{Code Postal début} as integer,\n\t\t{Code Postal fin} as integer,\n\t\tUtilisateur as string,\n\t\tFonction as string,\n\t\t{Département} as string,\n\t\tDR_x as string,\n\t\tmatches as string,\n\t\tATC as string,\n\t\tNomATC as string,\n\t\t{Plan primes} as string,\n\t\tDR_y as string,\n\t\t{Secteur prime} as string,\n\t\tMatricule as string,\n\t\t{Secteur DEC} as string,\n\t\tRallye as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> atcJoined\natcJoined filter(!isNull(ATC)) ~> Filter1\nFilter1 select(mapColumn(\n\t\t{Clé Référentiel},\n\t\t{Recherche Clé EPS},\n\t\tMarque,\n\t\t{Code Postal début},\n\t\t{Code Postal fin},\n\t\tUtilisateur,\n\t\tFonction,\n\t\t{Département},\n\t\tDR_x,\n\t\tmatches,\n\t\tATC,\n\t\tNomATC,\n\t\t{Plan primes},\n\t\tDR_y,\n\t\t{Secteur prime},\n\t\tMatricule,\n\t\t{Secteur DEC},\n\t\tRallye\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 derive({Canal final} = iif( in([\"Vaillant diffus\",\"SD diffus\"], {Plan primes}), \"Diffus\" ,\"Chantier\" ),\n\t\ttoreplicate = {Code Postal fin}-{Code Postal début}+1) ~> DerivedColumn1\nDerivedColumn1 filter({Code Postal début}<= {Code Postal fin}) ~> Filter2\nFilter2 derive(dd = mapLoop(abs(toInteger(toreplicate)), #index)) ~> DerivedColumn2\nDerivedColumn2 foldDown(unroll(dd, dd),\n\tmapColumn(\n\t\t{Clé Référentiel},\n\t\t{Recherche Clé EPS},\n\t\tMarque,\n\t\t{Code Postal début},\n\t\t{Code Postal fin},\n\t\tUtilisateur,\n\t\tFonction,\n\t\t{Département},\n\t\tDR_x,\n\t\tmatches,\n\t\tATC,\n\t\tNomATC,\n\t\t{Plan primes},\n\t\tDR_y,\n\t\t{Secteur prime},\n\t\tMatricule,\n\t\t{Secteur DEC},\n\t\tRallye,\n\t\t{Canal final},\n\t\ttoreplicate,\n\t\tdd\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> Flatten1\nFlatten1 derive(dd = toInteger(dd) -1) ~> DerivedColumn3\nDerivedColumn3 derive({Code postal} = {Code Postal début}+dd) ~> DerivedColumn4\nDerivedColumn4 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['referentiel_atc.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> AtcprepareForReplicate"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/fuzzyjoinATC')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "WranglingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"name": "afctationflows",
+							"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> afctationflows",
+							"dataset": {
+								"referenceName": "afctationflows",
+								"type": "DatasetReference"
+							}
+						},
+						{
+							"name": "atcc2021",
+							"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> atcc2021",
+							"dataset": {
+								"referenceName": "atcc2021",
+								"type": "DatasetReference"
+							}
+						}
+					],
+					"script": "section Section1;\r\nshared afctationflows = let\r\n  AdfDoc = AzureStorage.BlobContents(\"https://dsvaillantfr.blob.core.windows.net/data-warehouse/Temp/atc_affectation_lower\"),\r\n  Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]),\r\n  PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true])\r\nin\r\n  PromotedHeaders;\r\nshared atcc2021 = let\r\n  AdfDoc = AzureStorage.BlobContents(\"https://dsvaillantfr.blob.core.windows.net/data-warehouse/Temp/atc_c2021_lower\"),\r\n  Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]),\r\n  PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true])\r\nin\r\n  PromotedHeaders;\r\nshared UserQuery = let\r\n  Source = afctationflows,\r\n  #\"Choose columns\" = Table.SelectColumns(Source, {\"Clé Référentiel\", \"Marque\", \"Code Postal début\", \"Code Postal fin\", \"Utilisateur\", \"Fonction\", \"Département\", \"DR\"})\r\nin\r\n  #\"Choose columns\";\r\n",
+					"documentLocale": "en-us"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/lower_data')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
@@ -1401,6 +1492,12 @@
 								"dependencyConditions": [
 									"Succeeded"
 								]
+							},
+							{
+								"activity": "VanMarkes",
+								"dependencyConditions": [
+									"Succeeded"
+								]
 							}
 						],
 						"policy": {
@@ -1420,6 +1517,7 @@
 									"venteDirect": {},
 									"DSCModel": {},
 									"PartedisModel": {},
+									"VanMarkes": {},
 									"sink1": {}
 								}
 							},
@@ -1508,6 +1606,50 @@
 									"offre": {},
 									"refAtc": {},
 									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "VanMarkes",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "PREPARATION_ECC_AVOIR",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "VanMarkes",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"organisaation": {},
+									"Avoir": {},
+									"Facturation": {},
+									"ExtarctionSAP": {},
+									"REFATC": {},
+									"Offre": {},
+									"SortieVanMarkes": {},
+									"OutputVanMarkes": {},
+									"SinkVanMarkes": {}
 								}
 							},
 							"staging": {},
@@ -1670,226 +1812,6 @@
 				},
 				"annotations": [],
 				"lastPublishTime": "2021-10-04T08:55:52Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PL_OFFRE')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "PREPARATION",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "PREPARATION",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"offreDiffusInput": {},
-									"offreChantierInput": {},
-									"referentielATCinput": {},
-									"stagingDiffus": {},
-									"stagingChantier": {},
-									"outTemp": {},
-									"sink1": {},
-									"sink2": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "fuzzyjoin",
-						"description": "fuzzy join: atc 2020 2021 and  atc affectation",
-						"type": "AzureFunctionActivity",
-						"dependsOn": [
-							{
-								"activity": "PREPARATION",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"functionName": "fuzzyjoin",
-							"method": "POST",
-							"headers": {},
-							"body": {
-								"leftfilepath": "Temp/atc_affectation_lower",
-								"rightfilepath": "Temp/atc_c2021_lower",
-								"leftkey": "Utilisateur",
-								"rightkey": "NomATC",
-								"outputpath": "Temp/atc_fuzzyjoined.xlsx",
-								"containername": "data-warehouse"
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "data transformation azure function",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "FINITION",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [
-							{
-								"activity": "PREPARATION",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "FINITION",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"diffus": {},
-									"chantier": {},
-									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "REFERENTIEL"
-				},
-				"annotations": [],
-				"lastPublishTime": "2021-09-13T07:55:19Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PL_ORCAB')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "ORCAB_PREPARATION",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "ORCAB_PREPARATION",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"ecoulement": {},
-									"organisation": {},
-									"ventesDirectes": {},
-									"OUTPUT": {},
-									"quantityNullOutput": {},
-									"organisationNotFound": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "import orcab",
-						"description": "import data from orcab",
-						"type": "AzureFunctionActivity",
-						"dependsOn": [
-							{
-								"activity": "ORCAB_PREPARATION",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"functionName": "AF_IMPORT_ECOUL_ORCAB",
-							"method": "POST",
-							"headers": {},
-							"body": {
-								"containername": "data-input",
-								"folderpath": "Ecoulement/ORCAB",
-								"outputContainer": "data-warehouse",
-								"outputpath": "Temp/ORCAB_ECOULEMENT.xlsx"
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "data transformation azure function",
-							"type": "LinkedServiceReference"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "PREPARATION ECOULEMENT"
-				},
-				"annotations": [],
-				"lastPublishTime": "2021-09-10T11:58:57Z"
 			},
 			"dependsOn": []
 		}

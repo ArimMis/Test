@@ -4,7 +4,7 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Nom de fabrique de données",
+			"metadata": "Data Factory name",
 			"defaultValue": "DF-VAILLANT"
 		}
 	},
@@ -12,6 +12,153 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/notDSCTerevaPlateform')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "OTHER"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Région Statistique",
+						"type": "String"
+					},
+					{
+						"name": "Enseigne",
+						"type": "String"
+					},
+					{
+						"name": "Marque DESC",
+						"type": "String"
+					},
+					{
+						"name": "Marque Code",
+						"type": "String"
+					},
+					{
+						"name": "Sous Famille",
+						"type": "String"
+					},
+					{
+						"name": "Référence Article Fournisseur",
+						"type": "String"
+					},
+					{
+						"name": "Article National DESC",
+						"type": "String"
+					},
+					{
+						"name": "Article National Code",
+						"type": "String"
+					},
+					{
+						"name": "Agence Code",
+						"type": "String"
+					},
+					{
+						"name": "Agence DESC",
+						"type": "String"
+					},
+					{
+						"name": "Département DESC",
+						"type": "String"
+					},
+					{
+						"name": "Département ID",
+						"type": "String"
+					},
+					{
+						"name": "Secteur",
+						"type": "String"
+					},
+					{
+						"name": "Quantité en UV BL",
+						"type": "String"
+					},
+					{
+						"name": "Année Précédente (Quantité en UV BL)",
+						"type": "String"
+					},
+					{
+						"name": "Cumul Exercice (Quantité en UV BL)",
+						"type": "String"
+					},
+					{
+						"name": "Cumul Exercice A-1 (Quantité en UV BL)",
+						"type": "String"
+					},
+					{
+						"name": "MOIS CA PRR N",
+						"type": "String"
+					},
+					{
+						"name": "MOIS CA PRR N-1",
+						"type": "String"
+					},
+					{
+						"name": "CA PRR au cumul",
+						"type": "String"
+					},
+					{
+						"name": "CA PRR au cumul N-1",
+						"type": "String"
+					},
+					{
+						"name": "fileName",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ofactbw')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "OTHER"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/offre')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -1848,157 +1995,6 @@
 					},
 					{
 						"name": "code_postal_atc",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ref_atc_2021')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "REFERENTIEL_ATC"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "Bareme",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "Copie de referentiel ATC 2021 2020.xlsx",
-						"folderPath": "Client",
-						"container": "data-input"
-					},
-					"firstRowAsHeader": true
-				},
-				"schema": [
-					{
-						"name": "ATC",
-						"type": "String"
-					},
-					{
-						"name": "NomATC",
-						"type": "String"
-					},
-					{
-						"name": "Plan primes",
-						"type": "String"
-					},
-					{
-						"name": "DR",
-						"type": "String"
-					},
-					{
-						"name": "Secteur prime",
-						"type": "String"
-					},
-					{
-						"name": "Matricule",
-						"type": "String"
-					},
-					{
-						"name": "Secteur DEC",
-						"type": "String"
-					},
-					{
-						"name": "Rallye",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/referentielAtc')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "REFERENTIEL_ATC"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "staging",
-						"container": "data-warehouse"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "SaunierDuvalNicolas HERNANDEZ0100001999Conseiller Technique Thermodynamique0",
-						"type": "String"
-					},
-					{
-						"name": "SaunierDuvalNicolas HERNANDEZ0100001999Conseiller Technique Thermodynamique1",
-						"type": "String"
-					},
-					{
-						"name": "SaunierDuval",
-						"type": "String"
-					},
-					{
-						"name": "01000",
-						"type": "String"
-					},
-					{
-						"name": "01999",
-						"type": "String"
-					},
-					{
-						"name": "nicolas hernandez",
-						"type": "String"
-					},
-					{
-						"name": "Conseiller Technique Thermodynamique",
-						"type": "String"
-					},
-					{
-						"name": "01",
-						"type": "String"
-					},
-					{
-						"name": "1647-Rhône-Alpes Auvergne",
-						"type": "String"
-					},
-					{
-						"name": "16400092",
-						"type": "String"
-					},
-					{
-						"name": "nicolas julien",
-						"type": "String"
-					},
-					{
-						"name": "SD diffus",
-						"type": "String"
-					},
-					{
-						"name": "NICOLAS Julien",
-						"type": "String"
-					},
-					{
-						"name": "16566798",
-						"type": "String"
-					},
-					{
-						"name": "Prop_14",
 						"type": "String"
 					}
 				]

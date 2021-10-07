@@ -4,7 +4,7 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Nom de fabrique de données",
+			"metadata": "Data Factory name",
 			"defaultValue": "DF-VAILLANT"
 		}
 	},
@@ -12,6 +12,113 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Stg_offre_diffus')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "REFERENTIEL_OFFRE"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "staging",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ";",
+					"encodingName": "WINDOWS-1252",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/TEMPLATE_CALCUL_REM')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "CONTRAT DISTRIBUTION"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "calcul de rem",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "0630_template contrats.xlsx",
+						"folderPath": "Levier RH",
+						"container": "data-input"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "ID levier",
+						"type": "String"
+					},
+					{
+						"name": "Code produit",
+						"type": "String"
+					},
+					{
+						"name": "Code produits exclus",
+						"type": "String"
+					},
+					{
+						"name": "Famille produit",
+						"type": "String"
+					},
+					{
+						"name": "Famille produit exclus",
+						"type": "String"
+					},
+					{
+						"name": "Canal",
+						"type": "String"
+					},
+					{
+						"name": "Date de début",
+						"type": "String"
+					},
+					{
+						"name": "Date de fin",
+						"type": "String"
+					},
+					{
+						"name": "Type de seuil",
+						"type": "String"
+					},
+					{
+						"name": "Contrepartie seuil",
+						"type": "String"
+					},
+					{
+						"name": "ID seuil",
+						"type": "String"
+					},
+					{
+						"name": "Marque",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/TEMPLATE_CONTRAT')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -2051,233 +2158,6 @@
 					},
 					{
 						"name": "fileName",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/article_hierarchi')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "PREPARATION ECOULEMENT/UNION_ALL_DISTRIBUTOR"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "HIERARCHIE_ARTICLE",
-						"container": "data-warehouse"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "OrgCm",
-						"type": "String"
-					},
-					{
-						"name": "CDis",
-						"type": "String"
-					},
-					{
-						"name": "Article",
-						"type": "String"
-					},
-					{
-						"name": "Description",
-						"type": "String"
-					},
-					{
-						"name": "Hiérarch.groupe",
-						"type": "String"
-					},
-					{
-						"name": "Hiérarch.locale",
-						"type": "String"
-					},
-					{
-						"name": "Predecessor",
-						"type": "String"
-					},
-					{
-						"name": "Successor",
-						"type": "String"
-					},
-					{
-						"name": "St",
-						"type": "String"
-					},
-					{
-						"name": "Désignation Statut",
-						"type": "String"
-					},
-					{
-						"name": "Déb. val.",
-						"type": "String"
-					},
-					{
-						"name": "N1.groupe",
-						"type": "String"
-					},
-					{
-						"name": "N2.groupe",
-						"type": "String"
-					},
-					{
-						"name": "N3.groupe",
-						"type": "String"
-					},
-					{
-						"name": "N4.groupe",
-						"type": "String"
-					},
-					{
-						"name": "N5.groupe",
-						"type": "String"
-					},
-					{
-						"name": "N6.groupe",
-						"type": "String"
-					},
-					{
-						"name": "N7.groupe",
-						"type": "String"
-					},
-					{
-						"name": "N1.locale",
-						"type": "String"
-					},
-					{
-						"name": "N2.locale",
-						"type": "String"
-					},
-					{
-						"name": "N3.locale",
-						"type": "String"
-					},
-					{
-						"name": "N4.locale",
-						"type": "String"
-					},
-					{
-						"name": "N5.locale",
-						"type": "String"
-					},
-					{
-						"name": "N6.locale",
-						"type": "String"
-					},
-					{
-						"name": "N7.locale",
-						"type": "String"
-					},
-					{
-						"name": "N1.groupe.designation",
-						"type": "String"
-					},
-					{
-						"name": "N2.groupe.designation",
-						"type": "String"
-					},
-					{
-						"name": "N3.groupe.designation",
-						"type": "String"
-					},
-					{
-						"name": "N4.groupe.designation",
-						"type": "String"
-					},
-					{
-						"name": "N5.groupe.designation",
-						"type": "String"
-					},
-					{
-						"name": "N6.groupe.designation",
-						"type": "String"
-					},
-					{
-						"name": "N7.groupe.designation",
-						"type": "String"
-					},
-					{
-						"name": "N1.locale.designation",
-						"type": "String"
-					},
-					{
-						"name": "N2.locale.designation",
-						"type": "String"
-					},
-					{
-						"name": "N3.locale.designation",
-						"type": "String"
-					},
-					{
-						"name": "N4.locale.designation",
-						"type": "String"
-					},
-					{
-						"name": "N5.locale.designation",
-						"type": "String"
-					},
-					{
-						"name": "N6.locale.designation",
-						"type": "String"
-					},
-					{
-						"name": "N7.locale.designation",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/associationoffre')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "VENTE DIRECT BASE COMM"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "Sheet1",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "ArticulationSap.xlsx",
-						"folderPath": "Offre",
-						"container": "data-input"
-					},
-					"firstRowAsHeader": true
-				},
-				"schema": [
-					{
-						"name": "Commande",
-						"type": "String"
-					},
-					{
-						"name": "Référence Offre BA",
-						"type": "String"
-					},
-					{
-						"name": "Qté Cdée",
 						"type": "String"
 					}
 				]
