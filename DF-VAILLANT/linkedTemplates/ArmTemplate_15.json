@@ -582,14 +582,7 @@
 					{
 						"name": "PREPARATION",
 						"type": "ExecuteDataFlow",
-						"dependsOn": [
-							{
-								"activity": "importData",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
+						"dependsOn": [],
 						"policy": {
 							"timeout": "1.00:00:00",
 							"retry": 0,
@@ -622,7 +615,14 @@
 						"name": "importData",
 						"description": "import all file un folder",
 						"type": "AzureFunctionActivity",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "PREPARATION",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -783,14 +783,7 @@
 					{
 						"name": "VF_CONFORT_PREPARATION",
 						"type": "ExecuteDataFlow",
-						"dependsOn": [
-							{
-								"activity": "importData",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
+						"dependsOn": [],
 						"policy": {
 							"timeout": "1.00:00:00",
 							"retry": 0,
@@ -824,7 +817,14 @@
 						"name": "importData",
 						"description": "import all file un folder",
 						"type": "AzureFunctionActivity",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "VF_CONFORT_PREPARATION",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -1514,14 +1514,7 @@
 					{
 						"name": "PL_VF_CONFORT",
 						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "PL_ORCAB",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
+						"dependsOn": [],
 						"userProperties": [],
 						"typeProperties": {
 							"pipeline": {
@@ -1535,14 +1528,7 @@
 					{
 						"name": "PL_TEREVA",
 						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "PL_VF_CONFORT",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
+						"dependsOn": [],
 						"userProperties": [],
 						"typeProperties": {
 							"pipeline": {
@@ -1600,14 +1586,7 @@
 					{
 						"name": "PL_PARTEDIS",
 						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "PL_TEREVA",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
+						"dependsOn": [],
 						"userProperties": [],
 						"typeProperties": {
 							"pipeline": {
