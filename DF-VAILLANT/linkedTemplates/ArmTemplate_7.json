@@ -13,6 +13,35 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/TEMP_LEVIER_RH')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "LEVIER RH"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/TEMP_PRIX_PAR_PERIODE')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1985,107 +2014,6 @@
 					"quoteChar": "\""
 				},
 				"schema": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/atc_joined')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "REFERENTIEL_ATC"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "Sheet1",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "atc_fuzzyjoined.xlsx",
-						"folderPath": "Temp",
-						"container": "data-warehouse"
-					},
-					"firstRowAsHeader": true
-				},
-				"schema": [
-					{
-						"name": "Clé Référentiel",
-						"type": "String"
-					},
-					{
-						"name": "Recherche Clé EPS",
-						"type": "String"
-					},
-					{
-						"name": "Marque",
-						"type": "String"
-					},
-					{
-						"name": "Code Postal début",
-						"type": "String"
-					},
-					{
-						"name": "Code Postal fin",
-						"type": "String"
-					},
-					{
-						"name": "Utilisateur",
-						"type": "String"
-					},
-					{
-						"name": "Fonction",
-						"type": "String"
-					},
-					{
-						"name": "Département",
-						"type": "String"
-					},
-					{
-						"name": "DR_x",
-						"type": "String"
-					},
-					{
-						"name": "matches",
-						"type": "String"
-					},
-					{
-						"name": "ATC",
-						"type": "String"
-					},
-					{
-						"name": "NomATC",
-						"type": "String"
-					},
-					{
-						"name": "Plan primes",
-						"type": "String"
-					},
-					{
-						"name": "DR_y",
-						"type": "String"
-					},
-					{
-						"name": "Secteur prime",
-						"type": "String"
-					},
-					{
-						"name": "Matricule",
-						"type": "String"
-					},
-					{
-						"name": "Secteur DEC",
-						"type": "String"
-					},
-					{
-						"name": "Rallye",
-						"type": "String"
-					}
-				]
 			},
 			"dependsOn": []
 		}

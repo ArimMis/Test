@@ -13,6 +13,107 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/atc_joined')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "REFERENTIEL_ATC"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Sheet1",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "atc_fuzzyjoined.xlsx",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Clé Référentiel",
+						"type": "String"
+					},
+					{
+						"name": "Recherche Clé EPS",
+						"type": "String"
+					},
+					{
+						"name": "Marque",
+						"type": "String"
+					},
+					{
+						"name": "Code Postal début",
+						"type": "String"
+					},
+					{
+						"name": "Code Postal fin",
+						"type": "String"
+					},
+					{
+						"name": "Utilisateur",
+						"type": "String"
+					},
+					{
+						"name": "Fonction",
+						"type": "String"
+					},
+					{
+						"name": "Département",
+						"type": "String"
+					},
+					{
+						"name": "DR_x",
+						"type": "String"
+					},
+					{
+						"name": "matches",
+						"type": "String"
+					},
+					{
+						"name": "ATC",
+						"type": "String"
+					},
+					{
+						"name": "NomATC",
+						"type": "String"
+					},
+					{
+						"name": "Plan primes",
+						"type": "String"
+					},
+					{
+						"name": "DR_y",
+						"type": "String"
+					},
+					{
+						"name": "Secteur prime",
+						"type": "String"
+					},
+					{
+						"name": "Matricule",
+						"type": "String"
+					},
+					{
+						"name": "Secteur DEC",
+						"type": "String"
+					},
+					{
+						"name": "Rallye",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/atc_replicated')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -2794,119 +2895,6 @@
 					},
 					{
 						"name": "Offre",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ecoulmnt')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "BASE_COMMERCIAL"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "Sheet1",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "ecoulementPartedisWithIndex.xlsx",
-						"folderPath": "Temp",
-						"container": "data-warehouse"
-					},
-					"firstRowAsHeader": true
-				},
-				"schema": [
-					{
-						"name": "yearmonth",
-						"type": "String"
-					},
-					{
-						"name": "year",
-						"type": "String"
-					},
-					{
-						"name": "canal",
-						"type": "String"
-					},
-					{
-						"name": "month",
-						"type": "String"
-					},
-					{
-						"name": "qte_ecoulement",
-						"type": "String"
-					},
-					{
-						"name": "ca_ecoulement",
-						"type": "String"
-					},
-					{
-						"name": "POSSAMidString",
-						"type": "String"
-					},
-					{
-						"name": "HubSAPid",
-						"type": "String"
-					},
-					{
-						"name": "reference",
-						"type": "String"
-					},
-					{
-						"name": "distributeur",
-						"type": "String"
-					},
-					{
-						"name": "agence_code",
-						"type": "String"
-					},
-					{
-						"name": "sous_famille",
-						"type": "String"
-					},
-					{
-						"name": "article",
-						"type": "String"
-					},
-					{
-						"name": "marque",
-						"type": "String"
-					},
-					{
-						"name": "Code postal",
-						"type": "String"
-					},
-					{
-						"name": "marque_name",
-						"type": "String"
-					},
-					{
-						"name": "toreplicate",
-						"type": "String"
-					},
-					{
-						"name": "order",
-						"type": "String"
-					},
-					{
-						"name": "indexcols",
-						"type": "String"
-					},
-					{
-						"name": "cumcount",
-						"type": "String"
-					},
-					{
-						"name": "indexcols2",
 						"type": "String"
 					}
 				]
