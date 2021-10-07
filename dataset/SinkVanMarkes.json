@@ -1,5 +1,5 @@
 {
-	"name": "OutpuVanMarkes",
+	"name": "SinkVanMarkes",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "VAILLANT_ARCHITECTURE",
@@ -14,7 +14,6 @@
 				"container": "data-warehouse"
 			},
 			"columnDelimiter": ",",
-			"encodingName": "WINDOWS-1252",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
