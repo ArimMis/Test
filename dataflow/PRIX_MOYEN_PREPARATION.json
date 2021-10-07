@@ -9,7 +9,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "referentielPrix",
+						"referenceName": "REFERENTIEL_PRIX",
 						"type": "DatasetReference"
 					},
 					"name": "prixmoyen"

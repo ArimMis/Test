@@ -1,0 +1,45 @@
+{
+	"name": "REFERENTIEL_PRIX",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "BASE_COMMERCIAL"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "referentielPrix.xlsx",
+				"container": "data-warehouse"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "WholeSalerID",
+				"type": "String"
+			},
+			{
+				"name": "Article",
+				"type": "String"
+			},
+			{
+				"name": "prix_unitaire",
+				"type": "String"
+			},
+			{
+				"name": "Durée_période",
+				"type": "String"
+			},
+			{
+				"name": "Période",
+				"type": "String"
+			}
+		]
+	}
+}
