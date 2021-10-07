@@ -78,14 +78,7 @@
 			{
 				"name": "PL_VF_CONFORT",
 				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "PL_ORCAB",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
@@ -98,14 +91,7 @@
 			{
 				"name": "PL_TEREVA",
 				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "PL_VF_CONFORT",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
@@ -149,14 +135,7 @@
 			{
 				"name": "PL_PARTEDIS",
 				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "PL_TEREVA",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
