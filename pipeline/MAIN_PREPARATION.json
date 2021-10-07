@@ -51,7 +51,14 @@
 			{
 				"name": "PL_TRAITEMENT_DSC",
 				"type": "ExecutePipeline",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "PL_MABILLE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
@@ -75,57 +82,22 @@
 				}
 			},
 			{
-				"name": "PARTEDIS_PREPARATION",
-				"type": "ExecuteDataFlow",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "1.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataflow": {
-						"referenceName": "PARTEDIS_PREPARATION",
-						"type": "DataFlowReference"
-					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
-				}
-			},
-			{
-				"name": "MAILLARD_PREPARATION",
-				"type": "ExecuteDataFlow",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "1.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataflow": {
-						"referenceName": "MAILLARD_PREPARATION",
-						"type": "DataFlowReference"
-					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
-				}
-			},
-			{
 				"name": "PL_TEREVA",
 				"type": "ExecutePipeline",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "PL_ORCAB",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "PL_VF_CONFORT",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
@@ -140,49 +112,13 @@
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "PL_MABILLE",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "PL_ORCAB",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
 						"activity": "PL_TRAITEMENT_DSC",
 						"dependencyConditions": [
 							"Succeeded"
 						]
 					},
 					{
-						"activity": "PL_VF_CONFORT",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "PARTEDIS_PREPARATION",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "MAILLARD_PREPARATION",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "PL_TEREVA",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "EHS",
+						"activity": "PL_MAILLARD",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -209,27 +145,62 @@
 				}
 			},
 			{
-				"name": "EHS",
-				"type": "ExecuteDataFlow",
+				"name": "PL_PARTEDIS",
+				"type": "ExecutePipeline",
 				"dependsOn": [],
-				"policy": {
-					"timeout": "1.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
 				"userProperties": [],
 				"typeProperties": {
-					"dataflow": {
-						"referenceName": "EHS",
-						"type": "DataFlowReference"
+					"pipeline": {
+						"referenceName": "PL_PARTEDIS",
+						"type": "PipelineReference"
 					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PL_MAILLARD",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PL_EHS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_MAILLARD",
+						"type": "PipelineReference"
 					},
-					"traceLevel": "Fine"
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PL_EHS",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PL_PARTEDIS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "PL_TEREVA",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_EHS",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
 				}
 			}
 		],

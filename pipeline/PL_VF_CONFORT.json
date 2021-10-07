@@ -68,7 +68,14 @@
 			{
 				"name": "VF_CONFORT_PREPARATION",
 				"type": "ExecuteDataFlow",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "importData",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "1.00:00:00",
 					"retry": 0,
@@ -87,6 +94,34 @@
 						"computeType": "General"
 					},
 					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "importData",
+				"description": "import all file un folder",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "AF_IMPORT_ECOUL_VFCONFORT",
+					"method": "POST",
+					"body": {
+						"inputcontainer": "data-input",
+						"folderpath": "Ecoulement/VF Confort",
+						"outputcontainer": "data-warehouse",
+						"outputpath": "Temp/CONFORT_ECOULEMENT.xlsx"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "data transformation azure function",
+					"type": "LinkedServiceReference"
 				}
 			}
 		],

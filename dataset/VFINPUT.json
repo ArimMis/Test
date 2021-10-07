@@ -1,69 +1,60 @@
 {
-	"name": "tVerifBaseComm",
+	"name": "VFINPUT",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "VAILLANT_ARCHITECTURE",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "BASE_COMMERCIAL"
+			"name": "PREPARATION ECOULEMENT"
 		},
 		"annotations": [],
-		"type": "DelimitedText",
+		"type": "Excel",
 		"typeProperties": {
+			"sheetName": "Sheet1",
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": "CONFORT_ECOULEMENT.xlsx",
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
-			"columnDelimiter": ",",
-			"escapeChar": "\\",
-			"firstRowAsHeader": true,
-			"quoteChar": "\""
+			"firstRowAsHeader": true
 		},
 		"schema": [
 			{
-				"name": "yearmonth",
+				"name": "Représentant",
 				"type": "String"
 			},
 			{
-				"name": "year",
+				"name": "N° Département",
 				"type": "String"
 			},
 			{
-				"name": "month",
+				"name": "Département",
 				"type": "String"
 			},
 			{
-				"name": "qte_ecoulement",
+				"name": "Code point de vente",
 				"type": "String"
 			},
 			{
-				"name": "ca_ecoulement",
+				"name": "Libellé point de vente",
 				"type": "String"
 			},
 			{
-				"name": "POSSAMidString",
+				"name": "Code Depot source",
 				"type": "String"
 			},
 			{
-				"name": "HubSAPid",
+				"name": "Code client",
 				"type": "String"
 			},
 			{
-				"name": "reference",
+				"name": "Client",
 				"type": "String"
 			},
 			{
-				"name": "distributeur",
-				"type": "String"
-			},
-			{
-				"name": "agence_code",
-				"type": "String"
-			},
-			{
-				"name": "marque",
+				"name": "N° Siret",
 				"type": "String"
 			},
 			{
@@ -71,30 +62,49 @@
 				"type": "String"
 			},
 			{
-				"name": "marque_name",
+				"name": "Ville",
 				"type": "String"
 			},
 			{
-				"name": "toreplicate",
+				"name": "Année livraison",
 				"type": "String"
 			},
 			{
-				"name": "dd",
+				"name": "Mois livraison",
 				"type": "String"
 			},
 			{
-				"name": "rcount",
+				"name": "code fournisseur",
 				"type": "String"
 			},
 			{
-				"name": "indexcols2",
+				"name": "fournisseur principal",
 				"type": "String"
 			},
 			{
-				"name": "qte_ecc",
+				"name": "Code produit",
+				"type": "String"
+			},
+			{
+				"name": "produit",
+				"type": "String"
+			},
+			{
+				"name": "Réference",
+				"type": "String"
+			},
+			{
+				"name": "Qte en unité de vente",
+				"type": "String"
+			},
+			{
+				"name": "Montant prv net",
+				"type": "String"
+			},
+			{
+				"name": "path",
 				"type": "String"
 			}
 		]
-	},
-	"type": "Microsoft.DataFactory/factories/datasets"
+	}
 }

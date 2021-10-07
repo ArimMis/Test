@@ -3,74 +3,11 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "IMPORT DATA",
-				"type": "Copy",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "ExcelSource",
-						"additionalColumns": [
-							{
-								"name": "fileName",
-								"value": "$$FILEPATH"
-							}
-						],
-						"storeSettings": {
-							"type": "AzureBlobStorageReadSettings",
-							"recursive": true,
-							"wildcardFileName": "*",
-							"enablePartitionDiscovery": false
-						}
-					},
-					"sink": {
-						"type": "DelimitedTextSink",
-						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings",
-							"copyBehavior": "MergeFiles"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".csv"
-						}
-					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "FOLDER_ECOULEMENT_MABILE",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "MABILE_ECOULEMENT_OUTPUT",
-						"type": "DatasetReference"
-					}
-				]
-			},
-			{
 				"name": "MABILE_PREPARATION",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "IMPORT DATA",
+						"activity": "importData",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -94,6 +31,34 @@
 						"computeType": "General"
 					},
 					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "importData",
+				"description": "import all file un folder",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "AF_IMPORT_ECOUL_MABILE",
+					"method": "POST",
+					"body": {
+						"containername": "data-input",
+						"folderpath": "Ecoulement/Mabile",
+						"outputContainer": "data-warehouse",
+						"outputpath": "Temp/MABILE_ECOULEMENT.xlsx"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "data transformation azure function",
+					"type": "LinkedServiceReference"
 				}
 			}
 		],

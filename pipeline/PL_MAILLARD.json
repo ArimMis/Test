@@ -1,13 +1,13 @@
 {
-	"name": "PL_TEREVA",
+	"name": "PL_MAILLARD",
 	"properties": {
 		"activities": [
 			{
-				"name": "PREPARATION",
+				"name": "MAILLARD_PREPARATION",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "importData",
+						"activity": "DATA IMPORT",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -23,7 +23,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "TEREVA_PREPARATION",
+						"referenceName": "MAILLARD_PREPARATION",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -34,8 +34,7 @@
 				}
 			},
 			{
-				"name": "importData",
-				"description": "import all file un folder",
+				"name": "DATA IMPORT",
 				"type": "AzureFunctionActivity",
 				"dependsOn": [],
 				"policy": {
@@ -47,13 +46,13 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"functionName": "AF_IMPORT_ECOUL_TEREVA",
+					"functionName": "AF_IMPORT_ECOUL_PARTEDIS",
 					"method": "POST",
 					"body": {
 						"inputcontainer": "data-input",
-						"folderpath": "Ecoulement/Téréva",
+						"folderpath": "Ecoulement/Partedis",
 						"outputcontainer": "data-warehouse",
-						"outputpath": "Temp/TEREVA_ECOULEMENT.xlsx"
+						"outputpath": "Temp/PARTEDIS_ECOULEMENT.xlsx"
 					}
 				},
 				"linkedServiceName": {
@@ -65,8 +64,6 @@
 		"folder": {
 			"name": "PREPARATION ECOULEMENT"
 		},
-		"annotations": [],
-		"lastPublishTime": "2021-09-28T07:36:55Z"
-	},
-	"type": "Microsoft.DataFactory/factories/pipelines"
+		"annotations": []
+	}
 }

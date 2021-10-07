@@ -15,7 +15,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"functionName": " AF_IMPORT_ECOUL_PARTEDIS",
+					"functionName": "AF_IMPORT_ECOUL_PARTEDIS",
 					"method": "POST",
 					"body": {
 						"inputcontainer": "data-input",
