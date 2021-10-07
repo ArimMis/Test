@@ -426,14 +426,7 @@
 					{
 						"name": "PL_MABILLE",
 						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "PL_EHS",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
+						"dependsOn": [],
 						"userProperties": [],
 						"typeProperties": {
 							"pipeline": {
@@ -461,14 +454,7 @@
 					{
 						"name": "PL_TRAITEMENT_DSC",
 						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "PL_MAILLARD",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
+						"dependsOn": [],
 						"userProperties": [],
 						"typeProperties": {
 							"pipeline": {
@@ -513,6 +499,48 @@
 						"dependsOn": [
 							{
 								"activity": "PL_TRAITEMENT_DSC",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "PL_MABILLE",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "PL_ORCAB",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "PL_VF_CONFORT",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "PL_TEREVA",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "PL_PARTEDIS",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "PL_MAILLARD",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "PL_EHS",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -568,14 +596,7 @@
 					{
 						"name": "PL_MAILLARD",
 						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "PL_MABILLE",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
+						"dependsOn": [],
 						"userProperties": [],
 						"typeProperties": {
 							"pipeline": {
@@ -589,14 +610,7 @@
 					{
 						"name": "PL_EHS",
 						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "PL_PARTEDIS",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
+						"dependsOn": [],
 						"userProperties": [],
 						"typeProperties": {
 							"pipeline": {
@@ -1589,14 +1603,7 @@
 					{
 						"name": "MAILLARD_PREPARATION",
 						"type": "ExecuteDataFlow",
-						"dependsOn": [
-							{
-								"activity": "DATA IMPORT",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
+						"dependsOn": [],
 						"policy": {
 							"timeout": "1.00:00:00",
 							"retry": 0,
@@ -1629,7 +1636,14 @@
 					{
 						"name": "DATA IMPORT",
 						"type": "AzureFunctionActivity",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "MAILLARD_PREPARATION",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
