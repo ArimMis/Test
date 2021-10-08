@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "OUnionBasecommercial",
+				"fileName": "OUnionBasecommercial.csv",
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
