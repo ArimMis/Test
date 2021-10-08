@@ -1,5 +1,5 @@
 {
-	"name": "BASE_COMMERCIALE_INPUT",
+	"name": "BASE_AVANT_TRAITEMENT_ATC",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "VAILLANT_ARCHITECTURE",

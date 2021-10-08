@@ -1,0 +1,114 @@
+{
+	"name": "TEMP_baseCommercialOut",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "Temp",
+				"container": "data-warehouse"
+			},
+			"columnDelimiter": ";",
+			"encodingName": "WINDOWS-1252",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Clé Référentiel",
+				"type": "String"
+			},
+			{
+				"name": "Recherche Clé EPS",
+				"type": "String"
+			},
+			{
+				"name": "Marque",
+				"type": "String"
+			},
+			{
+				"name": "Code Postal début",
+				"type": "String"
+			},
+			{
+				"name": "Code Postal fin",
+				"type": "String"
+			},
+			{
+				"name": "Utilisateur",
+				"type": "String"
+			},
+			{
+				"name": "Fonction",
+				"type": "String"
+			},
+			{
+				"name": "Département",
+				"type": "String"
+			},
+			{
+				"name": "DR_x",
+				"type": "String"
+			},
+			{
+				"name": "matches",
+				"type": "String"
+			},
+			{
+				"name": "ATC",
+				"type": "String"
+			},
+			{
+				"name": "NomATC",
+				"type": "String"
+			},
+			{
+				"name": "Plan primes",
+				"type": "String"
+			},
+			{
+				"name": "DR_y",
+				"type": "String"
+			},
+			{
+				"name": "Secteur prime",
+				"type": "String"
+			},
+			{
+				"name": "Matricule",
+				"type": "String"
+			},
+			{
+				"name": "Secteur DEC",
+				"type": "String"
+			},
+			{
+				"name": "Rallye",
+				"type": "String"
+			},
+			{
+				"name": "Canal final",
+				"type": "String"
+			},
+			{
+				"name": "toreplicate",
+				"type": "String"
+			},
+			{
+				"name": "dd",
+				"type": "String"
+			},
+			{
+				"name": "Code postal",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
