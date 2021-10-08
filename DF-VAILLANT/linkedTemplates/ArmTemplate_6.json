@@ -4,7 +4,7 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Data Factory name",
+			"metadata": "Nom de fabrique de données",
 			"defaultValue": "DF-VAILLANT"
 		}
 	},
@@ -1428,7 +1428,7 @@
 						"folderPath": "Logistique",
 						"container": "data-mart"
 					},
-					"columnDelimiter": "|",
+					"columnDelimiter": ";",
 					"encodingName": "WINDOWS-1252",
 					"escapeChar": "\\",
 					"firstRowAsHeader": true,
