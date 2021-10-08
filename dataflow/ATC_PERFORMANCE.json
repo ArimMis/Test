@@ -13,11 +13,37 @@
 						"type": "DatasetReference"
 					},
 					"name": "baseCommerciale"
+				},
+				{
+					"dataset": {
+						"referenceName": "SECTEUR_FICTIF",
+						"type": "DatasetReference"
+					},
+					"name": "secteurFictif"
 				}
 			],
 			"sinks": [],
-			"transformations": [],
-			"script": "source(output(\n\t\t{affecte/non_affecte} as string,\n\t\t{plateforme/vente directe} as string,\n\t\t{origine de la ligne} as string,\n\t\tyear as string,\n\t\tmonth as string,\n\t\t{Code client livré} as string,\n\t\t{code client plateforme livree} as string,\n\t\t{code produit} as string,\n\t\tquantite as string,\n\t\tca as string,\n\t\t{Code postal du client livré} as string,\n\t\tmarque as string,\n\t\t{ID marque} as string,\n\t\t{ID canal de distribution} as string,\n\t\t{Nom du canal} as string,\n\t\t{Diffus/Chantier} as string,\n\t\t{document_vente (vente directe)} as string,\n\t\t{Agence commerciale corrigé (vente directe)} as string,\n\t\t{Donneur d'ordre (vente directe)} as string,\n\t\t{Facture (vente directe)} as string,\n\t\t{Type poste Facture (vente directe)} as string,\n\t\t{Numéro offre} as string,\n\t\t{ATC Corrigé (vente directe)} as string,\n\t\t{ATC offre} as string,\n\t\t{ATC livré} as string,\n\t\t{ATC Performance} as string,\n\t\tNomATC as string,\n\t\tMatricule as string,\n\t\t{Motif commande (vente directe)} as string,\n\t\t{Type de facture (vente directe)} as string,\n\t\tN1groupe as string,\n\t\tN2groupe as string,\n\t\tN3groupe as string,\n\t\tN4groupe as string,\n\t\tN5groupe as string,\n\t\tN6groupe as string,\n\t\tN7groupe as string,\n\t\tN1groupedesignation as string,\n\t\tN2groupedesignation as string,\n\t\tN3groupedesignation as string,\n\t\tN4groupedesignation as string,\n\t\tN5groupedesignation as string,\n\t\tN6groupedesignation as string,\n\t\tN7groupedesignation as string,\n\t\tN1localedesignation as string,\n\t\tN2localedesignation as string,\n\t\tN3localedesignation as string,\n\t\tN4localedesignation as string,\n\t\tN5localedesignation as string,\n\t\tN6localedesignation as string,\n\t\tN7localedesignation as string,\n\t\tN1locale as string,\n\t\tN2locale as string,\n\t\tN3locale as string,\n\t\tN4locale as string,\n\t\tN5locale as string,\n\t\tN6locale as string,\n\t\tN7locale as string,\n\t\t{Hiérarchgroupe} as string,\n\t\t{Hiérarchlocale} as string,\n\t\t{Numéro du compte} as string,\n\t\t{EPS_Nom du compte} as string,\n\t\t{EPS_Groupe cible/Typologie générale} as string,\n\t\t{EPS_Sous groupe cible/Typologie détaillée} as string,\n\t\t{EPS_Compte principal: Numéro du compte} as string,\n\t\t{EPS_Compte principal: Nom du compte} as string,\n\t\tClient as string,\n\t\t{Numéro client indirect} as string,\n\t\tCODE_CMI as string,\n\t\tNOM_CMI as string,\n\t\t{Nom du compte} as string,\n\t\t{Client Indirect_ Groupe cible/Typologie générale} as string,\n\t\t{Client Indirect_ Sous groupe cible/Typologie détaillée} as string,\n\t\t{Client Indirect_  Compte principal: Numéro du compte} as string,\n\t\t{Client Indirect_  Compte principal: Nom du compte} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> baseCommerciale"
+			"transformations": [
+				{
+					"name": "atcOffreINNER"
+				},
+				{
+					"name": "atcOffreFULLLEFT"
+				},
+				{
+					"name": "atcOffreOUTERLEFT"
+				},
+				{
+					"name": "updateATCOffre"
+				},
+				{
+					"name": "nullToEmpty"
+				},
+				{
+					"name": "Union1"
+				}
+			],
+			"script": "source(output(\n\t\t{affecte/non_affecte} as string,\n\t\t{plateforme/vente directe} as string,\n\t\t{origine de la ligne} as string,\n\t\tyear as string,\n\t\tmonth as string,\n\t\t{Code client livré} as string,\n\t\t{code client plateforme livree} as string,\n\t\t{code produit} as string,\n\t\tquantite as string,\n\t\tca as string,\n\t\t{Code postal du client livré} as string,\n\t\tmarque as string,\n\t\t{ID marque} as string,\n\t\t{ID canal de distribution} as string,\n\t\t{Nom du canal} as string,\n\t\t{Diffus/Chantier} as string,\n\t\t{document_vente (vente directe)} as string,\n\t\t{Agence commerciale corrigé (vente directe)} as string,\n\t\t{Donneur d'ordre (vente directe)} as string,\n\t\t{Facture (vente directe)} as string,\n\t\t{Type poste Facture (vente directe)} as string,\n\t\t{Numéro offre} as string,\n\t\t{ATC Corrigé (vente directe)} as string,\n\t\t{ATC offre} as string,\n\t\t{ATC livré} as string,\n\t\t{ATC Performance} as string,\n\t\tNomATC as string,\n\t\tMatricule as string,\n\t\t{Motif commande (vente directe)} as string,\n\t\t{Type de facture (vente directe)} as string,\n\t\tN1groupe as string,\n\t\tN2groupe as string,\n\t\tN3groupe as string,\n\t\tN4groupe as string,\n\t\tN5groupe as string,\n\t\tN6groupe as string,\n\t\tN7groupe as string,\n\t\tN1groupedesignation as string,\n\t\tN2groupedesignation as string,\n\t\tN3groupedesignation as string,\n\t\tN4groupedesignation as string,\n\t\tN5groupedesignation as string,\n\t\tN6groupedesignation as string,\n\t\tN7groupedesignation as string,\n\t\tN1localedesignation as string,\n\t\tN2localedesignation as string,\n\t\tN3localedesignation as string,\n\t\tN4localedesignation as string,\n\t\tN5localedesignation as string,\n\t\tN6localedesignation as string,\n\t\tN7localedesignation as string,\n\t\tN1locale as string,\n\t\tN2locale as string,\n\t\tN3locale as string,\n\t\tN4locale as string,\n\t\tN5locale as string,\n\t\tN6locale as string,\n\t\tN7locale as string,\n\t\t{Hiérarchgroupe} as string,\n\t\t{Hiérarchlocale} as string,\n\t\t{Numéro du compte} as string,\n\t\t{EPS_Nom du compte} as string,\n\t\t{EPS_Groupe cible/Typologie générale} as string,\n\t\t{EPS_Sous groupe cible/Typologie détaillée} as string,\n\t\t{EPS_Compte principal: Numéro du compte} as string,\n\t\t{EPS_Compte principal: Nom du compte} as string,\n\t\tClient as string,\n\t\t{Numéro client indirect} as string,\n\t\tCODE_CMI as string,\n\t\tNOM_CMI as string,\n\t\t{Nom du compte} as string,\n\t\t{Client Indirect_ Groupe cible/Typologie générale} as string,\n\t\t{Client Indirect_ Sous groupe cible/Typologie détaillée} as string,\n\t\t{Client Indirect_  Compte principal: Numéro du compte} as string,\n\t\t{Client Indirect_  Compte principal: Nom du compte} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> baseCommerciale\nsource(output(\n\t\tNoATC as string,\n\t\tATC as string,\n\t\tDRCde as string,\n\t\tFirstName as string,\n\t\tLastName as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> secteurFictif\nnullToEmpty, secteurFictif join(replace({ATC offre}, \" \", \"\") == replace(NoATC, \" \", \"\"),\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> atcOffreINNER\nbaseCommerciale, secteurFictif join(replace({ATC offre}, \" \", \"\") == replace(NoATC, \" \", \"\"),\n\tjoinType:'left',\n\tbroadcast: 'auto')~> atcOffreFULLLEFT\natcOffreFULLLEFT filter(isNull(NoATC)) ~> atcOffreOUTERLEFT\natcOffreINNER derive({ATC offre} = iif({ATC offre}!=\"\" && {ATC offre}==NoATC, \"\", {ATC offre})) ~> updateATCOffre\nbaseCommerciale derive({ATC offre} = iif(isNull({ATC offre}), \"\", {ATC offre}),\n\t\t{ATC Corrigé (vente directe)} = iif(isNull({ATC Corrigé (vente directe)}), \"\", {ATC Corrigé (vente directe)})) ~> nullToEmpty\nupdateATCOffre union(byName: true)~> Union1"
 		}
 	}
 }
