@@ -12861,7 +12861,7 @@
 						"folderPath": "Logistique",
 						"container": "data-mart"
 					},
-					"columnDelimiter": "|",
+					"columnDelimiter": ";",
 					"encodingName": "WINDOWS-1252",
 					"escapeChar": "\\",
 					"firstRowAsHeader": true,
