@@ -4,7 +4,7 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Nom de fabrique de données",
+			"metadata": "Data Factory name",
 			"defaultValue": "DF-VAILLANT"
 		}
 	},
@@ -841,7 +841,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "OUnionBasecommercial",
+						"fileName": "OUnionBasecommercial.csv",
 						"folderPath": "Temp",
 						"container": "data-warehouse"
 					},
