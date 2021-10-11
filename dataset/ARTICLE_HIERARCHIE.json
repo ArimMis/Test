@@ -11,7 +11,7 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
-			"sheetName": "BI_ARTICLES ",
+			"sheetName": "Sheet1",
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "Articles avec hiérarchie Articles groupe et locale.xlsx",
@@ -20,52 +20,7 @@
 			},
 			"firstRowAsHeader": true
 		},
-		"schema": [
-			{
-				"name": "OrgCm",
-				"type": "String"
-			},
-			{
-				"name": "CDis",
-				"type": "String"
-			},
-			{
-				"name": "Article",
-				"type": "String"
-			},
-			{
-				"name": "Description",
-				"type": "String"
-			},
-			{
-				"name": "Hiérarch.groupe",
-				"type": "String"
-			},
-			{
-				"name": "Hiérarch.locale",
-				"type": "String"
-			},
-			{
-				"name": "Predecessor",
-				"type": "String"
-			},
-			{
-				"name": "Successor",
-				"type": "String"
-			},
-			{
-				"name": "St",
-				"type": "String"
-			},
-			{
-				"name": "Désignation Statut",
-				"type": "String"
-			},
-			{
-				"name": "Déb. val.",
-				"type": "String"
-			}
-		]
+		"schema": []
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
 }
