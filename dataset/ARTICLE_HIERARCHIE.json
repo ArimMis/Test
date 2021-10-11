@@ -20,7 +20,52 @@
 			},
 			"firstRowAsHeader": true
 		},
-		"schema": []
+		"schema": [
+			{
+				"name": "OrgCm",
+				"type": "String"
+			},
+			{
+				"name": "CDis",
+				"type": "String"
+			},
+			{
+				"name": "Article",
+				"type": "String"
+			},
+			{
+				"name": "Description",
+				"type": "String"
+			},
+			{
+				"name": "Hiérarch.groupe",
+				"type": "String"
+			},
+			{
+				"name": "Hiérarch.locale",
+				"type": "String"
+			},
+			{
+				"name": "Predecessor",
+				"type": "String"
+			},
+			{
+				"name": "Successor",
+				"type": "String"
+			},
+			{
+				"name": "St",
+				"type": "String"
+			},
+			{
+				"name": "Désignation Statut",
+				"type": "String"
+			},
+			{
+				"name": "Déb. val.",
+				"type": "String"
+			}
+		]
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
 }
