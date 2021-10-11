@@ -2,7 +2,7 @@
 	"name": "FacturationBW",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "data_input",
+			"referenceName": "VAILLANT_ARCHITECTURE",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
@@ -15,7 +15,8 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "FacturationBW.xlsx",
-				"container": "facturationbw"
+				"folderPath": "FacturationBW",
+				"container": "data-input"
 			},
 			"firstRowAsHeader": true
 		},
