@@ -11,6 +11,7 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
+			"sheetName": "4.Avoirs validés",
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "Avoir Validés.xlsx",
