@@ -5,7 +5,14 @@
 			{
 				"name": "VF_CONFORT_PREPARATION",
 				"type": "ExecuteDataFlow",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "importData",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "1.00:00:00",
 					"retry": 0,
@@ -30,14 +37,7 @@
 				"name": "importData",
 				"description": "import all file un folder",
 				"type": "AzureFunctionActivity",
-				"dependsOn": [
-					{
-						"activity": "VF_CONFORT_PREPARATION",
-						"dependencyConditions": [
-							"Failed"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
