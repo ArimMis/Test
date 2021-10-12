@@ -2,7 +2,7 @@
 	"name": "DSC_QTE_NULL",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "datawarehouse",
+			"referenceName": "VAILLANT_ARCHITECTURE",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
@@ -13,7 +13,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"container": "errorfinding"
+				"folderPath": "Error_finding",
+				"container": "data-warehouse"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
