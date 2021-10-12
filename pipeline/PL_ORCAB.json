@@ -5,7 +5,14 @@
 			{
 				"name": "ORCAB_PREPARATION",
 				"type": "ExecuteDataFlow",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "import orcab",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "1.00:00:00",
 					"retry": 0,
@@ -30,14 +37,7 @@
 				"name": "import orcab",
 				"description": "import data from orcab",
 				"type": "AzureFunctionActivity",
-				"dependsOn": [
-					{
-						"activity": "ORCAB_PREPARATION",
-						"dependencyConditions": [
-							"Failed"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
