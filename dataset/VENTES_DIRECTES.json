@@ -2,7 +2,7 @@
 	"name": "VENTES_DIRECTES",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "datawarehouse",
+			"referenceName": "VAILLANT_ARCHITECTURE",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
@@ -11,7 +11,6 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
-			"sheetName": "Sheet1",
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "Ventes_directes.xlsx",
