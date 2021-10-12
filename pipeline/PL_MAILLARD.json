@@ -5,14 +5,7 @@
 			{
 				"name": "MAILLARD_PREPARATION",
 				"type": "ExecuteDataFlow",
-				"dependsOn": [
-					{
-						"activity": "DATA IMPORT",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "1.00:00:00",
 					"retry": 0,
@@ -36,7 +29,14 @@
 			{
 				"name": "DATA IMPORT",
 				"type": "AzureFunctionActivity",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "MAILLARD_PREPARATION",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
