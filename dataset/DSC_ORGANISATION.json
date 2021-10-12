@@ -2,7 +2,7 @@
 	"name": "DSC_ORGANISATION",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "data_input",
+			"referenceName": "VAILLANT_ARCHITECTURE",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
@@ -15,7 +15,8 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "Organisation_DSC.xlsx",
-				"container": "organisation"
+				"folderPath": "Organisation",
+				"container": "data-input"
 			},
 			"firstRowAsHeader": true
 		},
