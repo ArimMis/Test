@@ -16,7 +16,7 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "DSC_ORGANISATION",
+						"referenceName": "dsc_orga",
 						"type": "DatasetReference"
 					},
 					"name": "organisation"
