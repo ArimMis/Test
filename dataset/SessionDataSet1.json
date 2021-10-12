@@ -1,0 +1,59 @@
+{
+	"name": "SessionDataSet1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Ecoulements PF VAILLANT Novembre 2020.xlsx",
+				"folderPath": "Ecoulement/ORCAB",
+				"container": "data-input"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Fournisseur",
+				"type": "String"
+			},
+			{
+				"name": "Coopérative",
+				"type": "String"
+			},
+			{
+				"name": "Référence",
+				"type": "String"
+			},
+			{
+				"name": "Désignation",
+				"type": "String"
+			},
+			{
+				"name": "Mois",
+				"type": "String"
+			},
+			{
+				"name": "CA 2020",
+				"type": "String"
+			},
+			{
+				"name": "CA 2019",
+				"type": "String"
+			},
+			{
+				"name": "Qte 2020",
+				"type": "String"
+			},
+			{
+				"name": "Qte 2019",
+				"type": "String"
+			}
+		]
+	}
+}
