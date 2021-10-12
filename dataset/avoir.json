@@ -2,7 +2,7 @@
 	"name": "avoir",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "data_mart",
+			"referenceName": "VAILLANT_ARCHITECTURE",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
@@ -11,11 +11,11 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
-			"sheetName": "4.Avoirs validés",
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "Avoir Validés.xlsx",
-				"container": "datawarehouse"
+				"folderPath": "Avoir",
+				"container": "data-input"
 			},
 			"firstRowAsHeader": true
 		},
