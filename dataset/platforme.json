@@ -2,7 +2,7 @@
 	"name": "platforme",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "data_input",
+			"referenceName": "VAILLANT_ARCHITECTURE",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
@@ -15,7 +15,8 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "Plateformes.xlsx",
-				"container": "plateformes"
+				"folderPath": "Plateformes",
+				"container": "data-input"
 			},
 			"firstRowAsHeader": true
 		},
