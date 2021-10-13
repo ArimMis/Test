@@ -13,7 +13,8 @@
 				"folderPath": "Suivi Offre",
 				"container": "data-mart"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": ";",
+			"encodingName": "WINDOWS-1252",
 			"escapeChar": "\\",
 			"quoteChar": "\""
 		},
