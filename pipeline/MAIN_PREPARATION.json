@@ -38,7 +38,20 @@
 			{
 				"name": "PL_ORCAB",
 				"type": "ExecutePipeline",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "PL_MABILLE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "PL_TRAITEMENT_DSC",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
@@ -64,7 +77,20 @@
 			{
 				"name": "PL_VF_CONFORT",
 				"type": "ExecutePipeline",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "PL_ORCAB",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "PL_TEREVA",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
@@ -92,43 +118,7 @@
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "PL_TRAITEMENT_DSC",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "PL_MABILLE",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "PL_ORCAB",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "PL_VF_CONFORT",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "PL_TEREVA",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
 						"activity": "PL_PARTEDIS",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "PL_MAILLARD",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -163,7 +153,20 @@
 			{
 				"name": "PL_PARTEDIS",
 				"type": "ExecutePipeline",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "PL_VF_CONFORT",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "PL_MAILLARD",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
