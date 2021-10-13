@@ -29,7 +29,8 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "base commercial.csv",
+						"fileName": "base commerciale.csv",
+						"folderPath": "Temp",
 						"container": "data-warehouse"
 					},
 					"columnDelimiter": ";",
@@ -1630,7 +1631,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "data_input",
+					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
@@ -1643,7 +1644,8 @@
 					"location": {
 						"type": "AzureBlobStorageLocation",
 						"fileName": "Organisation_DSC.xlsx",
-						"container": "organisation"
+						"folderPath": "Organisation",
+						"container": "data-input"
 					},
 					"firstRowAsHeader": true
 				},
@@ -1714,7 +1716,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "datawarehouse",
+					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
@@ -1725,7 +1727,8 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"container": "errorfinding"
+						"folderPath": "Error_finding",
+						"container": "data-warehouse"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
@@ -1742,7 +1745,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "datawarehouse",
+					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
 				},
 				"folder": {
@@ -1753,7 +1756,8 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"container": "errorfinding"
+						"folderPath": "Error_finding",
+						"container": "data-warehouse"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",

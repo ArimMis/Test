@@ -308,7 +308,7 @@
 				"annotations": [],
 				"type": "Excel",
 				"typeProperties": {
-					"sheetName": "BI_ARTICLES ",
+					"sheetName": "Sheet1",
 					"location": {
 						"type": "AzureBlobStorageLocation",
 						"fileName": "Articles avec hiérarchie Articles groupe et locale.xlsx",
