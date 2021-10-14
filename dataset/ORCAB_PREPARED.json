@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "ORCAB_ECOUL_PREPARED",
+				"fileName": "ORCAB_ECOUL_PREPARED.csv",
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
