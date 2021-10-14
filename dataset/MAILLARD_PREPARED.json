@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "MAILLARD_ECOUL_PREPARED",
+				"fileName": "MAILLARD_ECOUL_PREPARED.csv",
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
