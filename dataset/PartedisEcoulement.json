@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "PARTEDIS_ECOUL_PREPARED",
+				"fileName": "PARTEDIS_ECOUL_PREPARED.csv",
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
@@ -77,6 +77,10 @@
 			},
 			{
 				"name": "year",
+				"type": "String"
+			},
+			{
+				"name": "month",
 				"type": "String"
 			}
 		]
