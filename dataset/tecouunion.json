@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "allDistruUnioned",
+				"fileName": "allDistruUnioned.csv",
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
