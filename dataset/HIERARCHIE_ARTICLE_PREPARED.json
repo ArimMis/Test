@@ -13,10 +13,11 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "HIERARCHIE_ARTICLE",
+				"fileName": "HIERARCHIE_ARTICLE.csv",
 				"container": "data-warehouse"
 			},
 			"columnDelimiter": ",",
+			"encodingName": "WINDOWS-1252",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
