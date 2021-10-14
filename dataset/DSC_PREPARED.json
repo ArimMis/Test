@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "DSC_ECOUL_PREPARED",
+				"fileName": "DSC_ECOUL_PREPARED.csv",
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
@@ -48,14 +48,6 @@
 				"type": "String"
 			},
 			{
-				"name": "year",
-				"type": "String"
-			},
-			{
-				"name": "month",
-				"type": "String"
-			},
-			{
 				"name": "yearmonth",
 				"type": "String"
 			},
@@ -69,6 +61,14 @@
 			},
 			{
 				"name": "HubSAPid",
+				"type": "String"
+			},
+			{
+				"name": "year",
+				"type": "String"
+			},
+			{
+				"name": "month",
 				"type": "String"
 			},
 			{
