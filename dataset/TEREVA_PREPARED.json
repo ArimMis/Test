@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "TEREVA_ECOUL_PREPARED",
+				"fileName": "TEREVA_ECOUL_PREPARED.csv",
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
@@ -53,6 +53,10 @@
 			},
 			{
 				"name": "year",
+				"type": "String"
+			},
+			{
+				"name": "month",
 				"type": "String"
 			},
 			{
