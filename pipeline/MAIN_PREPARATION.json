@@ -194,6 +194,7 @@
 			},
 			{
 				"name": "PL_PARTEDIS",
+				"description": "Input : \necoulement\nPARTEDIS_ORGANISATION\nventesDirectes\npartedisPrixStd\nprixParPeriode\nOutput : \norganisationNotFound\nquantityNullOutput\nPARTEDIS_ECOUL_PREPARED",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
