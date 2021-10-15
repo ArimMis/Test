@@ -29,6 +29,7 @@
 			},
 			{
 				"name": "NomenclatureClient",
+				"description": "Input : \nEXtractionSAP\nReferentielAtc4\nOutput : \nSortieNomenclatureClient",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -53,6 +54,7 @@
 			},
 			{
 				"name": "TDataSD",
+				"description": "Input : \nFacturationBW\nOutput : \nSortieTDataSD",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
