@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "PREPARATION_ECC_AVOIR",
+				"description": "Input : \necoulement\navoir\nsalerDSC\nOrgaTerevas\nOutput : \nAZ_OecoulementDscTerevaWithIndex\noutEccDscTereva\nAZ_OecoulementPartedislikeWithIndex\noutEccNotDSCTEREVA\nAZ_AvoirWithIndexDSClike\nDTAvoirRetraiter\nAvoirForVanMarkes",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {

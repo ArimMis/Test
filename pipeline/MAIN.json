@@ -25,6 +25,7 @@
 			},
 			{
 				"name": "PL_MAIN_BASE_COMMERCIAL",
+				"description": "PL main for : \nPREPARATION_ECC_AVOIR\nDSCTEREVA2\nModel_PARTEDIS2\nVanMarkes\nModelVenteDirecte\nUNION_BASE_COMMERCIAL\nPOST_UNION_FINISH\nATC_PERFORMANCE",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
