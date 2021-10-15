@@ -79,6 +79,7 @@
 			},
 			{
 				"name": "PL_VF_CONFORT",
+				"description": "Input : \n-ecoulement\n-CONFORT_ORGANISATION\n-ventesDirectes\nOutput : \n-outputQuantityNull\n-VFCONFORT_ECOULEMENT_PREPARED",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
