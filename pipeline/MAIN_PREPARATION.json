@@ -24,6 +24,7 @@
 			},
 			{
 				"name": "PL_MABILLE",
+				"description": "Flux de donnée Mabille",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
@@ -236,6 +237,7 @@
 			},
 			{
 				"name": "InputLoad",
+				"description": "AF : importDataMabille\n      importDataTereva\n      DATA IMPORTpartedis\n      VFimport\n      import orcab\n",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"userProperties": [],
