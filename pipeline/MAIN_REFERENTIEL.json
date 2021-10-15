@@ -32,6 +32,7 @@
 			},
 			{
 				"name": "PL_REFERENTIEL_ATC",
+				"description": "Input : \noffreInDiffus\nchantier\nOutput : \nstg_offre\n\n\nlower_data\ncomputing\nfuzzyjoinATC\nAF : fuzzy join: atc 2020 2021 and  atc affectation",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"userProperties": [],
