@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "PL_GET_ARTICLE_DESIGNATION",
+				"description": "Input : \narticleHierarchie\ndetailArticleHierarchie\nOutput : \nsortieArticleDesignation\n\n",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"userProperties": [],

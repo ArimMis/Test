@@ -46,6 +46,7 @@
 			},
 			{
 				"name": "MAIN_REFERENTIEL",
+				"description": "PL_GET_ARTICLE_DESIGNATION\nPL_OFFRE\nPL_REFERENTIEL_ATC\nPL_REFERENTIEL_PRIX",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"userProperties": [],

@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "article_designation",
+				"description": "Input : \narticleHierarchie\ndetailArticleHierarchie\nOutput : \nsortieArticleDesignation\n",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
