@@ -5,7 +5,14 @@
 			{
 				"name": "PREPARATION",
 				"type": "ExecuteDataFlow",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "DATA IMPORTpartedis",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "1.00:00:00",
 					"retry": 0,
@@ -24,6 +31,33 @@
 						"computeType": "General"
 					},
 					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "DATA IMPORTpartedis",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "AF_IMPORT_ECOUL_PARTEDIS",
+					"method": "POST",
+					"body": {
+						"inputcontainer": "data-input",
+						"folderpath": "Ecoulement/Partedis",
+						"outputcontainer": "data-warehouse",
+						"outputpath": "Temp/PARTEDIS_ECOULEMENT.xlsx"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "data transformation azure function",
+					"type": "LinkedServiceReference"
 				}
 			}
 		],
