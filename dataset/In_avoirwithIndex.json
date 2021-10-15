@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "AZ_AvoirWithIndexDSClike",
+				"fileName": "AZ_AvoirWithIndexDSClike.csv",
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
