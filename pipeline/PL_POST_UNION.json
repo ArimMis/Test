@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "prix_moyen",
+				"description": "Input : \nREFERENTIEL_PRIX\nOutput : \nprixMoyenSplited",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -28,6 +29,7 @@
 			},
 			{
 				"name": "unionSAP_EHS",
+				"description": "Input : \nclientEHS\nextractionSap\nOutput : \nsapUnionEHS",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
