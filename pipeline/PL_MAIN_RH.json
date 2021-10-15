@@ -32,6 +32,7 @@
 			},
 			{
 				"name": "OBJECTIF RH",
+				"description": "Objectif RH ",
 				"type": "AzureFunctionActivity",
 				"dependsOn": [
 					{
