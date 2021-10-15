@@ -18,6 +18,7 @@
 			},
 			{
 				"name": "PL_OFFRE",
+				"description": "\nPREPARATION\nFINITION",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"userProperties": [],
