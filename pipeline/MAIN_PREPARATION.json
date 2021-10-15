@@ -230,6 +230,7 @@
 			},
 			{
 				"name": "PL_EHS",
+				"description": "Input : \nEHS\norganisation\nventesDirectes\nOutput : \norgaNotFound\nSoriteEHS",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"userProperties": [],
