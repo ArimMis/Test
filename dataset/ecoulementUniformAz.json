@@ -86,10 +86,6 @@
 			{
 				"name": "marque_name",
 				"type": "String"
-			},
-			{
-				"name": "Code produit",
-				"type": "String"
 			}
 		]
 	},
