@@ -24,7 +24,7 @@
 			},
 			{
 				"name": "PL_MABILLE",
-				"description": "Flux de donnée Mabille",
+				"description": "Input : \n-MabilleSaunierDuvale\n-OrganisationMabilleSonac\n-ventesDirectes\nOutput : \n-MabileQteNull\n-organisationNotFound\n-MABILE_ECOULEMENT_OUTPUT",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
@@ -45,6 +45,7 @@
 			},
 			{
 				"name": "PL_ORCAB",
+				"description": "Input : \n-ORCAB_ECOULEMENT_INPUT\n-ORCAB_ORGANISATION\n-ventesDirectes\nOutput : \n-ORCAB_QTE_NULL\n-organisationNotFound\n-ORCAB_ECOULEMENT_PREPARED",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
