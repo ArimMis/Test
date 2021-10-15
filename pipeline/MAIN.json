@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "MAIN_PREPARATION_ECOULEMENT",
+				"description": "PL Input_Load\nPL_MABILLE\nPL_ORCAB\nPL_VF_CONFORT\nPL_TEREVA\nPL_PARTEDIS\nPL_TRAITEMENT_DSC\nDF_UNION_ECOULEMENT\nPL_POST_UNION",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
