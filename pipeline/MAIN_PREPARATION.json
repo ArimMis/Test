@@ -66,6 +66,7 @@
 			},
 			{
 				"name": "PL_TRAITEMENT_DSC",
+				"description": "Input : \nDSCINPUT\norganisation\nventesDirectes\nOutput : \noutputNullQuantity\norgaNotFound\npreparedDSC\nDSCPieceDetache",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"userProperties": [],

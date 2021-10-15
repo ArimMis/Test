@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "DSC_PREPARATION",
+				"description": "Input : \nDSCINPUT\norganisation\nventesDirectes\nOutput : \noutputNullQuantity\norgaNotFound\npreparedDSC\nDSCPieceDetache",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
