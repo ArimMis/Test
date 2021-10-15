@@ -54,6 +54,7 @@
 			},
 			{
 				"name": "CONTRAT DISTRIBUTION",
+				"description": "Input : \nseuil\nremuneration\nOutput : \nCONTRAT_DISTRIBUTION",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
