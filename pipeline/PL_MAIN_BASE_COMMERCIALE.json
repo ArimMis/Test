@@ -53,6 +53,7 @@
 			},
 			{
 				"name": "DSCTEREVA2",
+				"description": "Input : \necoulementwithIndex\navoirwithIndex\nstgOffre\nreferentielATC\nfacturation\nOutput : \navoirUnMappedutput\noutdsctereva2",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
