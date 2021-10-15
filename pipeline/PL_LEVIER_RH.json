@@ -33,7 +33,7 @@
 					{
 						"activity": "LEVIER RH",
 						"dependencyConditions": [
-							"Failed"
+							"Succeeded"
 						]
 					}
 				],

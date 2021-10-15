@@ -33,7 +33,7 @@
 					{
 						"activity": "PREPARATION OBJECTIF",
 						"dependencyConditions": [
-							"Failed"
+							"Succeeded"
 						]
 					}
 				],

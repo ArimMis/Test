@@ -35,13 +35,13 @@
 					{
 						"activity": "LEVIER RH",
 						"dependencyConditions": [
-							"Failed"
+							"Succeeded"
 						]
 					},
 					{
 						"activity": "PREPARATION OBJECTIF RH",
 						"dependencyConditions": [
-							"Failed"
+							"Succeeded"
 						]
 					}
 				],
