@@ -104,6 +104,7 @@
 			},
 			{
 				"name": "CALCUL OBJECTIF RH",
+				"description": "Main PL RH : \nPL LEVIER RH \nPREPARATION OBJECTIF RH\nAF OBJECTIF RH",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{

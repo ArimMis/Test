@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "LEVIER RH",
+				"description": "Input : \ndataCommerciale\nPLATEFORMES\nlevierPerformance\nOutput : \nTEMP_LEVIER_RH\nTEMP_LEVIER_PERFORMANCE\n",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
