@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "VF_CONFORT_PREPARATION",
+				"description": "Input : \n-ecoulement\n-CONFORT_ORGANISATION\n-ventesDirectes\nOutput : \n-outputQuantityNull\n-VFCONFORT_ECOULEMENT_PREPARED",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
