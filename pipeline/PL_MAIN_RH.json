@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "LEVIER RH",
+				"description": "Input : \ndataCommerciale\nPLATEFORMES\nlevierPerformance\nOutput : \nTEMP_LEVIER_RH\nTEMP_LEVIER_PERFORMANCE\n",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"userProperties": [],
@@ -17,6 +18,7 @@
 			},
 			{
 				"name": "PREPARATION OBJECTIF RH",
+				"description": "Input : \nobjectif\nlevierPerformance\nOutput : \nPREPARATION_OBJECTIF_RH\nTEMP_LEVIER_PERFORMANCE",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"userProperties": [],
