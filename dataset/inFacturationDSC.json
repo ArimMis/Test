@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "AZ_facturationDescTEREVA",
+				"fileName": "AZ_facturationDescTEREVA.csv",
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
