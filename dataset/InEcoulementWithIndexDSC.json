@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "AZ_OecoulementDscTerevaWithIndex",
+				"fileName": "AZ_OecoulementDscTerevaWithIndex.csv",
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
