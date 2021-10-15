@@ -7,7 +7,7 @@
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
-						"activity": "helloword",
+						"activity": "start",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -186,7 +186,7 @@
 				}
 			},
 			{
-				"name": "helloword",
+				"name": "start",
 				"description": "fuzzy join: atc 2020 2021 and  atc affectation",
 				"type": "AzureFunctionActivity",
 				"dependsOn": [],
