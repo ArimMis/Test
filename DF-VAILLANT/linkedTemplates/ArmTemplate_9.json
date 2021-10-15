@@ -4,7 +4,7 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Data Factory name",
+			"metadata": "Nom de fabrique de données",
 			"defaultValue": "DF-VAILLANT"
 		}
 	},
@@ -12,6 +12,274 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/clientehsOut')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "REFERENTIEL_ATC"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "ATC",
+						"type": "String"
+					},
+					{
+						"name": "NomATC",
+						"type": "String"
+					},
+					{
+						"name": "Plan primes",
+						"type": "String"
+					},
+					{
+						"name": "DR",
+						"type": "String"
+					},
+					{
+						"name": "Secteur prime",
+						"type": "String"
+					},
+					{
+						"name": "Matricule",
+						"type": "String"
+					},
+					{
+						"name": "Secteur DEC",
+						"type": "String"
+					},
+					{
+						"name": "Rallye",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/compteSap')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "VENTE DIRECT BASE COMM"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Feuil1",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Extraction compte SAP - F.xlsx",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"range": "",
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Agence commerciale",
+						"type": "String"
+					},
+					{
+						"name": "ATC Client",
+						"type": "String"
+					},
+					{
+						"name": "",
+						"type": "String"
+					},
+					{
+						"name": "Niveau 1",
+						"type": "String"
+					},
+					{
+						"name": "",
+						"type": "String"
+					},
+					{
+						"name": "Niveau 2",
+						"type": "String"
+					},
+					{
+						"name": "",
+						"type": "String"
+					},
+					{
+						"name": "Niveau 3",
+						"type": "String"
+					},
+					{
+						"name": "",
+						"type": "String"
+					},
+					{
+						"name": "Client",
+						"type": "String"
+					},
+					{
+						"name": "",
+						"type": "String"
+					},
+					{
+						"name": "Rue",
+						"type": "String"
+					},
+					{
+						"name": "Dép",
+						"type": "String"
+					},
+					{
+						"name": "Code postal",
+						"type": "String"
+					},
+					{
+						"name": "Localité",
+						"type": "String"
+					},
+					{
+						"name": "Téléphone 1",
+						"type": "String"
+					},
+					{
+						"name": "Numéro de télécopie",
+						"type": "String"
+					},
+					{
+						"name": "Attribut 2",
+						"type": "String"
+					},
+					{
+						"name": "",
+						"type": "String"
+					},
+					{
+						"name": "Email",
+						"type": "String"
+					},
+					{
+						"name": "SIRET",
+						"type": "String"
+					},
+					{
+						"name": "Niveau 4",
+						"type": "String"
+					},
+					{
+						"name": "",
+						"type": "String"
+					},
+					{
+						"name": "Groupe de clients",
+						"type": "String"
+					},
+					{
+						"name": "",
+						"type": "String"
+					},
+					{
+						"name": "Groupe de clients 5",
+						"type": "String"
+					},
+					{
+						"name": "",
+						"type": "String"
+					},
+					{
+						"name": "Attribut 1",
+						"type": "String"
+					},
+					{
+						"name": "",
+						"type": "String"
+					},
+					{
+						"name": "Attribut 3",
+						"type": "String"
+					},
+					{
+						"name": "",
+						"type": "String"
+					},
+					{
+						"name": "Récept. de march.",
+						"type": "String"
+					},
+					{
+						"name": "",
+						"type": "String"
+					},
+					{
+						"name": "Destinataire facture",
+						"type": "String"
+					},
+					{
+						"name": "",
+						"type": "String"
+					},
+					{
+						"name": "Payeur",
+						"type": "String"
+					},
+					{
+						"name": "",
+						"type": "String"
+					},
+					{
+						"name": "Témoin suppr. Tous domaines",
+						"type": "String"
+					},
+					{
+						"name": "Org. commerciale",
+						"type": "String"
+					},
+					{
+						"name": "",
+						"type": "String"
+					},
+					{
+						"name": "Canal distribution",
+						"type": "String"
+					},
+					{
+						"name": "",
+						"type": "String"
+					},
+					{
+						"name": "Secteur d'activité",
+						"type": "String"
+					},
+					{
+						"name": "",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/data_commercial_DTP2')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -1069,7 +1337,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "eccoulementUniforme",
+						"fileName": "eccoulementUniforme.csv",
 						"container": "data-warehouse"
 					},
 					"columnDelimiter": ",",
@@ -2422,242 +2690,6 @@
 					"quoteChar": "\""
 				},
 				"schema": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/facturationForOtherPlateform')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "OTHER"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "Temp",
-						"container": "data-warehouse"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "Région Statistique",
-						"type": "String"
-					},
-					{
-						"name": "Enseigne",
-						"type": "String"
-					},
-					{
-						"name": "Marque DESC",
-						"type": "String"
-					},
-					{
-						"name": "Marque Code",
-						"type": "String"
-					},
-					{
-						"name": "Sous Famille",
-						"type": "String"
-					},
-					{
-						"name": "Référence Article Fournisseur",
-						"type": "String"
-					},
-					{
-						"name": "Article National DESC",
-						"type": "String"
-					},
-					{
-						"name": "Article National Code",
-						"type": "String"
-					},
-					{
-						"name": "Agence Code",
-						"type": "String"
-					},
-					{
-						"name": "Agence DESC",
-						"type": "String"
-					},
-					{
-						"name": "Département DESC",
-						"type": "String"
-					},
-					{
-						"name": "Département ID",
-						"type": "String"
-					},
-					{
-						"name": "Secteur",
-						"type": "String"
-					},
-					{
-						"name": "Quantité en UV BL",
-						"type": "String"
-					},
-					{
-						"name": "Année Précédente (Quantité en UV BL)",
-						"type": "String"
-					},
-					{
-						"name": "Cumul Exercice (Quantité en UV BL)",
-						"type": "String"
-					},
-					{
-						"name": "Cumul Exercice A-1 (Quantité en UV BL)",
-						"type": "String"
-					},
-					{
-						"name": "MOIS CA PRR N",
-						"type": "String"
-					},
-					{
-						"name": "MOIS CA PRR N-1",
-						"type": "String"
-					},
-					{
-						"name": "CA PRR au cumul",
-						"type": "String"
-					},
-					{
-						"name": "CA PRR au cumul N-1",
-						"type": "String"
-					},
-					{
-						"name": "fileName",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/facturationForVanMarkes')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "OTHER"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "Temp",
-						"container": "data-warehouse"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "Région Statistique",
-						"type": "String"
-					},
-					{
-						"name": "Enseigne",
-						"type": "String"
-					},
-					{
-						"name": "Marque DESC",
-						"type": "String"
-					},
-					{
-						"name": "Marque Code",
-						"type": "String"
-					},
-					{
-						"name": "Sous Famille",
-						"type": "String"
-					},
-					{
-						"name": "Référence Article Fournisseur",
-						"type": "String"
-					},
-					{
-						"name": "Article National DESC",
-						"type": "String"
-					},
-					{
-						"name": "Article National Code",
-						"type": "String"
-					},
-					{
-						"name": "Agence Code",
-						"type": "String"
-					},
-					{
-						"name": "Agence DESC",
-						"type": "String"
-					},
-					{
-						"name": "Département DESC",
-						"type": "String"
-					},
-					{
-						"name": "Département ID",
-						"type": "String"
-					},
-					{
-						"name": "Secteur",
-						"type": "String"
-					},
-					{
-						"name": "Quantité en UV BL",
-						"type": "String"
-					},
-					{
-						"name": "Année Précédente (Quantité en UV BL)",
-						"type": "String"
-					},
-					{
-						"name": "Cumul Exercice (Quantité en UV BL)",
-						"type": "String"
-					},
-					{
-						"name": "Cumul Exercice A-1 (Quantité en UV BL)",
-						"type": "String"
-					},
-					{
-						"name": "MOIS CA PRR N",
-						"type": "String"
-					},
-					{
-						"name": "MOIS CA PRR N-1",
-						"type": "String"
-					},
-					{
-						"name": "CA PRR au cumul",
-						"type": "String"
-					},
-					{
-						"name": "CA PRR au cumul N-1",
-						"type": "String"
-					},
-					{
-						"name": "fileName",
-						"type": "String"
-					}
-				]
 			},
 			"dependsOn": []
 		}

@@ -4,44 +4,44 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Data Factory name",
+			"metadata": "Nom de fabrique de données",
 			"defaultValue": "DF-VAILLANT"
 		},
 		"AzureBlobStorage1_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
+			"metadata": "Chaîne sécurisée pour « connectionString » de « AzureBlobStorage1 »"
 		},
 		"BASE COMMERCIALE_password": {
 			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'BASE COMMERCIALE'"
+			"metadata": "Chaîne sécurisée pour « password » de « BASE COMMERCIALE »"
 		},
 		"BLOB_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'BLOB'"
+			"metadata": "Chaîne sécurisée pour « connectionString » de « BLOB »"
 		},
 		"VAILLANT_ARCHITECTURE_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'VAILLANT_ARCHITECTURE'"
+			"metadata": "Chaîne sécurisée pour « connectionString » de « VAILLANT_ARCHITECTURE »"
 		},
 		"data transformation azure function_functionKey": {
 			"type": "secureString",
-			"metadata": "Secure string for 'functionKey' of 'data transformation azure function'"
+			"metadata": "Chaîne sécurisée pour « functionKey » de « data transformation azure function »"
 		},
 		"data_input_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'data_input'"
+			"metadata": "Chaîne sécurisée pour « connectionString » de « data_input »"
 		},
 		"data_mart_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'data_mart'"
+			"metadata": "Chaîne sécurisée pour « connectionString » de « data_mart »"
 		},
 		"datawarehouse_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'datawarehouse'"
+			"metadata": "Chaîne sécurisée pour « connectionString » de « datawarehouse »"
 		},
 		"entrydata_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'entrydata'"
+			"metadata": "Chaîne sécurisée pour « connectionString » de « entrydata »"
 		},
 		"BASE COMMERCIALE_properties_typeProperties_host": {
 			"type": "string",
@@ -218,6 +218,171 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/InputLoad')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "prepare azure function load",
+				"activities": [
+					{
+						"name": "importDataMabille",
+						"description": "import all file un folder",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "AF_IMPORT_ECOUL_MABILE",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"containername": "data-input",
+								"folderpath": "Ecoulement/Mabile",
+								"outputContainer": "data-warehouse",
+								"outputpath": "Temp/MABILE_ECOULEMENT.xlsx"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "data transformation azure function",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "importDataTereva",
+						"description": "import all file un folder",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "AF_IMPORT_ECOUL_TEREVA",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"inputcontainer": "data-input",
+								"folderpath": "Ecoulement/Téréva",
+								"outputcontainer": "data-warehouse",
+								"outputpath": "Temp/TEREVA_ECOULEMENT.xlsx"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "data transformation azure function",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "DATA IMPORTpartedis",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "AF_IMPORT_ECOUL_PARTEDIS",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"inputcontainer": "data-input",
+								"folderpath": "Ecoulement/Partedis",
+								"outputcontainer": "data-warehouse",
+								"outputpath": "Temp/PARTEDIS_ECOULEMENT.xlsx"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "data transformation azure function",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "VFimport",
+						"description": "import all file un folder",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "AF_IMPORT_ECOUL_VFCONFORT",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"inputcontainer": "data-input",
+								"folderpath": "Ecoulement/VF Confort",
+								"outputcontainer": "data-warehouse",
+								"outputpath": "Temp/CONFORT_ECOULEMENT.xlsx"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "data transformation azure function",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "import orcab",
+						"description": "import data from orcab",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "AF_IMPORT_ECOUL_ORCAB",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"containername": "data-input",
+								"folderpath": "Ecoulement/ORCAB",
+								"outputContainer": "data-warehouse",
+								"outputpath": "Temp/ORCAB_ECOULEMENT.xlsx"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "data transformation azure function",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/data transformation azure function')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/helloAzurefunctionCall')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -242,35 +407,6 @@
 							"headers": {},
 							"body": {
 								"name": "bobl"
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "data transformation azure function",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "importDataMabille",
-						"description": "import all file un folder",
-						"type": "AzureFunctionActivity",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"functionName": "AF_IMPORT_ECOUL_MABILE",
-							"method": "POST",
-							"headers": {},
-							"body": {
-								"containername": "data-input",
-								"folderpath": "Ecoulement/Mabile",
-								"outputContainer": "data-warehouse",
-								"outputpath": "Temp/MABILE_ECOULEMENT.xlsx"
 							}
 						},
 						"linkedServiceName": {
@@ -307,35 +443,6 @@
 								"folderpath": "Ecoulement/DSC",
 								"outputContainer": "data-warehouse",
 								"outputpath": "Temp/DSC_ECOULEMENT.xlsx"
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "data transformation azure function",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "import orcab",
-						"description": "import data from orcab",
-						"type": "AzureFunctionActivity",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"functionName": "AF_IMPORT_ECOUL_ORCAB",
-							"method": "POST",
-							"headers": {},
-							"body": {
-								"containername": "data-input",
-								"folderpath": "Ecoulement/ORCAB",
-								"outputContainer": "data-warehouse",
-								"outputpath": "Temp/ORCAB_ECOULEMENT.xlsx"
 							}
 						},
 						"linkedServiceName": {
@@ -402,34 +509,6 @@
 						}
 					},
 					{
-						"name": "maillard import",
-						"type": "AzureFunctionActivity",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"functionName": "AF_IMPORT_ECOUL_PARTEDIS",
-							"method": "POST",
-							"headers": {},
-							"body": {
-								"inputcontainer": "data-input",
-								"folderpath": "Ecoulement/Partedis",
-								"outputcontainer": "data-warehouse",
-								"outputpath": "Temp/PARTEDIS_ECOULEMENT.xlsx"
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "data transformation azure function",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
 						"name": "DATA IMPORTpartedis",
 						"type": "AzureFunctionActivity",
 						"dependsOn": [],
@@ -467,6 +546,54 @@
 				},
 				"annotations": [],
 				"lastPublishTime": "2021-09-06T17:37:12Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/data transformation azure function')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline4')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DATA IMPORTpartedis",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "AF_IMPORT_ECOUL_PARTEDIS",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"inputcontainer": "data-input",
+								"folderpath": "Ecoulement/Partedis",
+								"outputcontainer": "data-warehouse",
+								"outputpath": "Temp/PARTEDIS_ECOULEMENT.xlsx"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "data transformation azure function",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "tutoriel_template"
+				},
+				"annotations": []
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/data transformation azure function')]"
@@ -1673,295 +1800,6 @@
 					},
 					{
 						"name": "Offre",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/VAILLANT_ARCHITECTURE')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ArctileHierarchi')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "BASE_COMMERCIAL"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "HIERARCHIE_ARTICLE",
-						"container": "data-warehouse"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "OrgCm",
-						"type": "String"
-					},
-					{
-						"name": "CDis",
-						"type": "String"
-					},
-					{
-						"name": "Article",
-						"type": "String"
-					},
-					{
-						"name": "Description",
-						"type": "String"
-					},
-					{
-						"name": "Hiérarch.groupe",
-						"type": "String"
-					},
-					{
-						"name": "Hiérarch.locale",
-						"type": "String"
-					},
-					{
-						"name": "Predecessor",
-						"type": "String"
-					},
-					{
-						"name": "Successor",
-						"type": "String"
-					},
-					{
-						"name": "St",
-						"type": "String"
-					},
-					{
-						"name": "Désignation Statut",
-						"type": "String"
-					},
-					{
-						"name": "Déb. val.",
-						"type": "String"
-					},
-					{
-						"name": "N1.groupe",
-						"type": "String"
-					},
-					{
-						"name": "N2.groupe",
-						"type": "String"
-					},
-					{
-						"name": "N3.groupe",
-						"type": "String"
-					},
-					{
-						"name": "N4.groupe",
-						"type": "String"
-					},
-					{
-						"name": "N5.groupe",
-						"type": "String"
-					},
-					{
-						"name": "N6.groupe",
-						"type": "String"
-					},
-					{
-						"name": "N7.groupe",
-						"type": "String"
-					},
-					{
-						"name": "N1.locale",
-						"type": "String"
-					},
-					{
-						"name": "N2.locale",
-						"type": "String"
-					},
-					{
-						"name": "N3.locale",
-						"type": "String"
-					},
-					{
-						"name": "N4.locale",
-						"type": "String"
-					},
-					{
-						"name": "N5.locale",
-						"type": "String"
-					},
-					{
-						"name": "N6.locale",
-						"type": "String"
-					},
-					{
-						"name": "N7.locale",
-						"type": "String"
-					},
-					{
-						"name": "N1.groupe.designation",
-						"type": "String"
-					},
-					{
-						"name": "N2.groupe.designation",
-						"type": "String"
-					},
-					{
-						"name": "N3.groupe.designation",
-						"type": "String"
-					},
-					{
-						"name": "N4.groupe.designation",
-						"type": "String"
-					},
-					{
-						"name": "N5.groupe.designation",
-						"type": "String"
-					},
-					{
-						"name": "N6.groupe.designation",
-						"type": "String"
-					},
-					{
-						"name": "N7.groupe.designation",
-						"type": "String"
-					},
-					{
-						"name": "N1.locale.designation",
-						"type": "String"
-					},
-					{
-						"name": "N2.locale.designation",
-						"type": "String"
-					},
-					{
-						"name": "N3.locale.designation",
-						"type": "String"
-					},
-					{
-						"name": "N4.locale.designation",
-						"type": "String"
-					},
-					{
-						"name": "N5.locale.designation",
-						"type": "String"
-					},
-					{
-						"name": "N6.locale.designation",
-						"type": "String"
-					},
-					{
-						"name": "N7.locale.designation",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/VAILLANT_ARCHITECTURE')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AvoirForVanMarkes')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "Temp",
-						"container": "data-warehouse"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "yearmonth",
-						"type": "String"
-					},
-					{
-						"name": "year",
-						"type": "String"
-					},
-					{
-						"name": "month",
-						"type": "String"
-					},
-					{
-						"name": "qte_ecoulement",
-						"type": "String"
-					},
-					{
-						"name": "ca_ecoulement",
-						"type": "String"
-					},
-					{
-						"name": "POSSAMidString",
-						"type": "String"
-					},
-					{
-						"name": "HubSAPid",
-						"type": "String"
-					},
-					{
-						"name": "reference",
-						"type": "String"
-					},
-					{
-						"name": "distributeur",
-						"type": "String"
-					},
-					{
-						"name": "agence_code",
-						"type": "String"
-					},
-					{
-						"name": "marque",
-						"type": "String"
-					},
-					{
-						"name": "Code postal",
-						"type": "String"
-					},
-					{
-						"name": "marque_name",
-						"type": "String"
-					},
-					{
-						"name": "toreplicate",
-						"type": "String"
-					},
-					{
-						"name": "dd",
-						"type": "String"
-					},
-					{
-						"name": "rcount",
-						"type": "String"
-					},
-					{
-						"name": "indexcols2",
-						"type": "String"
-					},
-					{
-						"name": "qte_ecc",
 						"type": "String"
 					}
 				]

@@ -4,7 +4,7 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Data Factory name",
+			"metadata": "Nom de fabrique de données",
 			"defaultValue": "DF-VAILLANT"
 		}
 	},
@@ -12,6 +12,291 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/ArctileHierarchi')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "BASE_COMMERCIAL"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "HIERARCHIE_ARTICLE",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "OrgCm",
+						"type": "String"
+					},
+					{
+						"name": "CDis",
+						"type": "String"
+					},
+					{
+						"name": "Article",
+						"type": "String"
+					},
+					{
+						"name": "Description",
+						"type": "String"
+					},
+					{
+						"name": "Hiérarch.groupe",
+						"type": "String"
+					},
+					{
+						"name": "Hiérarch.locale",
+						"type": "String"
+					},
+					{
+						"name": "Predecessor",
+						"type": "String"
+					},
+					{
+						"name": "Successor",
+						"type": "String"
+					},
+					{
+						"name": "St",
+						"type": "String"
+					},
+					{
+						"name": "Désignation Statut",
+						"type": "String"
+					},
+					{
+						"name": "Déb. val.",
+						"type": "String"
+					},
+					{
+						"name": "N1.groupe",
+						"type": "String"
+					},
+					{
+						"name": "N2.groupe",
+						"type": "String"
+					},
+					{
+						"name": "N3.groupe",
+						"type": "String"
+					},
+					{
+						"name": "N4.groupe",
+						"type": "String"
+					},
+					{
+						"name": "N5.groupe",
+						"type": "String"
+					},
+					{
+						"name": "N6.groupe",
+						"type": "String"
+					},
+					{
+						"name": "N7.groupe",
+						"type": "String"
+					},
+					{
+						"name": "N1.locale",
+						"type": "String"
+					},
+					{
+						"name": "N2.locale",
+						"type": "String"
+					},
+					{
+						"name": "N3.locale",
+						"type": "String"
+					},
+					{
+						"name": "N4.locale",
+						"type": "String"
+					},
+					{
+						"name": "N5.locale",
+						"type": "String"
+					},
+					{
+						"name": "N6.locale",
+						"type": "String"
+					},
+					{
+						"name": "N7.locale",
+						"type": "String"
+					},
+					{
+						"name": "N1.groupe.designation",
+						"type": "String"
+					},
+					{
+						"name": "N2.groupe.designation",
+						"type": "String"
+					},
+					{
+						"name": "N3.groupe.designation",
+						"type": "String"
+					},
+					{
+						"name": "N4.groupe.designation",
+						"type": "String"
+					},
+					{
+						"name": "N5.groupe.designation",
+						"type": "String"
+					},
+					{
+						"name": "N6.groupe.designation",
+						"type": "String"
+					},
+					{
+						"name": "N7.groupe.designation",
+						"type": "String"
+					},
+					{
+						"name": "N1.locale.designation",
+						"type": "String"
+					},
+					{
+						"name": "N2.locale.designation",
+						"type": "String"
+					},
+					{
+						"name": "N3.locale.designation",
+						"type": "String"
+					},
+					{
+						"name": "N4.locale.designation",
+						"type": "String"
+					},
+					{
+						"name": "N5.locale.designation",
+						"type": "String"
+					},
+					{
+						"name": "N6.locale.designation",
+						"type": "String"
+					},
+					{
+						"name": "N7.locale.designation",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AvoirForVanMarkes')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "yearmonth",
+						"type": "String"
+					},
+					{
+						"name": "year",
+						"type": "String"
+					},
+					{
+						"name": "month",
+						"type": "String"
+					},
+					{
+						"name": "qte_ecoulement",
+						"type": "String"
+					},
+					{
+						"name": "ca_ecoulement",
+						"type": "String"
+					},
+					{
+						"name": "POSSAMidString",
+						"type": "String"
+					},
+					{
+						"name": "HubSAPid",
+						"type": "String"
+					},
+					{
+						"name": "reference",
+						"type": "String"
+					},
+					{
+						"name": "distributeur",
+						"type": "String"
+					},
+					{
+						"name": "agence_code",
+						"type": "String"
+					},
+					{
+						"name": "marque",
+						"type": "String"
+					},
+					{
+						"name": "Code postal",
+						"type": "String"
+					},
+					{
+						"name": "marque_name",
+						"type": "String"
+					},
+					{
+						"name": "toreplicate",
+						"type": "String"
+					},
+					{
+						"name": "dd",
+						"type": "String"
+					},
+					{
+						"name": "rcount",
+						"type": "String"
+					},
+					{
+						"name": "indexcols2",
+						"type": "String"
+					},
+					{
+						"name": "qte_ecc",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AvoirForVanMarkesInput')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -1795,64 +2080,6 @@
 						"type": "String"
 					}
 				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DSC_ORGANISATION_NOTFOUND')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "PREPARATION ECOULEMENT/DSC"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "Error_finding",
-						"container": "data-warehouse"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DSC_PIECE_DETACHEE')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "PREPARATION ECOULEMENT/DSC"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "Error_finding",
-						"container": "data-warehouse"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": []
 			},
 			"dependsOn": []
 		}
