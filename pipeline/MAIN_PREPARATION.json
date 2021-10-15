@@ -216,6 +216,7 @@
 			},
 			{
 				"name": "PL_MAILLARD",
+				"description": "Input : \necoulement\norganisation\nventesDirectes\nOutput : \norgaNotFound\nMAILLARD_ECOUL_PREPARED",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"userProperties": [],
