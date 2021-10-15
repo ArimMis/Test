@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "AZ_OFacturactionPartedisLikeWithIndex",
+				"fileName": "AZ_OFacturactionPartedisLikeWithIndex.csv",
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
