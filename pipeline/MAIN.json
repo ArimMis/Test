@@ -125,6 +125,7 @@
 			},
 			{
 				"name": "SORTIE MARKETING",
+				"description": "Marketing",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
@@ -145,6 +146,7 @@
 			},
 			{
 				"name": "MAIN_LOGISTIQUE1",
+				"description": "NomenclatureProduit\nNomenclatureClient\nTDataSD",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
@@ -165,6 +167,7 @@
 			},
 			{
 				"name": "CONTRAT DISTRIBUTION",
+				"description": "CALCUL SEUIL\nCALCUL REMUNERATION\nCONTRAT DISTRIBUTION",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
