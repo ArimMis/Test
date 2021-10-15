@@ -54,6 +54,7 @@
 			},
 			{
 				"name": "CleaninPostUnion",
+				"description": "Input : \nunionEccoulement\narticlehierarchi\nunionsapehs\npricelisteReplicated\nOutput : \ntunionSap\noutputPreparationEcoulement",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
