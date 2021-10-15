@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "NomenclatureProduit",
+				"description": "Input : \nHIERARCHI_ARTICLE\nOutput : \nNOMENCLATURE_PRODUIT",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
