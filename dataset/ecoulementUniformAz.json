@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "eccoulementUniforme",
+				"fileName": "eccoulementUniforme.csv",
 				"container": "data-warehouse"
 			},
 			"columnDelimiter": ",",
