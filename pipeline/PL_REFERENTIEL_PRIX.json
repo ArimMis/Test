@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "DUREE PERIODE",
+				"description": "Input: \nfacturation\nplateforme\nOutpout :\ndureePeriodeOutput",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {

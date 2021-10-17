@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "EHS",
+				"description": "Input : \nEHS\norganisation\nventesDirectes\nOutput : \norgaNotFound\nSoriteEHS",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {

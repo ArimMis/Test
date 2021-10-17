@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "PL_POST_UNION",
+				"description": "prix_moyen\nunionSAP_EHS\nCleaninPostUnion",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
@@ -24,6 +25,7 @@
 			},
 			{
 				"name": "PL_MABILLE",
+				"description": "Input : \n-MabilleSaunierDuvale\n-OrganisationMabilleSonac\n-ventesDirectes\nOutput : \n-MabileQteNull\n-organisationNotFound\n-MABILE_ECOULEMENT_OUTPUT",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
@@ -44,6 +46,7 @@
 			},
 			{
 				"name": "PL_ORCAB",
+				"description": "Input : \n-ORCAB_ECOULEMENT_INPUT\n-ORCAB_ORGANISATION\n-ventesDirectes\nOutput : \n-ORCAB_QTE_NULL\n-organisationNotFound\n-ORCAB_ECOULEMENT_PREPARED",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
@@ -64,6 +67,7 @@
 			},
 			{
 				"name": "PL_TRAITEMENT_DSC",
+				"description": "Input : \nDSCINPUT\norganisation\nventesDirectes\nOutput : \noutputNullQuantity\norgaNotFound\npreparedDSC\nDSCPieceDetache",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"userProperties": [],
@@ -77,6 +81,7 @@
 			},
 			{
 				"name": "PL_VF_CONFORT",
+				"description": "Input : \n-ecoulement\n-CONFORT_ORGANISATION\n-ventesDirectes\nOutput : \n-outputQuantityNull\n-VFCONFORT_ECOULEMENT_PREPARED",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
@@ -97,6 +102,7 @@
 			},
 			{
 				"name": "PL_TEREVA",
+				"description": "Input : \necoulement\nTEREVA_ORGANISATION\nventesDirectes\nOutput : \nTEREVA_EC_PREPARED",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
@@ -117,6 +123,7 @@
 			},
 			{
 				"name": "UNION_ECOULEMENT",
+				"description": "Inupt : \nvfconfortPrepared\nmabillePrepared\norcabPrepared\ntereva\nDSC\nmaillard\nPartedis\nEHS\nOutput : \nallUnionedDistributor",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
@@ -190,6 +197,7 @@
 			},
 			{
 				"name": "PL_PARTEDIS",
+				"description": "Input : \necoulement\nPARTEDIS_ORGANISATION\nventesDirectes\npartedisPrixStd\nprixParPeriode\nOutput : \norganisationNotFound\nquantityNullOutput\nPARTEDIS_ECOUL_PREPARED",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
@@ -210,6 +218,7 @@
 			},
 			{
 				"name": "PL_MAILLARD",
+				"description": "Input : \necoulement\norganisation\nventesDirectes\nOutput : \norgaNotFound\nMAILLARD_ECOUL_PREPARED",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"userProperties": [],
@@ -223,6 +232,7 @@
 			},
 			{
 				"name": "PL_EHS",
+				"description": "Input : \nEHS\norganisation\nventesDirectes\nOutput : \norgaNotFound\nSoriteEHS",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"userProperties": [],
@@ -236,6 +246,7 @@
 			},
 			{
 				"name": "InputLoad",
+				"description": "AF : importDataMabille\n      importDataTereva\n      DATA IMPORTpartedis\n      VFimport\n      import orcab\n",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"userProperties": [],

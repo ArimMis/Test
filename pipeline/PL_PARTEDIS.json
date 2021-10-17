@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "PREPARATION",
+				"description": "Input : \necoulement\nPARTEDIS_ORGANISATION\nventesDirectes\npartedisPrixStd\nprixParPeriode\nOutput : \norganisationNotFound\nquantityNullOutput\nPARTEDIS_ECOUL_PREPARED",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {

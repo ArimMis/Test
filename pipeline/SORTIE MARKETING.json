@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "Marketing",
+				"description": "Input : \nBASE_COMMERCIALE\nHierarchieMKTSD\nHerarchieMKTVA\nStgOffreChantier\nArticleHierarchi\nOutput : \nSORTIE_MARKETING",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {

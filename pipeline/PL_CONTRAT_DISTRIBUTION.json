@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "CALCUL SEUIL",
+				"description": "Input : \ncontratCadre\ncontrat\nlevier\narticle\nbaseCommerciale\ntemplateContrat\ncalculRem\nOutput : \nOUTPUT_CALCUL_SEUIL",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -28,6 +29,7 @@
 			},
 			{
 				"name": "CALCUL REMUNERATION",
+				"description": "Input : \ncontratCadre\ncontrat\narticle\nbaseCommerciale\ntemplateContrat\ncalculRem\nOutput : \nOUTPUT_CALCUL_REMUNERATION",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -52,6 +54,7 @@
 			},
 			{
 				"name": "CONTRAT DISTRIBUTION",
+				"description": "Input : \nseuil\nremuneration\nOutput : \nCONTRAT_DISTRIBUTION",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{

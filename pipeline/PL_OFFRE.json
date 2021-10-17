@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "PREPARATION",
+				"description": "Input : \noffreDiffusInput\noffreChantierInput\nreferentielATCinput\nOutput : \noffreDiffusTemp\nStg_offre_diffus\noffreChantierTemp\nstagingChantier\noffreAtcTemp\n",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -65,6 +66,7 @@
 			},
 			{
 				"name": "FINITION",
+				"description": "Input : \noffreInDiffus\nchantier\nOutput : \nstg_offre\n",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{

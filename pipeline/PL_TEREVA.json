@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "PREPARATION",
+				"description": "Input : \necoulement\nTEREVA_ORGANISATION\nventesDirectes\nOutput : \nTEREVA_EC_PREPARED",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {

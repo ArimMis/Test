@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "PREPARATION OBJECTIF",
+				"description": "Input : \nobjectif\nlevierPerformance\nOutput : \nPREPARATION_OBJECTIF_RH\nTEMP_LEVIER_PERFORMANCE",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {

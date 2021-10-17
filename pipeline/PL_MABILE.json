@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "MABILE_PREPARATION",
+				"description": "Input : \n-MabilleSaunierDuvale\n-OrganisationMabilleSonac\n-ventesDirectes\nOutput : \n-MabileQteNull\n-organisationNotFound\n-MABILE_ECOULEMENT_OUTPUT",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {

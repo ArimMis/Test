@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "ORCAB_PREPARATION",
+				"description": "Input : \n-ORCAB_ECOULEMENT_INPUT\n-ORCAB_ORGANISATION\n-ventesDirectes\nOutput : \n-ORCAB_QTE_NULL\n-organisationNotFound\n-ORCAB_ECOULEMENT_PREPARED",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {

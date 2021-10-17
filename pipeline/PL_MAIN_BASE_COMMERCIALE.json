@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "PREPARATION_ECC_AVOIR",
+				"description": "Input : \necoulement\navoir\nsalerDSC\nOrgaTerevas\nOutput : \nAZ_OecoulementDscTerevaWithIndex\noutEccDscTereva\nAZ_OecoulementPartedislikeWithIndex\noutEccNotDSCTEREVA\nAZ_AvoirWithIndexDSClike\nDTAvoirRetraiter\nAvoirForVanMarkes",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -28,6 +29,7 @@
 			},
 			{
 				"name": "ModelVenteDirecte",
+				"description": "Input : \nventedirecte\ncomptesap\nrefAtc\nassociationoffre\noffre\nOutput : \noVenteDirect",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -52,6 +54,7 @@
 			},
 			{
 				"name": "DSCTEREVA2",
+				"description": "Input : \necoulementwithIndex\navoirwithIndex\nstgOffre\nreferentielATC\nfacturation\nOutput : \navoirUnMappedutput\noutdsctereva2",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
@@ -83,6 +86,7 @@
 			},
 			{
 				"name": "UNION_BASE_COMMERCIAL",
+				"description": "Input : \nventeDirect\nDSCModel\nPartedisModel\nVanMarkes\nOutput : \nOunionBaseCommercialt",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
@@ -132,6 +136,7 @@
 			},
 			{
 				"name": "POST_UNION_FINISH",
+				"description": "Input : \nBCUnion\nArticleHierarchi\nPlateformes\nExtractionCompte\nClientEHS\nInputManuel\nStgOffreUnique\nOutput : \nDataCommercialNotFOund\nTEMP_baseCommercialOut\nOutputBaseAllDistru\nDataCommercialDT2",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
@@ -163,6 +168,7 @@
 			},
 			{
 				"name": "Model_PARTEDIS2",
+				"description": "Input : \necoulement\nassociation\nstgOffre\nfacturation\nrefAtc\nOutput : \nsortiePardedis",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
@@ -194,6 +200,7 @@
 			},
 			{
 				"name": "VanMarkes",
+				"description": "Input : \norganisaation\nAvoir\nFacturation\nExtarctionSAP\nREFATC\nOffre\nOutput : \nrenameNoOffre\nOutputVanMarkes",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
@@ -225,6 +232,7 @@
 			},
 			{
 				"name": "ATC_PERFORMANCE",
+				"description": "Input : \nBASE_AVANT_TRAITEMENT_ATC\nsecteurFictif\nOutput : \nbaseCommercialOut",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
