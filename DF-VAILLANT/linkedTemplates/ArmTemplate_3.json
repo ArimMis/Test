@@ -4,7 +4,7 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Nom de fabrique de données",
+			"metadata": "Data Factory name",
 			"defaultValue": "DF-VAILLANT"
 		}
 	},
@@ -1062,7 +1062,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "AZ_OecoulementDscTerevaWithIndex",
+						"fileName": "AZ_OecoulementDscTerevaWithIndex.csv",
 						"folderPath": "Temp",
 						"container": "data-warehouse"
 					},
@@ -2025,7 +2025,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "AZ_AvoirWithIndexDSClike",
+						"fileName": "AZ_AvoirWithIndexDSClike.csv",
 						"folderPath": "Temp",
 						"container": "data-warehouse"
 					},

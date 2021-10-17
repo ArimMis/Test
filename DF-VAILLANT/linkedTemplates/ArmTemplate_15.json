@@ -4,7 +4,7 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Nom de fabrique de données",
+			"metadata": "Data Factory name",
 			"defaultValue": "DF-VAILLANT"
 		}
 	},
@@ -75,6 +75,7 @@
 				"activities": [
 					{
 						"name": "CALCUL SEUIL",
+						"description": "Input : \ncontratCadre\ncontrat\nlevier\narticle\nbaseCommerciale\ntemplateContrat\ncalculRem\nOutput : \nOUTPUT_CALCUL_SEUIL",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -111,6 +112,7 @@
 					},
 					{
 						"name": "CALCUL REMUNERATION",
+						"description": "Input : \ncontratCadre\ncontrat\narticle\nbaseCommerciale\ntemplateContrat\ncalculRem\nOutput : \nOUTPUT_CALCUL_REMUNERATION",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -146,6 +148,7 @@
 					},
 					{
 						"name": "CONTRAT DISTRIBUTION",
+						"description": "Input : \nseuil\nremuneration\nOutput : \nCONTRAT_DISTRIBUTION",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [
 							{
@@ -209,6 +212,7 @@
 				"activities": [
 					{
 						"name": "DSC_PREPARATION",
+						"description": "Input : \nDSCINPUT\norganisation\nventesDirectes\nOutput : \noutputNullQuantity\norgaNotFound\npreparedDSC\nDSCPieceDetache",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -263,6 +267,7 @@
 				"activities": [
 					{
 						"name": "EHS",
+						"description": "Input : \nEHS\norganisation\nventesDirectes\nOutput : \norgaNotFound\nSoriteEHS",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -369,6 +374,7 @@
 				"activities": [
 					{
 						"name": "article_designation",
+						"description": "Input : \narticleHierarchie\ndetailArticleHierarchie\nOutput : \nsortieArticleDesignation\n",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -419,6 +425,7 @@
 				"activities": [
 					{
 						"name": "LEVIER RH",
+						"description": "Input : \ndataCommerciale\nPLATEFORMES\nlevierPerformance\nOutput : \nTEMP_LEVIER_RH\nTEMP_LEVIER_PERFORMANCE\n",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -510,6 +517,7 @@
 				"activities": [
 					{
 						"name": "MABILE_PREPARATION",
+						"description": "Input : \n-MabilleSaunierDuvale\n-OrganisationMabilleSonac\n-ventesDirectes\nOutput : \n-MabileQteNull\n-organisationNotFound\n-MABILE_ECOULEMENT_OUTPUT",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -563,6 +571,7 @@
 				"activities": [
 					{
 						"name": "MAILLARD_PREPARATION",
+						"description": "Input : \necoulement\norganisation\nventesDirectes\nOutput : \norgaNotFound\nMAILLARD_ECOUL_PREPARED",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -614,6 +623,7 @@
 				"activities": [
 					{
 						"name": "PREPARATION_ECC_AVOIR",
+						"description": "Input : \necoulement\navoir\nsalerDSC\nOrgaTerevas\nOutput : \nAZ_OecoulementDscTerevaWithIndex\noutEccDscTereva\nAZ_OecoulementPartedislikeWithIndex\noutEccNotDSCTEREVA\nAZ_AvoirWithIndexDSClike\nDTAvoirRetraiter\nAvoirForVanMarkes",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -653,6 +663,7 @@
 					},
 					{
 						"name": "ModelVenteDirecte",
+						"description": "Input : \nventedirecte\ncomptesap\nrefAtc\nassociationoffre\noffre\nOutput : \noVenteDirect",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -687,6 +698,7 @@
 					},
 					{
 						"name": "DSCTEREVA2",
+						"description": "Input : \necoulementwithIndex\navoirwithIndex\nstgOffre\nreferentielATC\nfacturation\nOutput : \navoirUnMappedutput\noutdsctereva2",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [
 							{
@@ -729,6 +741,7 @@
 					},
 					{
 						"name": "UNION_BASE_COMMERCIAL",
+						"description": "Input : \nventeDirect\nDSCModel\nPartedisModel\nVanMarkes\nOutput : \nOunionBaseCommercialt",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [
 							{
@@ -787,6 +800,7 @@
 					},
 					{
 						"name": "POST_UNION_FINISH",
+						"description": "Input : \nBCUnion\nArticleHierarchi\nPlateformes\nExtractionCompte\nClientEHS\nInputManuel\nStgOffreUnique\nOutput : \nDataCommercialNotFOund\nTEMP_baseCommercialOut\nOutputBaseAllDistru\nDataCommercialDT2",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [
 							{
@@ -833,6 +847,7 @@
 					},
 					{
 						"name": "Model_PARTEDIS2",
+						"description": "Input : \necoulement\nassociation\nstgOffre\nfacturation\nrefAtc\nOutput : \nsortiePardedis",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [
 							{
@@ -874,6 +889,7 @@
 					},
 					{
 						"name": "VanMarkes",
+						"description": "Input : \norganisaation\nAvoir\nFacturation\nExtarctionSAP\nREFATC\nOffre\nOutput : \nrenameNoOffre\nOutputVanMarkes",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [
 							{
@@ -918,6 +934,7 @@
 					},
 					{
 						"name": "ATC_PERFORMANCE",
+						"description": "Input : \nBASE_AVANT_TRAITEMENT_ATC\nsecteurFictif\nOutput : \nbaseCommercialOut",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [
 							{
@@ -1027,6 +1044,7 @@
 				"activities": [
 					{
 						"name": "PREPARATION OBJECTIF",
+						"description": "Input : \nobjectif\nlevierPerformance\nOutput : \nPREPARATION_OBJECTIF_RH\nTEMP_LEVIER_PERFORMANCE",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -1117,6 +1135,7 @@
 				"activities": [
 					{
 						"name": "PREPARATION",
+						"description": "Input : \noffreDiffusInput\noffreChantierInput\nreferentielATCinput\nOutput : \noffreDiffusTemp\nStg_offre_diffus\noffreChantierTemp\nstagingChantier\noffreAtcTemp\n",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -1191,6 +1210,7 @@
 					},
 					{
 						"name": "FINITION",
+						"description": "Input : \noffreInDiffus\nchantier\nOutput : \nstg_offre\n",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [
 							{
@@ -1248,6 +1268,7 @@
 				"activities": [
 					{
 						"name": "ORCAB_PREPARATION",
+						"description": "Input : \n-ORCAB_ECOULEMENT_INPUT\n-ORCAB_ORGANISATION\n-ventesDirectes\nOutput : \n-ORCAB_QTE_NULL\n-organisationNotFound\n-ORCAB_ECOULEMENT_PREPARED",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -1301,6 +1322,7 @@
 				"activities": [
 					{
 						"name": "PREPARATION",
+						"description": "Input : \necoulement\nPARTEDIS_ORGANISATION\nventesDirectes\npartedisPrixStd\nprixParPeriode\nOutput : \norganisationNotFound\nquantityNullOutput\nPARTEDIS_ECOUL_PREPARED",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -1356,6 +1378,7 @@
 				"activities": [
 					{
 						"name": "prix_moyen",
+						"description": "Input : \nREFERENTIEL_PRIX\nOutput : \nprixMoyenSplited",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -1386,6 +1409,7 @@
 					},
 					{
 						"name": "unionSAP_EHS",
+						"description": "Input : \nclientEHS\nextractionSap\nOutput : \nsapUnionEHS",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -1417,6 +1441,7 @@
 					},
 					{
 						"name": "CleaninPostUnion",
+						"description": "Input : \nunionEccoulement\narticlehierarchi\nunionsapehs\npricelisteReplicated\nOutput : \ntunionSap\noutputPreparationEcoulement",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [
 							{
@@ -1483,6 +1508,7 @@
 				"activities": [
 					{
 						"name": "lower_data",
+						"description": "Input: \nrefaffectation\nref2021\nOutpout :\natcAffectationLower\natcC2021Lower",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -1515,6 +1541,7 @@
 					},
 					{
 						"name": "computing",
+						"description": "Input: \natcJoined\nOutpout :\nAtcprepareForReplicate",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [
 							{
@@ -1661,6 +1688,7 @@
 				"activities": [
 					{
 						"name": "DUREE PERIODE",
+						"description": "Input: \nfacturation\nplateforme\nOutpout :\ndureePeriodeOutput",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -1827,6 +1855,7 @@
 				"activities": [
 					{
 						"name": "PREPARATION",
+						"description": "Input : \necoulement\nTEREVA_ORGANISATION\nventesDirectes\nOutput : \nTEREVA_EC_PREPARED",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {

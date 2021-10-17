@@ -4,7 +4,7 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Nom de fabrique de données",
+			"metadata": "Data Factory name",
 			"defaultValue": "DF-VAILLANT"
 		}
 	},
@@ -69,6 +69,7 @@
 				"activities": [
 					{
 						"name": "VF_CONFORT_PREPARATION",
+						"description": "Input : \n-ecoulement\n-CONFORT_ORGANISATION\n-ventesDirectes\nOutput : \n-outputQuantityNull\n-VFCONFORT_ECOULEMENT_PREPARED",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -253,6 +254,7 @@
 				"activities": [
 					{
 						"name": "Marketing",
+						"description": "Input : \nBASE_COMMERCIALE\nHierarchieMKTSD\nHerarchieMKTVA\nStgOffreChantier\nArticleHierarchi\nOutput : \nSORTIE_MARKETING",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -659,6 +661,7 @@
 				"activities": [
 					{
 						"name": "PL_POST_UNION",
+						"description": "prix_moyen\nunionSAP_EHS\nCleaninPostUnion",
 						"type": "ExecutePipeline",
 						"dependsOn": [
 							{
@@ -680,6 +683,7 @@
 					},
 					{
 						"name": "PL_MABILLE",
+						"description": "Input : \n-MabilleSaunierDuvale\n-OrganisationMabilleSonac\n-ventesDirectes\nOutput : \n-MabileQteNull\n-organisationNotFound\n-MABILE_ECOULEMENT_OUTPUT",
 						"type": "ExecutePipeline",
 						"dependsOn": [
 							{
@@ -701,6 +705,7 @@
 					},
 					{
 						"name": "PL_ORCAB",
+						"description": "Input : \n-ORCAB_ECOULEMENT_INPUT\n-ORCAB_ORGANISATION\n-ventesDirectes\nOutput : \n-ORCAB_QTE_NULL\n-organisationNotFound\n-ORCAB_ECOULEMENT_PREPARED",
 						"type": "ExecutePipeline",
 						"dependsOn": [
 							{
@@ -722,6 +727,7 @@
 					},
 					{
 						"name": "PL_TRAITEMENT_DSC",
+						"description": "Input : \nDSCINPUT\norganisation\nventesDirectes\nOutput : \noutputNullQuantity\norgaNotFound\npreparedDSC\nDSCPieceDetache",
 						"type": "ExecutePipeline",
 						"dependsOn": [],
 						"userProperties": [],
@@ -736,6 +742,7 @@
 					},
 					{
 						"name": "PL_VF_CONFORT",
+						"description": "Input : \n-ecoulement\n-CONFORT_ORGANISATION\n-ventesDirectes\nOutput : \n-outputQuantityNull\n-VFCONFORT_ECOULEMENT_PREPARED",
 						"type": "ExecutePipeline",
 						"dependsOn": [
 							{
@@ -757,6 +764,7 @@
 					},
 					{
 						"name": "PL_TEREVA",
+						"description": "Input : \necoulement\nTEREVA_ORGANISATION\nventesDirectes\nOutput : \nTEREVA_EC_PREPARED",
 						"type": "ExecutePipeline",
 						"dependsOn": [
 							{
@@ -778,6 +786,7 @@
 					},
 					{
 						"name": "UNION_ECOULEMENT",
+						"description": "Inupt : \nvfconfortPrepared\nmabillePrepared\norcabPrepared\ntereva\nDSC\nmaillard\nPartedis\nEHS\nOutput : \nallUnionedDistributor",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [
 							{
@@ -864,6 +873,7 @@
 					},
 					{
 						"name": "PL_PARTEDIS",
+						"description": "Input : \necoulement\nPARTEDIS_ORGANISATION\nventesDirectes\npartedisPrixStd\nprixParPeriode\nOutput : \norganisationNotFound\nquantityNullOutput\nPARTEDIS_ECOUL_PREPARED",
 						"type": "ExecutePipeline",
 						"dependsOn": [
 							{
@@ -885,6 +895,7 @@
 					},
 					{
 						"name": "PL_MAILLARD",
+						"description": "Input : \necoulement\norganisation\nventesDirectes\nOutput : \norgaNotFound\nMAILLARD_ECOUL_PREPARED",
 						"type": "ExecutePipeline",
 						"dependsOn": [],
 						"userProperties": [],
@@ -899,6 +910,7 @@
 					},
 					{
 						"name": "PL_EHS",
+						"description": "Input : \nEHS\norganisation\nventesDirectes\nOutput : \norgaNotFound\nSoriteEHS",
 						"type": "ExecutePipeline",
 						"dependsOn": [],
 						"userProperties": [],
@@ -913,6 +925,7 @@
 					},
 					{
 						"name": "InputLoad",
+						"description": "AF : importDataMabille\n      importDataTereva\n      DATA IMPORTpartedis\n      VFimport\n      import orcab\n",
 						"type": "ExecutePipeline",
 						"dependsOn": [],
 						"userProperties": [],
@@ -948,6 +961,7 @@
 				"activities": [
 					{
 						"name": "PL_GET_ARTICLE_DESIGNATION",
+						"description": "Input : \narticleHierarchie\ndetailArticleHierarchie\nOutput : \nsortieArticleDesignation\n\n",
 						"type": "ExecutePipeline",
 						"dependsOn": [],
 						"userProperties": [],
@@ -962,6 +976,7 @@
 					},
 					{
 						"name": "PL_OFFRE",
+						"description": "\nPREPARATION\nFINITION",
 						"type": "ExecutePipeline",
 						"dependsOn": [],
 						"userProperties": [],
@@ -976,6 +991,7 @@
 					},
 					{
 						"name": "PL_REFERENTIEL_ATC",
+						"description": "Input : \noffreInDiffus\nchantier\nOutput : \nstg_offre\n\n\nlower_data\ncomputing\nfuzzyjoinATC\nAF : fuzzy join: atc 2020 2021 and  atc affectation",
 						"type": "ExecutePipeline",
 						"dependsOn": [],
 						"userProperties": [],
@@ -990,6 +1006,7 @@
 					},
 					{
 						"name": "PL_REFERENTIEL_PRIX",
+						"description": "DUREE PERIODE\nAF : DUREE PERIODE",
 						"type": "ExecutePipeline",
 						"dependsOn": [],
 						"userProperties": [],
@@ -1023,6 +1040,7 @@
 				"activities": [
 					{
 						"name": "LEVIER RH",
+						"description": "Input : \ndataCommerciale\nPLATEFORMES\nlevierPerformance\nOutput : \nTEMP_LEVIER_RH\nTEMP_LEVIER_PERFORMANCE\n",
 						"type": "ExecutePipeline",
 						"dependsOn": [],
 						"userProperties": [],
@@ -1037,6 +1055,7 @@
 					},
 					{
 						"name": "PREPARATION OBJECTIF RH",
+						"description": "Input : \nobjectif\nlevierPerformance\nOutput : \nPREPARATION_OBJECTIF_RH\nTEMP_LEVIER_PERFORMANCE",
 						"type": "ExecutePipeline",
 						"dependsOn": [],
 						"userProperties": [],
@@ -1051,6 +1070,7 @@
 					},
 					{
 						"name": "OBJECTIF RH",
+						"description": "Objectif RH ",
 						"type": "AzureFunctionActivity",
 						"dependsOn": [
 							{
@@ -1114,10 +1134,11 @@
 				"activities": [
 					{
 						"name": "MAIN_PREPARATION_ECOULEMENT",
+						"description": "PL Input_Load\nPL_MABILLE\nPL_ORCAB\nPL_VF_CONFORT\nPL_TEREVA\nPL_PARTEDIS\nPL_TRAITEMENT_DSC\nDF_UNION_ECOULEMENT\nPL_POST_UNION",
 						"type": "ExecutePipeline",
 						"dependsOn": [
 							{
-								"activity": "helloword",
+								"activity": "start",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -1135,6 +1156,7 @@
 					},
 					{
 						"name": "PL_MAIN_BASE_COMMERCIAL",
+						"description": "PL main for : \nPREPARATION_ECC_AVOIR\nDSCTEREVA2\nModel_PARTEDIS2\nVanMarkes\nModelVenteDirecte\nUNION_BASE_COMMERCIAL\nPOST_UNION_FINISH\nATC_PERFORMANCE",
 						"type": "ExecutePipeline",
 						"dependsOn": [
 							{
@@ -1162,6 +1184,7 @@
 					},
 					{
 						"name": "MAIN_REFERENTIEL",
+						"description": "PL_GET_ARTICLE_DESIGNATION\nPL_OFFRE\nPL_REFERENTIEL_ATC\nPL_REFERENTIEL_PRIX",
 						"type": "ExecutePipeline",
 						"dependsOn": [],
 						"userProperties": [],
@@ -1176,6 +1199,7 @@
 					},
 					{
 						"name": "MAIN_LOGISTIQUE",
+						"description": "NomenclatureProduit\nNomenclatureClient\nTDataSD",
 						"type": "ExecutePipeline",
 						"dependsOn": [
 							{
@@ -1197,6 +1221,7 @@
 					},
 					{
 						"name": "preparation_facturation",
+						"description": "Input : -facturationbw\n          -PLATEFORMES\ntraitement : -join facturationbw & Plateformes\n                 -join facturationbw & other plateformes\n                 -join facturationbw & filtre DSC\nOutput : -venteDirect\n-AZ_OFacturactionPartedisLikeWithIndex\n-facturationForOtherPlateform\n-facturationForDSCTEREVA\n-facturationForVanMarkes",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -1233,6 +1258,7 @@
 					},
 					{
 						"name": "CALCUL OBJECTIF RH",
+						"description": "Main PL RH : \nPL LEVIER RH \nPREPARATION OBJECTIF RH\nAF OBJECTIF RH",
 						"type": "ExecutePipeline",
 						"dependsOn": [
 							{
@@ -1254,6 +1280,7 @@
 					},
 					{
 						"name": "SORTIE MARKETING",
+						"description": "Marketing",
 						"type": "ExecutePipeline",
 						"dependsOn": [
 							{
@@ -1275,6 +1302,7 @@
 					},
 					{
 						"name": "MAIN_LOGISTIQUE1",
+						"description": "NomenclatureProduit\nNomenclatureClient\nTDataSD",
 						"type": "ExecutePipeline",
 						"dependsOn": [
 							{
@@ -1296,6 +1324,7 @@
 					},
 					{
 						"name": "CONTRAT DISTRIBUTION",
+						"description": "CALCUL SEUIL\nCALCUL REMUNERATION\nCONTRAT DISTRIBUTION",
 						"type": "ExecutePipeline",
 						"dependsOn": [
 							{
@@ -1316,7 +1345,7 @@
 						}
 					},
 					{
-						"name": "helloword",
+						"name": "start",
 						"description": "fuzzy join: atc 2020 2021 and  atc affectation",
 						"type": "AzureFunctionActivity",
 						"dependsOn": [],

@@ -4,7 +4,7 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Nom de fabrique de données",
+			"metadata": "Data Factory name",
 			"defaultValue": "DF-VAILLANT"
 		}
 	},
@@ -1141,7 +1141,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "AZ_OecoulementPartedislikeWithIndex",
+						"fileName": "AZ_OecoulementPartedislikeWithIndex.csv",
 						"folderPath": "Temp",
 						"container": "data-warehouse"
 					},
@@ -1615,7 +1615,8 @@
 						"fileName": "eccoulementUniforme.csv",
 						"container": "data-warehouse"
 					},
-					"columnDelimiter": ",",
+					"columnDelimiter": ";",
+					"encodingName": "WINDOWS-1252",
 					"escapeChar": "\\",
 					"firstRowAsHeader": true,
 					"quoteChar": "\""
@@ -1683,10 +1684,6 @@
 					},
 					{
 						"name": "marque_name",
-						"type": "String"
-					},
-					{
-						"name": "Code produit",
 						"type": "String"
 					}
 				]
