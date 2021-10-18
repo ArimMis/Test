@@ -1,5 +1,5 @@
 {
-	"name": "TUTO_OUTPUT2",
+	"name": "TUTO_OUTPUT1",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "dstuto",

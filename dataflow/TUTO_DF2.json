@@ -1,12 +1,15 @@
 {
 	"name": "TUTO_DF2",
 	"properties": {
+		"folder": {
+			"name": "TUTO"
+		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "InFacturationForVenteDirect",
+						"referenceName": "TUTO_INPUT",
 						"type": "DatasetReference"
 					},
 					"name": "ventedirecte"
