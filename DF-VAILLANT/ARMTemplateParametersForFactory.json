@@ -29,6 +29,9 @@
 		"datawarehouse_connectionString": {
 			"value": ""
 		},
+		"dstuto_connectionString": {
+			"value": ""
+		},
 		"entrydata_connectionString": {
 			"value": ""
 		},
