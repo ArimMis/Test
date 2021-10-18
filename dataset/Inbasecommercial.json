@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "OutputBaseAllDistru.csv",
+				"fileName": "base commerciale.csv",
 				"container": "data-warehouse"
 			},
 			"columnDelimiter": ";",
