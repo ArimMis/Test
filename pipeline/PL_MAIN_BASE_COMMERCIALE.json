@@ -231,7 +231,7 @@
 				}
 			},
 			{
-				"name": "ATC_PERFORMANCE",
+				"name": "ATC_PERFORMANCE_ET_CLIENT_SAP",
 				"description": "Input : \nBASE_AVANT_TRAITEMENT_ATC\nsecteurFictif\nOutput : \nbaseCommercialOut",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
@@ -252,7 +252,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "ATC_PERFORMANCE",
+						"referenceName": "ATC_PERFORMANCE_ET_CLIENT_SAP",
 						"type": "DataFlowReference"
 					},
 					"compute": {
