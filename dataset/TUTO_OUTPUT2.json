@@ -1,0 +1,22 @@
+{
+	"name": "TUTO_OUTPUT2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "dstuto",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "tuto"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
