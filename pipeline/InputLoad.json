@@ -35,14 +35,7 @@
 				"name": "importDataTereva",
 				"description": "import all file un folder",
 				"type": "AzureFunctionActivity",
-				"dependsOn": [
-					{
-						"activity": "DATA IMPORTpartedis",
-						"dependencyConditions": [
-							"Failed"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -69,14 +62,7 @@
 			{
 				"name": "DATA IMPORTpartedis",
 				"type": "AzureFunctionActivity",
-				"dependsOn": [
-					{
-						"activity": "importDataMabille",
-						"dependencyConditions": [
-							"Failed"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -149,6 +135,33 @@
 						"folderpath": "Ecoulement/ORCAB",
 						"outputContainer": "data-warehouse",
 						"outputpath": "Temp/ORCAB_ECOULEMENT.xlsx"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "data transformation azure function",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Data import EHS",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "AF_IMPORT_ECOUL_EHS",
+					"method": "POST",
+					"body": {
+						"containername": "data-input",
+						"folderpath": "Ecoulement/Engie_Home_Services",
+						"outputContainer": "data-warehouse",
+						"outputpath": "Temp/EHS_ECOULEMENT.xlsx"
 					}
 				},
 				"linkedServiceName": {
