@@ -8,6 +8,7 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
+			"sheetName": "Data",
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "févr 2020_Mensuel_SAUNIER DUVAL - SDECC00484.xlsx",
