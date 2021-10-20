@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "PREPARATION ECOULEMENT"
+			"name": "PREPARATION ECOULEMENT/TEREVA"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
