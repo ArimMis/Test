@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "STG_OFFRE",
+				"fileName": "STG_OFFRE_CHANTIER.csv",
 				"folderPath": "staging",
 				"container": "data-warehouse"
 			},
