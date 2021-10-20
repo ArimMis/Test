@@ -14,6 +14,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "referentiel_atc_4.csv",
+				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
 			"columnDelimiter": ",",
