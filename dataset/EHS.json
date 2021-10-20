@@ -11,10 +11,10 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
-			"sheetName": "Feuille1",
+			"sheetName": "Sheet1",
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "EHS.xlsx",
+				"fileName": "EHS_ECOULEMENT.xlsx",
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
@@ -58,19 +58,19 @@
 				"type": "String"
 			},
 			{
-				"name": "str_mois",
-				"type": "String"
-			},
-			{
 				"name": "year",
 				"type": "String"
 			},
 			{
-				"name": "Gestion entrepôt",
+				"name": "month",
 				"type": "String"
 			},
 			{
 				"name": "Marques/ Constructeur",
+				"type": "String"
+			},
+			{
+				"name": "Gestion entrepôt",
 				"type": "String"
 			}
 		]
