@@ -4,7 +4,7 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Data Factory name",
+			"metadata": "Nom de fabrique de données",
 			"defaultValue": "DF-VAILLANT"
 		}
 	},
@@ -12,6 +12,37 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/fuzzyjoinATC')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "WranglingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"name": "afctationflows",
+							"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> afctationflows",
+							"dataset": {
+								"referenceName": "afctationflows",
+								"type": "DatasetReference"
+							}
+						},
+						{
+							"name": "atcc2021",
+							"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> atcc2021",
+							"dataset": {
+								"referenceName": "atcc2021",
+								"type": "DatasetReference"
+							}
+						}
+					],
+					"script": "section Section1;\r\nshared afctationflows = let\r\n  AdfDoc = AzureStorage.BlobContents(\"https://dsvaillantfr.blob.core.windows.net/data-warehouse/Temp/atc_affectation_lower\"),\r\n  Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]),\r\n  PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true])\r\nin\r\n  PromotedHeaders;\r\nshared atcc2021 = let\r\n  AdfDoc = AzureStorage.BlobContents(\"https://dsvaillantfr.blob.core.windows.net/data-warehouse/Temp/atc_c2021_lower\"),\r\n  Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]),\r\n  PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true])\r\nin\r\n  PromotedHeaders;\r\nshared UserQuery = let\r\n  Source = afctationflows,\r\n  #\"Choose columns\" = Table.SelectColumns(Source, {\"Clé Référentiel\", \"Marque\", \"Code Postal début\", \"Code Postal fin\", \"Utilisateur\", \"Fonction\", \"Département\", \"DR\"})\r\nin\r\n  #\"Choose columns\";\r\n",
+					"documentLocale": "en-us"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/lower_data')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
@@ -281,7 +312,8 @@
 								"datasetParameters": {
 									"EXtractionSAP": {},
 									"ReferentielAtc4": {},
-									"SortieNomenclatureClient": {}
+									"SortieNomenclatureClient": {},
+									"sinktemp": {}
 								}
 							},
 							"staging": {},
@@ -362,7 +394,8 @@
 								"datasetParameters": {
 									"EXtractionSAP": {},
 									"ReferentielAtc4": {},
-									"SortieNomenclatureClient": {}
+									"SortieNomenclatureClient": {},
+									"sinktemp": {}
 								}
 							},
 							"staging": {},
@@ -1737,60 +1770,6 @@
 				},
 				"annotations": [],
 				"lastPublishTime": "2021-09-13T07:55:19Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PL_ORCAB')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "ORCAB_PREPARATION",
-						"description": "Input : \n-ORCAB_ECOULEMENT_INPUT\n-ORCAB_ORGANISATION\n-ventesDirectes\nOutput : \n-ORCAB_QTE_NULL\n-organisationNotFound\n-ORCAB_ECOULEMENT_PREPARED",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "ORCAB_PREPARATION",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"ecoulement": {},
-									"organisation": {},
-									"ventesDirectes": {},
-									"OUTPUT": {},
-									"quantityNullOutput": {},
-									"organisationNotFound": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "PREPARATION ECOULEMENT"
-				},
-				"annotations": [],
-				"lastPublishTime": "2021-09-10T11:58:57Z"
 			},
 			"dependsOn": []
 		}
