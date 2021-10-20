@@ -12,6 +12,12 @@
 						"dependencyConditions": [
 							"Succeeded"
 						]
+					},
+					{
+						"activity": "preparation_facturation",
+						"dependencyConditions": [
+							"Succeeded"
+						]
 					}
 				],
 				"userProperties": [],
@@ -30,12 +36,6 @@
 				"dependsOn": [
 					{
 						"activity": "MAIN_PREPARATION_ECOULEMENT",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "preparation_facturation",
 						"dependencyConditions": [
 							"Succeeded"
 						]
