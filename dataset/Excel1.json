@@ -1,0 +1,21 @@
+{
+	"name": "Excel1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "févr 2020_Mensuel_SAUNIER DUVAL - SDECC00484.xlsx",
+				"folderPath": "Ecoulement/DSC",
+				"container": "data-input"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": []
+	}
+}
