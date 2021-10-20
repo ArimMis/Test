@@ -7,7 +7,14 @@
 				"name": "importDataMabille",
 				"description": "import all file un folder",
 				"type": "AzureFunctionActivity",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "importDataVF_confort",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -35,7 +42,14 @@
 				"name": "importDataTereva",
 				"description": "import all file un folder",
 				"type": "AzureFunctionActivity",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "importDataMabille",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -60,9 +74,16 @@
 				}
 			},
 			{
-				"name": "DATA IMPORTpartedis",
+				"name": "importDataPartedis",
 				"type": "AzureFunctionActivity",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "importDataVF_confort",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -87,7 +108,7 @@
 				}
 			},
 			{
-				"name": "VFimport",
+				"name": "importDataVF_confort",
 				"description": "import all file un folder",
 				"type": "AzureFunctionActivity",
 				"dependsOn": [],
@@ -115,7 +136,7 @@
 				}
 			},
 			{
-				"name": "import orcab",
+				"name": "importDataOrcab",
 				"description": "import data from orcab",
 				"type": "AzureFunctionActivity",
 				"dependsOn": [],
@@ -143,9 +164,16 @@
 				}
 			},
 			{
-				"name": "Data import EHS",
+				"name": "importDataEHS",
 				"type": "AzureFunctionActivity",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "importDataOrcab",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
