@@ -20,7 +20,14 @@
 				"name": "PREPARATION OBJECTIF RH",
 				"description": "Input : \nobjectif\nlevierPerformance\nOutput : \nPREPARATION_OBJECTIF_RH\nTEMP_LEVIER_PERFORMANCE",
 				"type": "ExecutePipeline",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "LEVIER RH",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
@@ -35,12 +42,6 @@
 				"description": "Objectif RH ",
 				"type": "AzureFunctionActivity",
 				"dependsOn": [
-					{
-						"activity": "LEVIER RH",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
 					{
 						"activity": "PREPARATION OBJECTIF RH",
 						"dependencyConditions": [
