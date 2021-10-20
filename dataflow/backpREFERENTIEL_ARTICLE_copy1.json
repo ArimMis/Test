@@ -3,7 +3,7 @@
 	"properties": {
 		"description": "backup",
 		"folder": {
-			"name": "REFERENTIEL"
+			"name": "VERIFICATION/bkp"
 		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
