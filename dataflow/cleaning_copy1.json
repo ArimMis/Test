@@ -3,7 +3,7 @@
 	"properties": {
 		"description": "cleaning process after join",
 		"folder": {
-			"name": "REFERENTIEL/ATC"
+			"name": "VERIFICATION"
 		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
