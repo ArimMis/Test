@@ -13,6 +13,35 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/extrationSapOut')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "REFERENTIEL_ATC"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/facturatemp')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -3275,125 +3304,6 @@
 					},
 					"columnDelimiter": ";",
 					"rowDelimiter": "\n",
-					"encodingName": "WINDOWS-1252",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "Région Statistique",
-						"type": "String"
-					},
-					{
-						"name": "Enseigne",
-						"type": "String"
-					},
-					{
-						"name": "Marque DESC",
-						"type": "String"
-					},
-					{
-						"name": "Marque Code",
-						"type": "String"
-					},
-					{
-						"name": "Sous Famille",
-						"type": "String"
-					},
-					{
-						"name": "Référence Article Fournisseur",
-						"type": "String"
-					},
-					{
-						"name": "Article National DESC",
-						"type": "String"
-					},
-					{
-						"name": "Article National Code",
-						"type": "String"
-					},
-					{
-						"name": "Agence Code",
-						"type": "String"
-					},
-					{
-						"name": "Agence DESC",
-						"type": "String"
-					},
-					{
-						"name": "Département DESC",
-						"type": "String"
-					},
-					{
-						"name": "Département ID",
-						"type": "String"
-					},
-					{
-						"name": "Secteur",
-						"type": "String"
-					},
-					{
-						"name": "Quantité en UV BL",
-						"type": "String"
-					},
-					{
-						"name": "Année Précédente (Quantité en UV BL)",
-						"type": "String"
-					},
-					{
-						"name": "Cumul Exercice (Quantité en UV BL)",
-						"type": "String"
-					},
-					{
-						"name": "Cumul Exercice A-1 (Quantité en UV BL)",
-						"type": "String"
-					},
-					{
-						"name": "MOIS CA PRR N",
-						"type": "String"
-					},
-					{
-						"name": "MOIS CA PRR N-1",
-						"type": "String"
-					},
-					{
-						"name": "CA PRR au cumul",
-						"type": "String"
-					},
-					{
-						"name": "CA PRR au cumul N-1",
-						"type": "String"
-					},
-					{
-						"name": "fileName",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/offreDiffusTemp')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "REFERENTIEL_OFFRE"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "Temp",
-						"container": "data-warehouse"
-					},
-					"columnDelimiter": ";",
 					"encodingName": "WINDOWS-1252",
 					"escapeChar": "\\",
 					"firstRowAsHeader": true,

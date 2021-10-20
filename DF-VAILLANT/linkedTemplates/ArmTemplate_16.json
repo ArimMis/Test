@@ -13,6 +13,62 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/PL_PARTEDIS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "PREPARATION",
+						"description": "Input : \necoulement\nPARTEDIS_ORGANISATION\nventesDirectes\npartedisPrixStd\nprixParPeriode\nOutput : \norganisationNotFound\nquantityNullOutput\nPARTEDIS_ECOUL_PREPARED",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "PARTEDIS_PREPARATION",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"ecoulement": {},
+									"organisation": {},
+									"venteDirecte": {},
+									"partedisPrixStd": {},
+									"prixParPeriode": {},
+									"organisationNotFound": {},
+									"quantityNullOutput": {},
+									"output": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-14T08:05:27Z"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/PL_POST_UNION')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -805,6 +861,7 @@
 									"HerarchieMKTVA": {},
 									"StgOffreChantier": {},
 									"ArticleHierarchi": {},
+									"typologieEPS": {},
 									"Smarketing": {}
 								}
 							},
@@ -1573,7 +1630,8 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/PL_POST_UNION')]",
 				"[concat(variables('factoryId'), '/pipelines/PL_VF_CONFORT')]",
-				"[concat(variables('factoryId'), '/pipelines/PL_TEREVA')]"
+				"[concat(variables('factoryId'), '/pipelines/PL_TEREVA')]",
+				"[concat(variables('factoryId'), '/pipelines/PL_PARTEDIS')]"
 			]
 		},
 		{

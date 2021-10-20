@@ -69,6 +69,59 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/TYPOLOGIE_EPS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "SORTIE MARKETING"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "report1623684783907",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Extraction comptes EPS_Typologie_Sous Typo_Compte Principal.xlsx",
+						"folderPath": "Client",
+						"container": "data-input"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Numéro du compte",
+						"type": "String"
+					},
+					{
+						"name": "Nom du compte",
+						"type": "String"
+					},
+					{
+						"name": "Groupe cible/Typologie générale",
+						"type": "String"
+					},
+					{
+						"name": "Sous groupe cible/Typologie détaillée",
+						"type": "String"
+					},
+					{
+						"name": "Compte principal: Numéro du compte",
+						"type": "String"
+					},
+					{
+						"name": "Compte principal: Nom du compte",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/VENTES_DIRECTES_PREPARATION')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1762,103 +1815,6 @@
 					},
 					{
 						"name": "Nouveau Prix vente unitaire",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/avoirReplicated')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "OTHER"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "Sheet1",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "avoir_replicated.xlsx",
-						"folderPath": "Temp",
-						"container": "data-warehouse"
-					},
-					"firstRowAsHeader": true
-				},
-				"schema": [
-					{
-						"name": "Mois_Selection",
-						"type": "String"
-					},
-					{
-						"name": "NoOffre",
-						"type": "String"
-					},
-					{
-						"name": "NoArtVGF",
-						"type": "String"
-					},
-					{
-						"name": "Agence",
-						"type": "String"
-					},
-					{
-						"name": "Qte_Validee_VGF",
-						"type": "String"
-					},
-					{
-						"name": "NoCli",
-						"type": "String"
-					},
-					{
-						"name": "PA_Valide_VGF",
-						"type": "String"
-					},
-					{
-						"name": "Mois",
-						"type": "String"
-					},
-					{
-						"name": "Année",
-						"type": "String"
-					},
-					{
-						"name": "CompanyId",
-						"type": "String"
-					},
-					{
-						"name": "HubSAPid",
-						"type": "String"
-					},
-					{
-						"name": "toreplicate",
-						"type": "String"
-					},
-					{
-						"name": "ca_avoir",
-						"type": "String"
-					},
-					{
-						"name": "yearmonth",
-						"type": "String"
-					},
-					{
-						"name": "POSid",
-						"type": "String"
-					},
-					{
-						"name": "WholeSalerID",
-						"type": "String"
-					},
-					{
-						"name": "order",
 						"type": "String"
 					}
 				]
