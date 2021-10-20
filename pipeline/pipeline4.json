@@ -28,44 +28,6 @@
 					"referenceName": "data transformation azure function",
 					"type": "LinkedServiceReference"
 				}
-			},
-			{
-				"name": "Copy data1",
-				"type": "Copy",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "ExcelSource",
-						"additionalColumns": [
-							{
-								"name": "filepath",
-								"value": "$$FILEPATH"
-							}
-						],
-						"storeSettings": {
-							"type": "AzureBlobStorageReadSettings",
-							"recursive": true,
-							"wildcardFolderPath": "Ecoulement/DSC",
-							"wildcardFileName": "*",
-							"enablePartitionDiscovery": false
-						}
-					},
-					"enableStaging": false
-				},
-				"inputs": [
-					{
-						"referenceName": "Excel1",
-						"type": "DatasetReference"
-					}
-				]
 			}
 		],
 		"folder": {
