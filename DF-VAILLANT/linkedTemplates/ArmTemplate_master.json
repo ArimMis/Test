@@ -35,17 +35,9 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'data_mart'"
 		},
-		"datawarehouse_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'datawarehouse'"
-		},
 		"dstuto_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'dstuto'"
-		},
-		"entrydata_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'entrydata'"
 		},
 		"BASE COMMERCIALE_properties_typeProperties_host": {
 			"type": "string",
@@ -107,14 +99,8 @@
 					"data_mart_connectionString": {
 						"value": "[parameters('data_mart_connectionString')]"
 					},
-					"datawarehouse_connectionString": {
-						"value": "[parameters('datawarehouse_connectionString')]"
-					},
 					"dstuto_connectionString": {
 						"value": "[parameters('dstuto_connectionString')]"
-					},
-					"entrydata_connectionString": {
-						"value": "[parameters('entrydata_connectionString')]"
 					},
 					"BASE COMMERCIALE_properties_typeProperties_host": {
 						"value": "[parameters('BASE COMMERCIALE_properties_typeProperties_host')]"

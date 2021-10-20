@@ -13,120 +13,6 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/DSC_ORGANISATION')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "PREPARATION ECOULEMENT/DSC"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "Feuil1",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "Organisation_DSC.xlsx",
-						"folderPath": "Organisation",
-						"container": "data-input"
-					},
-					"firstRowAsHeader": true
-				},
-				"schema": [
-					{
-						"name": "WholeSalerID",
-						"type": "String"
-					},
-					{
-						"name": "WholeSalerShortName",
-						"type": "String"
-					},
-					{
-						"name": "UnitID",
-						"type": "String"
-					},
-					{
-						"name": "POSid",
-						"type": "String"
-					},
-					{
-						"name": "POSdescription",
-						"type": "String"
-					},
-					{
-						"name": "County",
-						"type": "String"
-					},
-					{
-						"name": "POSSAMid",
-						"type": "String"
-					},
-					{
-						"name": "POSSAMidString",
-						"type": "String"
-					},
-					{
-						"name": "SupplierID",
-						"type": "String"
-					},
-					{
-						"name": "BrandID",
-						"type": "String"
-					},
-					{
-						"name": "WholeSalerHubID",
-						"type": "String"
-					},
-					{
-						"name": "HubName",
-						"type": "String"
-					},
-					{
-						"name": "HubSAPid",
-						"type": "String"
-					},
-					{
-						"name": "SectorID",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DSC_ORGANISATION_NOTFOUND')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "PREPARATION ECOULEMENT/DSC"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "Error_finding",
-						"container": "data-warehouse"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": []
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/DSC_PIECE_DETACHEE')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1041,10 +927,10 @@
 				"annotations": [],
 				"type": "Excel",
 				"typeProperties": {
-					"sheetName": "Feuille1",
+					"sheetName": "Sheet1",
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "EHS.xlsx",
+						"fileName": "EHS_ECOULEMENT.xlsx",
 						"folderPath": "Temp",
 						"container": "data-warehouse"
 					},
@@ -1088,19 +974,19 @@
 						"type": "String"
 					},
 					{
-						"name": "str_mois",
-						"type": "String"
-					},
-					{
 						"name": "year",
 						"type": "String"
 					},
 					{
-						"name": "Gestion entrepôt",
+						"name": "month",
 						"type": "String"
 					},
 					{
 						"name": "Marques/ Constructeur",
+						"type": "String"
+					},
+					{
+						"name": "Gestion entrepôt",
 						"type": "String"
 					}
 				]
@@ -1475,6 +1361,31 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Excel1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Data",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "févr 2020_Mensuel_SAUNIER DUVAL - SDECC00484.xlsx",
+						"folderPath": "Ecoulement/DSC",
+						"container": "data-input"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ExtractionComptesEPSTypologieSousTypoComptePrincipal')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1805,6 +1716,134 @@
 					"firstRowAsHeader": true
 				},
 				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/FOLDER_ECOULEMENT_MABILE')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT/MABILE"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Détails",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "Ecoulement/Mabille",
+						"container": "data-input"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Activité",
+						"type": "String"
+					},
+					{
+						"name": "Fournisseur Groupe",
+						"type": "String"
+					},
+					{
+						"name": "Société",
+						"type": "String"
+					},
+					{
+						"name": "Code",
+						"type": "String"
+					},
+					{
+						"name": "Fournisseur",
+						"type": "String"
+					},
+					{
+						"name": "Agence du client",
+						"type": "String"
+					},
+					{
+						"name": "Code article",
+						"type": "String"
+					},
+					{
+						"name": "Libellé article",
+						"type": "String"
+					},
+					{
+						"name": "Ref fournisseur",
+						"type": "String"
+					},
+					{
+						"name": "Qté Mois A-1",
+						"type": "String"
+					},
+					{
+						"name": "Qté Cumul A-1",
+						"type": "String"
+					},
+					{
+						"name": "CA Mois A-1",
+						"type": "String"
+					},
+					{
+						"name": "CA Cumul A-1",
+						"type": "String"
+					},
+					{
+						"name": "MB Mois A-1",
+						"type": "String"
+					},
+					{
+						"name": "MB Cumul A-1",
+						"type": "String"
+					},
+					{
+						"name": "VVA Mois A-1",
+						"type": "String"
+					},
+					{
+						"name": "VVA Cumul A-1",
+						"type": "String"
+					},
+					{
+						"name": "Qté Mois A",
+						"type": "String"
+					},
+					{
+						"name": "Qté Cumul A",
+						"type": "String"
+					},
+					{
+						"name": "CA Mois A",
+						"type": "String"
+					},
+					{
+						"name": "CA Cumul A",
+						"type": "String"
+					},
+					{
+						"name": "MB Mois A",
+						"type": "String"
+					},
+					{
+						"name": "MB Cumul A",
+						"type": "String"
+					},
+					{
+						"name": "VVA Mois A",
+						"type": "String"
+					},
+					{
+						"name": "VVA Cumul A",
+						"type": "String"
+					}
+				]
 			},
 			"dependsOn": []
 		}

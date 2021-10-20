@@ -26,13 +26,7 @@
 		"data_mart_connectionString": {
 			"value": ""
 		},
-		"datawarehouse_connectionString": {
-			"value": ""
-		},
 		"dstuto_connectionString": {
-			"value": ""
-		},
-		"entrydata_connectionString": {
 			"value": ""
 		},
 		"BASE COMMERCIALE_properties_typeProperties_host": {
