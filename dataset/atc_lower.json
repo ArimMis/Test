@@ -57,6 +57,14 @@
 				"type": "String"
 			},
 			{
+				"name": "ID SAP",
+				"type": "String"
+			},
+			{
+				"name": "Diffus/Chantier",
+				"type": "String"
+			},
+			{
 				"name": "Plan prime",
 				"type": "String"
 			}
