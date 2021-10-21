@@ -1,0 +1,126 @@
+{
+	"name": "TraitementDistributeur",
+	"properties": {
+		"folder": {
+			"name": "PREPARATION ECOULEMENT"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ORCAB_ECOULEMENT_INPUT",
+						"type": "DatasetReference"
+					},
+					"name": "ecoulement"
+				},
+				{
+					"dataset": {
+						"referenceName": "ORCAB_ORGANISATION",
+						"type": "DatasetReference"
+					},
+					"name": "organisation"
+				},
+				{
+					"dataset": {
+						"referenceName": "VENTES_DIRECTES_PREPARED",
+						"type": "DatasetReference"
+					},
+					"name": "ventesDirectes"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ORCAB_ECOULEMENT_PREPARED",
+						"type": "DatasetReference"
+					},
+					"name": "OUTPUT"
+				},
+				{
+					"dataset": {
+						"referenceName": "ORCAB_QTE_NULL",
+						"type": "DatasetReference"
+					},
+					"name": "quantityNullOutput"
+				},
+				{
+					"dataset": {
+						"referenceName": "ORCAB_ORGANISATION_NOTFOUND",
+						"type": "DatasetReference"
+					},
+					"name": "organisationNotFound"
+				}
+			],
+			"transformations": [
+				{
+					"name": "monthToNumber"
+				},
+				{
+					"name": "quantityNotNull"
+				},
+				{
+					"name": "quantityNull"
+				},
+				{
+					"name": "cooperativenotNull"
+				},
+				{
+					"name": "orgaCooperativeNotNull"
+				},
+				{
+					"name": "unique"
+				},
+				{
+					"name": "innerOrganisation"
+				},
+				{
+					"name": "leftOrganisation"
+				},
+				{
+					"name": "leftOuter"
+				},
+				{
+					"name": "innerVentesDirectes"
+				},
+				{
+					"name": "yearmonth"
+				},
+				{
+					"name": "enleverVentesDirectes"
+				},
+				{
+					"name": "leftVentesDirectes"
+				},
+				{
+					"name": "outerLeftVentesDirectes"
+				},
+				{
+					"name": "Select2"
+				},
+				{
+					"name": "Select3"
+				},
+				{
+					"name": "Union1"
+				},
+				{
+					"name": "Select4"
+				},
+				{
+					"name": "typeCaste"
+				},
+				{
+					"name": "uniformisation"
+				},
+				{
+					"name": "columnChoice"
+				},
+				{
+					"name": "getYearmonth"
+				}
+			],
+			"script": "source(output(\n\t\tFournisseur as string,\n\t\t{Coopérative} as string,\n\t\t{Référence} as string,\n\t\t{Désignation} as string,\n\t\tMois as string,\n\t\t{CA 2020} as string,\n\t\t{CA 2019} as string,\n\t\t{Qte 2020} as string,\n\t\t{Qte 2019} as string,\n\t\tpath as string,\n\t\tqte_ecoulement as string,\n\t\tFamille as string,\n\t\t{Sous Famille} as string,\n\t\tREFFOURNISSEUR as string,\n\t\t{Qte Livrée 2020} as string,\n\t\t{Qte Livrée 2019} as string,\n\t\t{Code Dispo Cde} as string,\n\t\t{Code SAPAIG} as string,\n\t\t{CA sans Marge} as string,\n\t\t{CA sans Marge A-1} as string,\n\t\t{Evol. CA A/A-1} as string,\n\t\t{Qte Livrée} as string,\n\t\t{Qte Livrée A-1} as string,\n\t\t{Evol. Qte A/A-1} as string,\n\t\t{Qté Livrée 2020} as string,\n\t\t{Qté Livrée 2019} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> ecoulement\nsource(output(\n\t\t{Nom Coopérative} as string,\n\t\t{CP Coop.} as string,\n\t\tPOSSAMid as string,\n\t\tHubSAPid as string,\n\t\tBrandID as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> organisation\nsource(output(\n\t\tyearmonth as string,\n\t\tArticle as string,\n\t\t{Code client} as string,\n\t\t{Qt� vente directe} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> ventesDirectes\ngetYearmonth derive(month = iif(lower(Mois)==\"janvier\", \"01\",      iif(lower(Mois)==\"février\",\"02\",     iif(lower(Mois)==\"mars\", \"03\",      iif(lower(Mois)==\"avril\", \"04\",      iif(lower(Mois)==\"mai\", \"05\",      iif(lower(Mois)==\"juin\", \"06\",      iif(lower(Mois)==\"juillet\", \"07\",      iif(lower(Mois)==\"août\", \"08\",      iif(lower(Mois)==\"septembre\", \"09\",      iif(lower(Mois)==\"octobre\", \"10\",      iif(lower(Mois)==\"novembre\", \"11\",      iif(lower(Mois)==\"décembre\", \"12\", \"0\")))))))))))),\n\t\tqte_ecoulement = toDouble(qte_ecoulement)) ~> monthToNumber\nyearmonth filter(!isNull(qte_ecoulement)) ~> quantityNotNull\nmonthToNumber filter(isNull(qte_ecoulement)) ~> quantityNull\nquantityNotNull filter(!isNull({Coopérative})) ~> cooperativenotNull\norganisation filter(!isNull({Nom Coopérative})) ~> orgaCooperativeNotNull\norgaCooperativeNotNull aggregate(groupBy({Nom Coopérative},\n\t\tHubSAPid),\n\tPOSSAMid = max(POSSAMid)) ~> unique\ncooperativenotNull, unique join({Coopérative} == {Nom Coopérative},\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> innerOrganisation\ncooperativenotNull, unique join({Coopérative} == {Nom Coopérative},\n\tjoinType:'left',\n\tbroadcast: 'auto')~> leftOrganisation\nleftOrganisation filter(isNull({Nom Coopérative})) ~> leftOuter\ninnerOrganisation, ventesDirectes join(yearmonth@yearmonth == ventesDirectes@yearmonth\n\t&& REFFOURNISSEUR == Article\n\t&& POSSAMid == {Code client},\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> innerVentesDirectes\nmonthToNumber derive(yearmonth = year+month,\n\t\tqte_ecoulement = toDouble(qte_ecoulement)) ~> yearmonth\ninnerVentesDirectes derive(qte_ecoulement = qte_ecoulement-toDouble({Qt� vente directe})) ~> enleverVentesDirectes\ninnerOrganisation, ventesDirectes join(yearmonth@yearmonth == ventesDirectes@yearmonth\n\t&& REFFOURNISSEUR == Article\n\t&& POSSAMid == {Code client},\n\tjoinType:'left',\n\tbroadcast: 'auto')~> leftVentesDirectes\nleftVentesDirectes filter(isNull(ventesDirectes@yearmonth) || isNull(Article) || isNull({Code client})) ~> outerLeftVentesDirectes\nenleverVentesDirectes select(mapColumn(\n\t\tFournisseur = marque_file,\n\t\t{Coopérative},\n\t\t{Référence},\n\t\t{Désignation},\n\t\tMois,\n\t\tpath,\n\t\tqte_ecoulement,\n\t\tREFFOURNISSEUR,\n\t\tyear,\n\t\tmonth,\n\t\tyearmonth = yearmonth@yearmonth,\n\t\t{Nom Coopérative},\n\t\tHubSAPid,\n\t\tPOSSAMid,\n\t\tyearmonth = ventesDirectes@yearmonth,\n\t\tArticle,\n\t\t{Code client},\n\t\t{Qt� vente directe}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select2\nouterLeftVentesDirectes select(mapColumn(\n\t\tmarque_file,\n\t\t{Coopérative},\n\t\t{Référence},\n\t\t{Désignation},\n\t\tMois,\n\t\tpath,\n\t\tqte_ecoulement,\n\t\tREFFOURNISSEUR,\n\t\tyear,\n\t\tmonth,\n\t\tyearmonth = yearmonth@yearmonth,\n\t\t{Nom Coopérative},\n\t\tHubSAPid,\n\t\tPOSSAMid,\n\t\tyearmonth = ventesDirectes@yearmonth,\n\t\tArticle,\n\t\t{Code client},\n\t\t{Qt� vente directe}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select3\nSelect3, Select2 union(byName: true)~> Union1\nUnion1 select(mapColumn(\n\t\tmarque_file,\n\t\t{Coopérative},\n\t\t{Référence},\n\t\t{Désignation},\n\t\tMois,\n\t\tpath,\n\t\tqte_ecoulement,\n\t\tREFFOURNISSEUR,\n\t\tyear,\n\t\tmonth,\n\t\tyearmonth,\n\t\t{Nom Coopérative},\n\t\tHubSAPid,\n\t\tPOSSAMid,\n\t\tArticle,\n\t\t{Code client},\n\t\t{Qt� vente directe}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select4\nSelect4 derive(year = substring(yearmonth,1,4),\n\t\tmarque_id = iif(lower(marque_file)==\"vaillant\", 1621, 1604)) ~> typeCaste\ntypeCaste select(mapColumn(\n\t\tmarque_file,\n\t\treference = {Référence},\n\t\tarticle = {Désignation},\n\t\tqte_ecoulement,\n\t\tyear,\n\t\tmonth,\n\t\tyearmonth,\n\t\tHubSAPid,\n\t\tPOSSAMid,\n\t\tmarque_id\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> uniformisation\necoulement select(mapColumn(\n\t\tmarque_file = Fournisseur,\n\t\t{Coopérative},\n\t\t{Référence},\n\t\t{Désignation},\n\t\tMois,\n\t\tpath,\n\t\tqte_ecoulement,\n\t\tREFFOURNISSEUR\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> columnChoice\ncolumnChoice derive(year = replace(split(path, \" \")[5], \".xlsx\", \"\"),\n\t\tmonth = split(path, \" \")[4]) ~> getYearmonth\nuniformisation sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\t{Région Statistique} as string,\n\t\tEnseigne as string,\n\t\t{Marque DESC} as string,\n\t\t{Marque Code} as string,\n\t\t{Sous Famille} as string,\n\t\t{Référence Article Fournisseur} as string,\n\t\t{Article National DESC} as string,\n\t\t{Article National Code} as string,\n\t\t{Agence Code} as string,\n\t\t{Agence DESC} as string,\n\t\t{Département DESC} as string,\n\t\t{Département ID} as string,\n\t\tSecteur as string,\n\t\t{Quantité en UV BL} as string,\n\t\t{Année Précédente (Quantité en UV BL)} as string,\n\t\t{Cumul Exercice (Quantité en UV BL)} as string,\n\t\t{Cumul Exercice A-1 (Quantité en UV BL)} as string,\n\t\t{MOIS CA PRR N} as string,\n\t\t{MOIS CA PRR N-1} as string,\n\t\t{CA PRR au cumul} as string,\n\t\t{CA PRR au cumul N-1} as string,\n\t\tfileName as string\n\t),\n\tpartitionFileNames:['ORCAB_ECOUL_PREPARED.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> OUTPUT\nquantityNull sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['ORCAB_QTE_NULL'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> quantityNullOutput\nleftOuter sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['ORCAB_ORGANISATION_NOTFOUND.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> organisationNotFound"
+		}
+	}
+}
