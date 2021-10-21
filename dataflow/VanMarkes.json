@@ -1,6 +1,9 @@
 {
 	"name": "VanMarkes",
 	"properties": {
+		"folder": {
+			"name": "BASE COMMERCIALE"
+		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [

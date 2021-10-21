@@ -2,7 +2,7 @@
 	"name": "TraitementDistributeur",
 	"properties": {
 		"folder": {
-			"name": "PREPARATION ECOULEMENT"
+			"name": "TUTO"
 		},
 		"type": "MappingDataFlow",
 		"typeProperties": {

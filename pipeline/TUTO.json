@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Data flow1",
+				"name": "extraction vente direc",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -27,11 +27,11 @@
 				}
 			},
 			{
-				"name": "Data flow2",
+				"name": "model vente direct",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "Data flow1",
+						"activity": "extraction vente direc",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -58,6 +58,9 @@
 				}
 			}
 		],
+		"folder": {
+			"name": "tutoriel"
+		},
 		"annotations": []
 	}
 }
