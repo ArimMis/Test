@@ -5,6 +5,9 @@
 			"referenceName": "VAILLANT_ARCHITECTURE",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "PREPARATION ECOULEMENT/DSC"
+		},
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
