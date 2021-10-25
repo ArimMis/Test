@@ -446,6 +446,9 @@
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "SUIVI OFFRE"
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
@@ -949,6 +952,9 @@
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "SUIVI OFFRE"
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
@@ -1034,6 +1040,9 @@
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "OTHER"
+				},
 				"annotations": [],
 				"type": "Excel",
 				"typeProperties": {
@@ -1095,6 +1104,9 @@
 				"linkedServiceName": {
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "VanMarkes"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -1194,6 +1206,9 @@
 				"linkedServiceName": {
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "OTHER"
 				},
 				"annotations": [],
 				"type": "DelimitedText",

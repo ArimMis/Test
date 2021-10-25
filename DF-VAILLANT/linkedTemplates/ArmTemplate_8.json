@@ -442,6 +442,9 @@
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "OTHER"
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
@@ -1096,6 +1099,9 @@
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "REFERENTIEL_ATC"
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
@@ -1284,6 +1290,9 @@
 				"linkedServiceName": {
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "REFERENTIEL_ATC"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -1973,6 +1982,9 @@
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "OTHER"
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
@@ -2060,6 +2072,9 @@
 				"linkedServiceName": {
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "BASE_COMMERCIAL"
 				},
 				"annotations": [],
 				"type": "DelimitedText",

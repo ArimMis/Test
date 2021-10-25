@@ -238,6 +238,9 @@
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT/MABILE"
+				},
 				"annotations": [],
 				"type": "Excel",
 				"typeProperties": {

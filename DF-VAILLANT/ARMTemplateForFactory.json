@@ -5543,6 +5543,9 @@
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "VanMarkes"
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
@@ -5643,6 +5646,9 @@
 				"linkedServiceName": {
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "VanMarkes"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -7016,6 +7022,9 @@
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "OTHER"
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
@@ -7490,6 +7499,9 @@
 				"linkedServiceName": {
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT/DSC"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -8690,6 +8702,9 @@
 				"linkedServiceName": {
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "OTHER"
 				},
 				"annotations": [],
 				"type": "Excel",
@@ -10662,6 +10677,9 @@
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "OTHER"
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
@@ -10964,6 +10982,9 @@
 				"linkedServiceName": {
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "BASE_COMMERCIAL"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -12721,6 +12742,9 @@
 				"linkedServiceName": {
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT/MABILE"
 				},
 				"annotations": [],
 				"type": "Excel",
@@ -15368,6 +15392,9 @@
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "VanMarkes"
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
@@ -15513,6 +15540,9 @@
 				"linkedServiceName": {
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "VanMarkes"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -17014,6 +17044,9 @@
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "SUIVI OFFRE"
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
@@ -17523,6 +17556,9 @@
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "SUIVI OFFRE"
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
@@ -17614,6 +17650,9 @@
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "OTHER"
+				},
 				"annotations": [],
 				"type": "Excel",
 				"typeProperties": {
@@ -17677,6 +17716,9 @@
 				"linkedServiceName": {
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "VanMarkes"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -17778,6 +17820,9 @@
 				"linkedServiceName": {
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "OTHER"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -20642,6 +20687,9 @@
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "OTHER"
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
@@ -21312,6 +21360,9 @@
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "REFERENTIEL_ATC"
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
@@ -21504,6 +21555,9 @@
 				"linkedServiceName": {
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "REFERENTIEL_ATC"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -22201,6 +22255,9 @@
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "OTHER"
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
@@ -22290,6 +22347,9 @@
 				"linkedServiceName": {
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "BASE_COMMERCIAL"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
@@ -23389,6 +23449,9 @@
 				"linkedServiceName": {
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT/DSC"
 				},
 				"annotations": [],
 				"type": "Excel",
@@ -25480,6 +25543,9 @@
 				"linkedServiceName": {
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "BASE_COMMERCIAL"
 				},
 				"annotations": [],
 				"type": "DelimitedText",
