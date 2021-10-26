@@ -224,26 +224,6 @@
 					"referenceName": "data transformation azure function",
 					"type": "LinkedServiceReference"
 				}
-			},
-			{
-				"name": "PL_SUIVIE_OFFRE",
-				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "PL_MAIN_BASE_COMMERCIAL",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "PL_SUIVIE_OFFRE",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true
-				}
 			}
 		],
 		"annotations": [],
