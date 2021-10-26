@@ -14,7 +14,7 @@
 			"sheetName": "WholeSalerOrganizationExploded",
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "Organisation terreva.xlsx",
+				"fileName": "Organisation_tereva.xlsx",
 				"folderPath": "Organisation",
 				"container": "data-input"
 			},
