@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "OutputBaseAllDistru.csv",
+				"fileName": "base commerciale.csv",
 				"container": "data-warehouse"
 			},
 			"columnDelimiter": ";",
@@ -33,10 +33,6 @@
 			},
 			{
 				"name": "origine de la ligne",
-				"type": "String"
-			},
-			{
-				"name": "yearmonth",
 				"type": "String"
 			},
 			{
@@ -68,7 +64,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Code postal",
+				"name": "Code postal du client livré",
 				"type": "String"
 			},
 			{
@@ -76,55 +72,47 @@
 				"type": "String"
 			},
 			{
-				"name": "marque_code",
+				"name": "ID marque",
 				"type": "String"
 			},
 			{
-				"name": "Canal distribution",
+				"name": "ID canal de distribution",
 				"type": "String"
 			},
 			{
-				"name": "nom du canal",
+				"name": "Nom du canal",
 				"type": "String"
 			},
 			{
-				"name": "canal_distribution_final",
+				"name": "Diffus/Chantier",
 				"type": "String"
 			},
 			{
-				"name": "canal_final",
+				"name": "document_vente (vente directe)",
 				"type": "String"
 			},
 			{
-				"name": "Secteur d'activité",
+				"name": "Agence commerciale corrigé (vente directe)",
 				"type": "String"
 			},
 			{
-				"name": "document_vente",
+				"name": "Donneur d'ordre (vente directe)",
 				"type": "String"
 			},
 			{
-				"name": "Agence commerciale corrigé",
+				"name": "Facture (vente directe)",
 				"type": "String"
 			},
 			{
-				"name": "Donneur d'ordre",
+				"name": "Type poste Facture (vente directe)",
 				"type": "String"
 			},
 			{
-				"name": "Facture",
+				"name": "Numéro offre",
 				"type": "String"
 			},
 			{
-				"name": "Type poste Facture",
-				"type": "String"
-			},
-			{
-				"name": "no_offre",
-				"type": "String"
-			},
-			{
-				"name": "ATC Corrigé",
+				"name": "ATC Corrigé (vente directe)",
 				"type": "String"
 			},
 			{
@@ -148,83 +136,11 @@
 				"type": "String"
 			},
 			{
-				"name": "Qté facturée",
+				"name": "Motif commande (vente directe)",
 				"type": "String"
 			},
 			{
-				"name": "CA facturé",
-				"type": "String"
-			},
-			{
-				"name": "qt_ecc_enrichi",
-				"type": "String"
-			},
-			{
-				"name": "ca_ecc_enrichi",
-				"type": "String"
-			},
-			{
-				"name": "qte_ecoulement",
-				"type": "String"
-			},
-			{
-				"name": "qte plateforme final",
-				"type": "String"
-			},
-			{
-				"name": "ca plateforme final",
-				"type": "String"
-			},
-			{
-				"name": "Sum_qt_factur_e",
-				"type": "String"
-			},
-			{
-				"name": "Sum_ca_factur_",
-				"type": "String"
-			},
-			{
-				"name": "Sum_ca_ecoulement",
-				"type": "String"
-			},
-			{
-				"name": "Sum_qte_ecoulement",
-				"type": "String"
-			},
-			{
-				"name": "Motif commande",
-				"type": "String"
-			},
-			{
-				"name": "Type de facture",
-				"type": "String"
-			},
-			{
-				"name": "source_atc",
-				"type": "String"
-			},
-			{
-				"name": "Successor",
-				"type": "String"
-			},
-			{
-				"name": "CDis",
-				"type": "String"
-			},
-			{
-				"name": "Predecessor",
-				"type": "String"
-			},
-			{
-				"name": "St",
-				"type": "String"
-			},
-			{
-				"name": "Désignation Statut",
-				"type": "String"
-			},
-			{
-				"name": "Deb val",
+				"name": "Type de facture (vente directe)",
 				"type": "String"
 			},
 			{
@@ -372,10 +288,6 @@
 				"type": "String"
 			},
 			{
-				"name": "ca_ecoulement",
-				"type": "String"
-			},
-			{
 				"name": "Client",
 				"type": "String"
 			},
@@ -392,43 +304,39 @@
 				"type": "String"
 			},
 			{
-				"name": "ATC",
-				"type": "String"
-			},
-			{
-				"name": "canal",
-				"type": "String"
-			},
-			{
-				"name": "Produit",
-				"type": "String"
-			},
-			{
-				"name": "Numéro interne 2",
-				"type": "String"
-			},
-			{
 				"name": "Nom du compte",
 				"type": "String"
 			},
 			{
-				"name": "Numero Interne_ Groupe cible/Typologie générale",
+				"name": "Client Indirect_ Groupe cible/Typologie générale",
 				"type": "String"
 			},
 			{
-				"name": "Numero Interne_ Sous groupe cible/Typologie détaillée",
+				"name": "Client Indirect_ Sous groupe cible/Typologie détaillée",
 				"type": "String"
 			},
 			{
-				"name": "Numero Interne_ Compte principal: Numéro du compte",
+				"name": "Client Indirect_  Compte principal: Numéro du compte",
 				"type": "String"
 			},
 			{
-				"name": "Numero Interne_ Compte principal: Nom du compte",
+				"name": "Client Indirect_  Compte principal: Nom du compte",
 				"type": "String"
 			},
 			{
-				"name": "Jour calendaire",
+				"name": "Client Direct - Hiérarchie N1 SAP ",
+				"type": "String"
+			},
+			{
+				"name": "Client Direct - Hiérarchie N2 SAP ",
+				"type": "String"
+			},
+			{
+				"name": "Client Indirect - Hiérarchie N1 SAP",
+				"type": "String"
+			},
+			{
+				"name": "Client Indirect - Hiérarchie N2 SAP",
 				"type": "String"
 			}
 		]
