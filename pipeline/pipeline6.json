@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "CHANTIER",
+				"name": "DIFFUS",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "SUIVIE_OFFRE_CHANTIER",
+						"referenceName": "SUIVIE_OFFRE_DIFFUS",
 						"type": "DataFlowReference"
 					},
 					"compute": {
