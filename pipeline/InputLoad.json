@@ -124,9 +124,9 @@
 					"functionName": "AF_IMPORT_ECOUL_VFCONFORT",
 					"method": "POST",
 					"body": {
-						"inputcontainer": "data-input",
+						"containername": "data-input",
 						"folderpath": "Ecoulement/VF Confort",
-						"outputcontainer": "data-warehouse",
+						"outputContainer": "data-warehouse",
 						"outputpath": "Temp/CONFORT_ECOULEMENT.xlsx"
 					}
 				},
