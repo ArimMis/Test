@@ -11,12 +11,12 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
-			"sheetName": "ExportOffreDet1",
+			"sheetName": "Sheet1",
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "OffresDet1-6Mois.xlsx",
-				"folderPath": "Offre/OffresBAD&BAC/Diffus",
-				"container": "data-input"
+				"fileName": "ALL_OFFRE_DIFFUS.xlsx",
+				"folderPath": "Temp",
+				"container": "data-warehouse"
 			},
 			"firstRowAsHeader": true
 		},
