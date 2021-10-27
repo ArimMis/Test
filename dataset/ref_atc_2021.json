@@ -11,11 +11,10 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
-			"sheetName": "Bareme",
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "Copie de referentiel ATC 2021 2020.xlsx",
-				"folderPath": "Client",
+				"folderPath": "ATC",
 				"container": "data-input"
 			},
 			"firstRowAsHeader": true
