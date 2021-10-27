@@ -24,7 +24,7 @@
 				}
 			},
 			{
-				"name": "PL_MABILLE",
+				"name": "PL_MABILE",
 				"description": "Input : \n-MabilleSaunierDuvale\n-OrganisationMabilleSonac\n-ventesDirectes\nOutput : \n-MabileQteNull\n-organisationNotFound\n-MABILE_ECOULEMENT_OUTPUT",
 				"type": "ExecutePipeline",
 				"dependsOn": [
@@ -163,7 +163,7 @@
 						]
 					},
 					{
-						"activity": "PL_MABILLE",
+						"activity": "PL_MABILE",
 						"dependencyConditions": [
 							"Succeeded"
 						]
