@@ -14,8 +14,8 @@
 			"sheetName": "Feuil1",
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "Libellés hiérarchies articles groupe et locale.xlsx",
-				"folderPath": "Reference article",
+				"fileName": "Libellés_hiérarchies_articles_groupe_et_locale.xlsx",
+				"folderPath": "ReferentielArticle",
 				"container": "data-input"
 			},
 			"firstRowAsHeader": true
