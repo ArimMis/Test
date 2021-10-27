@@ -13,11 +13,12 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "STG_OFFRE_CHANTIER",
+				"fileName": "STG_OFFRE_CHANTIER.csv",
 				"folderPath": "staging",
 				"container": "data-warehouse"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": ";",
+			"encodingName": "WINDOWS-1252",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
@@ -173,6 +174,10 @@
 			},
 			{
 				"name": "OffreSupprimee",
+				"type": "String"
+			},
+			{
+				"name": "canal",
 				"type": "String"
 			},
 			{

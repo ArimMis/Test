@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "STG_OFFRE_DIFFUS",
+				"fileName": "STG_OFFRE_DIFFUS.csv",
 				"folderPath": "staging",
 				"container": "data-warehouse"
 			},
@@ -214,6 +214,10 @@
 			},
 			{
 				"name": "OffreSupprimee",
+				"type": "String"
+			},
+			{
+				"name": "canal",
 				"type": "String"
 			},
 			{
