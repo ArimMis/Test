@@ -8,12 +8,6 @@
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
-						"activity": "start",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
 						"activity": "preparation_facturation",
 						"dependencyConditions": [
 							"Succeeded"
@@ -21,6 +15,12 @@
 					},
 					{
 						"activity": "MAIN_REFERENTIEL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "start",
 						"dependencyConditions": [
 							"Succeeded"
 						]
