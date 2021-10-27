@@ -65,7 +65,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Code postal du client livré",
+				"name": "Code postal",
 				"type": "String"
 			},
 			{
@@ -73,19 +73,19 @@
 				"type": "String"
 			},
 			{
-				"name": "ID marque",
+				"name": "marque_code",
 				"type": "String"
 			},
 			{
-				"name": "ID canal de distribution",
+				"name": "Canal de distribution",
 				"type": "String"
 			},
 			{
-				"name": "Nom du canal",
+				"name": "nom du canal",
 				"type": "String"
 			},
 			{
-				"name": "Diffus/Chantier",
+				"name": "canal_final",
 				"type": "String"
 			},
 			{
@@ -338,6 +338,10 @@
 			},
 			{
 				"name": "Client Indirect - Hiérarchie N2 SAP",
+				"type": "String"
+			},
+			{
+				"name": "yearmont",
 				"type": "String"
 			}
 		]

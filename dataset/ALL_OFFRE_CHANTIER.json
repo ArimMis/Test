@@ -1,0 +1,185 @@
+{
+	"name": "ALL_OFFRE_CHANTIER",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "REFERENTIEL_OFFRE"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "ALL_OFFRE_CHANTIER.csv",
+				"folderPath": "Temp",
+				"container": "data-warehouse"
+			},
+			"columnDelimiter": ";",
+			"encodingName": "WINDOWS-1252",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "DateOffre",
+				"type": "String"
+			},
+			{
+				"name": "Date Prev Cde",
+				"type": "String"
+			},
+			{
+				"name": "Code projet",
+				"type": "String"
+			},
+			{
+				"name": "Projet",
+				"type": "String"
+			},
+			{
+				"name": "Type",
+				"type": "String"
+			},
+			{
+				"name": "CP projet",
+				"type": "String"
+			},
+			{
+				"name": "Ville projet",
+				"type": "String"
+			},
+			{
+				"name": "NbLogement",
+				"type": "String"
+			},
+			{
+				"name": "Référence",
+				"type": "String"
+			},
+			{
+				"name": "Marque",
+				"type": "String"
+			},
+			{
+				"name": "Famille",
+				"type": "String"
+			},
+			{
+				"name": "Produit",
+				"type": "String"
+			},
+			{
+				"name": "Quantité",
+				"type": "String"
+			},
+			{
+				"name": "Prix de base",
+				"type": "String"
+			},
+			{
+				"name": "Prix client",
+				"type": "String"
+			},
+			{
+				"name": "Prix négoce",
+				"type": "String"
+			},
+			{
+				"name": "Prix total",
+				"type": "String"
+			},
+			{
+				"name": "Client",
+				"type": "String"
+			},
+			{
+				"name": "Type financement",
+				"type": "String"
+			},
+			{
+				"name": "Ville client",
+				"type": "String"
+			},
+			{
+				"name": "Numéro interne 1",
+				"type": "String"
+			},
+			{
+				"name": "Négoce",
+				"type": "String"
+			},
+			{
+				"name": "Ville négoce",
+				"type": "String"
+			},
+			{
+				"name": "Numéro interne 2",
+				"type": "String"
+			},
+			{
+				"name": "Statut offre",
+				"type": "String"
+			},
+			{
+				"name": "Responsable",
+				"type": "String"
+			},
+			{
+				"name": "Groupe",
+				"type": "String"
+			},
+			{
+				"name": "Offre",
+				"type": "String"
+			},
+			{
+				"name": "Date de maj statut",
+				"type": "String"
+			},
+			{
+				"name": "Numéro avant vente",
+				"type": "String"
+			},
+			{
+				"name": "Créateur offre",
+				"type": "String"
+			},
+			{
+				"name": "Commentaire interne",
+				"type": "String"
+			},
+			{
+				"name": "Offre dérogée",
+				"type": "String"
+			},
+			{
+				"name": "Contrat cadre",
+				"type": "String"
+			},
+			{
+				"name": "Typologie projet",
+				"type": "String"
+			},
+			{
+				"name": "DateValidite",
+				"type": "String"
+			},
+			{
+				"name": "DEEE",
+				"type": "String"
+			},
+			{
+				"name": "OffreSupprimee",
+				"type": "String"
+			},
+			{
+				"name": "canal",
+				"type": "String"
+			}
+		]
+	}
+}
