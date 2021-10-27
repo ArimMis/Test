@@ -3,7 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "DATA IMPORTpartedis",
+				"name": "importDataTereva",
+				"description": "import all file un folder",
 				"type": "AzureFunctionActivity",
 				"dependsOn": [],
 				"policy": {
@@ -15,13 +16,13 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"functionName": "AF_IMPORT_ECOUL_PARTEDIS",
+					"functionName": "AF_IMPORT_ECOUL_TEREVA",
 					"method": "POST",
 					"body": {
 						"inputcontainer": "data-input",
-						"folderpath": "Ecoulement/Partedis",
+						"folderpath": "Ecoulement/Téréva",
 						"outputcontainer": "data-warehouse",
-						"outputpath": "Temp/PARTEDIS_ECOULEMENT.xlsx"
+						"outputpath": "Temp/TEREVA_ECOULEMENT.csv"
 					}
 				},
 				"linkedServiceName": {
