@@ -27,14 +27,7 @@
 				"name": "PL_MABILE",
 				"description": "Input : \n-MabilleSaunierDuvale\n-OrganisationMabilleSonac\n-ventesDirectes\nOutput : \n-MabileQteNull\n-organisationNotFound\n-MABILE_ECOULEMENT_OUTPUT",
 				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "InputLoad",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
@@ -48,14 +41,7 @@
 				"name": "PL_ORCAB",
 				"description": "Input : \n-ORCAB_ECOULEMENT_INPUT\n-ORCAB_ORGANISATION\n-ventesDirectes\nOutput : \n-ORCAB_QTE_NULL\n-organisationNotFound\n-ORCAB_ECOULEMENT_PREPARED",
 				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "InputLoad",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
@@ -83,14 +69,7 @@
 				"name": "PL_VF_CONFORT",
 				"description": "Input : \n-ecoulement\n-CONFORT_ORGANISATION\n-ventesDirectes\nOutput : \n-outputQuantityNull\n-VFCONFORT_ECOULEMENT_PREPARED",
 				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "InputLoad",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
@@ -104,14 +83,7 @@
 				"name": "PL_TEREVA",
 				"description": "Input : \necoulement\nTEREVA_ORGANISATION\nventesDirectes\nOutput : \nTEREVA_EC_PREPARED",
 				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "InputLoad",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
@@ -199,14 +171,7 @@
 				"name": "PL_PARTEDIS",
 				"description": "Input : \necoulement\nPARTEDIS_ORGANISATION\nventesDirectes\npartedisPrixStd\nprixParPeriode\nOutput : \norganisationNotFound\nquantityNullOutput\nPARTEDIS_ECOUL_PREPARED",
 				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "InputLoad",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
@@ -234,32 +199,11 @@
 				"name": "PL_EHS",
 				"description": "Input : \nEHS\norganisation\nventesDirectes\nOutput : \norgaNotFound\nSoriteEHS",
 				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "InputLoad",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "PL_EHS",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true
-				}
-			},
-			{
-				"name": "InputLoad",
-				"description": "AF : importDataMabille\n      importDataTereva\n      DATA IMPORTpartedis\n      VFimport\n      import orcab\n",
-				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "InputLoad",
+						"referenceName": "PL_EHS",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true
