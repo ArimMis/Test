@@ -50,12 +50,11 @@
 					"functionName": "AF_CALCUL_LEVIER_RH",
 					"method": "POST",
 					"body": {
-						"data1_container": "data-warehouse",
-						"data1_path": "Temp/TEMP_LEVIERS_RH.csv",
-						"data2_container": "data-warehouse",
-						"data2_path": "Temp/TEMP_LEVIER_PERFORMANCE.csv",
+						"levierContainer": "data-warehouse",
+						"levierRHpath": "Temp/TEMP_LEVIERS_RH.csv",
+						"levierPerformancePath": "Temp/TEMP_LEVIER_PERFORMANCE.csv",
 						"atc_container": "data-input",
-						"atc_path": "Client/Copie de referentiel ATC 2021 2020.xlsx",
+						"atc_path": "ATC/Copie de referentiel ATC 2021 2020.xlsx",
 						"output_container": "data-mart",
 						"output_path": "RH/LEVIER_RH.xlsx"
 					}

@@ -51,11 +51,11 @@
 					"method": "POST",
 					"body": {
 						"data1_container": "data-warehouse",
-						"data1_path": "Temp/PREPARATION_OBJECTIF_RH",
+						"data1_path": "Temp/PREPARATION_OBJECTIF_RH.csv",
 						"data2_container": "data-warehouse",
-						"data2_path": "Temp/TEMP_LEVIER_PERFORMANCE",
+						"data2_path": "Temp/TEMP_LEVIER_PERFORMANCE.csv",
 						"atc_container": "data-input",
-						"atc_path": "Client/Copie de referentiel ATC 2021 2020.xlsx",
+						"atc_path": "ATC/Copie de referentiel ATC 2021 2020.xlsx",
 						"output_container": "data-warehouse",
 						"output_path": "Temp/OBJECTIF_RH_PREPARED.xlsx"
 					}
