@@ -1,6 +1,7 @@
 {
 	"name": "TerevaOrgaNotFound",
 	"properties": {
+		"description": "Error finding organisation not found",
 		"linkedServiceName": {
 			"referenceName": "VAILLANT_ARCHITECTURE",
 			"type": "LinkedServiceReference"
