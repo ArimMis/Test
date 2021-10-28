@@ -11,10 +11,10 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
-			"sheetName": "4.Avoirs validés",
+			"sheetName": "T_DSC",
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "Avoir Validés.xlsx",
+				"fileName": "Avoirs.xlsx",
 				"folderPath": "Avoir",
 				"container": "data-input"
 			},
@@ -231,22 +231,6 @@
 			},
 			{
 				"name": "DateAjout",
-				"type": "String"
-			},
-			{
-				"name": "ID ATC",
-				"type": "String"
-			},
-			{
-				"name": "Nom ATC",
-				"type": "String"
-			},
-			{
-				"name": "HubSAPid",
-				"type": "String"
-			},
-			{
-				"name": "Nouveau Prix vente unitaire",
 				"type": "String"
 			}
 		]
