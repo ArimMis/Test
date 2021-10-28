@@ -22,7 +22,7 @@
 						"inputcontainer": "data-input",
 						"folderpath": "Ecoulement/Téréva",
 						"outputcontainer": "data-warehouse",
-						"outputpath": "Temp/TEREVA_ECOULEMENT.csv"
+						"outputpath": "Temp/TEREVA_ECOULEMENT.xlsx"
 					}
 				},
 				"linkedServiceName": {
