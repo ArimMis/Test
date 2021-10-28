@@ -4,7 +4,7 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Nom de fabrique de données",
+			"metadata": "Data Factory name",
 			"defaultValue": "DF-VAILLANT"
 		}
 	},
@@ -12,6 +12,220 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/ORCAB_ECOULEMENT_SAMPLE')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT/ORCAB"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Sheet1",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "ecoulements PF VAILLANT DECEMBRE 2020.xlsx",
+						"folderPath": "Ecoulement/ORCAB",
+						"container": "data-input"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Fournisseur",
+						"type": "String"
+					},
+					{
+						"name": "Coopérative",
+						"type": "String"
+					},
+					{
+						"name": "REFFOURNISSEUR",
+						"type": "String"
+					},
+					{
+						"name": "Désignation",
+						"type": "String"
+					},
+					{
+						"name": "Mois",
+						"type": "String"
+					},
+					{
+						"name": "CA 2020",
+						"type": "String"
+					},
+					{
+						"name": "CA 2019",
+						"type": "String"
+					},
+					{
+						"name": "Qte Livrée 2020",
+						"type": "String"
+					},
+					{
+						"name": "Qte Livrée 2019",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ORCAB_ORGANISATION')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT/ORCAB"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Sectorisation",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Organisation_Orcab.xlsx",
+						"folderPath": "Organisation",
+						"container": "data-input"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Nom Coopérative",
+						"type": "String"
+					},
+					{
+						"name": "CP Coop.",
+						"type": "String"
+					},
+					{
+						"name": "POSSAMid",
+						"type": "String"
+					},
+					{
+						"name": "HubSAPid",
+						"type": "String"
+					},
+					{
+						"name": "BrandID",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ORCAB_ORGANISATION_NOTFOUND')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT/ORCAB"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "Error_finding",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ORCAB_PREPARED')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT/ORCAB"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "ORCAB_ECOUL_PREPARED.csv",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "marque_file",
+						"type": "String"
+					},
+					{
+						"name": "reference",
+						"type": "String"
+					},
+					{
+						"name": "article",
+						"type": "String"
+					},
+					{
+						"name": "qte_ecoulement",
+						"type": "String"
+					},
+					{
+						"name": "year",
+						"type": "String"
+					},
+					{
+						"name": "month",
+						"type": "String"
+					},
+					{
+						"name": "yearmonth",
+						"type": "String"
+					},
+					{
+						"name": "HubSAPid",
+						"type": "String"
+					},
+					{
+						"name": "POSSAMid",
+						"type": "String"
+					},
+					{
+						"name": "marque_id",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ORCAB_QTE_NULL')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -240,91 +454,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/OrgaTerevas')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "OTHER"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "WholeSalerOrganizationExploded",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "Organisation terreva.xlsx",
-						"folderPath": "Organisation",
-						"container": "data-input"
-					},
-					"firstRowAsHeader": true
-				},
-				"schema": [
-					{
-						"name": "WholeSalerID",
-						"type": "String"
-					},
-					{
-						"name": "WholeSalerShortName",
-						"type": "String"
-					},
-					{
-						"name": "UnitID",
-						"type": "String"
-					},
-					{
-						"name": "POSid",
-						"type": "String"
-					},
-					{
-						"name": "POSdescription",
-						"type": "String"
-					},
-					{
-						"name": "County",
-						"type": "String"
-					},
-					{
-						"name": "POSSAMid",
-						"type": "String"
-					},
-					{
-						"name": "POSSAMidString",
-						"type": "String"
-					},
-					{
-						"name": "SupplierID",
-						"type": "String"
-					},
-					{
-						"name": "BrandID",
-						"type": "String"
-					},
-					{
-						"name": "WholeSalerHubID",
-						"type": "String"
-					},
-					{
-						"name": "HubName",
-						"type": "String"
-					},
-					{
-						"name": "HubSAPid",
-						"type": "String"
-					},
-					{
-						"name": "SectorID",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/OrganisationEHS')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -378,34 +507,6 @@
 						"type": "String"
 					}
 				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Orgatereva')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "OTHER"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "WholeSalerOrganizationExploded",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "Organisation terreva.xlsx",
-						"folderPath": "Organisation",
-						"container": "data-input"
-					},
-					"firstRowAsHeader": true
-				},
-				"schema": []
 			},
 			"dependsOn": []
 		},
@@ -889,6 +990,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
+						"folderPath": "Temp",
 						"container": "data-warehouse"
 					},
 					"columnDelimiter": ";",
@@ -1306,7 +1408,7 @@
 					"sheetName": "WholeSalerOrganizationExploded",
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "WholeSalerOrganization_Partedis.xlsx",
+						"fileName": "Organization_Partedis.xlsx",
 						"folderPath": "Organisation",
 						"container": "data-input"
 					},
@@ -1688,126 +1790,6 @@
 						"type": "String"
 					}
 				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PartedisEcoulement')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "BASE_COMMERCIAL"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "PARTEDIS_ECOUL_PREPARED.csv",
-						"folderPath": "Temp",
-						"container": "data-warehouse"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "marque_file",
-						"type": "String"
-					},
-					{
-						"name": "agence_code",
-						"type": "String"
-					},
-					{
-						"name": "Code postal",
-						"type": "String"
-					},
-					{
-						"name": "reference",
-						"type": "String"
-					},
-					{
-						"name": "qte_ecoulement",
-						"type": "String"
-					},
-					{
-						"name": "yearmonth",
-						"type": "String"
-					},
-					{
-						"name": "HubSAPid",
-						"type": "String"
-					},
-					{
-						"name": "WholeSalerShortName",
-						"type": "String"
-					},
-					{
-						"name": "UnitID",
-						"type": "String"
-					},
-					{
-						"name": "POSdescription",
-						"type": "String"
-					},
-					{
-						"name": "County",
-						"type": "String"
-					},
-					{
-						"name": "POSSAMidString",
-						"type": "String"
-					},
-					{
-						"name": "marque_id",
-						"type": "String"
-					},
-					{
-						"name": "year",
-						"type": "String"
-					},
-					{
-						"name": "month",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Partedis_qte_null')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "PREPARATION ECOULEMENT/PARTEDIS"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "Error_finding",
-						"container": "data-warehouse"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": []
 			},
 			"dependsOn": []
 		}
