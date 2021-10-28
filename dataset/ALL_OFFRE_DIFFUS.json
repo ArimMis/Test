@@ -17,12 +17,16 @@
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": ";",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": [
+			{
+				"name": "Prop_0",
+				"type": "String"
+			},
 			{
 				"name": "DateOffre",
 				"type": "String"
@@ -213,10 +217,6 @@
 			},
 			{
 				"name": "OffreSupprimee",
-				"type": "String"
-			},
-			{
-				"name": "canal",
 				"type": "String"
 			}
 		]
