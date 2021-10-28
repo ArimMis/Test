@@ -113,10 +113,6 @@
 				"type": "String"
 			},
 			{
-				"name": "ATC Corrigé",
-				"type": "String"
-			},
-			{
 				"name": "ATC offre",
 				"type": "String"
 			},
@@ -125,7 +121,7 @@
 				"type": "String"
 			},
 			{
-				"name": "ATC Performance",
+				"name": "ATC Corrigé",
 				"type": "String"
 			},
 			{
