@@ -1,5 +1,5 @@
 {
-	"name": "testLongAF",
+	"name": "testLongAF_offre",
 	"properties": {
 		"activities": [
 			{
@@ -16,13 +16,13 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"functionName": "AF_IMPORT_ECOUL_DSC ",
+					"functionName": "AF_IMPORT_OFFRE_DIFFUS",
 					"method": "POST",
 					"body": {
-						"inputContainer": "data-input",
-						"inputFolderPath": "Ecoulement/DSC",
+						"containername": "data-input",
+						"folderpath": "Offre/OffresBAD&BAC/Diffus",
 						"outputContainer": "data-warehouse",
-						"outputpath": "Temp/DSC_ECOULEMENT.csv"
+						"outputpath": "Temp/ALL_OFFRE_DIFFUS.csv"
 					}
 				},
 				"linkedServiceName": {
