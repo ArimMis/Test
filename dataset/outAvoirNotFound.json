@@ -5,6 +5,9 @@
 			"referenceName": "VAILLANT_ARCHITECTURE",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "BASE_COMMERCIAL"
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
