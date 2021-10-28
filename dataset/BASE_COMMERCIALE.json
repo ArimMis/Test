@@ -77,7 +77,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Canal de distribution",
+				"name": "canal_distribution_final",
 				"type": "String"
 			},
 			{
@@ -89,7 +89,7 @@
 				"type": "String"
 			},
 			{
-				"name": "document_vente (vente directe)",
+				"name": "document_vente",
 				"type": "String"
 			},
 			{
@@ -109,11 +109,11 @@
 				"type": "String"
 			},
 			{
-				"name": "Numéro offre",
+				"name": "no_offre",
 				"type": "String"
 			},
 			{
-				"name": "ATC Corrigé (vente directe)",
+				"name": "ATC Corrigé",
 				"type": "String"
 			},
 			{
@@ -137,11 +137,11 @@
 				"type": "String"
 			},
 			{
-				"name": "Motif commande (vente directe)",
+				"name": "Motif commande",
 				"type": "String"
 			},
 			{
-				"name": "Type de facture (vente directe)",
+				"name": "Type de facture",
 				"type": "String"
 			},
 			{
@@ -341,7 +341,7 @@
 				"type": "String"
 			},
 			{
-				"name": "yearmont",
+				"name": "yearmonth",
 				"type": "String"
 			}
 		]
