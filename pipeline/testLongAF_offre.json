@@ -3,10 +3,17 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "importOffrediffus",
+				"name": "importOffreDiffus",
 				"description": "import all file un folder",
 				"type": "AzureFunctionActivity",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "importOffreChantier",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 1,
@@ -34,14 +41,7 @@
 				"name": "importOffreChantier",
 				"description": "import all file un folder",
 				"type": "AzureFunctionActivity",
-				"dependsOn": [
-					{
-						"activity": "importOffrediffus",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 1,
@@ -51,7 +51,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"functionName": "AF_IMPORT_OFFRE_DIFFUS",
+					"functionName": "AF_IMPORT_OFFRE_CHANTIER",
 					"method": "POST",
 					"body": {
 						"containername": "data-input",
