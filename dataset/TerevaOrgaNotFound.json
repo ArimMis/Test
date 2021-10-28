@@ -1,0 +1,85 @@
+{
+	"name": "TerevaOrgaNotFound",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "Error_finding",
+				"container": "data-warehouse"
+			},
+			"columnDelimiter": ";",
+			"encodingName": "WINDOWS-1252",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Marque DESC",
+				"type": "String"
+			},
+			{
+				"name": "Marque Code",
+				"type": "String"
+			},
+			{
+				"name": "Sous Famille",
+				"type": "String"
+			},
+			{
+				"name": "Référence Article Fournisseur",
+				"type": "String"
+			},
+			{
+				"name": "Agence Code",
+				"type": "String"
+			},
+			{
+				"name": "Département ID",
+				"type": "String"
+			},
+			{
+				"name": "Quantité en UV BL",
+				"type": "String"
+			},
+			{
+				"name": "yearmonth",
+				"type": "String"
+			},
+			{
+				"name": "year",
+				"type": "String"
+			},
+			{
+				"name": "month",
+				"type": "String"
+			},
+			{
+				"name": "POSid",
+				"type": "String"
+			},
+			{
+				"name": "WholeSalerID",
+				"type": "String"
+			},
+			{
+				"name": "POSSAMidString",
+				"type": "String"
+			},
+			{
+				"name": "HubSAPid",
+				"type": "String"
+			},
+			{
+				"name": "BrandID",
+				"type": "String"
+			}
+		]
+	}
+}
