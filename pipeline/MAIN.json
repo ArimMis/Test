@@ -117,27 +117,6 @@
 				}
 			},
 			{
-				"name": "CALCUL OBJECTIF RH",
-				"description": "Main PL RH : \nPL LEVIER RH \nPREPARATION OBJECTIF RH\nAF OBJECTIF RH",
-				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "PL_MAIN_BASE_COMMERCIAL",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "PL_MAIN_RH",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true
-				}
-			},
-			{
 				"name": "SORTIE MARKETING",
 				"description": "Marketing",
 				"type": "ExecutePipeline",
@@ -223,6 +202,26 @@
 				"linkedServiceName": {
 					"referenceName": "data transformation azure function",
 					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "PL_SUIVIE_OFFRE",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PL_MAIN_BASE_COMMERCIAL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_SUIVIE_OFFRE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
 				}
 			}
 		],
