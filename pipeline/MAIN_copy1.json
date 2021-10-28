@@ -17,41 +17,6 @@
 				}
 			},
 			{
-				"name": "MAIN_REFERENTIEL",
-				"description": "PL_GET_ARTICLE_DESIGNATION\nPL_OFFRE\nPL_REFERENTIEL_ATC\nPL_REFERENTIEL_PRIX",
-				"type": "ExecutePipeline",
-				"dependsOn": [],
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "MAIN_REFERENTIEL",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true
-				}
-			},
-			{
-				"name": "MAIN_LOGISTIQUE",
-				"description": "NomenclatureProduit\nNomenclatureClient\nTDataSD",
-				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "MAIN_REFERENTIEL",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "MAIN_LOGISTIQUE",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true
-				}
-			},
-			{
 				"name": "MAIN_LOGISTIQUE1",
 				"description": "NomenclatureProduit\nNomenclatureClient\nTDataSD",
 				"type": "ExecutePipeline",
