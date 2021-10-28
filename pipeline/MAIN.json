@@ -117,27 +117,6 @@
 				}
 			},
 			{
-				"name": "SORTIE MARKETING",
-				"description": "Marketing",
-				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "PL_MAIN_BASE_COMMERCIAL",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "SORTIE MARKETING",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true
-				}
-			},
-			{
 				"name": "MAIN_LOGISTIQUE1",
 				"description": "NomenclatureProduit\nNomenclatureClient\nTDataSD",
 				"type": "ExecutePipeline",
