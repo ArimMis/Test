@@ -6,7 +6,14 @@
 				"name": "DSC_PREPARATION",
 				"description": "Input : \nDSCINPUT\norganisation\nventesDirectes\nOutput : \noutputNullQuantity\norgaNotFound\npreparedDSC\nDSCPieceDetache",
 				"type": "ExecuteDataFlow",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "importDataDSC",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "1.00:00:00",
 					"retry": 0,
@@ -25,6 +32,34 @@
 						"computeType": "General"
 					},
 					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "importDataDSC",
+				"description": "import all file un folder",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 1,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "AF_IMPORT_ECOUL_DSC ",
+					"method": "POST",
+					"body": {
+						"inputContainer": "data-input",
+						"inputFolderPath": "Ecoulement/DSC",
+						"outputContainer": "data-warehouse",
+						"outputpath": "Temp/DSC_ECOULEMENT.csv"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureFunctionPremium",
+					"type": "LinkedServiceReference"
 				}
 			}
 		],
