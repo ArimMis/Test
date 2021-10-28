@@ -1,0 +1,124 @@
+{
+	"name": "MAIN_copy1",
+	"properties": {
+		"activities": [
+			{
+				"name": "PL_MAIN_BASE_COMMERCIAL",
+				"description": "PL main for : \nPREPARATION_ECC_AVOIR\nDSCTEREVA2\nModel_PARTEDIS2\nVanMarkes\nModelVenteDirecte\nUNION_BASE_COMMERCIAL\nPOST_UNION_FINISH\nATC_PERFORMANCE",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_MAIN_BASE_COMMERCIALE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "MAIN_REFERENTIEL",
+				"description": "PL_GET_ARTICLE_DESIGNATION\nPL_OFFRE\nPL_REFERENTIEL_ATC\nPL_REFERENTIEL_PRIX",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "MAIN_REFERENTIEL",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "MAIN_LOGISTIQUE",
+				"description": "NomenclatureProduit\nNomenclatureClient\nTDataSD",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "MAIN_REFERENTIEL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "MAIN_LOGISTIQUE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "MAIN_LOGISTIQUE1",
+				"description": "NomenclatureProduit\nNomenclatureClient\nTDataSD",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PL_MAIN_BASE_COMMERCIAL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "MAIN_LOGISTIQUE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "CONTRAT DISTRIBUTION",
+				"description": "CALCUL SEUIL\nCALCUL REMUNERATION\nCONTRAT DISTRIBUTION",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PL_MAIN_BASE_COMMERCIAL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_CONTRAT_DISTRIBUTION",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PL_SUIVIE_OFFRE",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PL_MAIN_BASE_COMMERCIAL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_SUIVIE_OFFRE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "tutoriel"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-10-04T10:59:39Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
