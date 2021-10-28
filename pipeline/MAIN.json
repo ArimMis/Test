@@ -14,12 +14,6 @@
 						]
 					},
 					{
-						"activity": "MAIN_REFERENTIEL",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
 						"activity": "start",
 						"dependencyConditions": [
 							"Succeeded"
