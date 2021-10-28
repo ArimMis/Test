@@ -17,8 +17,7 @@
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
-			"columnDelimiter": ";",
-			"encodingName": "WINDOWS-1252",
+			"columnDelimiter": ",",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
