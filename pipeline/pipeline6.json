@@ -3,8 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "PREPARATION OBJECTIF",
-				"description": "Input : \nobjectif\nlevierPerformance\nOutput : \nPREPARATION_OBJECTIF_RH\nTEMP_LEVIER_PERFORMANCE",
+				"name": "CHANTIER",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -17,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "PREPARATION_OBJECTIF_RH",
+						"referenceName": "SUIVIE_OFFRE_CHANTIER",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -28,9 +27,6 @@
 				}
 			}
 		],
-		"folder": {
-			"name": "tutoriel"
-		},
 		"annotations": []
 	}
 }
