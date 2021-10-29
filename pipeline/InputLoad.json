@@ -168,13 +168,13 @@
 				"type": "AzureFunctionActivity",
 				"dependsOn": [
 					{
-						"activity": "importDataPartedis",
+						"activity": "importDataMabille",
 						"dependencyConditions": [
 							"Succeeded"
 						]
 					},
 					{
-						"activity": "importDataMabille",
+						"activity": "importDataPartedis",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -205,7 +205,7 @@
 					}
 				},
 				"linkedServiceName": {
-					"referenceName": "data transformation azure function",
+					"referenceName": "AzureFunctionPremium",
 					"type": "LinkedServiceReference"
 				}
 			}
