@@ -180,13 +180,17 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataflow": {
-								"referenceName": "SUIVIE_OFFRE_DIFFUS",
+								"referenceName": "DSC_PREPARATION",
 								"type": "DataFlowReference",
 								"parameters": {},
 								"datasetParameters": {
-									"stgOffre": {},
-									"baseCommerciale": {},
-									"sink1": {}
+									"DSCINPUT": {},
+									"organisation": {},
+									"ventesDirectes": {},
+									"DSCPieceDetache": {},
+									"outputNullQuantity": {},
+									"preparedDSC": {},
+									"orgaNotFound": {}
 								}
 							},
 							"staging": {},

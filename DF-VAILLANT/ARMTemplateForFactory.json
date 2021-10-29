@@ -4495,13 +4495,17 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataflow": {
-								"referenceName": "SUIVIE_OFFRE_DIFFUS",
+								"referenceName": "DSC_PREPARATION",
 								"type": "DataFlowReference",
 								"parameters": {},
 								"datasetParameters": {
-									"stgOffre": {},
-									"baseCommerciale": {},
-									"sink1": {}
+									"DSCINPUT": {},
+									"organisation": {},
+									"ventesDirectes": {},
+									"DSCPieceDetache": {},
+									"outputNullQuantity": {},
+									"preparedDSC": {},
+									"orgaNotFound": {}
 								}
 							},
 							"staging": {},
@@ -4520,7 +4524,7 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/SUIVIE_OFFRE_DIFFUS')]"
+				"[concat(variables('factoryId'), '/dataflows/DSC_PREPARATION')]"
 			]
 		},
 		{
