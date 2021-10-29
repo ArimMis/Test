@@ -206,6 +206,9 @@
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
 				},
+				"folder": {
+					"name": "tutoriel"
+				},
 				"annotations": []
 			},
 			"dependsOn": []
