@@ -121,7 +121,7 @@
 				"type": "String"
 			},
 			{
-				"name": "ATC Corrigé",
+				"name": "ATC Performance",
 				"type": "String"
 			},
 			{
@@ -338,6 +338,10 @@
 			},
 			{
 				"name": "yearmonth",
+				"type": "String"
+			},
+			{
+				"name": "ATC Corrigé",
 				"type": "String"
 			}
 		]
