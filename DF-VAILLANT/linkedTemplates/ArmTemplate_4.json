@@ -1123,7 +1123,7 @@
 						"folderPath": "Temp",
 						"container": "data-warehouse"
 					},
-					"columnDelimiter": ",",
+					"columnDelimiter": ";",
 					"escapeChar": "\\",
 					"firstRowAsHeader": true,
 					"quoteChar": "\""
@@ -1262,7 +1262,7 @@
 						"folderPath": "Error_finding",
 						"container": "data-warehouse"
 					},
-					"columnDelimiter": ",",
+					"columnDelimiter": ";",
 					"escapeChar": "\\",
 					"firstRowAsHeader": true,
 					"quoteChar": "\""
@@ -1292,7 +1292,7 @@
 						"folderPath": "Temp",
 						"container": "data-warehouse"
 					},
-					"columnDelimiter": ",",
+					"columnDelimiter": ";",
 					"escapeChar": "\\",
 					"firstRowAsHeader": true,
 					"quoteChar": "\""

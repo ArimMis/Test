@@ -69,7 +69,7 @@
 						"folderPath": "Temp",
 						"container": "data-warehouse"
 					},
-					"columnDelimiter": ",",
+					"columnDelimiter": ";",
 					"escapeChar": "\\",
 					"firstRowAsHeader": true,
 					"quoteChar": "\""
@@ -280,7 +280,7 @@
 						"folderPath": "Error_finding",
 						"container": "data-warehouse"
 					},
-					"columnDelimiter": ",",
+					"columnDelimiter": ";",
 					"escapeChar": "\\",
 					"firstRowAsHeader": true,
 					"quoteChar": "\""
@@ -310,7 +310,8 @@
 						"folderPath": "Temp",
 						"container": "data-warehouse"
 					},
-					"columnDelimiter": ",",
+					"columnDelimiter": ";",
+					"encodingName": "WINDOWS-1252",
 					"escapeChar": "\\",
 					"firstRowAsHeader": true,
 					"quoteChar": "\""
@@ -392,7 +393,8 @@
 						"folderPath": "Error_finding",
 						"container": "data-warehouse"
 					},
-					"columnDelimiter": ",",
+					"columnDelimiter": ";",
+					"encodingName": "WINDOWS-1252",
 					"escapeChar": "\\",
 					"quoteChar": "\""
 				},
