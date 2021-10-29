@@ -161,6 +161,53 @@
 					"referenceName": "data transformation azure function",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "importDataTereva",
+				"description": "import all file un folder",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [
+					{
+						"activity": "importDataPartedis",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "importDataMabille",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "importDataEHS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "AF_IMPORT_ECOUL_TEREVA",
+					"method": "POST",
+					"body": {
+						"inputcontainer": "data-input",
+						"folderpath": "Ecoulement/Téréva",
+						"outputcontainer": "data-warehouse",
+						"outputpath": "Temp/TEREVA_ECOULEMENT.csv"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "data transformation azure function",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"folder": {
