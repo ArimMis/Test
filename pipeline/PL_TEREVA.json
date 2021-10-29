@@ -4,7 +4,7 @@
 		"activities": [
 			{
 				"name": "PREPARATION",
-				"description": "Input : \necoulement\nTEREVA_ORGANISATION\nventesDirectes\nOutput : \nTEREVA_EC_PREPARED",
+				"description": "Input : \necoulement\nTEREVA_ORGANISATION\nventesDirectes\nOutput : \nTEREVA_EC_PREPARED\nTEREVA_qtenull\nTEREVA orga notfound",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
