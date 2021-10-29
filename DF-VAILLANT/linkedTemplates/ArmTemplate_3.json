@@ -13,6 +13,33 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/FOLDER_ECOULEMENT_CONFORT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "data_input",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT/VF CONFORT"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Feuil2",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "VF Confort",
+						"container": "ecoulement"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/FOLDER_ECOULEMENT_MABILE')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -2766,97 +2793,6 @@
 					},
 					{
 						"name": "Jour calendaire",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/InputFacturationDecrementer')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "BASE_COMMERCIAL"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "FacturationDecrementer",
-						"folderPath": "Temp",
-						"container": "data-warehouse"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "reference",
-						"type": "String"
-					},
-					{
-						"name": "HubSAPid",
-						"type": "String"
-					},
-					{
-						"name": "yearmonth",
-						"type": "String"
-					},
-					{
-						"name": "id_canal_final",
-						"type": "String"
-					},
-					{
-						"name": "marque_code",
-						"type": "String"
-					},
-					{
-						"name": "marque_name",
-						"type": "String"
-					},
-					{
-						"name": "POSSAMidString",
-						"type": "String"
-					},
-					{
-						"name": "Sum_qt_factur_e",
-						"type": "String"
-					},
-					{
-						"name": "Sum_ca_factur_",
-						"type": "String"
-					},
-					{
-						"name": "qt_plateforme_final",
-						"type": "String"
-					},
-					{
-						"name": "ca_plateforme_final",
-						"type": "String"
-					},
-					{
-						"name": "data_origin",
-						"type": "String"
-					},
-					{
-						"name": "marque_id",
-						"type": "String"
-					},
-					{
-						"name": "Sum_ca_ecoulement",
-						"type": "String"
-					},
-					{
-						"name": "Sum_qte_ecoulement",
 						"type": "String"
 					}
 				]

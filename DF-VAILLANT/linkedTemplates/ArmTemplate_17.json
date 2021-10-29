@@ -13,6 +13,258 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/pipeline3')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "UNION_ECOULEMENT",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "UNION_ECOULEMENT",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"vfconfortPrepared": {},
+									"mabillePrepared": {},
+									"orcabPrepared": {},
+									"tereva": {},
+									"DSC": {},
+									"maillard": {},
+									"Partedis": {},
+									"EHS": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "CLEANING_POST_UNION",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "UNION_ECOULEMENT",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "CLEANING_POST_UNION",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"unionEccoulement": {},
+									"articlehierarchi": {},
+									"unionsapehs": {},
+									"pricelisteReplicated": {},
+									"outputPreparationEcoulement": {},
+									"sink2": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT/test"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-23T13:36:09Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline5')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Data flow1",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "ATC_PERFORMANCE_ET_CLIENT_SAP",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"baseCommerciale": {},
+									"secteurFictif": {},
+									"ExtractionSAP": {},
+									"sink1": {},
+									"sink2": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "tutoriel"
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline6')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ATC_PERFORMANCE_ET_CLIENT_SAP_copy1",
+						"description": "Input : \nBASE_AVANT_TRAITEMENT_ATC\nsecteurFictif\nOutput : \nbaseCommercialOut",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "ATC_PERFORMANCE_ET_CLIENT_SAP",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"baseCommerciale": {},
+									"secteurFictif": {},
+									"ExtractionSAP": {},
+									"sink1": {},
+									"sink2": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline8')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "PREPARATION",
+						"description": "Input : \noffreDiffusInput\noffreChantierInput\nreferentielATCinput\nOutput : \noffreDiffusTemp\nStg_offre_diffus\noffreChantierTemp\nstagingChantier\noffreAtcTemp\n",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "PREPARATION",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"offreDiffusInput": {},
+									"offreChantierInput": {},
+									"referentielATCinput": {},
+									"stagingDiffus": {},
+									"stagingChantier": {},
+									"outTemp": {},
+									"sink1": {},
+									"sink2": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "tutoriel"
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/MAIN_PREPARATION')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -291,7 +543,6 @@
 					},
 					{
 						"name": "InputLoad",
-						"description": "AF : importDataMabille\n      importDataTereva\n      DATA IMPORTpartedis\n      VFimport\n      import orcab\n",
 						"type": "ExecutePipeline",
 						"dependsOn": [],
 						"userProperties": [],
@@ -393,6 +644,105 @@
 				},
 				"annotations": [],
 				"lastPublishTime": "2021-09-13T07:58:57Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MAIN_copy1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "PL_MAIN_BASE_COMMERCIAL",
+						"description": "PL main for : \nPREPARATION_ECC_AVOIR\nDSCTEREVA2\nModel_PARTEDIS2\nVanMarkes\nModelVenteDirecte\nUNION_BASE_COMMERCIAL\nPOST_UNION_FINISH\nATC_PERFORMANCE",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "PL_MAIN_BASE_COMMERCIALE",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "MAIN_LOGISTIQUE1",
+						"description": "NomenclatureProduit\nNomenclatureClient\nTDataSD",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "PL_MAIN_BASE_COMMERCIAL",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "MAIN_LOGISTIQUE",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CONTRAT DISTRIBUTION",
+						"description": "CALCUL SEUIL\nCALCUL REMUNERATION\nCONTRAT DISTRIBUTION",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "PL_MAIN_BASE_COMMERCIAL",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "PL_CONTRAT_DISTRIBUTION",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "PL_SUIVIE_OFFRE",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "PL_MAIN_BASE_COMMERCIAL",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "PL_SUIVIE_OFFRE",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "tutoriel"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-10-04T10:59:39Z"
 			},
 			"dependsOn": []
 		},
@@ -509,13 +859,13 @@
 								]
 							},
 							{
-								"activity": "MAIN_REFERENTIEL",
+								"activity": "start",
 								"dependencyConditions": [
 									"Succeeded"
 								]
 							},
 							{
-								"activity": "start",
+								"activity": "MAIN_REFERENTIEL",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -712,6 +1062,27 @@
 						"typeProperties": {
 							"pipeline": {
 								"referenceName": "PL_SUIVIE_OFFRE",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "SORTIE MARKETING",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "PL_MAIN_BASE_COMMERCIAL",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "SORTIE MARKETING",
 								"type": "PipelineReference"
 							},
 							"waitOnCompletion": true,

@@ -323,42 +323,6 @@
 						}
 					},
 					{
-						"name": "importDataTereva",
-						"description": "import all file un folder",
-						"type": "AzureFunctionActivity",
-						"dependsOn": [
-							{
-								"activity": "importDataMabille",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"functionName": "AF_IMPORT_ECOUL_TEREVA",
-							"method": "POST",
-							"headers": {},
-							"body": {
-								"inputcontainer": "data-input",
-								"folderpath": "Ecoulement/Téréva",
-								"outputcontainer": "data-warehouse",
-								"outputpath": "Temp/TEREVA_ECOULEMENT.csv"
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "data transformation azure function",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
 						"name": "importDataPartedis",
 						"type": "AzureFunctionActivity",
 						"dependsOn": [
@@ -485,6 +449,54 @@
 							"referenceName": "data transformation azure function",
 							"type": "LinkedServiceReference"
 						}
+					},
+					{
+						"name": "importDataTereva",
+						"description": "import all file un folder",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "importDataMabille",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "importDataPartedis",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "importDataEHS",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "AF_IMPORT_ECOUL_TEREVA",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"inputcontainer": "data-input",
+								"folderpath": "Ecoulement/Téréva",
+								"outputcontainer": "data-warehouse",
+								"outputpath": "Temp/TEREVA_ECOULEMENT.csv"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureFunctionPremium",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
 				"policy": {
@@ -497,7 +509,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/data transformation azure function')]"
+				"[concat(variables('factoryId'), '/linkedServices/data transformation azure function')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureFunctionPremium')]"
 			]
 		},
 		{
@@ -712,6 +725,55 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/pipeline7')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "importDataTereva",
+						"description": "import all file un folder",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "AF_IMPORT_ECOUL_TEREVA",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"inputcontainer": "data-input",
+								"folderpath": "Ecoulement/Téréva",
+								"outputcontainer": "data-warehouse",
+								"outputpath": "Temp/TEREVA_ECOULEMENT.xlsx"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "data transformation azure function",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "tutoriel"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/data transformation azure function')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/testLongAF')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -767,10 +829,17 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "importOffrediffus",
+						"name": "importOffreDiffus",
 						"description": "import all file un folder",
 						"type": "AzureFunctionActivity",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "importOffreChantier",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 1,
@@ -799,14 +868,7 @@
 						"name": "importOffreChantier",
 						"description": "import all file un folder",
 						"type": "AzureFunctionActivity",
-						"dependsOn": [
-							{
-								"activity": "importOffrediffus",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
+						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 1,
@@ -816,7 +878,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"functionName": "AF_IMPORT_OFFRE_DIFFUS",
+							"functionName": "AF_IMPORT_OFFRE_CHANTIER",
 							"method": "POST",
 							"headers": {},
 							"body": {
@@ -867,12 +929,15 @@
 						"container": "data-warehouse"
 					},
 					"columnDelimiter": ";",
-					"encodingName": "WINDOWS-1252",
 					"escapeChar": "\\",
 					"firstRowAsHeader": true,
 					"quoteChar": "\""
 				},
 				"schema": [
+					{
+						"name": "Prop_0",
+						"type": "String"
+					},
 					{
 						"name": "DateOffre",
 						"type": "String"
@@ -1024,10 +1089,6 @@
 					{
 						"name": "OffreSupprimee",
 						"type": "String"
-					},
-					{
-						"name": "canal",
-						"type": "String"
 					}
 				]
 			},
@@ -1057,12 +1118,15 @@
 						"container": "data-warehouse"
 					},
 					"columnDelimiter": ";",
-					"encodingName": "WINDOWS-1252",
 					"escapeChar": "\\",
 					"firstRowAsHeader": true,
 					"quoteChar": "\""
 				},
 				"schema": [
+					{
+						"name": "Prop_0",
+						"type": "String"
+					},
 					{
 						"name": "DateOffre",
 						"type": "String"
@@ -1253,85 +1317,6 @@
 					},
 					{
 						"name": "OffreSupprimee",
-						"type": "String"
-					},
-					{
-						"name": "canal",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/VAILLANT_ARCHITECTURE')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ARTICLE_HIERARCHIE')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "REFERENTIEL ARTICLE"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "BI_ARTICLES ",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "Articles_avec_hiérarchie_Articles_groupe_et_locale.xlsx",
-						"folderPath": "ReferentielArticle",
-						"container": "data-input"
-					},
-					"firstRowAsHeader": true
-				},
-				"schema": [
-					{
-						"name": "OrgCm",
-						"type": "String"
-					},
-					{
-						"name": "CDis",
-						"type": "String"
-					},
-					{
-						"name": "Article",
-						"type": "String"
-					},
-					{
-						"name": "Description",
-						"type": "String"
-					},
-					{
-						"name": "Hiérarch.groupe",
-						"type": "String"
-					},
-					{
-						"name": "Hiérarch.locale",
-						"type": "String"
-					},
-					{
-						"name": "Predecessor",
-						"type": "String"
-					},
-					{
-						"name": "Successor",
-						"type": "String"
-					},
-					{
-						"name": "St",
-						"type": "String"
-					},
-					{
-						"name": "Désignation Statut",
-						"type": "String"
-					},
-					{
-						"name": "Déb. val.",
 						"type": "String"
 					}
 				]

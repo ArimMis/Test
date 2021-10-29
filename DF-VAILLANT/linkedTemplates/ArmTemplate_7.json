@@ -13,6 +13,109 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/SortieNomenclatureClient')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "SortieLogistique"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "Logistique",
+						"container": "data-mart"
+					},
+					"columnDelimiter": ";",
+					"encodingName": "WINDOWS-1252",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "yearmonth",
+						"type": "String"
+					},
+					{
+						"name": "year",
+						"type": "String"
+					},
+					{
+						"name": "month",
+						"type": "String"
+					},
+					{
+						"name": "qte_ecoulement",
+						"type": "String"
+					},
+					{
+						"name": "ca_ecoulement",
+						"type": "String"
+					},
+					{
+						"name": "POSSAMidString",
+						"type": "String"
+					},
+					{
+						"name": "HubSAPid",
+						"type": "String"
+					},
+					{
+						"name": "reference",
+						"type": "String"
+					},
+					{
+						"name": "distributeur",
+						"type": "String"
+					},
+					{
+						"name": "agence_code",
+						"type": "String"
+					},
+					{
+						"name": "marque",
+						"type": "String"
+					},
+					{
+						"name": "Code postal",
+						"type": "String"
+					},
+					{
+						"name": "marque_name",
+						"type": "String"
+					},
+					{
+						"name": "toreplicate",
+						"type": "String"
+					},
+					{
+						"name": "dd",
+						"type": "String"
+					},
+					{
+						"name": "rcount",
+						"type": "String"
+					},
+					{
+						"name": "indexcols2",
+						"type": "String"
+					},
+					{
+						"name": "qte_ecc",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SortieTDataSD')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -950,26 +1053,31 @@
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"description": "import ecoulement for tereva",
 				"linkedServiceName": {
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
 				},
-				"folder": {
-					"name": "PREPARATION ECOULEMENT/TEREVA"
-				},
 				"annotations": [],
-				"type": "Excel",
+				"type": "DelimitedText",
 				"typeProperties": {
-					"sheetName": "Sheet1",
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "TEREVA_ECOULEMENT.xlsx",
+						"fileName": "TEREVA_ECOULEMENT.csv",
 						"folderPath": "Temp",
 						"container": "data-warehouse"
 					},
-					"firstRowAsHeader": true
+					"columnDelimiter": ";",
+					"encodingName": "WINDOWS-1252",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
 				},
 				"schema": [
+					{
+						"name": "Prop_0",
+						"type": "String"
+					},
 					{
 						"name": "societe",
 						"type": "String"
@@ -1518,6 +1626,353 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/TEST')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "SUIVI OFFRE"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "base commerciale.csv",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ";",
+					"encodingName": "WINDOWS-1252",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "affecte/non_affecte",
+						"type": "String"
+					},
+					{
+						"name": "plateforme/vente directe",
+						"type": "String"
+					},
+					{
+						"name": "origine de la ligne",
+						"type": "String"
+					},
+					{
+						"name": "year",
+						"type": "String"
+					},
+					{
+						"name": "month",
+						"type": "String"
+					},
+					{
+						"name": "Code client livré",
+						"type": "String"
+					},
+					{
+						"name": "code client plateforme livree",
+						"type": "String"
+					},
+					{
+						"name": "code produit",
+						"type": "String"
+					},
+					{
+						"name": "quantite",
+						"type": "String"
+					},
+					{
+						"name": "ca",
+						"type": "String"
+					},
+					{
+						"name": "Code postal du client livré",
+						"type": "String"
+					},
+					{
+						"name": "marque",
+						"type": "String"
+					},
+					{
+						"name": "ID marque",
+						"type": "String"
+					},
+					{
+						"name": "ID canal de distribution",
+						"type": "String"
+					},
+					{
+						"name": "Nom du canal",
+						"type": "String"
+					},
+					{
+						"name": "Diffus/Chantier",
+						"type": "String"
+					},
+					{
+						"name": "document_vente (vente directe)",
+						"type": "String"
+					},
+					{
+						"name": "Agence commerciale corrigé (vente directe)",
+						"type": "String"
+					},
+					{
+						"name": "Donneur d'ordre (vente directe)",
+						"type": "String"
+					},
+					{
+						"name": "Facture (vente directe)",
+						"type": "String"
+					},
+					{
+						"name": "Type poste Facture (vente directe)",
+						"type": "String"
+					},
+					{
+						"name": "Numéro offre",
+						"type": "String"
+					},
+					{
+						"name": "ATC Corrigé (vente directe)",
+						"type": "String"
+					},
+					{
+						"name": "ATC offre",
+						"type": "String"
+					},
+					{
+						"name": "ATC livré",
+						"type": "String"
+					},
+					{
+						"name": "ATC Performance",
+						"type": "String"
+					},
+					{
+						"name": "NomATC",
+						"type": "String"
+					},
+					{
+						"name": "Matricule",
+						"type": "String"
+					},
+					{
+						"name": "Motif commande (vente directe)",
+						"type": "String"
+					},
+					{
+						"name": "Type de facture (vente directe)",
+						"type": "String"
+					},
+					{
+						"name": "N1groupe",
+						"type": "String"
+					},
+					{
+						"name": "N2groupe",
+						"type": "String"
+					},
+					{
+						"name": "N3groupe",
+						"type": "String"
+					},
+					{
+						"name": "N4groupe",
+						"type": "String"
+					},
+					{
+						"name": "N5groupe",
+						"type": "String"
+					},
+					{
+						"name": "N6groupe",
+						"type": "String"
+					},
+					{
+						"name": "N7groupe",
+						"type": "String"
+					},
+					{
+						"name": "N1groupedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N2groupedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N3groupedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N4groupedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N5groupedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N6groupedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N7groupedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N1localedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N2localedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N3localedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N4localedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N5localedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N6localedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N7localedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N1locale",
+						"type": "String"
+					},
+					{
+						"name": "N2locale",
+						"type": "String"
+					},
+					{
+						"name": "N3locale",
+						"type": "String"
+					},
+					{
+						"name": "N4locale",
+						"type": "String"
+					},
+					{
+						"name": "N5locale",
+						"type": "String"
+					},
+					{
+						"name": "N6locale",
+						"type": "String"
+					},
+					{
+						"name": "N7locale",
+						"type": "String"
+					},
+					{
+						"name": "Hiérarchgroupe",
+						"type": "String"
+					},
+					{
+						"name": "Hiérarchlocale",
+						"type": "String"
+					},
+					{
+						"name": "Numéro du compte",
+						"type": "String"
+					},
+					{
+						"name": "EPS_Nom du compte",
+						"type": "String"
+					},
+					{
+						"name": "EPS_Groupe cible/Typologie générale",
+						"type": "String"
+					},
+					{
+						"name": "EPS_Sous groupe cible/Typologie détaillée",
+						"type": "String"
+					},
+					{
+						"name": "EPS_Compte principal: Numéro du compte",
+						"type": "String"
+					},
+					{
+						"name": "EPS_Compte principal: Nom du compte",
+						"type": "String"
+					},
+					{
+						"name": "Client",
+						"type": "String"
+					},
+					{
+						"name": "Numéro client indirect",
+						"type": "String"
+					},
+					{
+						"name": "CODE_CMI",
+						"type": "String"
+					},
+					{
+						"name": "NOM_CMI",
+						"type": "String"
+					},
+					{
+						"name": "Nom du compte",
+						"type": "String"
+					},
+					{
+						"name": "Client Indirect_ Groupe cible/Typologie générale",
+						"type": "String"
+					},
+					{
+						"name": "Client Indirect_ Sous groupe cible/Typologie détaillée",
+						"type": "String"
+					},
+					{
+						"name": "Client Indirect_  Compte principal: Numéro du compte",
+						"type": "String"
+					},
+					{
+						"name": "Client Indirect_  Compte principal: Nom du compte",
+						"type": "String"
+					},
+					{
+						"name": "Client Direct - Hiérarchie N1 SAP ",
+						"type": "String"
+					},
+					{
+						"name": "Client Direct - Hiérarchie N2 SAP ",
+						"type": "String"
+					},
+					{
+						"name": "Client Indirect - Hiérarchie N1 SAP",
+						"type": "String"
+					},
+					{
+						"name": "Client Indirect - Hiérarchie N2 SAP",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/TUTO_INPUT')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1807,151 +2262,6 @@
 					"quoteChar": "\""
 				},
 				"schema": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/TYPOLOGIE_EPS')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "SORTIE MARKETING"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "report1623684783907",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "Extraction comptes EPS_Typologie_Sous Typo_Compte Principal.xlsx",
-						"folderPath": "Client",
-						"container": "data-input"
-					},
-					"firstRowAsHeader": true
-				},
-				"schema": [
-					{
-						"name": "Numéro du compte",
-						"type": "String"
-					},
-					{
-						"name": "Nom du compte",
-						"type": "String"
-					},
-					{
-						"name": "Groupe cible/Typologie générale",
-						"type": "String"
-					},
-					{
-						"name": "Sous groupe cible/Typologie détaillée",
-						"type": "String"
-					},
-					{
-						"name": "Compte principal: Numéro du compte",
-						"type": "String"
-					},
-					{
-						"name": "Compte principal: Nom du compte",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/TerevaOrgaNotFound')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Error finding organisation not found",
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "PREPARATION ECOULEMENT/TEREVA"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "Error_finding",
-						"container": "data-warehouse"
-					},
-					"columnDelimiter": ";",
-					"encodingName": "WINDOWS-1252",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "Marque DESC",
-						"type": "String"
-					},
-					{
-						"name": "Marque Code",
-						"type": "String"
-					},
-					{
-						"name": "Sous Famille",
-						"type": "String"
-					},
-					{
-						"name": "Référence Article Fournisseur",
-						"type": "String"
-					},
-					{
-						"name": "Agence Code",
-						"type": "String"
-					},
-					{
-						"name": "Département ID",
-						"type": "String"
-					},
-					{
-						"name": "Quantité en UV BL",
-						"type": "String"
-					},
-					{
-						"name": "yearmonth",
-						"type": "String"
-					},
-					{
-						"name": "year",
-						"type": "String"
-					},
-					{
-						"name": "month",
-						"type": "String"
-					},
-					{
-						"name": "POSid",
-						"type": "String"
-					},
-					{
-						"name": "WholeSalerID",
-						"type": "String"
-					},
-					{
-						"name": "POSSAMidString",
-						"type": "String"
-					},
-					{
-						"name": "HubSAPid",
-						"type": "String"
-					},
-					{
-						"name": "BrandID",
-						"type": "String"
-					}
-				]
 			},
 			"dependsOn": []
 		}
