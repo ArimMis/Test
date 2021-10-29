@@ -3,12 +3,12 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "ATC_PERFORMANCE_ET_CLIENT_SAP_copy1",
-				"description": "Input : \nBASE_AVANT_TRAITEMENT_ATC\nsecteurFictif\nOutput : \nbaseCommercialOut",
-				"type": "ExecuteDataFlow",
+				"name": "OBJECTIF RH",
+				"description": "Objectif RH ",
+				"type": "AzureFunctionActivity",
 				"dependsOn": [],
 				"policy": {
-					"timeout": "1.00:00:00",
+					"timeout": "7.00:00:00",
 					"retry": 0,
 					"retryIntervalInSeconds": 30,
 					"secureOutput": false,
@@ -16,15 +16,21 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"dataflow": {
-						"referenceName": "ATC_PERFORMANCE_ET_CLIENT_SAP",
-						"type": "DataFlowReference"
-					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
+					"functionName": "AF_OBJECTIF_RH",
+					"method": "POST",
+					"body": {
+						"objectif_container": "data-warehouse",
+						"objectif_path": "Temp/OBJECTIF_RH_PREPARED.xlsx",
+						"levier_container": "data-mart",
+						"levier_path": "RH/LEVIER_RH.xlsx",
+						"output_container": "data-mart",
+						"output_path": "RH/OBJECTIFS.xlsx",
+						"yearToCalculate": "2020"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureFunctionPremium",
+					"type": "LinkedServiceReference"
 				}
 			}
 		],
