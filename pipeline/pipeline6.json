@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "SUIVIE_OFFRE_DIFFUS",
+						"referenceName": "DSC_PREPARATION",
 						"type": "DataFlowReference"
 					},
 					"compute": {
