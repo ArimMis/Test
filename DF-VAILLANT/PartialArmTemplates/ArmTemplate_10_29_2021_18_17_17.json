@@ -1,0 +1,466 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "DF-VAILLANT"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_LEVIER_RH')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "LEVIER RH",
+						"description": "Input : \ndataCommerciale\nPLATEFORMES\nlevierPerformance\nOutput : \nTEMP_LEVIER_RH\nTEMP_LEVIER_PERFORMANCE\n",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "LEVIER_RH",
+								"type": "DataFlowReference"
+							},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "AF CALCUL LEVIER RH",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "LEVIER RH",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "AF_CALCUL_LEVIER_RH",
+							"method": "POST",
+							"body": {
+								"levierContainer": "data-warehouse",
+								"levierRHpath": "Temp/TEMP_LEVIERS_RH.csv",
+								"levierPerformancePath": "Temp/TEMP_LEVIER_PERFORMANCE.csv",
+								"atc_container": "data-input",
+								"atc_path": "ATC/Copie de referentiel ATC 2021 2020.xlsx",
+								"output_container": "data-mart",
+								"output_path": "RH/LEVIER_RH.xlsx"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureFunctionPremium",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"folder": {
+					"name": "RH"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-10-04T08:55:52Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_MAIN_RH')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "LEVIER RH",
+						"description": "Input : \ndataCommerciale\nPLATEFORMES\nlevierPerformance\nOutput : \nTEMP_LEVIER_RH\nTEMP_LEVIER_PERFORMANCE\n",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "PL_LEVIER_RH",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true
+						}
+					},
+					{
+						"name": "PREPARATION OBJECTIF RH",
+						"description": "Input : \nobjectif\nlevierPerformance\nOutput : \nPREPARATION_OBJECTIF_RH\nTEMP_LEVIER_PERFORMANCE",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "LEVIER RH",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "PL_OBJECTIF_RH",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true
+						}
+					},
+					{
+						"name": "OBJECTIF RH",
+						"description": "Objectif RH ",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "PREPARATION OBJECTIF RH",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "AF_OBJECTIF_RH",
+							"method": "POST",
+							"body": {
+								"objectif_container": "data-warehouse",
+								"objectif_path": "Temp/OBJECTIF_RH_PREPARED.xlsx",
+								"levier_container": "data-mart",
+								"levier_path": "RH/LEVIER_RH.xlsx",
+								"output_container": "data-mart",
+								"output_path": "RH/OBJECTIFS.xlsx",
+								"yearToCalculate": "2020"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureFunctionPremium",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"folder": {
+					"name": "RH"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-10-04T08:58:46Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PL_LEVIER_RH')]",
+				"[concat(variables('factoryId'), '/pipelines/PL_OBJECTIF_RH')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_OBJECTIF_RH')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "PREPARATION OBJECTIF",
+						"description": "Input : \nobjectif\nlevierPerformance\nOutput : \nPREPARATION_OBJECTIF_RH\nTEMP_LEVIER_PERFORMANCE",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "PREPARATION_OBJECTIF_RH",
+								"type": "DataFlowReference"
+							},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "AF PREPARATION OBJECTIF",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "PREPARATION OBJECTIF",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "AF_PREPARATION_OBJECTIF_RH",
+							"method": "POST",
+							"body": {
+								"data1_container": "data-warehouse",
+								"data1_path": "Temp/PREPARATION_OBJECTIF_RH.csv",
+								"data2_container": "data-warehouse",
+								"data2_path": "Temp/TEMP_LEVIER_PERFORMANCE.csv",
+								"atc_container": "data-input",
+								"atc_path": "ATC/Copie de referentiel ATC 2021 2020.xlsx",
+								"output_container": "data-warehouse",
+								"output_path": "Temp/OBJECTIF_RH_PREPARED.xlsx"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureFunctionPremium",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"folder": {
+					"name": "RH"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-10-04T08:55:52Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline6')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DIFFUS",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "SUIVIE_OFFRE_DIFFUS",
+								"type": "DataFlowReference"
+							},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DSC_ORGANISATION_NOTFOUND')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT/DSC"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "Error_finding",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ";",
+					"encodingName": "WINDOWS-1252",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DSC_PREPARATION')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "PREPARATION ECOULEMENT"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "DSC_input",
+								"type": "DatasetReference"
+							},
+							"name": "DSCINPUT"
+						},
+						{
+							"dataset": {
+								"referenceName": "dsc_orga",
+								"type": "DatasetReference"
+							},
+							"name": "organisation"
+						},
+						{
+							"dataset": {
+								"referenceName": "VENTES_DIRECTES_PREPARED",
+								"type": "DatasetReference"
+							},
+							"name": "ventesDirectes"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DSC_PIECE_DETACHEE",
+								"type": "DatasetReference"
+							},
+							"name": "DSCPieceDetache"
+						},
+						{
+							"dataset": {
+								"referenceName": "DSC_QTE_NULL",
+								"type": "DatasetReference"
+							},
+							"name": "outputNullQuantity"
+						},
+						{
+							"dataset": {
+								"referenceName": "DSC_ECOUL_PREPARED",
+								"type": "DatasetReference"
+							},
+							"name": "preparedDSC"
+						},
+						{
+							"dataset": {
+								"referenceName": "DSC_ORGANISATION_NOTFOUND",
+								"type": "DatasetReference"
+							},
+							"name": "orgaNotFound"
+						}
+					],
+					"transformations": [
+						{
+							"name": "KeepImportantColumn"
+						},
+						{
+							"name": "notNullQuantity"
+						},
+						{
+							"name": "columnFormat",
+							"description": "Autogenerated by data preview actions"
+						},
+						{
+							"name": "pieceDetache"
+						},
+						{
+							"name": "nullQuantity"
+						},
+						{
+							"name": "notPieceDetache"
+						},
+						{
+							"name": "agenceCodeNotNull"
+						},
+						{
+							"name": "posidNotNull"
+						},
+						{
+							"name": "innerJoinWithOrga"
+						},
+						{
+							"name": "fullLeftJoin"
+						},
+						{
+							"name": "leftOuter"
+						},
+						{
+							"name": "RenameColumn"
+						},
+						{
+							"name": "InnerVentesDirecte"
+						},
+						{
+							"name": "fullLeftVentesDirectes"
+						},
+						{
+							"name": "removeQuantityVenteDirecte"
+						},
+						{
+							"name": "Select1"
+						},
+						{
+							"name": "outerLeft"
+						},
+						{
+							"name": "Select2"
+						},
+						{
+							"name": "uniformisation"
+						},
+						{
+							"name": "Addcolumn"
+						},
+						{
+							"name": "Aggregate1"
+						},
+						{
+							"name": "Union1"
+						}
+					],
+					"script": "source(output(\n\t\tProp_0 as string,\n\t\t{Région Statistique} as string,\n\t\tEnseigne as string,\n\t\t{Marque DESC} as string,\n\t\t{Marque Code} as string,\n\t\t{Sous Famille} as string,\n\t\t{Référence Article Fournisseur} as string,\n\t\t{Article National DESC} as string,\n\t\t{Article National Code} as string,\n\t\t{Agence Code} as integer,\n\t\t{Agence DESC} as string,\n\t\t{Département DESC} as string,\n\t\t{Département ID} as string,\n\t\tSecteur as string,\n\t\t{Quantité en UV BL} as string,\n\t\t{Année Précédente (Quantité en UV BL)} as string,\n\t\t{Cumul Exercice (Quantité en UV BL)} as string,\n\t\t{Cumul Exercice A-1 (Quantité en UV BL)} as string,\n\t\t{MOIS CA PRR N} as string,\n\t\t{MOIS CA PRR N-1} as string,\n\t\t{CA PRR au cumul} as string,\n\t\t{CA PRR au cumul N-1} as string,\n\t\tyearmonth as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> DSCINPUT\nsource(output(\n\t\tWholeSalerID as string,\n\t\tWholeSalerShortName as string,\n\t\tUnitID as string,\n\t\tPOSid as integer,\n\t\tPOSdescription as string,\n\t\tCounty as string,\n\t\tPOSSAMid as string,\n\t\tPOSSAMidString as string,\n\t\tSupplierID as string,\n\t\tBrandID as string,\n\t\tWholeSalerHubID as string,\n\t\tHubName as string,\n\t\tHubSAPid as string,\n\t\tSectorID as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> organisation\nsource(output(\n\t\tyearmonth as string,\n\t\tArticle as string,\n\t\t{Code client} as string,\n\t\t{Qt� vente directe} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> ventesDirectes\nDSCINPUT select(mapColumn(\n\t\t{Marque DESC},\n\t\t{Marque Code},\n\t\t{Sous Famille},\n\t\t{Référence Article Fournisseur},\n\t\t{Agence Code},\n\t\t{Département ID},\n\t\t{Quantité en UV BL},\n\t\tyearmonth\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> KeepImportantColumn\ncolumnFormat filter({Quantité en UV BL}!=0) ~> notNullQuantity\nKeepImportantColumn derive({Quantité en UV BL} = toDouble({Quantité en UV BL}),\n\t\t{Marque Code} = toDouble({Marque Code}),\n\t\tyear = substring(yearmonth, 1, 4),\n\t\tmonth = substring(yearmonth, 5, 2)) ~> columnFormat\nnotNullQuantity filter(locate(\"Pièces détachées pour chauffage\", {Sous Famille})>0) ~> pieceDetache\ncolumnFormat filter({Quantité en UV BL}==0) ~> nullQuantity\nnotNullQuantity filter(locate(\"Pièces détachées pour chauffage\", {Sous Famille})==0) ~> notPieceDetache\nnotPieceDetache filter(!isNull({Agence Code})) ~> agenceCodeNotNull\nAggregate1 filter(!isNull(POSid)) ~> posidNotNull\nagenceCodeNotNull, posidNotNull join(toFloat({Agence Code}) == toFloat(POSid),\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> innerJoinWithOrga\nagenceCodeNotNull, posidNotNull join({Agence Code} == POSid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> fullLeftJoin\nfullLeftJoin filter(!isNull(POSid)) ~> leftOuter\nventesDirectes select(mapColumn(\n\t\tyearmonth_right = yearmonth,\n\t\tArticle_right = Article,\n\t\t{Code client_right} = {Code client},\n\t\t{Qté vente directe} = {Qt� vente directe}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> RenameColumn\ninnerJoinWithOrga, RenameColumn join(yearmonth == yearmonth_right\n\t&& {Référence Article Fournisseur} == Article_right\n\t&& POSSAMidString == {Code client_right},\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> InnerVentesDirecte\ninnerJoinWithOrga, RenameColumn join(yearmonth == yearmonth_right\n\t&& {Référence Article Fournisseur} == Article_right\n\t&& POSSAMidString == {Code client_right},\n\tjoinType:'left',\n\tbroadcast: 'auto')~> fullLeftVentesDirectes\nInnerVentesDirecte derive({Quantité en UV BL} = {Quantité en UV BL}-toDouble({Qté vente directe})) ~> removeQuantityVenteDirecte\nremoveQuantityVenteDirecte select(mapColumn(\n\t\t{Marque DESC},\n\t\t{Marque Code},\n\t\t{Sous Famille},\n\t\t{Référence Article Fournisseur},\n\t\t{Agence Code},\n\t\t{Département ID},\n\t\t{Quantité en UV BL},\n\t\tyearmonth,\n\t\tWholeSalerID,\n\t\tPOSid,\n\t\tPOSSAMidString,\n\t\tHubSAPid,\n\t\tBrandID,\n\t\tyear,\n\t\tmonth\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nfullLeftVentesDirectes filter(isNull(yearmonth_right) || isNull(Article_right) || isNull({Code client_right})) ~> outerLeft\nouterLeft select(mapColumn(\n\t\t{Marque DESC},\n\t\t{Marque Code},\n\t\t{Sous Famille},\n\t\t{Référence Article Fournisseur},\n\t\t{Agence Code},\n\t\t{Département ID},\n\t\t{Quantité en UV BL},\n\t\tyearmonth,\n\t\tyear,\n\t\tmonth,\n\t\tWholeSalerID,\n\t\tPOSid,\n\t\tPOSSAMidString,\n\t\tHubSAPid\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select2\nUnion1 select(mapColumn(\n\t\tmarque_file = {Marque DESC},\n\t\tsous_famille = {Sous Famille},\n\t\treference = {Référence Article Fournisseur},\n\t\tagence_code = {Agence Code},\n\t\tdepartement_id = {Département ID},\n\t\tqte_ecoulement = {Quantité en UV BL},\n\t\tyearmonth,\n\t\tPOSSAMidString,\n\t\tmarque_id = BrandID,\n\t\tHubSAPid,\n\t\tyearmonth,\n\t\tyear,\n\t\tmonth,\n\t\tdistributeur\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> uniformisation\nSelect1 derive(departement_id = toDouble(''),\n\t\tprix_unitaire_std = toDouble(''),\n\t\tdistributeur = \"DSC\") ~> Addcolumn\norganisation aggregate(groupBy(POSid),\n\tWholeSalerID = max(WholeSalerID),\n\t\tPOSSAMidString = first(POSSAMidString),\n\t\tHubSAPid = first(HubSAPid),\n\t\tBrandID = first(BrandID)) ~> Aggregate1\nAddcolumn, Select2 union(byName: true)~> Union1\npieceDetache sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['DSC_PIECE_DETACHEE.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> DSCPieceDetache\nnullQuantity sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['DSC_QTE_NULL.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> outputNullQuantity\nuniformisation sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tColumn_1 as string,\n\t\tColumn_2 as string,\n\t\tColumn_3 as string,\n\t\tColumn_4 as string,\n\t\tColumn_5 as string,\n\t\tColumn_6 as string,\n\t\tColumn_7 as string,\n\t\tColumn_8 as string,\n\t\tColumn_9 as string,\n\t\tColumn_10 as string,\n\t\tColumn_11 as string,\n\t\tColumn_12 as string,\n\t\tColumn_13 as string,\n\t\tColumn_14 as string,\n\t\tColumn_15 as string,\n\t\tColumn_16 as string,\n\t\tColumn_17 as string,\n\t\tColumn_18 as string,\n\t\tColumn_19 as string,\n\t\tColumn_20 as string,\n\t\tColumn_21 as string,\n\t\tColumn_22 as string\n\t),\n\tpartitionFileNames:['DSC_ECOUL_PREPARED.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> preparedDSC\nleftOuter sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['DSC_ORGANISATION_NOTFOUND.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> orgaNotFound"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DSC_ORGANISATION_NOTFOUND')]"
+			]
+		}
+	]
+}

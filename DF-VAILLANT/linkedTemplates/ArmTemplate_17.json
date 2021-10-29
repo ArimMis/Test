@@ -167,8 +167,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "ATC_PERFORMANCE_ET_CLIENT_SAP_copy1",
-						"description": "Input : \nBASE_AVANT_TRAITEMENT_ATC\nsecteurFictif\nOutput : \nbaseCommercialOut",
+						"name": "DIFFUS",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -181,15 +180,13 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataflow": {
-								"referenceName": "ATC_PERFORMANCE_ET_CLIENT_SAP",
+								"referenceName": "SUIVIE_OFFRE_DIFFUS",
 								"type": "DataFlowReference",
 								"parameters": {},
 								"datasetParameters": {
+									"stgOffre": {},
 									"baseCommerciale": {},
-									"secteurFictif": {},
-									"ExtractionSAP": {},
-									"sink1": {},
-									"sink2": {}
+									"sink1": {}
 								}
 							},
 							"staging": {},
@@ -824,7 +821,7 @@
 							}
 						},
 						"linkedServiceName": {
-							"referenceName": "data transformation azure function",
+							"referenceName": "AzureFunctionPremium",
 							"type": "LinkedServiceReference"
 						}
 					}
