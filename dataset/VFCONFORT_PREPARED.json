@@ -13,11 +13,12 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "VFCONFORT_ECOUL_PREPARED",
+				"fileName": "VFCONFORT_ECOUL_PREPARED.csv",
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": ";",
+			"encodingName": "WINDOWS-1252",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
@@ -40,7 +41,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Représentant",
+				"name": "ReprÃ©sentant",
 				"type": "String"
 			},
 			{
