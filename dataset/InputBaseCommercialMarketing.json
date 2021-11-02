@@ -1,5 +1,5 @@
 {
-	"name": "BASE_COMMERCIALE",
+	"name": "InputBaseCommercialMarketing",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "VAILLANT_ARCHITECTURE",
