@@ -3,8 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "lower_data",
-				"description": "Input: \nrefaffectation\nref2021\nOutpout :\natcAffectationLower\natcC2021Lower",
+				"name": "cleaning",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -17,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "lower_data",
+						"referenceName": "cleaning",
 						"type": "DataFlowReference"
 					},
 					"compute": {

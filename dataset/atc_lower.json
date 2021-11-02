@@ -25,7 +25,51 @@
 		},
 		"schema": [
 			{
-				"name": "ClÃ© RÃ©fÃ©rentiel,Recherche ClÃ© EPS,Marque,Code Postal dÃ©but,Code Postal fin,Utilisateur,Fonction,DÃ©partement,DR,ID SAP,Diffus/Chantier,Plan prime",
+				"name": "Clé Référentiel",
+				"type": "String"
+			},
+			{
+				"name": "Recherche Clé EPS",
+				"type": "String"
+			},
+			{
+				"name": "Marque",
+				"type": "String"
+			},
+			{
+				"name": "Code Postal début",
+				"type": "String"
+			},
+			{
+				"name": "Code Postal fin",
+				"type": "String"
+			},
+			{
+				"name": "Utilisateur",
+				"type": "String"
+			},
+			{
+				"name": "Fonction",
+				"type": "String"
+			},
+			{
+				"name": "Département",
+				"type": "String"
+			},
+			{
+				"name": "DR",
+				"type": "String"
+			},
+			{
+				"name": "ID SAP",
+				"type": "String"
+			},
+			{
+				"name": "Diffus/Chantier",
+				"type": "String"
+			},
+			{
+				"name": "Plan prime",
 				"type": "String"
 			}
 		]
