@@ -25,51 +25,7 @@
 		},
 		"schema": [
 			{
-				"name": "Cl� R�f�rentiel",
-				"type": "String"
-			},
-			{
-				"name": "Recherche Cl� EPS",
-				"type": "String"
-			},
-			{
-				"name": "Marque",
-				"type": "String"
-			},
-			{
-				"name": "Code Postal d�but",
-				"type": "String"
-			},
-			{
-				"name": "Code Postal fin",
-				"type": "String"
-			},
-			{
-				"name": "Utilisateur",
-				"type": "String"
-			},
-			{
-				"name": "Fonction",
-				"type": "String"
-			},
-			{
-				"name": "D�partement",
-				"type": "String"
-			},
-			{
-				"name": "DR",
-				"type": "String"
-			},
-			{
-				"name": "ID SAP",
-				"type": "String"
-			},
-			{
-				"name": "Diffus/Chantier",
-				"type": "String"
-			},
-			{
-				"name": "Plan prime",
+				"name": "ClÃ© RÃ©fÃ©rentiel,Recherche ClÃ© EPS,Marque,Code Postal dÃ©but,Code Postal fin,Utilisateur,Fonction,DÃ©partement,DR,ID SAP,Diffus/Chantier,Plan prime",
 				"type": "String"
 			}
 		]
