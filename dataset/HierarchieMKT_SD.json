@@ -15,7 +15,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "Hiérarchie MKT_SD&VA_2021.06.15.xlsx",
-				"folderPath": "Reference article",
+				"folderPath": "ReferentielArticle",
 				"container": "data-input"
 			},
 			"firstRowAsHeader": true
