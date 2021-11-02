@@ -154,7 +154,7 @@
 					"cancelAfter": {}
 				},
 				"folder": {
-					"name": "tutoriel"
+					"name": "tutoriel&test"
 				},
 				"annotations": []
 			},
@@ -207,7 +207,7 @@
 					"cancelAfter": {}
 				},
 				"folder": {
-					"name": "tutoriel"
+					"name": "tutoriel&test"
 				},
 				"annotations": []
 			},
@@ -262,7 +262,7 @@
 					"cancelAfter": {}
 				},
 				"folder": {
-					"name": "tutoriel"
+					"name": "tutoriel&test"
 				},
 				"annotations": []
 			},
@@ -314,6 +314,9 @@
 				"policy": {
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "tutoriel&test"
 				},
 				"annotations": []
 			},
@@ -794,7 +797,7 @@
 					"cancelAfter": {}
 				},
 				"folder": {
-					"name": "tutoriel"
+					"name": "tutoriel&test"
 				},
 				"annotations": [],
 				"lastPublishTime": "2021-10-04T10:59:39Z"
