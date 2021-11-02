@@ -17,18 +17,19 @@
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": ";",
+			"encodingName": "WINDOWS-1252",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": [
 			{
-				"name": "Clé Référentiel",
+				"name": "Cl� R�f�rentiel",
 				"type": "String"
 			},
 			{
-				"name": "Recherche Clé EPS",
+				"name": "Recherche Cl� EPS",
 				"type": "String"
 			},
 			{
@@ -36,7 +37,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Code Postal début",
+				"name": "Code Postal d�but",
 				"type": "String"
 			},
 			{
@@ -52,7 +53,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Département",
+				"name": "D�partement",
 				"type": "String"
 			},
 			{
