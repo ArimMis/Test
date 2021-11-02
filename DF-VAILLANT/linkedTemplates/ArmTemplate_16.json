@@ -1534,7 +1534,7 @@
 								"type": "DataFlowReference",
 								"parameters": {},
 								"datasetParameters": {
-									"source1": {},
+									"InputBaseCom": {},
 									"HierarchieMKTSD": {},
 									"HerarchieMKTVA": {},
 									"StgOffreChantier": {},
@@ -1853,13 +1853,13 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/pipeline2')]",
+			"name": "[concat(parameters('factoryName'), '/pipeline10')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "DSCTEREVA2",
+						"name": "cleaning",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -1872,17 +1872,12 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataflow": {
-								"referenceName": "DSCTEREVA2",
+								"referenceName": "cleaning",
 								"type": "DataFlowReference",
 								"parameters": {},
 								"datasetParameters": {
-									"ecoulementwithIndex": {},
-									"avoirwithIndex": {},
-									"stgOffre": {},
-									"referentielATC": {},
-									"facturation": {},
-									"sink1": {},
-									"sink2": {}
+									"atcJoined": {},
+									"AtcprepareForReplicate": {}
 								}
 							},
 							"staging": {},
@@ -1898,11 +1893,7 @@
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
 				},
-				"folder": {
-					"name": "BASE COMMERCIALE/Test"
-				},
-				"annotations": [],
-				"lastPublishTime": "2021-09-20T18:37:12Z"
+				"annotations": []
 			},
 			"dependsOn": []
 		}

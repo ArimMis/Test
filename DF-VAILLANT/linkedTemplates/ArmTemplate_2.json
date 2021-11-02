@@ -13,43 +13,6 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/DETAIL_ARTICLE_HIERARCHIE')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "REFERENTIEL ARTICLE"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "Feuil1",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "Libellés_hiérarchies_articles_groupe_et_locale.xlsx",
-						"folderPath": "ReferentielArticle",
-						"container": "data-input"
-					},
-					"firstRowAsHeader": true
-				},
-				"schema": [
-					{
-						"name": "Hiérarch.produits",
-						"type": "String"
-					},
-					{
-						"name": "Désignation",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/DSC_ECOUL_PREPARED')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1890,6 +1853,33 @@
 						"type": "String"
 					}
 				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/FOLDER_ECOULEMENT_CONFORT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "data_input",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT/VF CONFORT"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Feuil2",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "VF Confort",
+						"container": "ecoulement"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": []
 			},
 			"dependsOn": []
 		}

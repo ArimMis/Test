@@ -218,7 +218,7 @@
 						},
 						{
 							"dataset": {
-								"referenceName": "BASE_COMMERCIALE",
+								"referenceName": "InputBaseCommercialMarketing",
 								"type": "DatasetReference"
 							},
 							"name": "baseCommerciale"
@@ -300,7 +300,7 @@
 						},
 						{
 							"dataset": {
-								"referenceName": "BASE_COMMERCIALE",
+								"referenceName": "InputBaseCommercialMarketing",
 								"type": "DatasetReference"
 							},
 							"name": "baseCommerciale"
