@@ -124,8 +124,8 @@
 									"stgOffre": {},
 									"referentielATC": {},
 									"facturation": {},
-									"sink1": {},
-									"sink2": {}
+									"OModelDSC": {},
+									"avoirUnMapped": {}
 								}
 							},
 							"staging": {},
@@ -1892,6 +1892,9 @@
 				"policy": {
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "tutoriel&test"
 				},
 				"annotations": []
 			},

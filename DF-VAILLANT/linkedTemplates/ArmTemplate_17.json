@@ -41,8 +41,8 @@
 									"stgOffre": {},
 									"referentielATC": {},
 									"facturation": {},
-									"sink1": {},
-									"sink2": {}
+									"OModelDSC": {},
+									"avoirUnMapped": {}
 								}
 							},
 							"staging": {},
@@ -1200,6 +1200,27 @@
 							"waitOnCompletion": true,
 							"parameters": {}
 						}
+					},
+					{
+						"name": "PL_MAIN_RH",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "PL_MAIN_BASE_COMMERCIAL",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "PL_MAIN_RH",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
 					}
 				],
 				"policy": {
@@ -1211,7 +1232,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/MAIN_PREPARATION')]",
-				"[concat(variables('factoryId'), '/pipelines/MAIN_REFERENTIEL')]"
+				"[concat(variables('factoryId'), '/pipelines/MAIN_REFERENTIEL')]",
+				"[concat(variables('factoryId'), '/pipelines/PL_MAIN_RH')]"
 			]
 		}
 	]
