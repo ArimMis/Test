@@ -27,6 +27,9 @@
 				}
 			}
 		],
+		"folder": {
+			"name": "tutoriel&test"
+		},
 		"annotations": []
 	}
 }
