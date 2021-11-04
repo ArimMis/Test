@@ -14,12 +14,6 @@
 						]
 					},
 					{
-						"activity": "start",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
 						"activity": "MAIN_REFERENTIEL",
 						"dependencyConditions": [
 							"Succeeded"
@@ -135,31 +129,6 @@
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true
-				}
-			},
-			{
-				"name": "start",
-				"description": "fuzzy join: atc 2020 2021 and  atc affectation",
-				"type": "AzureFunctionActivity",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"functionName": "HelloWord",
-					"method": "POST",
-					"body": {
-						"name": "bobl"
-					}
-				},
-				"linkedServiceName": {
-					"referenceName": "data transformation azure function",
-					"type": "LinkedServiceReference"
 				}
 			},
 			{
