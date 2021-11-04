@@ -98,7 +98,7 @@
 									"maillard": {},
 									"Partedis": {},
 									"EHS": {},
-									"sink1": {}
+									"allDistruUnioned": {}
 								}
 							},
 							"staging": {},
@@ -583,7 +583,7 @@
 									"maillard": {},
 									"Partedis": {},
 									"EHS": {},
-									"sink1": {}
+									"allDistruUnioned": {}
 								}
 							},
 							"staging": {},
@@ -1078,7 +1078,7 @@
 									"notDSCTerevaPlateform": {},
 									"facturationForVanMarkes": {},
 									"venteDirect": {},
-									"sink1": {}
+									"OFacturactionPartedisLikeWithIndex": {}
 								}
 							},
 							"staging": {},
