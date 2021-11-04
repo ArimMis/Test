@@ -88,7 +88,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "basecommercialUnion_Model",
+						"referenceName": "BaseCommercialePOSTUnion_Model",
 						"type": "DataFlowReference"
 					},
 					"compute": {
