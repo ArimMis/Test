@@ -117,27 +117,6 @@
 				}
 			},
 			{
-				"name": "MAIN_LOGISTIQUE1",
-				"description": "NomenclatureProduit\nNomenclatureClient\nTDataSD",
-				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "PL_MAIN_BASE_COMMERCIAL",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "MAIN_LOGISTIQUE",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true
-				}
-			},
-			{
 				"name": "CONTRAT DISTRIBUTION",
 				"description": "CALCUL SEUIL\nCALCUL REMUNERATION\nCONTRAT DISTRIBUTION",
 				"type": "ExecutePipeline",
