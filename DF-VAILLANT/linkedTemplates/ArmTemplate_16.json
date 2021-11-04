@@ -13,6 +13,58 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/PL_MAILLARD')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "MAILLARD_PREPARATION",
+						"description": "Input : \necoulement\norganisation\nventesDirectes\nOutput : \norgaNotFound\nMAILLARD_ECOUL_PREPARED",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "MAILLARD_PREPARATION",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"ecoulement": {},
+									"organisation": {},
+									"ventesDirectes": {},
+									"MAILLARDECOULPREPARED": {},
+									"organisationNotFound": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT"
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/PL_MAIN_BASE_COMMERCIALE')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -461,7 +513,7 @@
 									"objectif": {},
 									"levierPerformance": {},
 									"output": {},
-									"sink1": {}
+									"TEMPLEVIERPERFORMANCE": {}
 								}
 							},
 							"staging": {},
@@ -568,8 +620,8 @@
 									"stagingDiffus": {},
 									"stagingChantier": {},
 									"outTemp": {},
-									"sink1": {},
-									"sink2": {}
+									"offreChantierTemp": {},
+									"offreDiffusTemp": {}
 								}
 							},
 							"staging": {},
@@ -646,7 +698,7 @@
 								"datasetParameters": {
 									"diffus": {},
 									"chantier": {},
-									"sink1": {}
+									"stgOffre": {}
 								}
 							},
 							"staging": {},
@@ -1009,7 +1061,7 @@
 						"type": "ExecuteDataFlow",
 						"dependsOn": [
 							{
-								"activity": "lower_data",
+								"activity": "fuzzy join",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -1039,6 +1091,44 @@
 								"computeType": "General"
 							},
 							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "fuzzy join",
+						"description": "\n    \"leftfilepath\":\"Temp/atc_affectation_lower\",\n    \"rightfilepath\":\"Temp/atc_c2021_lower\",\n    \"leftkey\":\"Utilisateur\",\n    \"rightkey\":\"NomATC\",\n    \"outputpath\":\"Temp/atc_fuzzyjoined.xlsx\",\n",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "lower_data",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "fuzzyjoin",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"leftfilepath": "Temp/atc_affectation_lower",
+								"rightfilepath": "Temp/atc_c2021_lower",
+								"leftkey": "Utilisateur",
+								"rightkey": "NomATC",
+								"outputpath": "Temp/atc_fuzzyjoined.xlsx",
+								"containername": "data-warehouse"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "data transformation azure function",
+							"type": "LinkedServiceReference"
 						}
 					}
 				],
@@ -1166,7 +1256,8 @@
 								"datasetParameters": {
 									"stgOffre": {},
 									"baseCommerciale": {},
-									"sink1": {}
+									"SUIVIOFFREDIFFUS": {},
+									"offreSansMatching": {}
 								}
 							},
 							"staging": {},
@@ -1197,8 +1288,8 @@
 								"datasetParameters": {
 									"stgOffre": {},
 									"baseCommerciale": {},
-									"sink1": {},
-									"sink2": {}
+									"SUIVIEOFFRECHANTIER": {},
+									"offreEtBaseComSansMatching": {}
 								}
 							},
 							"staging": {},
@@ -1849,54 +1940,6 @@
 				},
 				"annotations": [],
 				"lastPublishTime": "2021-09-24T07:39:47Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pipeline10')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "cleaning",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "cleaning",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"atcJoined": {},
-									"AtcprepareForReplicate": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "tutoriel&test"
-				},
-				"annotations": []
 			},
 			"dependsOn": []
 		}
