@@ -269,7 +269,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataflow": {
-								"referenceName": "basecommercialUnion_Model",
+								"referenceName": "BaseCommercialePOSTUnion_Model",
 								"type": "DataFlowReference",
 								"parameters": {},
 								"datasetParameters": {
@@ -620,8 +620,8 @@
 									"stagingDiffus": {},
 									"stagingChantier": {},
 									"outTemp": {},
-									"offreChantierTemp": {},
-									"offreDiffusTemp": {}
+									"sink1": {},
+									"sink2": {}
 								}
 							},
 							"staging": {},
@@ -1564,7 +1564,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataflow": {
-								"referenceName": "basecommercialUnion_Model",
+								"referenceName": "BaseCommercialePOSTUnion_Model",
 								"type": "DataFlowReference",
 								"parameters": {},
 								"datasetParameters": {
@@ -1907,7 +1907,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataflow": {
-								"referenceName": "basecommercialUnion_Model",
+								"referenceName": "BaseCommercialePOSTUnion_Model",
 								"type": "DataFlowReference",
 								"parameters": {},
 								"datasetParameters": {

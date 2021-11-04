@@ -346,8 +346,8 @@
 									"stagingDiffus": {},
 									"stagingChantier": {},
 									"outTemp": {},
-									"offreChantierTemp": {},
-									"offreDiffusTemp": {}
+									"sink1": {},
+									"sink2": {}
 								}
 							},
 							"staging": {},
