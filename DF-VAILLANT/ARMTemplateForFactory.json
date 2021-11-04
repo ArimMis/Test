@@ -368,12 +368,6 @@
 								]
 							},
 							{
-								"activity": "start",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
 								"activity": "MAIN_REFERENTIEL",
 								"dependencyConditions": [
 									"Succeeded"
@@ -487,28 +481,6 @@
 						}
 					},
 					{
-						"name": "MAIN_LOGISTIQUE1",
-						"description": "NomenclatureProduit\nNomenclatureClient\nTDataSD",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "PL_MAIN_BASE_COMMERCIAL",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "MAIN_LOGISTIQUE",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					},
-					{
 						"name": "CONTRAT DISTRIBUTION",
 						"description": "CALCUL SEUIL\nCALCUL REMUNERATION\nCONTRAT DISTRIBUTION",
 						"type": "ExecutePipeline",
@@ -528,32 +500,6 @@
 							},
 							"waitOnCompletion": true,
 							"parameters": {}
-						}
-					},
-					{
-						"name": "start",
-						"description": "fuzzy join: atc 2020 2021 and  atc affectation",
-						"type": "AzureFunctionActivity",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"functionName": "HelloWord",
-							"method": "POST",
-							"headers": {},
-							"body": {
-								"name": "bobl"
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "data transformation azure function",
-							"type": "LinkedServiceReference"
 						}
 					},
 					{
@@ -634,7 +580,6 @@
 				"[concat(variables('factoryId'), '/pipelines/MAIN_LOGISTIQUE')]",
 				"[concat(variables('factoryId'), '/dataflows/preparation_facturation')]",
 				"[concat(variables('factoryId'), '/pipelines/PL_CONTRAT_DISTRIBUTION')]",
-				"[concat(variables('factoryId'), '/linkedServices/data transformation azure function')]",
 				"[concat(variables('factoryId'), '/pipelines/PL_SUIVIE_OFFRE')]",
 				"[concat(variables('factoryId'), '/pipelines/SORTIE MARKETING')]",
 				"[concat(variables('factoryId'), '/pipelines/PL_MAIN_RH')]"
