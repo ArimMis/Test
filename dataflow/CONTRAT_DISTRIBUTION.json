@@ -28,7 +28,7 @@
 						"referenceName": "CONTRAT_DISTRIBUTION",
 						"type": "DatasetReference"
 					},
-					"name": "output"
+					"name": "CONTRATDISTRIBUTION"
 				}
 			],
 			"transformations": [
@@ -39,10 +39,10 @@
 					"name": "remunerationColumn"
 				},
 				{
-					"name": "Select1"
+					"name": "dropColumns"
 				}
 			],
-			"script": "source(output(\n\t\tyear as string,\n\t\t{ID contrat cadre} as string,\n\t\t{ID contrat} as string,\n\t\t{ID levier} as string,\n\t\t{Max ID Seuil} as string,\n\t\t{Contrepartie seuil} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> seuil\nsource(output(\n\t\t{ID contrat cadre} as string,\n\t\t{ID contrat} as string,\n\t\t{ID levier} as string,\n\t\tyear as string,\n\t\tca as string,\n\t\t{Réalisé} as string,\n\t\t{Somme quantité} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> remuneration\nseuil, remuneration join(seuil@{ID contrat cadre} == remuneration@{ID contrat cadre}\n\t&& seuil@{ID contrat} == remuneration@{ID contrat}\n\t&& seuil@{ID levier} == remuneration@{ID levier},\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> innerJoin\nSelect1 derive({Rémunération} = toDouble({Réalisé})*toDouble({Contrepartie seuil})) ~> remunerationColumn\ninnerJoin select(mapColumn(\n\t\tyear = seuil@year,\n\t\t{ID contrat cadre} = seuil@{ID contrat cadre},\n\t\t{ID contrat} = seuil@{ID contrat},\n\t\t{ID levier} = seuil@{ID levier},\n\t\t{ID Seuil} = {Max ID Seuil},\n\t\t{Contrepartie seuil},\n\t\tca,\n\t\t{Réalisé},\n\t\t{Somme quantité}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nremunerationColumn sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['CONTRAT_DISTRIBUTION.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> output"
+			"script": "source(output(\n\t\tyear as string,\n\t\t{ID contrat cadre} as string,\n\t\t{ID contrat} as string,\n\t\t{ID levier} as string,\n\t\t{Max ID Seuil} as string,\n\t\t{Contrepartie seuil} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> seuil\nsource(output(\n\t\t{ID contrat cadre} as string,\n\t\t{ID contrat} as string,\n\t\t{ID levier} as string,\n\t\tyear as string,\n\t\tca as string,\n\t\t{Réalisé} as string,\n\t\t{Somme quantité} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> remuneration\nseuil, remuneration join(seuil@{ID contrat cadre} == remuneration@{ID contrat cadre}\n\t&& seuil@{ID contrat} == remuneration@{ID contrat}\n\t&& seuil@{ID levier} == remuneration@{ID levier},\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> innerJoin\ndropColumns derive({Rémunération} = toDouble({Réalisé})*toDouble({Contrepartie seuil})) ~> remunerationColumn\ninnerJoin select(mapColumn(\n\t\tyear = seuil@year,\n\t\t{ID contrat cadre} = seuil@{ID contrat cadre},\n\t\t{ID contrat} = seuil@{ID contrat},\n\t\t{ID levier} = seuil@{ID levier},\n\t\t{ID Seuil} = {Max ID Seuil},\n\t\t{Contrepartie seuil},\n\t\tca,\n\t\t{Réalisé},\n\t\t{Somme quantité}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> dropColumns\nremunerationColumn sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['CONTRAT_DISTRIBUTION.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> CONTRATDISTRIBUTION"
 		}
 	}
 }
