@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "atc_affectation_lower",
+				"fileName": "atc_affectation_lower.csv",
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
