@@ -1,0 +1,41 @@
+{
+	"name": "TDataSD_update",
+	"properties": {
+		"folder": {
+			"name": "SORTIE LOGISTIQUE"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "FacturationBW",
+						"type": "DatasetReference"
+					},
+					"name": "FacturationBW"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SortieTDataSD",
+						"type": "DatasetReference"
+					},
+					"name": "SortieTDataSD"
+				}
+			],
+			"transformations": [
+				{
+					"name": "RecordID"
+				},
+				{
+					"name": "DateExtDocVteLongDateCRE"
+				},
+				{
+					"name": "Rename"
+				}
+			],
+			"script": "source(output(\n\t\t{Org. commerciale} as string,\n\t\t{Canal distribution} as string,\n\t\t{Secteur d'activité} as string,\n\t\t{Document de vente} as string,\n\t\tPoste as string,\n\t\t{Jour calendaire} as string,\n\t\t{Agence commerciale corrigé} as string,\n\t\t{ATC Corrigé} as string,\n\t\t{Donneur d'ordre} as string,\n\t\t{Récept. de march.} as string,\n\t\t{Destinataire facture} as string,\n\t\tArticle as string,\n\t\t{Type doc. vente} as string,\n\t\t{Type de poste} as string,\n\t\tLivraison as string,\n\t\t{Type de livraison} as string,\n\t\t{Type poste Livraison} as string,\n\t\tFacture as string,\n\t\t{Type de facture} as string,\n\t\t{Type poste Facture} as string,\n\t\t{Mois calendrier} as string,\n\t\t{Année civile} as string,\n\t\t{Motif commande} as string,\n\t\t{Qté cdée} as string,\n\t\t{CA cdé} as string,\n\t\t{Qté livrée} as string,\n\t\t{CA livré} as string,\n\t\t{Qté facturée} as string,\n\t\t{CA facturé} as string,\n\t\t{Cout standard cdé} as string,\n\t\t{Cout fabrication} as string,\n\t\t{Cout standard livré} as string,\n\t\t{Cout standard facturé} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> FacturationBW\nFacturationBW keyGenerate(output(CleDataSD as long),\n\tstartAt: 1L) ~> RecordID\nRecordID derive(DateExt = \"\",\n\t\tDocVte_Long = \"\",\n\t\tDateCRE = \"\") ~> DateExtDocVteLongDateCRE\nDateExtDocVteLongDateCRE select(mapColumn(\n\t\tOrgCial = {Org. commerciale},\n\t\tCanalDist = {Canal distribution},\n\t\tSectAct = {Secteur d'activité},\n\t\tDocVte = {Document de vente},\n\t\tPoste,\n\t\tDate = {Jour calendaire},\n\t\tDRCde = {Agence commerciale corrigé},\n\t\tATCCde = {ATC Corrigé},\n\t\tCliCde = {Donneur d'ordre},\n\t\tCliLiv = {Récept. de march.},\n\t\tCliFac = {Destinataire facture},\n\t\tNoArt = Article,\n\t\tTypDocVte = {Type doc. vente},\n\t\tTypPoste = {Type de poste},\n\t\tNoLiv = Livraison,\n\t\tTypLiv = {Type de livraison},\n\t\tTypPostLiv = {Type poste Livraison},\n\t\tNoFac = Facture,\n\t\tTypFac = {Type de facture},\n\t\tTypPostFac = {Type poste Facture},\n\t\tMois = {Mois calendrier},\n\t\tAn = {Année civile},\n\t\tRaiCde = {Motif commande},\n\t\tQtCde = {Qté cdée},\n\t\tValNet = {CA cdé},\n\t\tQtLiv = {Qté livrée},\n\t\tValLiv = {CA livré},\n\t\tQtFac = {Qté facturée},\n\t\tValFac = {CA facturé},\n\t\tStdCost = {Cout standard cdé},\n\t\tFabCost = {Cout fabrication},\n\t\tStdCostLiv = {Cout standard livré},\n\t\tStdCostFac = {Cout standard facturé},\n\t\tCleDataSD,\n\t\tDateExt,\n\t\tDocVte_Long,\n\t\tDateCRE\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Rename\nRename sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tyearmonth as string,\n\t\tyear as string,\n\t\tmonth as string,\n\t\tqte_ecoulement as string,\n\t\tca_ecoulement as string,\n\t\tPOSSAMidString as string,\n\t\tHubSAPid as string,\n\t\treference as string,\n\t\tdistributeur as string,\n\t\tagence_code as string,\n\t\tmarque as string,\n\t\t{Code postal} as string,\n\t\tmarque_name as string,\n\t\ttoreplicate as string,\n\t\tdd as string,\n\t\trcount as string,\n\t\tindexcols2 as string,\n\t\tqte_ecc as string\n\t),\n\tpartitionFileNames:['SortieTDataSD.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> SortieTDataSD"
+		}
+	}
+}
