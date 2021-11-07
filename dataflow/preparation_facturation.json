@@ -10,7 +10,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "EVENEMENTS_COMMERCIAUX_BW",
+						"referenceName": "FacturationBW",
 						"type": "DatasetReference"
 					},
 					"name": "facturationbw"
