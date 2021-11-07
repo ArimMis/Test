@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "OModelDSC",
+				"fileName": "OModelDSC.csv",
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
