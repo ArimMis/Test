@@ -13,11 +13,12 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "OModelPartedis",
+				"fileName": "OModelPartedis.csv",
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
 			"columnDelimiter": ",",
+			"encodingName": "WINDOWS-1252",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
