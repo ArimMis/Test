@@ -3,8 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "DSC_PREPARATION",
-				"description": "Input : \nDSCINPUT\norganisation\nventesDirectes\nOutput : \noutputNullQuantity\norgaNotFound\npreparedDSC\nDSCPieceDetache",
+				"name": "Model_PARTEDIS2",
+				"description": "Input : \necoulement\nassociation\nstgOffre\nfacturation\nrefAtc\nOutput : \nsortiePardedis",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -17,7 +17,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "DSC_PREPARATION",
+						"referenceName": "Model_PARTEDIS2",
 						"type": "DataFlowReference"
 					},
 					"compute": {
