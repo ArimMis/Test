@@ -13,6 +13,33 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/FOLDER_ECOULEMENT_CONFORT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "data_input",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT/VF CONFORT"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Feuil2",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "VF Confort",
+						"container": "ecoulement"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/FOLDER_ECOULEMENT_MABILE')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -2766,358 +2793,6 @@
 					},
 					{
 						"name": "Jour calendaire",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/InputBaseCommercialMarketing')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "LEVIER RH"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "BaseCommercialeDTP2.csv",
-						"folderPath": "Temp",
-						"container": "data-warehouse"
-					},
-					"columnDelimiter": ";",
-					"encodingName": "WINDOWS-1252",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "affecte/non_affecte",
-						"type": "String"
-					},
-					{
-						"name": "plateforme/vente directe",
-						"type": "String"
-					},
-					{
-						"name": "origine de la ligne",
-						"type": "String"
-					},
-					{
-						"name": "year",
-						"type": "String"
-					},
-					{
-						"name": "month",
-						"type": "String"
-					},
-					{
-						"name": "Code client livré",
-						"type": "String"
-					},
-					{
-						"name": "code client plateforme livree",
-						"type": "String"
-					},
-					{
-						"name": "code produit",
-						"type": "String"
-					},
-					{
-						"name": "quantite",
-						"type": "String"
-					},
-					{
-						"name": "ca",
-						"type": "String"
-					},
-					{
-						"name": "Code postal",
-						"type": "String"
-					},
-					{
-						"name": "marque",
-						"type": "String"
-					},
-					{
-						"name": "marque_code",
-						"type": "String"
-					},
-					{
-						"name": "canal_distribution_final",
-						"type": "String"
-					},
-					{
-						"name": "nom du canal",
-						"type": "String"
-					},
-					{
-						"name": "canal_final",
-						"type": "String"
-					},
-					{
-						"name": "document_vente",
-						"type": "String"
-					},
-					{
-						"name": "Agence commerciale corrigé (vente directe)",
-						"type": "String"
-					},
-					{
-						"name": "Donneur d'ordre (vente directe)",
-						"type": "String"
-					},
-					{
-						"name": "Facture (vente directe)",
-						"type": "String"
-					},
-					{
-						"name": "Type poste Facture (vente directe)",
-						"type": "String"
-					},
-					{
-						"name": "no_offre",
-						"type": "String"
-					},
-					{
-						"name": "ATC offre",
-						"type": "String"
-					},
-					{
-						"name": "ATC livré",
-						"type": "String"
-					},
-					{
-						"name": "ATC Performance",
-						"type": "String"
-					},
-					{
-						"name": "NomATC",
-						"type": "String"
-					},
-					{
-						"name": "Matricule",
-						"type": "String"
-					},
-					{
-						"name": "Motif commande",
-						"type": "String"
-					},
-					{
-						"name": "Type de facture",
-						"type": "String"
-					},
-					{
-						"name": "N1groupe",
-						"type": "String"
-					},
-					{
-						"name": "N2groupe",
-						"type": "String"
-					},
-					{
-						"name": "N3groupe",
-						"type": "String"
-					},
-					{
-						"name": "N4groupe",
-						"type": "String"
-					},
-					{
-						"name": "N5groupe",
-						"type": "String"
-					},
-					{
-						"name": "N6groupe",
-						"type": "String"
-					},
-					{
-						"name": "N7groupe",
-						"type": "String"
-					},
-					{
-						"name": "N1groupedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N2groupedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N3groupedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N4groupedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N5groupedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N6groupedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N7groupedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N1localedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N2localedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N3localedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N4localedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N5localedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N6localedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N7localedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N1locale",
-						"type": "String"
-					},
-					{
-						"name": "N2locale",
-						"type": "String"
-					},
-					{
-						"name": "N3locale",
-						"type": "String"
-					},
-					{
-						"name": "N4locale",
-						"type": "String"
-					},
-					{
-						"name": "N5locale",
-						"type": "String"
-					},
-					{
-						"name": "N6locale",
-						"type": "String"
-					},
-					{
-						"name": "N7locale",
-						"type": "String"
-					},
-					{
-						"name": "Hiérarchgroupe",
-						"type": "String"
-					},
-					{
-						"name": "Hiérarchlocale",
-						"type": "String"
-					},
-					{
-						"name": "Numéro du compte",
-						"type": "String"
-					},
-					{
-						"name": "EPS_Nom du compte",
-						"type": "String"
-					},
-					{
-						"name": "EPS_Groupe cible/Typologie générale",
-						"type": "String"
-					},
-					{
-						"name": "EPS_Sous groupe cible/Typologie détaillée",
-						"type": "String"
-					},
-					{
-						"name": "EPS_Compte principal: Numéro du compte",
-						"type": "String"
-					},
-					{
-						"name": "EPS_Compte principal: Nom du compte",
-						"type": "String"
-					},
-					{
-						"name": "Client",
-						"type": "String"
-					},
-					{
-						"name": "Numéro client indirect",
-						"type": "String"
-					},
-					{
-						"name": "CODE_CMI",
-						"type": "String"
-					},
-					{
-						"name": "NOM_CMI",
-						"type": "String"
-					},
-					{
-						"name": "Nom du compte",
-						"type": "String"
-					},
-					{
-						"name": "Client Indirect_ Groupe cible/Typologie générale",
-						"type": "String"
-					},
-					{
-						"name": "Client Indirect_ Sous groupe cible/Typologie détaillée",
-						"type": "String"
-					},
-					{
-						"name": "Client Indirect_  Compte principal: Numéro du compte",
-						"type": "String"
-					},
-					{
-						"name": "Client Indirect_  Compte principal: Nom du compte",
-						"type": "String"
-					},
-					{
-						"name": "Client Direct - Hiérarchie N1 SAP ",
-						"type": "String"
-					},
-					{
-						"name": "Client Direct - Hiérarchie N2 SAP ",
-						"type": "String"
-					},
-					{
-						"name": "Client Indirect - Hiérarchie N1 SAP",
-						"type": "String"
-					},
-					{
-						"name": "Client Indirect - Hiérarchie N2 SAP",
-						"type": "String"
-					},
-					{
-						"name": "yearmonth",
-						"type": "String"
-					},
-					{
-						"name": "ATC Corrigé",
 						"type": "String"
 					}
 				]

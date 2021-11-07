@@ -13,6 +13,34 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/TUTO_OUTPUT1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "dstuto",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "TUTO"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "tuto"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/TUTO_OUTPUT2')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1569,7 +1597,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "atc_affectation_lower",
+						"fileName": "atc_affectation_lower.csv",
 						"folderPath": "Temp",
 						"container": "data-warehouse"
 					},
@@ -1626,119 +1654,6 @@
 					},
 					{
 						"name": "Plan prime",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/atc_replicated')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "REFERENTIEL_ATC"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "Sheet1",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "atc_replicated.xlsx",
-						"folderPath": "Temp",
-						"container": "data-warehouse"
-					},
-					"firstRowAsHeader": true
-				},
-				"schema": [
-					{
-						"name": "Clé Référentiel",
-						"type": "String"
-					},
-					{
-						"name": "Recherche Clé EPS",
-						"type": "String"
-					},
-					{
-						"name": "Marque",
-						"type": "String"
-					},
-					{
-						"name": "Code Postal début",
-						"type": "String"
-					},
-					{
-						"name": "Code Postal fin",
-						"type": "String"
-					},
-					{
-						"name": "Utilisateur",
-						"type": "String"
-					},
-					{
-						"name": "Fonction",
-						"type": "String"
-					},
-					{
-						"name": "Département",
-						"type": "String"
-					},
-					{
-						"name": "DR_x",
-						"type": "String"
-					},
-					{
-						"name": "matches",
-						"type": "String"
-					},
-					{
-						"name": "ATC",
-						"type": "String"
-					},
-					{
-						"name": "NomATC",
-						"type": "String"
-					},
-					{
-						"name": "Plan primes",
-						"type": "String"
-					},
-					{
-						"name": "DR_y",
-						"type": "String"
-					},
-					{
-						"name": "Secteur prime",
-						"type": "String"
-					},
-					{
-						"name": "Matricule",
-						"type": "String"
-					},
-					{
-						"name": "Secteur DEC",
-						"type": "String"
-					},
-					{
-						"name": "Rallye",
-						"type": "String"
-					},
-					{
-						"name": "Canal final",
-						"type": "String"
-					},
-					{
-						"name": "toreplicate",
-						"type": "String"
-					},
-					{
-						"name": "order",
 						"type": "String"
 					}
 				]

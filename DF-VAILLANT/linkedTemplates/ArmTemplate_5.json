@@ -13,6 +13,74 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/ORCAB_ECOULEMENT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT/ORCAB"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "data_4ff7fba4-15c0-4a45-bb38-971aaa6bfaaa_985cc61b-ecb2-41f3-9b06-2f13a0c784d4.csv",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"encodingName": "WINDOWS-1252",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Coopérative",
+						"type": "String"
+					},
+					{
+						"name": "Référence",
+						"type": "String"
+					},
+					{
+						"name": "Désignation",
+						"type": "String"
+					},
+					{
+						"name": "Mois",
+						"type": "String"
+					},
+					{
+						"name": "CA 2020",
+						"type": "String"
+					},
+					{
+						"name": "CA 2019",
+						"type": "String"
+					},
+					{
+						"name": "Qte 2020",
+						"type": "String"
+					},
+					{
+						"name": "Qte 2019",
+						"type": "String"
+					},
+					{
+						"name": "filename",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ORCAB_ECOULEMENT_INPUT')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -996,6 +1064,7 @@
 						"container": "data-warehouse"
 					},
 					"columnDelimiter": ",",
+					"encodingName": "WINDOWS-1252",
 					"escapeChar": "\\",
 					"firstRowAsHeader": true,
 					"quoteChar": "\""
@@ -1791,51 +1860,6 @@
 					},
 					{
 						"name": "Prix Unitaire Std",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PLATEFORMES')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "BASE_COMMERCIAL"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "Feuil1",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "Plateformes.xlsx",
-						"folderPath": "Plateformes",
-						"container": "data-input"
-					},
-					"firstRowAsHeader": true
-				},
-				"schema": [
-					{
-						"name": "WholeSalerID",
-						"type": "String"
-					},
-					{
-						"name": "WholeSalerHubID",
-						"type": "String"
-					},
-					{
-						"name": "HubName",
-						"type": "String"
-					},
-					{
-						"name": "HubSAPid",
 						"type": "String"
 					}
 				]

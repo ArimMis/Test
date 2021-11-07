@@ -13,6 +13,245 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/TUTO')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "extraction vente direc",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "TUTO_DF1",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"facturationbw": {},
+									"PLATEFORMES": {},
+									"venteDirect": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "model vente direct",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "extraction vente direc",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "TUTO_DF2",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"ventedirecte": {},
+									"comptesap": {},
+									"refAtc": {},
+									"oVenteDirect": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "tutoriel&test"
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/facturation')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "preparation_facturation",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "preparation_facturation",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"facturationbw": {},
+									"PLATEFORMES": {},
+									"facturationForDSCTEREVA": {},
+									"facturationForOtherPlateform": {},
+									"notDSCTerevaPlateform": {},
+									"facturationForVanMarkes": {},
+									"venteDirect": {},
+									"OFacturactionPartedisLikeWithIndex": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "BASE COMMERCIALE/Test"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-20T12:13:34Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "UNION_BASE_COMMERCIAL",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "UNION_BASE_COMMERCIAL",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"venteDirect": {},
+									"DSCModel": {},
+									"PartedisModel": {},
+									"VanMarkes": {},
+									"OUnionBasecommercial": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "basecommercialUnion_Model",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "UNION_BASE_COMMERCIAL",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "BaseCommercialePOSTUnion_Model",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"BCUnion": {},
+									"ArticleHierarchi": {},
+									"Plateformes": {},
+									"ExtractionCompte": {},
+									"ClientEHS": {},
+									"InputManuel": {},
+									"StgOffreUnique": {},
+									"DataCommercialNotFOund": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "BASE COMMERCIALE/Test"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-24T07:39:47Z"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/pipeline10')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -377,8 +616,8 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "DSC_PREPARATION",
-						"description": "Input : \nDSCINPUT\norganisation\nventesDirectes\nOutput : \noutputNullQuantity\norgaNotFound\npreparedDSC\nDSCPieceDetache",
+						"name": "Model_PARTEDIS2",
+						"description": "Input : \necoulement\nassociation\nstgOffre\nfacturation\nrefAtc\nOutput : \nsortiePardedis",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -391,17 +630,16 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataflow": {
-								"referenceName": "DSC_PREPARATION",
+								"referenceName": "Model_PARTEDIS2",
 								"type": "DataFlowReference",
 								"parameters": {},
 								"datasetParameters": {
-									"DSCINPUT": {},
-									"organisation": {},
-									"ventesDirectes": {},
-									"DSCPieceDetache": {},
-									"outputNullQuantity": {},
-									"preparedDSC": {},
-									"orgaNotFound": {}
+									"ecoulmnt": {},
+									"facturation": {},
+									"association": {},
+									"offre": {},
+									"refAtc": {},
+									"OModelPartedis": {}
 								}
 							},
 							"staging": {},

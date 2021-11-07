@@ -13,6 +13,202 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/PL_GET_ARTICLE_DESIGNATION')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "article_designation",
+						"description": "Input : \narticleHierarchie\ndetailArticleHierarchie\nOutput : \nsortieArticleDesignation\n",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "REFERENTIEL_ARTICLE",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"articleHierarchie": {},
+									"detailArticleHierarchie": {},
+									"sortieArticleDesignation": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "REFERENTIEL"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-07T07:24:29Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_LEVIER_RH')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "LEVIER RH",
+						"description": "Input : \ndataCommerciale\nPLATEFORMES\nlevierPerformance\nOutput : \nTEMP_LEVIER_RH\nTEMP_LEVIER_PERFORMANCE\n",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "LEVIER_RH",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"dataCommerciale": {},
+									"PLATEFORMES": {},
+									"levierPerformance": {},
+									"output": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "AF CALCUL LEVIER RH",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "LEVIER RH",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "AF_CALCUL_LEVIER_RH",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"levierContainer": "data-warehouse",
+								"levierRHpath": "Temp/TEMP_LEVIERS_RH.csv",
+								"levierPerformancePath": "Temp/TEMP_LEVIER_PERFORMANCE.csv",
+								"atc_container": "data-input",
+								"atc_path": "ATC/Copie de referentiel ATC 2021 2020.xlsx",
+								"output_container": "data-mart",
+								"output_path": "RH/LEVIER_RH.xlsx"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureFunctionPremium",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "RH"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-10-04T08:55:52Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_MABILE')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "MABILE_PREPARATION",
+						"description": "Input : \n-MabilleSaunierDuvale\n-OrganisationMabilleSonac\n-ventesDirectes\nOutput : \n-MabileQteNull\n-organisationNotFound\n-MABILE_ECOULEMENT_OUTPUT",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "MABILE_PREPARATION",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"MabilleSaunierDuvale": {},
+									"OrganisationMabilleSonac": {},
+									"ventesDirectes": {},
+									"MABILLEECOULPREPARED": {},
+									"MabileQteNull": {},
+									"organisationNotFound": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-13T20:37:13Z"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/PL_MAILLARD')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -1061,7 +1257,7 @@
 						"type": "ExecuteDataFlow",
 						"dependsOn": [
 							{
-								"activity": "fuzzy join",
+								"activity": "lower_data",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -1091,44 +1287,6 @@
 								"computeType": "General"
 							},
 							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "fuzzy join",
-						"description": "\n    \"leftfilepath\":\"Temp/atc_affectation_lower\",\n    \"rightfilepath\":\"Temp/atc_c2021_lower\",\n    \"leftkey\":\"Utilisateur\",\n    \"rightkey\":\"NomATC\",\n    \"outputpath\":\"Temp/atc_fuzzyjoined.xlsx\",\n",
-						"type": "AzureFunctionActivity",
-						"dependsOn": [
-							{
-								"activity": "lower_data",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"functionName": "fuzzyjoin",
-							"method": "POST",
-							"headers": {},
-							"body": {
-								"leftfilepath": "Temp/atc_affectation_lower",
-								"rightfilepath": "Temp/atc_c2021_lower",
-								"leftkey": "Utilisateur",
-								"rightkey": "NomATC",
-								"outputpath": "Temp/atc_fuzzyjoined.xlsx",
-								"containername": "data-warehouse"
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "data transformation azure function",
-							"type": "LinkedServiceReference"
 						}
 					}
 				],
@@ -1701,245 +1859,6 @@
 				},
 				"annotations": [],
 				"lastPublishTime": "2021-09-28T09:57:54Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/TUTO')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "extraction vente direc",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "TUTO_DF1",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"facturationbw": {},
-									"PLATEFORMES": {},
-									"venteDirect": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "model vente direct",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [
-							{
-								"activity": "extraction vente direc",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "TUTO_DF2",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"ventedirecte": {},
-									"comptesap": {},
-									"refAtc": {},
-									"oVenteDirect": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "tutoriel&test"
-				},
-				"annotations": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/facturation')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "preparation_facturation",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "preparation_facturation",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"facturationbw": {},
-									"PLATEFORMES": {},
-									"facturationForDSCTEREVA": {},
-									"facturationForOtherPlateform": {},
-									"notDSCTerevaPlateform": {},
-									"facturationForVanMarkes": {},
-									"venteDirect": {},
-									"OFacturactionPartedisLikeWithIndex": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "BASE COMMERCIALE/Test"
-				},
-				"annotations": [],
-				"lastPublishTime": "2021-09-20T12:13:34Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "UNION_BASE_COMMERCIAL",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "UNION_BASE_COMMERCIAL",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"venteDirect": {},
-									"DSCModel": {},
-									"PartedisModel": {},
-									"VanMarkes": {},
-									"OUnionBasecommercial": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "basecommercialUnion_Model",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [
-							{
-								"activity": "UNION_BASE_COMMERCIAL",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "BaseCommercialePOSTUnion_Model",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"BCUnion": {},
-									"ArticleHierarchi": {},
-									"Plateformes": {},
-									"ExtractionCompte": {},
-									"ClientEHS": {},
-									"InputManuel": {},
-									"StgOffreUnique": {},
-									"DataCommercialNotFOund": {},
-									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "BASE COMMERCIALE/Test"
-				},
-				"annotations": [],
-				"lastPublishTime": "2021-09-24T07:39:47Z"
 			},
 			"dependsOn": []
 		}
