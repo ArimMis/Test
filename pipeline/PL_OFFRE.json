@@ -64,16 +64,16 @@
 					"functionName": "fuzzyjoin",
 					"method": "POST",
 					"body": {
-						"leftfilepath": "Temp/offreChantierTemp.csv",
+						"leftfilepath": "Temp/responsableOffreChantier.csv",
 						"rightfilepath": "Temp/refATC2021Offre.csv",
-						"leftkey": "Responsable",
+						"leftkey": "UserLowerCase",
 						"rightkey": "NomATC",
-						"outputpath": "Temp/offreChantierTempfuzzy.xlsx",
+						"outputpath": "Temp/responsableMappingfuzzy.xlsx",
 						"containername": "data-warehouse"
 					}
 				},
 				"linkedServiceName": {
-					"referenceName": "data transformation azure function",
+					"referenceName": "AzureFunctionPremium",
 					"type": "LinkedServiceReference"
 				}
 			},
