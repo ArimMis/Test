@@ -48,7 +48,7 @@
 					{
 						"activity": "PREPARATION",
 						"dependencyConditions": [
-							"Failed"
+							"Succeeded"
 						]
 					}
 				],
@@ -83,7 +83,7 @@
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "PREPARATION",
+						"activity": "fuzzyjoin",
 						"dependencyConditions": [
 							"Succeeded"
 						]
