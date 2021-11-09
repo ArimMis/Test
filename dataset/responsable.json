@@ -1,0 +1,51 @@
+{
+	"name": "responsable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "responsableMappingfuzzy.xlsx",
+				"folderPath": "Temp",
+				"container": "data-warehouse"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Responsable",
+				"type": "String"
+			},
+			{
+				"name": "DateOffre",
+				"type": "String"
+			},
+			{
+				"name": "matches",
+				"type": "String"
+			},
+			{
+				"name": "ATC",
+				"type": "String"
+			},
+			{
+				"name": "NomATC",
+				"type": "String"
+			},
+			{
+				"name": "Plan primes",
+				"type": "String"
+			},
+			{
+				"name": "Source",
+				"type": "String"
+			}
+		]
+	}
+}
