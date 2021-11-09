@@ -11,7 +11,7 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
-			"sheetName": "Data",
+			"sheetName": "data",
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "Référentiel_Affectation Roles Utilisateurs par Code postaux.xlsx",
@@ -63,10 +63,6 @@
 			},
 			{
 				"name": "Lancement Maj Affectation",
-				"type": "String"
-			},
-			{
-				"name": "Diffus/Chantier",
 				"type": "String"
 			}
 		]
