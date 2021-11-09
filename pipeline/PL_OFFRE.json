@@ -64,11 +64,11 @@
 					"functionName": "fuzzyjoin",
 					"method": "POST",
 					"body": {
-						"leftfilepath": "Temp/atc_affectation_lower",
-						"rightfilepath": "Temp/atc_c2021_lower",
-						"leftkey": "Utilisateur",
+						"leftfilepath": "Temp/offreChantierTemp.csv",
+						"rightfilepath": "Temp/refATC2021Offre.csv",
+						"leftkey": "Responsable",
 						"rightkey": "NomATC",
-						"outputpath": "Temp/atc_fuzzyjoined.xlsx",
+						"outputpath": "Temp/offreChantierTempfuzzy.xlsx",
 						"containername": "data-warehouse"
 					}
 				},
