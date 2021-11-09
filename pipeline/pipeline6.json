@@ -3,7 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "DIFFUS",
+				"name": "PREPARATION",
+				"description": "Input : \noffreDiffusInput\noffreChantierInput\nreferentielATCinput\nOutput : \noffreDiffusTemp\nStg_offre_diffus\noffreChantierTemp\nstagingChantier\noffreAtcTemp\n",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,7 +17,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "DSC_PREPARATION",
+						"referenceName": "PREPARATION",
 						"type": "DataFlowReference"
 					},
 					"compute": {
