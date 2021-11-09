@@ -3,12 +3,12 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "PREPARATION",
-				"description": "Input : \noffreDiffusInput\noffreChantierInput\nreferentielATCinput\nOutput : \noffreDiffusTemp\nStg_offre_diffus\noffreChantierTemp\nstagingChantier\noffreAtcTemp\n",
-				"type": "ExecuteDataFlow",
+				"name": "fuzzyjoin",
+				"description": "fuzzy join: atc 2020 2021 and  atc affectation",
+				"type": "AzureFunctionActivity",
 				"dependsOn": [],
 				"policy": {
-					"timeout": "1.00:00:00",
+					"timeout": "7.00:00:00",
 					"retry": 0,
 					"retryIntervalInSeconds": 30,
 					"secureOutput": false,
@@ -16,15 +16,20 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"dataflow": {
-						"referenceName": "PREPARATION",
-						"type": "DataFlowReference"
-					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
+					"functionName": "fuzzyjoin",
+					"method": "POST",
+					"body": {
+						"leftfilepath": "Temp/responsableOffreChantier.csv",
+						"rightfilepath": "Temp/refATC2021Offre.csv",
+						"leftkey": "UserLowerCase",
+						"rightkey": "NomATC",
+						"outputpath": "Temp/responsableMappingfuzzy.xlsx",
+						"containername": "data-warehouse"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureFunctionPremium",
+					"type": "LinkedServiceReference"
 				}
 			}
 		],
