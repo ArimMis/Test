@@ -59,6 +59,22 @@
 			{
 				"name": "canal",
 				"type": "String"
+			},
+			{
+				"name": "Numéro interne 2",
+				"type": "String"
+			},
+			{
+				"name": "NOM_CMI",
+				"type": "String"
+			},
+			{
+				"name": "CODE_CMI",
+				"type": "String"
+			},
+			{
+				"name": "Numéro interne 1",
+				"type": "String"
 			}
 		]
 	},
