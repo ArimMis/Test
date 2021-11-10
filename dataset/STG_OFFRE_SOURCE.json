@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "stg_offre",
+				"fileName": "stg_offre.csv",
 				"folderPath": "staging",
 				"container": "data-warehouse"
 			},
@@ -60,27 +60,11 @@
 				"type": "String"
 			},
 			{
-				"name": "NbLogement",
-				"type": "String"
-			},
-			{
 				"name": "Produit",
 				"type": "String"
 			},
 			{
-				"name": "Numéro interne 2",
-				"type": "String"
-			},
-			{
 				"name": "Créateur offre",
-				"type": "String"
-			},
-			{
-				"name": "Source",
-				"type": "String"
-			},
-			{
-				"name": "UserLowerCase",
 				"type": "String"
 			}
 		]
