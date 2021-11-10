@@ -76,6 +76,10 @@
 				"type": "String"
 			},
 			{
+				"name": "DR",
+				"type": "String"
+			},
+			{
 				"name": "Code postal",
 				"type": "String"
 			}
