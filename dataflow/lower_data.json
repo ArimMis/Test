@@ -13,13 +13,6 @@
 						"type": "DatasetReference"
 					},
 					"name": "refaffectation"
-				},
-				{
-					"dataset": {
-						"referenceName": "ref_atc_2021",
-						"type": "DatasetReference"
-					},
-					"name": "ref2021"
 				}
 			],
 			"sinks": [
@@ -29,13 +22,6 @@
 						"type": "DatasetReference"
 					},
 					"name": "atcAffectationLower"
-				},
-				{
-					"dataset": {
-						"referenceName": "atc_c2021_lower",
-						"type": "DatasetReference"
-					},
-					"name": "atcC2021Lower"
 				}
 			],
 			"transformations": [
@@ -43,16 +29,7 @@
 					"name": "DerivedColumn1"
 				},
 				{
-					"name": "DerivedColumn2"
-				},
-				{
 					"name": "filteredcolumnsrefrefaffectation"
-				},
-				{
-					"name": "Select1"
-				},
-				{
-					"name": "Filter1"
 				},
 				{
 					"name": "DerivedColumn3"
@@ -61,20 +38,13 @@
 					"name": "Select2"
 				},
 				{
-					"name": "Select3"
-				},
-				{
-					"name": "MapDrifted1",
-					"description": "Creates an explicit mapping for each drifted column"
-				},
-				{
 					"name": "Filter2"
 				},
 				{
 					"name": "Filter3"
 				}
 			],
-			"script": "source(output(\n\t\t{Clé Référentiel} as string,\n\t\t{Recherche Clé EPS} as string,\n\t\tMarque as string,\n\t\t{Code Postal début} as string,\n\t\t{Code Postal fin} as string,\n\t\tUtilisateur as string,\n\t\tFonction as string,\n\t\t{Département} as string,\n\t\tDR as string,\n\t\t{ID SAP} as string,\n\t\t{Lancement Maj Affectation} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> refaffectation\nsource(output(\n\t\tATC as string,\n\t\tNomATC as string,\n\t\t{Plan primes} as string,\n\t\tDR as string,\n\t\t{Secteur prime} as string,\n\t\tMatricule as string,\n\t\t{Secteur DEC} as string,\n\t\tRallye as string,\n\t\tNomATC2 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> ref2021\nSelect2 derive(Utilisateur = lower(Utilisateur)) ~> DerivedColumn1\nSelect1 derive(NomATC = lower(NomATC)) ~> DerivedColumn2\nDerivedColumn1 select(mapColumn(\n\t\t{Clé Référentiel},\n\t\t{Recherche Clé EPS},\n\t\tMarque,\n\t\t{Code Postal début},\n\t\t{Code Postal fin},\n\t\tUtilisateur,\n\t\tFonction,\n\t\t{Département},\n\t\tDR,\n\t\t{ID SAP}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> filteredcolumnsrefrefaffectation\nFilter1 select(mapColumn(\n\t\tATC,\n\t\tNomATC,\n\t\t{Plan primes},\n\t\tDR,\n\t\t{Secteur prime},\n\t\tMatricule,\n\t\t{Secteur DEC},\n\t\tRallye\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect3 filter(!isNull(NomATC)) ~> Filter1\nfilteredcolumnsrefrefaffectation derive({Plan prime} = iif( Fonction== \"Attaché commercial réseau\" || Fonction == \"Attaché commercial réseau 2\" , \"Diffus\", iif( Fonction == \"Attaché commercial prescription\"  , \"Chantier\", \"\"  )  )) ~> DerivedColumn3\nFilter2 select(mapColumn(\n\t\t{Clé Référentiel},\n\t\t{Recherche Clé EPS},\n\t\tMarque,\n\t\t{Code Postal début},\n\t\t{Code Postal fin},\n\t\tUtilisateur,\n\t\tFonction,\n\t\t{Département},\n\t\tDR,\n\t\t{ID SAP}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select2\nMapDrifted1 select(mapColumn(\n\t\tATC,\n\t\t{Plan primes},\n\t\tDR,\n\t\t{Secteur prime},\n\t\tMatricule,\n\t\t{Secteur DEC},\n\t\tRallye,\n\t\tNomATC = NomATC_new\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select3\nref2021 derive(NomATC_oring = toString(byName('NomATC1')),\n\t\tNomATC_new = toString(byName('NomATC8'))) ~> MapDrifted1\nrefaffectation filter(in(['Attaché commercial prescription','Attaché commercial réseau 2','Attaché commercial réseau'], Fonction)) ~> Filter2\nFilter2 filter({ID SAP}==\"16400015\") ~> Filter3\nDerivedColumn3 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['atc_affectation_lower.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> atcAffectationLower\nDerivedColumn2 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['atc_c2021_lower.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> atcC2021Lower"
+			"script": "source(output(\n\t\t{Clé Référentiel} as string,\n\t\t{Recherche Clé EPS} as string,\n\t\tMarque as string,\n\t\t{Code Postal début} as string,\n\t\t{Code Postal fin} as string,\n\t\tUtilisateur as string,\n\t\tFonction as string,\n\t\t{Département} as string,\n\t\tDR as string,\n\t\t{ID SAP} as string,\n\t\t{Lancement Maj Affectation} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> refaffectation\nSelect2 derive(Utilisateur = lower(Utilisateur)) ~> DerivedColumn1\nDerivedColumn1 select(mapColumn(\n\t\t{Clé Référentiel},\n\t\t{Recherche Clé EPS},\n\t\tMarque,\n\t\t{Code Postal début},\n\t\t{Code Postal fin},\n\t\tUtilisateur,\n\t\tFonction,\n\t\t{Département},\n\t\tDR,\n\t\t{ID SAP}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> filteredcolumnsrefrefaffectation\nfilteredcolumnsrefrefaffectation derive({Plan prime} = iif( Fonction== \"Attaché commercial réseau\" || Fonction == \"Attaché commercial réseau 2\" , \"Diffus\", iif( Fonction == \"Attaché commercial prescription\"  , \"Chantier\", \"\"  )  )) ~> DerivedColumn3\nFilter2 select(mapColumn(\n\t\t{Clé Référentiel},\n\t\t{Recherche Clé EPS},\n\t\tMarque,\n\t\t{Code Postal début},\n\t\t{Code Postal fin},\n\t\tUtilisateur,\n\t\tFonction,\n\t\t{Département},\n\t\tDR,\n\t\t{ID SAP}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select2\nrefaffectation filter(in(['Attaché commercial prescription','Attaché commercial réseau 2','Attaché commercial réseau'], Fonction)) ~> Filter2\nFilter2 filter({ID SAP}==\"16400015\") ~> Filter3\nDerivedColumn3 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['atc_affectation_lower.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> atcAffectationLower"
 		}
 	}
 }
