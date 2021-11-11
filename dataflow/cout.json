@@ -1,6 +1,7 @@
 {
 	"name": "cout",
 	"properties": {
+		"description": "o\tPour le cout\n\tPrendre la facturation « brute » en sortie de SAP/BW\n\tFiltrer les lignes ou le donneur d’ordre est un CTT\n•\tQuestion 2bis (cf plus haut) : il semblerait que nous ayons besoin ID du CTT ?\n\tFiltrer certaines raisons de commandes et de types de document\n•\tQuestion 3 : pouvez-vous nous transmettre le détail des filtres svp ?\n\tLa colonne de cout en sortie sera le « cout standard » présent dans la facturation \n\tAjouter l’information de VMC (en euros) en faisant la jointure en avec le nouveau référentiel VMC (info non dispo dans l’extract à date BW)\n\tAjouter les méta données produits, client, CTT, comme dans la base commerciale\n",
 		"folder": {
 			"name": "SORTIE MARKETING"
 		},
