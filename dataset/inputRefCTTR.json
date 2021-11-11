@@ -21,7 +21,63 @@
 		},
 		"schema": [
 			{
-				"name": "Marque;Code Postal d�but;Code Postal fin;Utilisateur;Fonction;D�partement;ATC;NomATC;Plan primes;Matricule;Canal final;toreplicate;dd;DR;Code postal",
+				"name": "Marque",
+				"type": "String"
+			},
+			{
+				"name": "Code Postal début",
+				"type": "String"
+			},
+			{
+				"name": "Code Postal fin",
+				"type": "String"
+			},
+			{
+				"name": "Utilisateur",
+				"type": "String"
+			},
+			{
+				"name": "Fonction",
+				"type": "String"
+			},
+			{
+				"name": "Département",
+				"type": "String"
+			},
+			{
+				"name": "ATC",
+				"type": "String"
+			},
+			{
+				"name": "NomATC",
+				"type": "String"
+			},
+			{
+				"name": "Plan primes",
+				"type": "String"
+			},
+			{
+				"name": "Matricule",
+				"type": "String"
+			},
+			{
+				"name": "Canal final",
+				"type": "String"
+			},
+			{
+				"name": "toreplicate",
+				"type": "String"
+			},
+			{
+				"name": "dd",
+				"type": "String"
+			},
+			{
+				"name": "DR",
+				"type": "String"
+			},
+			{
+				"name": "Code postal",
 				"type": "String"
 			}
 		]
