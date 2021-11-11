@@ -1,5 +1,5 @@
 {
-	"name": "outputQteCede",
+	"name": "facturactionCede",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "VAILLANT_ARCHITECTURE",
