@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "ATC_PERFORMANCE_ET_CLIENT_SAP",
+						"referenceName": "preparation_facturation_update",
 						"type": "DataFlowReference"
 					},
 					"compute": {
