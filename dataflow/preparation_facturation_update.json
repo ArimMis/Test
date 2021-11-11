@@ -75,7 +75,7 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "outputQteCede",
+						"referenceName": "facturactionCede",
 						"type": "DatasetReference"
 					},
 					"name": "outputQteCede"
