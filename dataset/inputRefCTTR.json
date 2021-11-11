@@ -1,0 +1,29 @@
+{
+	"name": "inputRefCTTR",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "referentiel_CTRCTT.csv",
+				"container": "data-warehouse"
+			},
+			"columnDelimiter": ";",
+			"encodingName": "WINDOWS-1252",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Marque;Code Postal d�but;Code Postal fin;Utilisateur;Fonction;D�partement;ATC;NomATC;Plan primes;Matricule;Canal final;toreplicate;dd;DR;Code postal",
+				"type": "String"
+			}
+		]
+	}
+}
