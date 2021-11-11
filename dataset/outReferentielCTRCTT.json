@@ -1,6 +1,7 @@
 {
 	"name": "outReferentielCTRCTT",
 	"properties": {
+		"description": "output referentiel CTT&Cttr",
 		"linkedServiceName": {
 			"referenceName": "VAILLANT_ARCHITECTURE",
 			"type": "LinkedServiceReference"
