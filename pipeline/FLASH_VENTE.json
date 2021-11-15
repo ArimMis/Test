@@ -32,7 +32,7 @@
 					}
 				},
 				"linkedServiceName": {
-					"referenceName": "data transformation azure function",
+					"referenceName": "AzureFunctionPremium",
 					"type": "LinkedServiceReference"
 				}
 			}
