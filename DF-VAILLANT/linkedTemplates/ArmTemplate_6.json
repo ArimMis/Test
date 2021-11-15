@@ -13,6 +13,47 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/PARTEDIS_PRIX_STD')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT/PARTEDIS"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Px Std 2020",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Partedis.xlsx",
+						"folderPath": "PriceList",
+						"container": "data-input"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Référence",
+						"type": "String"
+					},
+					{
+						"name": "Article",
+						"type": "String"
+					},
+					{
+						"name": "Prix Unitaire Std",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/PLATEFORMES')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -740,6 +781,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
+						"folderPath": "Marketing",
 						"container": "data-mart"
 					},
 					"columnDelimiter": ";",
@@ -1248,7 +1290,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "stg_offre",
+						"fileName": "stg_offre.csv",
 						"folderPath": "staging",
 						"container": "data-warehouse"
 					},
@@ -1295,27 +1337,11 @@
 						"type": "String"
 					},
 					{
-						"name": "NbLogement",
-						"type": "String"
-					},
-					{
 						"name": "Produit",
 						"type": "String"
 					},
 					{
-						"name": "Numéro interne 2",
-						"type": "String"
-					},
-					{
 						"name": "Créateur offre",
-						"type": "String"
-					},
-					{
-						"name": "Source",
-						"type": "String"
-					},
-					{
-						"name": "UserLowerCase",
 						"type": "String"
 					}
 				]
@@ -1572,40 +1598,6 @@
 					},
 					{
 						"name": "qte_ecc",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Sinktemp')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "OTHER"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "Temp",
-						"container": "data-warehouse"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "affecte/non_affecte;plateforme/vente directe;origine de la ligne;year;month;Code client livr�;code client plateforme livree;code produit;quantite;ca;Code postal du client livr�;marque;ID marque;ID canal de distribution;Nom du canal;Diffus/Chantier;document_vente (vente directe);Agence commerciale corrig� (vente directe);Donneur d'ordre (vente directe);Facture (vente directe);Type poste Facture (vente directe);Num�ro offre;ATC Corrig� (vente directe);ATC offre;ATC livr�;ATC Performance;NomATC;Matricule;Motif commande (vente directe);Type de facture (vente directe);N1groupe;N2groupe;N3groupe;N4groupe;N5groupe;N6groupe;N7groupe;N1groupedesignation;N2groupedesignation;N3groupedesignation;N4groupedesignation;N5groupedesignation;N6groupedesignation;N7groupedesignation;N1localedesignation;N2localedesignation;N3localedesignation;N4localedesignation;N5localedesignation;N6localedesignation;N7localedesignation;N1locale;N2locale;N3locale;N4locale;N5locale;N6locale;N7locale;Hi�rarchgroupe;Hi�rarchlocale;Num�ro du compte;EPS_Nom du compte;EPS_Groupe cible/Typologie g�n�rale;EPS_Sous groupe cible/Typologie d�taill�e;EPS_Compte principal: Num�ro du compte;EPS_Compte principal: Nom du compte;Client;Num�ro client indirect;CODE_CMI;NOM_CMI;Nom du compte;Client Indirect_ Groupe cible/Typologie g�n�rale;Client Indirect_ Sous groupe cible/Typologie d�taill�e;Client Indirect_  Compte principal: Num�ro du compte;Client Indirect_  Compte principal: Nom du compte",
 						"type": "String"
 					}
 				]
