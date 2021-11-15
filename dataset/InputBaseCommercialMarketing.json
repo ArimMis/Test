@@ -129,6 +129,10 @@
 				"type": "String"
 			},
 			{
+				"name": "DR",
+				"type": "String"
+			},
+			{
 				"name": "Matricule",
 				"type": "String"
 			},
