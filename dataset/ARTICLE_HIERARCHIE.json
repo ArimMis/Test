@@ -11,13 +11,13 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
-			"sheetName": "BI_ARTICLES ",
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "Articles_avec_hiérarchie_Articles_groupe_et_locale.xlsx",
 				"folderPath": "ReferentielArticle",
 				"container": "data-input"
 			},
+			"sheetIndex": 0,
 			"firstRowAsHeader": true
 		},
 		"schema": [
