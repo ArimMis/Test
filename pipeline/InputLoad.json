@@ -213,6 +213,8 @@
 		"folder": {
 			"name": "PREPARATION ECOULEMENT"
 		},
-		"annotations": []
-	}
+		"annotations": [],
+		"lastPublishTime": "2021-10-29T13:48:43Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
 }
