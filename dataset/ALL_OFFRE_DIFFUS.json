@@ -18,17 +18,14 @@
 				"container": "data-input"
 			},
 			"columnDelimiter": ";",
+			"encodingName": "WINDOWS-1252",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": [
 			{
-				"name": "Prop_0",
-				"type": "String"
-			},
-			{
-				"name": "DateOffre",
+				"name": "DateDébutValidité",
 				"type": "String"
 			},
 			{
@@ -196,7 +193,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Date de validité",
+				"name": "DateFinValidité",
 				"type": "String"
 			},
 			{
@@ -217,6 +214,30 @@
 			},
 			{
 				"name": "OffreSupprimee",
+				"type": "String"
+			},
+			{
+				"name": "Date de création",
+				"type": "String"
+			},
+			{
+				"name": "NomSignataire1",
+				"type": "String"
+			},
+			{
+				"name": "NomSignataire2",
+				"type": "String"
+			},
+			{
+				"name": "DateSignataire1",
+				"type": "String"
+			},
+			{
+				"name": "DateSignataire2",
+				"type": "String"
+			},
+			{
+				"name": "DateDérogation",
 				"type": "String"
 			}
 		]
