@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "FACTURATION"
+			"name": "OTHER"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
