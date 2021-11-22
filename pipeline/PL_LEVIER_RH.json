@@ -53,8 +53,8 @@
 						"levierContainer": "data-warehouse",
 						"levierRHpath": "Temp/TEMP_LEVIERS_RH.csv",
 						"levierPerformancePath": "Temp/TEMP_LEVIER_PERFORMANCE.csv",
-						"atc_container": "data-input",
-						"atc_path": "ATC/Copie de referentiel ATC 2021 2020.xlsx",
+						"atc_container": "data-warehouse",
+						"atc_path": "referentiel_atc.csv",
 						"output_container": "data-mart",
 						"output_path": "RH/LEVIER_RH.xlsx"
 					}
