@@ -1,5 +1,5 @@
 {
-	"name": "facturationDSCTEREVA",
+	"name": "facturationBW_AP",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "VAILLANT_ARCHITECTURE",
@@ -9,18 +9,16 @@
 			"name": "FACTURATION"
 		},
 		"annotations": [],
-		"type": "DelimitedText",
+		"type": "Excel",
 		"typeProperties": {
+			"sheetName": "Feuil1",
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "facturationForDSCTEREVA",
-				"folderPath": "Temp",
-				"container": "data-warehouse"
+				"fileName": "FacturationBW_AP.xlsx",
+				"folderPath": "FacturationBW",
+				"container": "data-input"
 			},
-			"columnDelimiter": ",",
-			"escapeChar": "\\",
-			"firstRowAsHeader": true,
-			"quoteChar": "\""
+			"firstRowAsHeader": true
 		},
 		"schema": [
 			{
@@ -45,6 +43,10 @@
 			},
 			{
 				"name": "Jour calendaire",
+				"type": "String"
+			},
+			{
+				"name": "1ereDateLivrDdee",
 				"type": "String"
 			},
 			{
@@ -154,68 +156,7 @@
 			{
 				"name": "Cout standard facturé",
 				"type": "String"
-			},
-			{
-				"name": "date_id",
-				"type": "String"
-			},
-			{
-				"name": "year",
-				"type": "String"
-			},
-			{
-				"name": "yearmonth",
-				"type": "String"
-			},
-			{
-				"name": "fact_filter",
-				"type": "String"
-			},
-			{
-				"name": "qt_cd_e",
-				"type": "String"
-			},
-			{
-				"name": "ca_cd_",
-				"type": "String"
-			},
-			{
-				"name": "qt_livr_e",
-				"type": "String"
-			},
-			{
-				"name": "ca_livr_",
-				"type": "String"
-			},
-			{
-				"name": "qt_factur_e",
-				"type": "String"
-			},
-			{
-				"name": "ca_factur_",
-				"type": "String"
-			},
-			{
-				"name": "cout_standard_cd_",
-				"type": "String"
-			},
-			{
-				"name": "cout_fabrication",
-				"type": "String"
-			},
-			{
-				"name": "cout_standard_livr_",
-				"type": "String"
-			},
-			{
-				"name": "cout_standard_factur_",
-				"type": "String"
-			},
-			{
-				"name": "year_month",
-				"type": "String"
 			}
 		]
-	},
-	"type": "Microsoft.DataFactory/factories/datasets"
+	}
 }
