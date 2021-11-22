@@ -54,8 +54,8 @@
 						"data1_path": "Temp/PREPARATION_OBJECTIF_RH.csv",
 						"data2_container": "data-warehouse",
 						"data2_path": "Temp/TEMP_LEVIER_PERFORMANCE.csv",
-						"atc_container": "data-input",
-						"atc_path": "ATC/Copie de referentiel ATC 2021 2020.xlsx",
+						"atc_container": "data-warehouse",
+						"atc_path": "referentiel_atc.csv",
 						"output_container": "data-warehouse",
 						"output_path": "Temp/OBJECTIF_RH_PREPARED.xlsx"
 					}
