@@ -3,9 +3,40 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "CLEANING_POST_UNION",
+				"name": "UNION_ECOULEMENT",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "UNION_ECOULEMENT",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "CLEANING_POST_UNION",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "UNION_ECOULEMENT",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "1.00:00:00",
 					"retry": 0,
