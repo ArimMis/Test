@@ -13,19 +13,22 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "ExportDet2Ans.csv",
-				"folderPath": "Offre/Chantier",
-				"container": "data-input"
+				"fileName": "ALL_OFFRE_CHANTIER.csv",
+				"folderPath": "Temp",
+				"container": "data-warehouse"
 			},
 			"columnDelimiter": ";",
-			"encodingName": "WINDOWS-1252",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": [
 			{
-				"name": "DateDébutValidité",
+				"name": "Prop_0",
+				"type": "String"
+			},
+			{
+				"name": "DateOffre",
 				"type": "String"
 			},
 			{
@@ -81,11 +84,11 @@
 				"type": "String"
 			},
 			{
-				"name": "Prix DO",
+				"name": "Prix client",
 				"type": "String"
 			},
 			{
-				"name": "Prix pro",
+				"name": "Prix négoce",
 				"type": "String"
 			},
 			{
@@ -93,15 +96,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Numéro interne 1",
-				"type": "String"
-			},
-			{
 				"name": "Client",
-				"type": "String"
-			},
-			{
-				"name": "Ville client",
 				"type": "String"
 			},
 			{
@@ -109,7 +104,11 @@
 				"type": "String"
 			},
 			{
-				"name": "Numéro interne 2",
+				"name": "Ville client",
+				"type": "String"
+			},
+			{
+				"name": "Numéro interne 1",
 				"type": "String"
 			},
 			{
@@ -118,6 +117,10 @@
 			},
 			{
 				"name": "Ville négoce",
+				"type": "String"
+			},
+			{
+				"name": "Numéro interne 2",
 				"type": "String"
 			},
 			{
@@ -161,51 +164,11 @@
 				"type": "String"
 			},
 			{
-				"name": "Offre nationale",
+				"name": "Typologie projet",
 				"type": "String"
 			},
 			{
-				"name": "Année Tarif",
-				"type": "String"
-			},
-			{
-				"name": "PotentielP1N",
-				"type": "String"
-			},
-			{
-				"name": "PotentielP2N",
-				"type": "String"
-			},
-			{
-				"name": "PotentielP3N",
-				"type": "String"
-			},
-			{
-				"name": "PotentielP4N",
-				"type": "String"
-			},
-			{
-				"name": "PotentielP5N",
-				"type": "String"
-			},
-			{
-				"name": "PotentielP6N",
-				"type": "String"
-			},
-			{
-				"name": "DateFinValidité",
-				"type": "String"
-			},
-			{
-				"name": "CODE_CMI",
-				"type": "String"
-			},
-			{
-				"name": "NOM_CMI",
-				"type": "String"
-			},
-			{
-				"name": "CodeATC",
+				"name": "DateValidite",
 				"type": "String"
 			},
 			{
@@ -214,30 +177,6 @@
 			},
 			{
 				"name": "OffreSupprimee",
-				"type": "String"
-			},
-			{
-				"name": "Date de création",
-				"type": "String"
-			},
-			{
-				"name": "NomSignataire1",
-				"type": "String"
-			},
-			{
-				"name": "NomSignataire2",
-				"type": "String"
-			},
-			{
-				"name": "DateSignataire1",
-				"type": "String"
-			},
-			{
-				"name": "DateSignataire2",
-				"type": "String"
-			},
-			{
-				"name": "DateDérogation",
 				"type": "String"
 			}
 		]
