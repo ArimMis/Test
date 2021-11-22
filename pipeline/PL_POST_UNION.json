@@ -28,41 +28,10 @@
 				}
 			},
 			{
-				"name": "unionSAP_EHS",
-				"description": "Input : \nclientEHS\nextractionSap\nOutput : \nsapUnionEHS",
-				"type": "ExecuteDataFlow",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "1.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataflow": {
-						"referenceName": "CLIENT_SAP_EHS_PREPARATION",
-						"type": "DataFlowReference"
-					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
-				}
-			},
-			{
 				"name": "CleaninPostUnion",
 				"description": "Input : \nunionEccoulement\narticlehierarchi\nunionsapehs\npricelisteReplicated\nOutput : \ntunionSap\noutputPreparationEcoulement",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
-					{
-						"activity": "unionSAP_EHS",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
 					{
 						"activity": "prix_moyen",
 						"dependencyConditions": [
