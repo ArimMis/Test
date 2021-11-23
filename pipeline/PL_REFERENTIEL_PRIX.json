@@ -34,7 +34,7 @@
 					{
 						"activity": "DUREE PERIODE",
 						"dependencyConditions": [
-							"Failed"
+							"Succeeded"
 						]
 					}
 				],
