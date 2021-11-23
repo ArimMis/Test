@@ -34,7 +34,7 @@
 					{
 						"activity": "DUREE PERIODE",
 						"dependencyConditions": [
-							"Failed"
+							"Succeeded"
 						]
 					}
 				],
@@ -51,13 +51,13 @@
 					"method": "POST",
 					"body": {
 						"inputcontainer": "data-warehouse",
-						"inputpath": "Temp/TEMP_PRIX_PAR_PERIODE",
+						"inputpath": "Temp/TEMP_PRIX_PAR_PERIODE.csv",
 						"outputcontainer": "data-warehouse",
-						"outputpath": "PRIX_PAR_PERIODEV3.xlsx"
+						"outputpath": "referentielPrix.xlsx"
 					}
 				},
 				"linkedServiceName": {
-					"referenceName": "data transformation azure function",
+					"referenceName": "AzureFunctionPremium",
 					"type": "LinkedServiceReference"
 				}
 			}
