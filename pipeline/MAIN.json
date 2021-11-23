@@ -106,7 +106,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "preparation_facturation_OLD",
+						"referenceName": "preparation_facturation_original",
 						"type": "DataFlowReference"
 					},
 					"compute": {
