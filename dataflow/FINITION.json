@@ -2,7 +2,7 @@
 	"name": "FINITION",
 	"properties": {
 		"folder": {
-			"name": "REFERENTIEL/OFFRE"
+			"name": "TUTO/OFFRE OLD"
 		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
