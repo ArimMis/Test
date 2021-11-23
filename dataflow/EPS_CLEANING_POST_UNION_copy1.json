@@ -44,7 +44,7 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "epsv2",
+						"referenceName": "inepsv2",
 						"type": "DatasetReference"
 					},
 					"name": "EPS"

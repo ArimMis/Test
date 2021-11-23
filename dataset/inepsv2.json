@@ -1,0 +1,55 @@
+{
+	"name": "inepsv2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "report1635506729086",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Répertoire comptes actifs-inactifs_V2.xlsx",
+				"folderPath": "Client",
+				"container": "data-input"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Numéro du compte",
+				"type": "String"
+			},
+			{
+				"name": "Nom du compte",
+				"type": "String"
+			},
+			{
+				"name": "Compte principal: Nom du compte",
+				"type": "String"
+			},
+			{
+				"name": "Compte principal: Numéro du compte",
+				"type": "String"
+			},
+			{
+				"name": "Code postal",
+				"type": "String"
+			},
+			{
+				"name": "Ville",
+				"type": "String"
+			},
+			{
+				"name": "Groupe cible/Typologie générale",
+				"type": "String"
+			},
+			{
+				"name": "Sous groupe cible/Typologie détaillée",
+				"type": "String"
+			}
+		]
+	}
+}
