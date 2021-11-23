@@ -2,7 +2,7 @@
 	"name": "CLEANING_POST_UNION",
 	"properties": {
 		"folder": {
-			"name": "PREPARATION ECOULEMENT/POST_UNION"
+			"name": "TUTO"
 		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
