@@ -13,9 +13,9 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "ALL_OFFRE_DIFFUS.csv",
-				"folderPath": "Temp",
-				"container": "data-warehouse"
+				"fileName": "ExportDet2Ans.csv",
+				"folderPath": "Offre/Diffus",
+				"container": "data-input"
 			},
 			"columnDelimiter": ";",
 			"escapeChar": "\\",
