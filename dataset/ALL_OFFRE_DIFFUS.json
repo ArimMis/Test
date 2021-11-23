@@ -1,6 +1,7 @@
 {
 	"name": "ALL_OFFRE_DIFFUS",
 	"properties": {
+		"description": "all offre diffus 2ans",
 		"linkedServiceName": {
 			"referenceName": "VAILLANT_ARCHITECTURE",
 			"type": "LinkedServiceReference"
