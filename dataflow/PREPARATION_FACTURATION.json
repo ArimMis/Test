@@ -1,9 +1,9 @@
 {
-	"name": "FACTURATION_BW",
+	"name": "PREPARATION_FACTURATION",
 	"properties": {
 		"description": "pre",
 		"folder": {
-			"name": "BW"
+			"name": "BASE COMMERCIALE"
 		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
