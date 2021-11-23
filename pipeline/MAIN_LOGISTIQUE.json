@@ -67,7 +67,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "TDataSD",
+						"referenceName": "FacturationBW",
 						"type": "DataFlowReference"
 					},
 					"compute": {

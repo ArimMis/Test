@@ -1,5 +1,5 @@
 {
-	"name": "FacturationBW",
+	"name": "CommandeBW",
 	"properties": {
 		"folder": {
 			"name": "SORTIE LOGISTIQUE"
@@ -9,14 +9,14 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "facturationBW_AC",
+						"referenceName": "commandeBW_AC",
 						"type": "DatasetReference"
 					},
 					"name": "AC"
 				},
 				{
 					"dataset": {
-						"referenceName": "facturationBW_AP",
+						"referenceName": "commandeBW_AP",
 						"type": "DatasetReference"
 					},
 					"name": "AP"
