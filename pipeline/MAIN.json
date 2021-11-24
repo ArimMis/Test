@@ -74,12 +74,6 @@
 						"dependencyConditions": [
 							"Succeeded"
 						]
-					},
-					{
-						"activity": "preparation_facturation",
-						"dependencyConditions": [
-							"Succeeded"
-						]
 					}
 				],
 				"userProperties": [],
