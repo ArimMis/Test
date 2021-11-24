@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "preparation_facturation_original",
+						"referenceName": "ModelVenteDirecte",
 						"type": "DataFlowReference"
 					},
 					"compute": {
