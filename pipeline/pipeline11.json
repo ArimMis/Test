@@ -3,11 +3,12 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "CALCUL PERIODE",
-				"type": "AzureFunctionActivity",
+				"name": "LEVIER RH",
+				"description": "Input : \ndataCommerciale\nPLATEFORMES\nlevierPerformance\nOutput : \nTEMP_LEVIER_RH\nTEMP_LEVIER_PERFORMANCE\n",
+				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
-					"timeout": "7.00:00:00",
+					"timeout": "1.00:00:00",
 					"retry": 0,
 					"retryIntervalInSeconds": 30,
 					"secureOutput": false,
@@ -15,18 +16,15 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"functionName": "AF_CALCUL_PERIODE",
-					"method": "POST",
-					"body": {
-						"inputcontainer": "data-warehouse",
-						"inputpath": "Temp/TEMP_PRIX_PAR_PERIODE.csv",
-						"outputcontainer": "data-warehouse",
-						"outputpath": "referentielPrix.xlsx"
-					}
-				},
-				"linkedServiceName": {
-					"referenceName": "AzureFunctionPremium",
-					"type": "LinkedServiceReference"
+					"dataflow": {
+						"referenceName": "LEVIER_RH",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
 				}
 			}
 		],
