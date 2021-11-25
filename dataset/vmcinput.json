@@ -1,0 +1,34 @@
+{
+	"name": "vmcinput",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Feuil1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "VMC",
+				"container": "data-input"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Material",
+				"type": "String"
+			},
+			{
+				"name": "Description article",
+				"type": "String"
+			},
+			{
+				"name": "VMC",
+				"type": "String"
+			}
+		]
+	}
+}
