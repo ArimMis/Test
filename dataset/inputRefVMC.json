@@ -1,6 +1,7 @@
 {
-	"name": "inputRefCTTR",
+	"name": "inputRefVMC",
 	"properties": {
+		"description": "datawarehouse/referentielVMC",
 		"linkedServiceName": {
 			"referenceName": "VAILLANT_ARCHITECTURE",
 			"type": "LinkedServiceReference"
@@ -10,7 +11,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "referentiel_CTRCTT.csv",
+				"fileName": "referentiel_vmc.csv",
 				"container": "data-warehouse"
 			},
 			"columnDelimiter": ";",
