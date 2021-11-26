@@ -22,63 +22,15 @@
 		},
 		"schema": [
 			{
-				"name": "Marque",
+				"name": "Material",
 				"type": "String"
 			},
 			{
-				"name": "Code Postal début",
+				"name": "year",
 				"type": "String"
 			},
 			{
-				"name": "Code Postal fin",
-				"type": "String"
-			},
-			{
-				"name": "Utilisateur",
-				"type": "String"
-			},
-			{
-				"name": "Fonction",
-				"type": "String"
-			},
-			{
-				"name": "Département",
-				"type": "String"
-			},
-			{
-				"name": "ATC",
-				"type": "String"
-			},
-			{
-				"name": "NomATC",
-				"type": "String"
-			},
-			{
-				"name": "Plan primes",
-				"type": "String"
-			},
-			{
-				"name": "Matricule",
-				"type": "String"
-			},
-			{
-				"name": "Canal final",
-				"type": "String"
-			},
-			{
-				"name": "toreplicate",
-				"type": "String"
-			},
-			{
-				"name": "dd",
-				"type": "String"
-			},
-			{
-				"name": "DR",
-				"type": "String"
-			},
-			{
-				"name": "Code postal",
+				"name": "VMC",
 				"type": "String"
 			}
 		]
