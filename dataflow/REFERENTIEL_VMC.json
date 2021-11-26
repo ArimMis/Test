@@ -2,6 +2,9 @@
 	"name": "REFERENTIEL_VMC",
 	"properties": {
 		"description": "\ninput: dossier VMC\ntraitement:\nconcat all file in vmc,\ndrop duplicate.\noutput referentiel VMC.",
+		"folder": {
+			"name": "SORTIE MARKETING"
+		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
