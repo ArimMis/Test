@@ -13,6 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"folderPath": "Contrat_distribution",
 				"container": "data-mart"
 			},
 			"columnDelimiter": ",",
