@@ -76,6 +76,19 @@
 					},
 					"traceLevel": "Fine"
 				}
+			},
+			{
+				"name": "FICHIER_BW",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "FICHIER_BW",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
 			}
 		],
 		"folder": {
