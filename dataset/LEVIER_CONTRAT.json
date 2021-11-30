@@ -15,7 +15,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "0630_template contrats.xlsx",
-				"folderPath": "Levier RH",
+				"folderPath": "Contrat_distribution",
 				"container": "data-input"
 			},
 			"firstRowAsHeader": true
