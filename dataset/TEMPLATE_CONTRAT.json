@@ -14,7 +14,7 @@
 			"sheetName": "Vue contrat",
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "0630_template contrats.xlsx",
+				"fileName": "Liste_contrats_distribution.xlsx",
 				"folderPath": "Contrat_distribution",
 				"container": "data-input"
 			},
