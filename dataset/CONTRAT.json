@@ -11,6 +11,7 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
+			"sheetName": "Contrat",
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "Liste_contrats_distribution.xlsx",
