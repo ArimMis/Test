@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"folderPath": "staging",
 				"container": "data-warehouse"
 			},
 			"columnDelimiter": ",",
