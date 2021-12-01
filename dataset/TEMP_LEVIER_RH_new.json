@@ -5,6 +5,9 @@
 			"referenceName": "VAILLANT_ARCHITECTURE",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "LEVIER RH"
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
