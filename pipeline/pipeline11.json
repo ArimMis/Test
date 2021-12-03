@@ -3,8 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "LEVIER RH",
-				"description": "Input : \ndataCommerciale\nPLATEFORMES\nlevierPerformance\nOutput : \nTEMP_LEVIER_RH\nTEMP_LEVIER_PERFORMANCE\n",
+				"name": "PREPARATION OBJECTIF",
+				"description": "Input : \nobjectif\nlevierPerformance\nOutput : \nPREPARATION_OBJECTIF_RH\nTEMP_LEVIER_PERFORMANCE",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -17,7 +17,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "LEVIER_RH",
+						"referenceName": "PREPARATION_OBJECTIF_RH",
 						"type": "DataFlowReference"
 					},
 					"compute": {
