@@ -48,7 +48,14 @@
 				"name": "PL_REFERENTIEL_PRIX",
 				"description": "DUREE PERIODE\nAF : DUREE PERIODE",
 				"type": "ExecutePipeline",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "PL_REFERENTIEL_ATC",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
