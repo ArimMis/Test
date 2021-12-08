@@ -66,8 +66,7 @@
 						"levier_container": "data-warehouse",
 						"levier_path": "Temp/LEVIER_RH.xlsx",
 						"output_container": "data-mart",
-						"output_path": "RH/OBJECTIFS.xlsx",
-						"yearToCalculate": "2020"
+						"output_path": "RH/OBJECTIFS.xlsx"
 					}
 				},
 				"linkedServiceName": {
