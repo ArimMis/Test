@@ -1,0 +1,38 @@
+{
+	"name": "FILTRE_OBJECTIF_RH",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "LEVIER RH"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Feuil1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "FILTRE_CALCUL_OBJECTIF.xlsx",
+				"folderPath": "Levier RH",
+				"container": "data-input"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Année",
+				"type": "String"
+			},
+			{
+				"name": "Mois début",
+				"type": "String"
+			},
+			{
+				"name": "Mois fin",
+				"type": "String"
+			}
+		]
+	}
+}
