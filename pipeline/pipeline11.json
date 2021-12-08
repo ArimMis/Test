@@ -17,7 +17,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "PREPARATION_OBJECTIF_RH",
+						"referenceName": "LEVIER_RH_FILTRE",
 						"type": "DataFlowReference"
 					},
 					"compute": {
