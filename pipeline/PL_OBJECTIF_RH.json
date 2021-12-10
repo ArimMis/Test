@@ -54,6 +54,8 @@
 						"data1_path": "Temp/PREPARATION_OBJECTIF_RH.csv",
 						"data2_container": "data-warehouse",
 						"data2_path": "Temp/TEMP_LEVIER_PERFORMANCE.csv",
+						"filtre_container": "data-warehouse",
+						"filtre_path": "Temp/FILTRE_OBJECTIF_SORTIE.csv",
 						"atc_container": "data-warehouse",
 						"atc_path": "referentiel_atc.csv",
 						"output_container": "data-warehouse",
