@@ -3,12 +3,11 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "LEVIER RH",
-				"description": "Input : \ndataCommerciale\nPLATEFORMES\nlevierPerformance\nOutput : \nTEMP_LEVIER_RH\nTEMP_LEVIER_PERFORMANCE\n",
-				"type": "ExecuteDataFlow",
+				"name": "Azure Function1",
+				"type": "AzureFunctionActivity",
 				"dependsOn": [],
 				"policy": {
-					"timeout": "1.00:00:00",
+					"timeout": "7.00:00:00",
 					"retry": 0,
 					"retryIntervalInSeconds": 30,
 					"secureOutput": false,
@@ -16,15 +15,18 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"dataflow": {
-						"referenceName": "LEVIER_RH_FILTRE",
-						"type": "DataFlowReference"
-					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
+					"functionName": "AF_IMPORT_ECOUL_EHS",
+					"method": "POST",
+					"body": {
+						"containername": "data-input",
+						"folderpath": "Ecoulement/Engie_Home_Services",
+						"outputContainer": "data-warehouse",
+						"outputpath": "Temp/EHS_ECOULEMENT.xlsx"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureFunctionPremium",
+					"type": "LinkedServiceReference"
 				}
 			}
 		],
