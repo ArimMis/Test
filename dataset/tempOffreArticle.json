@@ -1,0 +1,184 @@
+{
+	"name": "tempOffreArticle",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "Temp",
+				"container": "data-warehouse"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "yearmonth",
+				"type": "String"
+			},
+			{
+				"name": "year",
+				"type": "String"
+			},
+			{
+				"name": "month",
+				"type": "String"
+			},
+			{
+				"name": "qte_ecoulement",
+				"type": "String"
+			},
+			{
+				"name": "ca_ecoulement",
+				"type": "String"
+			},
+			{
+				"name": "POSSAMidString",
+				"type": "String"
+			},
+			{
+				"name": "HubSAPid",
+				"type": "String"
+			},
+			{
+				"name": "reference",
+				"type": "String"
+			},
+			{
+				"name": "distributeur",
+				"type": "String"
+			},
+			{
+				"name": "agence_code",
+				"type": "String"
+			},
+			{
+				"name": "marque_id",
+				"type": "String"
+			},
+			{
+				"name": "Code postal",
+				"type": "String"
+			},
+			{
+				"name": "marque_name",
+				"type": "String"
+			},
+			{
+				"name": "Canal distribution",
+				"type": "String"
+			},
+			{
+				"name": "Secteur d'activit�",
+				"type": "String"
+			},
+			{
+				"name": "Document de vente",
+				"type": "String"
+			},
+			{
+				"name": "Jour calendaire",
+				"type": "String"
+			},
+			{
+				"name": "Agence commerciale corrig�",
+				"type": "String"
+			},
+			{
+				"name": "ATC Corrig�",
+				"type": "String"
+			},
+			{
+				"name": "Donneur d'ordre",
+				"type": "String"
+			},
+			{
+				"name": "Recept de march",
+				"type": "String"
+			},
+			{
+				"name": "Type doc vente",
+				"type": "String"
+			},
+			{
+				"name": "Type de poste",
+				"type": "String"
+			},
+			{
+				"name": "Livraison",
+				"type": "String"
+			},
+			{
+				"name": "Type de livraison",
+				"type": "String"
+			},
+			{
+				"name": "Type poste Livraison",
+				"type": "String"
+			},
+			{
+				"name": "Facture",
+				"type": "String"
+			},
+			{
+				"name": "Type poste Facture",
+				"type": "String"
+			},
+			{
+				"name": "Motif commande",
+				"type": "String"
+			},
+			{
+				"name": "Qt� factur�e",
+				"type": "String"
+			},
+			{
+				"name": "CA factur�",
+				"type": "String"
+			},
+			{
+				"name": "no_offre",
+				"type": "String"
+			},
+			{
+				"name": "ca_final",
+				"type": "String"
+			},
+			{
+				"name": "qt_final",
+				"type": "String"
+			},
+			{
+				"name": "data_origin",
+				"type": "String"
+			},
+			{
+				"name": "canal_final",
+				"type": "String"
+			},
+			{
+				"name": "ATC performance",
+				"type": "String"
+			},
+			{
+				"name": "ATC",
+				"type": "String"
+			},
+			{
+				"name": "NomATC",
+				"type": "String"
+			},
+			{
+				"name": "Matricule",
+				"type": "String"
+			}
+		]
+	}
+}
