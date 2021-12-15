@@ -17,7 +17,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "LEVIER_RH_FILTRE",
+						"referenceName": "LEVIER_RH",
 						"type": "DataFlowReference"
 					},
 					"compute": {
