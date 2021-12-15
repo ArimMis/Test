@@ -11,7 +11,7 @@
 					{
 						"activity": "importDataVF_confort",
 						"dependencyConditions": [
-							"Succeeded"
+							"Completed"
 						]
 					}
 				],
@@ -45,7 +45,7 @@
 					{
 						"activity": "importDataVF_confort",
 						"dependencyConditions": [
-							"Succeeded"
+							"Completed"
 						]
 					}
 				],
@@ -104,7 +104,14 @@
 				"name": "importDataOrcab",
 				"description": "import data from orcab",
 				"type": "AzureFunctionActivity",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "importDataEHS",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -134,21 +141,21 @@
 				"type": "AzureFunctionActivity",
 				"dependsOn": [
 					{
-						"activity": "importDataMabille",
+						"activity": "importDataOrcab",
 						"dependencyConditions": [
-							"Succeeded"
+							"Completed"
 						]
 					},
 					{
 						"activity": "importDataPartedis",
 						"dependencyConditions": [
-							"Succeeded"
+							"Completed"
 						]
 					},
 					{
-						"activity": "importDataOrcab",
+						"activity": "importDataMabille",
 						"dependencyConditions": [
-							"Succeeded"
+							"Completed"
 						]
 					}
 				],
@@ -168,6 +175,33 @@
 						"folderpath": "Ecoulement/Téréva",
 						"outputcontainer": "data-warehouse",
 						"outputpath": "Temp/TEREVA_ECOULEMENT.csv"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureFunctionPremium",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "importDataEHS",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "AF_IMPORT_ECOUL_EHS",
+					"method": "POST",
+					"body": {
+						"containername": "data-input",
+						"folderpath": "Ecoulement/Engie_Home_Services",
+						"outputContainer": "data-warehouse",
+						"outputpath": "Temp/EHS_ECOULEMENT.xlsx"
 					}
 				},
 				"linkedServiceName": {
