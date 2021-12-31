@@ -43,20 +43,6 @@
 					},
 					"waitOnCompletion": true
 				}
-			},
-			{
-				"name": "PL_REFERENTIEL_PRIX",
-				"description": "DUREE PERIODE\nAF : DUREE PERIODE",
-				"type": "ExecutePipeline",
-				"dependsOn": [],
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "PL_REFERENTIEL_PRIX",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true
-				}
 			}
 		],
 		"folder": {
