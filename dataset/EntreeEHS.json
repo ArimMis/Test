@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "SortieEcoulementEHS",
+				"fileName": "SortieEcoulementEHS.csv",
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
