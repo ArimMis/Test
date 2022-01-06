@@ -14,7 +14,7 @@
 						]
 					},
 					{
-						"activity": "PREPARATION_FACTURATION1",
+						"activity": "PREPARATION_FACTURATION",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -71,12 +71,6 @@
 				"dependsOn": [
 					{
 						"activity": "MAIN_REFERENTIEL",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
-						"activity": "PREPARATION_FACTURATION1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -173,7 +167,8 @@
 				}
 			},
 			{
-				"name": "PREPARATION_FACTURATION1",
+				"name": "PREPARATION_FACTURATION",
+				"description": "Input : -facturationbw\n          -PLATEFORMES\ntraitement : -join facturationbw & Plateformes\n                 -join facturationbw & other plateformes\n                 -join facturationbw & filtre DSC\nOutput : -venteDirect\n-AZ_OFacturactionPartedisLikeWithIndex\n-facturationForOtherPlateform\n-facturationForDSCTEREVA\n-facturationForVanMarkes",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
