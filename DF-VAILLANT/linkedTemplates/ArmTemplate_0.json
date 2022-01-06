@@ -239,6 +239,70 @@
 						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
+							"retry": 1,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "Flash_vente_update",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"inputContainer": "data-input",
+								"facturationAPInput": "FacturationBW/FacturationBW_AP.xlsx",
+								"facturationACInput": "FacturationBW/FacturationBW_AC.xlsx",
+								"resteALivrerInput": "Flash_Vente/Input_daily_Reste_à_livrer.xls",
+								"n3excludeInput": "Flash_Vente/Input_Filter_RAL&BW_N3_to_exclude.xlsx",
+								"ssgrExcludeInput": "Flash_Vente/Input_Filter_RAL_SGCR_to_exclude.xlsx",
+								"productHierachyInput": "Flash_Vente/Input_Ref_Product hierarchy.xlsx",
+								"productHierarchyLabeInput": "Flash_Vente/Input_Ref_Product hierarchy label.xlsx",
+								"motifCommandExclude": "Flash_Vente/Input_Filter_BW_Motif_commande_to_exclude.xlsx",
+								"n1ToKeepInput": "Flash_Vente/Input_Filter_BW_N1_to_keep.xlsx",
+								"objectifsInput": "Flash_Vente/Input_annual_objectives_v2.xlsx",
+								"calendrier": "Flash_Vente/Input_Annual_Calendrier.xls",
+								"commandeAcInput": "Flash_Vente/Input_CommandeBW_AC.xlsx",
+								"previsions": "Flash_Vente/Input_daily_FlashForecast4Azure.xlsx",
+								"productHierarchy": "Flash_Vente/Input_Ref_Product hierarchy.xlsx",
+								"budget_ex": "Flash_Vente/Input_annual_FlashBudget4Azure_v2.xlsx",
+								"outputContainer": "data-mart",
+								"bddFlashventeOutput": "Flash_Vente/Output_temp_BDD Flash vente.csv",
+								"graphChaudiereOutput": "Flash_Vente/Output_graph_Chaudiere_SD.xlsx",
+								"graphPACSDOutput": "Flash_Vente/Output_graph_PAC_SD.xlsx",
+								"graphChaudiereVAillantOuput": "Flash_Vente/Output_graph_Chaudiere_Vaillant.xlsx",
+								"graphPacVaillantOutput": "Flash_Vente/Output_graph_PAC_Vaillant.xlsx"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureFunctionPremium",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-11-15T14:53:03Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureFunctionPremium')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/FLASH_VENTE_draft')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "RunFlashVente",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
 							"retry": 0,
 							"retryIntervalInSeconds": 30,
 							"secureOutput": false,
@@ -273,7 +337,11 @@
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
 				},
-				"annotations": []
+				"folder": {
+					"name": "tutoriel&test"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-11-15T14:53:03Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureFunctionPremium')]"
@@ -294,7 +362,7 @@
 							{
 								"activity": "importDataVF_confort",
 								"dependencyConditions": [
-									"Succeeded"
+									"Completed"
 								]
 							}
 						],
@@ -329,7 +397,7 @@
 							{
 								"activity": "importDataVF_confort",
 								"dependencyConditions": [
-									"Succeeded"
+									"Completed"
 								]
 							}
 						],
@@ -390,7 +458,14 @@
 						"name": "importDataOrcab",
 						"description": "import data from orcab",
 						"type": "AzureFunctionActivity",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "importDataEHS",
+								"dependencyConditions": [
+									"Completed"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -416,61 +491,26 @@
 						}
 					},
 					{
-						"name": "importDataEHS",
-						"type": "AzureFunctionActivity",
-						"dependsOn": [
-							{
-								"activity": "importDataOrcab",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"functionName": "AF_IMPORT_ECOUL_EHS",
-							"method": "POST",
-							"headers": {},
-							"body": {
-								"containername": "data-input",
-								"folderpath": "Ecoulement/Engie_Home_Services",
-								"outputContainer": "data-warehouse",
-								"outputpath": "Temp/EHS_ECOULEMENT.xlsx"
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "data transformation azure function",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
 						"name": "importDataTereva",
 						"description": "import all file un folder",
 						"type": "AzureFunctionActivity",
 						"dependsOn": [
 							{
-								"activity": "importDataMabille",
+								"activity": "importDataOrcab",
 								"dependencyConditions": [
-									"Succeeded"
+									"Completed"
 								]
 							},
 							{
 								"activity": "importDataPartedis",
 								"dependencyConditions": [
-									"Succeeded"
+									"Completed"
 								]
 							},
 							{
-								"activity": "importDataEHS",
+								"activity": "importDataMabille",
 								"dependencyConditions": [
-									"Succeeded"
+									"Completed"
 								]
 							}
 						],
@@ -497,6 +537,34 @@
 							"referenceName": "AzureFunctionPremium",
 							"type": "LinkedServiceReference"
 						}
+					},
+					{
+						"name": "importDataEHS",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "AF_IMPORT_ECOUL_EHS",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"containername": "data-input",
+								"folderpath": "Ecoulement/Engie_Home_Services",
+								"outputContainer": "data-warehouse",
+								"outputpath": "Temp/EHS_ECOULEMENT.xlsx"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureFunctionPremium",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
 				"policy": {
@@ -506,7 +574,8 @@
 				"folder": {
 					"name": "PREPARATION ECOULEMENT"
 				},
-				"annotations": []
+				"annotations": [],
+				"lastPublishTime": "2021-10-29T13:48:43Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/data transformation azure function')]",
@@ -669,7 +738,7 @@
 					"name": "tutoriel&test"
 				},
 				"annotations": [],
-				"lastPublishTime": "2021-09-06T17:37:12Z"
+				"lastPublishTime": "2021-11-02T08:02:12Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/data transformation azure function')]"
@@ -718,7 +787,8 @@
 				"folder": {
 					"name": "tutoriel&test"
 				},
-				"annotations": []
+				"annotations": [],
+				"lastPublishTime": "2021-11-02T08:02:12Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/data transformation azure function')]"
@@ -769,7 +839,8 @@
 				"folder": {
 					"name": "tutoriel&test"
 				},
-				"annotations": []
+				"annotations": [],
+				"lastPublishTime": "2021-11-15T14:53:04Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureFunctionPremium')]"
@@ -818,7 +889,8 @@
 				"folder": {
 					"name": "tutoriel&test"
 				},
-				"annotations": []
+				"annotations": [],
+				"lastPublishTime": "2021-11-02T08:02:12Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/data transformation azure function')]"
@@ -867,7 +939,8 @@
 				"folder": {
 					"name": "tutoriel&test"
 				},
-				"annotations": []
+				"annotations": [],
+				"lastPublishTime": "2021-11-02T08:02:12Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureFunctionPremium')]"
@@ -952,199 +1025,11 @@
 				"folder": {
 					"name": "tutoriel&test"
 				},
-				"annotations": []
+				"annotations": [],
+				"lastPublishTime": "2021-11-02T08:02:12Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureFunctionPremium')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ALL_OFFRE_CHANTIER')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "REFERENTIEL_OFFRE"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "ALL_OFFRE_CHANTIER.csv",
-						"folderPath": "Temp",
-						"container": "data-warehouse"
-					},
-					"columnDelimiter": ";",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "Prop_0",
-						"type": "String"
-					},
-					{
-						"name": "DateOffre",
-						"type": "String"
-					},
-					{
-						"name": "Date Prev Cde",
-						"type": "String"
-					},
-					{
-						"name": "Code projet",
-						"type": "String"
-					},
-					{
-						"name": "Projet",
-						"type": "String"
-					},
-					{
-						"name": "Type",
-						"type": "String"
-					},
-					{
-						"name": "CP projet",
-						"type": "String"
-					},
-					{
-						"name": "Ville projet",
-						"type": "String"
-					},
-					{
-						"name": "NbLogement",
-						"type": "String"
-					},
-					{
-						"name": "Référence",
-						"type": "String"
-					},
-					{
-						"name": "Marque",
-						"type": "String"
-					},
-					{
-						"name": "Famille",
-						"type": "String"
-					},
-					{
-						"name": "Produit",
-						"type": "String"
-					},
-					{
-						"name": "Quantité",
-						"type": "String"
-					},
-					{
-						"name": "Prix de base",
-						"type": "String"
-					},
-					{
-						"name": "Prix client",
-						"type": "String"
-					},
-					{
-						"name": "Prix négoce",
-						"type": "String"
-					},
-					{
-						"name": "Prix total",
-						"type": "String"
-					},
-					{
-						"name": "Client",
-						"type": "String"
-					},
-					{
-						"name": "Type financement",
-						"type": "String"
-					},
-					{
-						"name": "Ville client",
-						"type": "String"
-					},
-					{
-						"name": "Numéro interne 1",
-						"type": "String"
-					},
-					{
-						"name": "Négoce",
-						"type": "String"
-					},
-					{
-						"name": "Ville négoce",
-						"type": "String"
-					},
-					{
-						"name": "Numéro interne 2",
-						"type": "String"
-					},
-					{
-						"name": "Statut offre",
-						"type": "String"
-					},
-					{
-						"name": "Responsable",
-						"type": "String"
-					},
-					{
-						"name": "Groupe",
-						"type": "String"
-					},
-					{
-						"name": "Offre",
-						"type": "String"
-					},
-					{
-						"name": "Date de maj statut",
-						"type": "String"
-					},
-					{
-						"name": "Numéro avant vente",
-						"type": "String"
-					},
-					{
-						"name": "Créateur offre",
-						"type": "String"
-					},
-					{
-						"name": "Commentaire interne",
-						"type": "String"
-					},
-					{
-						"name": "Offre dérogée",
-						"type": "String"
-					},
-					{
-						"name": "Contrat cadre",
-						"type": "String"
-					},
-					{
-						"name": "Typologie projet",
-						"type": "String"
-					},
-					{
-						"name": "DateValidite",
-						"type": "String"
-					},
-					{
-						"name": "DEEE",
-						"type": "String"
-					},
-					{
-						"name": "OffreSupprimee",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/VAILLANT_ARCHITECTURE')]"
 			]
 		}
 	]

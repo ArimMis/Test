@@ -13,7 +13,7 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/ALL_OFFRE_DIFFUS')]",
+			"name": "[concat(parameters('factoryName'), '/ALL_OFFRE_CHANTIER')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -29,22 +29,19 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "ALL_OFFRE_DIFFUS.csv",
-						"folderPath": "Temp",
-						"container": "data-warehouse"
+						"fileName": "ExportDet2Ans.csv",
+						"folderPath": "Offre/Chantier",
+						"container": "data-input"
 					},
 					"columnDelimiter": ";",
+					"encodingName": "WINDOWS-1252",
 					"escapeChar": "\\",
 					"firstRowAsHeader": true,
 					"quoteChar": "\""
 				},
 				"schema": [
 					{
-						"name": "Prop_0",
-						"type": "String"
-					},
-					{
-						"name": "DateOffre",
+						"name": "DateDébutValidité",
 						"type": "String"
 					},
 					{
@@ -212,7 +209,7 @@
 						"type": "String"
 					},
 					{
-						"name": "Date de validité",
+						"name": "DateFinValidité",
 						"type": "String"
 					},
 					{
@@ -234,6 +231,279 @@
 					{
 						"name": "OffreSupprimee",
 						"type": "String"
+					},
+					{
+						"name": "Date de création",
+						"type": "String"
+					},
+					{
+						"name": "NomSignataire1",
+						"type": "String"
+					},
+					{
+						"name": "NomSignataire2",
+						"type": "String"
+					},
+					{
+						"name": "DateSignataire1",
+						"type": "String"
+					},
+					{
+						"name": "DateSignataire2",
+						"type": "String"
+					},
+					{
+						"name": "DateDérogation",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ALL_OFFRE_DIFFUS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "all offre diffus 2ans",
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "REFERENTIEL_OFFRE"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "ExportDet2Ans.csv",
+						"folderPath": "Offre/Diffus",
+						"container": "data-input"
+					},
+					"columnDelimiter": ";",
+					"encodingName": "WINDOWS-1252",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "DateDébutValidité",
+						"type": "String"
+					},
+					{
+						"name": "Date Prev Cde",
+						"type": "String"
+					},
+					{
+						"name": "Code projet",
+						"type": "String"
+					},
+					{
+						"name": "Projet",
+						"type": "String"
+					},
+					{
+						"name": "Type",
+						"type": "String"
+					},
+					{
+						"name": "CP projet",
+						"type": "String"
+					},
+					{
+						"name": "Ville projet",
+						"type": "String"
+					},
+					{
+						"name": "NbLogement",
+						"type": "String"
+					},
+					{
+						"name": "Référence",
+						"type": "String"
+					},
+					{
+						"name": "Marque",
+						"type": "String"
+					},
+					{
+						"name": "Famille",
+						"type": "String"
+					},
+					{
+						"name": "Produit",
+						"type": "String"
+					},
+					{
+						"name": "Quantité",
+						"type": "String"
+					},
+					{
+						"name": "Prix de base",
+						"type": "String"
+					},
+					{
+						"name": "Prix DO",
+						"type": "String"
+					},
+					{
+						"name": "Prix pro",
+						"type": "String"
+					},
+					{
+						"name": "Prix total",
+						"type": "String"
+					},
+					{
+						"name": "Numéro interne 1",
+						"type": "String"
+					},
+					{
+						"name": "Client",
+						"type": "String"
+					},
+					{
+						"name": "Ville client",
+						"type": "String"
+					},
+					{
+						"name": "Type financement",
+						"type": "String"
+					},
+					{
+						"name": "Numéro interne 2",
+						"type": "String"
+					},
+					{
+						"name": "Négoce",
+						"type": "String"
+					},
+					{
+						"name": "Ville négoce",
+						"type": "String"
+					},
+					{
+						"name": "Statut offre",
+						"type": "String"
+					},
+					{
+						"name": "Responsable",
+						"type": "String"
+					},
+					{
+						"name": "Groupe",
+						"type": "String"
+					},
+					{
+						"name": "Offre",
+						"type": "String"
+					},
+					{
+						"name": "Date de maj statut",
+						"type": "String"
+					},
+					{
+						"name": "Numéro avant vente",
+						"type": "String"
+					},
+					{
+						"name": "Créateur offre",
+						"type": "String"
+					},
+					{
+						"name": "Commentaire interne",
+						"type": "String"
+					},
+					{
+						"name": "Offre dérogée",
+						"type": "String"
+					},
+					{
+						"name": "Contrat cadre",
+						"type": "String"
+					},
+					{
+						"name": "Offre nationale",
+						"type": "String"
+					},
+					{
+						"name": "Année Tarif",
+						"type": "String"
+					},
+					{
+						"name": "PotentielP1N",
+						"type": "String"
+					},
+					{
+						"name": "PotentielP2N",
+						"type": "String"
+					},
+					{
+						"name": "PotentielP3N",
+						"type": "String"
+					},
+					{
+						"name": "PotentielP4N",
+						"type": "String"
+					},
+					{
+						"name": "PotentielP5N",
+						"type": "String"
+					},
+					{
+						"name": "PotentielP6N",
+						"type": "String"
+					},
+					{
+						"name": "DateFinValidité",
+						"type": "String"
+					},
+					{
+						"name": "CODE_CMI",
+						"type": "String"
+					},
+					{
+						"name": "NOM_CMI",
+						"type": "String"
+					},
+					{
+						"name": "CodeATC",
+						"type": "String"
+					},
+					{
+						"name": "DEEE",
+						"type": "String"
+					},
+					{
+						"name": "OffreSupprimee",
+						"type": "String"
+					},
+					{
+						"name": "Date de création",
+						"type": "String"
+					},
+					{
+						"name": "NomSignataire1",
+						"type": "String"
+					},
+					{
+						"name": "NomSignataire2",
+						"type": "String"
+					},
+					{
+						"name": "DateSignataire1",
+						"type": "String"
+					},
+					{
+						"name": "DateSignataire2",
+						"type": "String"
+					},
+					{
+						"name": "DateDérogation",
+						"type": "String"
 					}
 				]
 			},
@@ -254,13 +524,13 @@
 				"annotations": [],
 				"type": "Excel",
 				"typeProperties": {
-					"sheetName": "BI_ARTICLES ",
 					"location": {
 						"type": "AzureBlobStorageLocation",
 						"fileName": "Articles_avec_hiérarchie_Articles_groupe_et_locale.xlsx",
 						"folderPath": "ReferentielArticle",
 						"container": "data-input"
 					},
+					"sheetIndex": 0,
 					"firstRowAsHeader": true
 				},
 				"schema": [
@@ -1937,6 +2207,10 @@
 						"type": "String"
 					},
 					{
+						"name": "Description",
+						"type": "String"
+					},
+					{
 						"name": "N1groupe",
 						"type": "String"
 					},
@@ -2547,8 +2821,8 @@
 					"sheetName": "Contrat",
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "0630_template contrats.xlsx",
-						"folderPath": "Levier RH",
+						"fileName": "Liste_contrats_distribution.xlsx",
+						"folderPath": "Contrat_distribution",
 						"container": "data-input"
 					},
 					"firstRowAsHeader": true
@@ -2592,8 +2866,8 @@
 					"sheetName": "Contrat cadre",
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "0630_template contrats.xlsx",
-						"folderPath": "Levier RH",
+						"fileName": "Liste_contrats_distribution.xlsx",
+						"folderPath": "Contrat_distribution",
 						"container": "data-input"
 					},
 					"firstRowAsHeader": true
@@ -2628,59 +2902,16 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
+						"folderPath": "Contrat_distribution",
 						"container": "data-mart"
 					},
-					"columnDelimiter": ",",
+					"columnDelimiter": ";",
+					"encodingName": "WINDOWS-1252",
 					"escapeChar": "\\",
 					"firstRowAsHeader": true,
 					"quoteChar": "\""
 				},
 				"schema": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ClientEHS')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "REFERENTIEL_ATC/UnionSAP_EHS"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "Sectorisation",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "Client_EHS.xlsx",
-						"folderPath": "Client",
-						"container": "data-input"
-					},
-					"firstRowAsHeader": true
-				},
-				"schema": [
-					{
-						"name": "Client",
-						"type": "String"
-					},
-					{
-						"name": "BrandID",
-						"type": "String"
-					},
-					{
-						"name": "Code Postal",
-						"type": "String"
-					},
-					{
-						"name": "Nom",
-						"type": "String"
-					}
-				]
 			},
 			"dependsOn": []
 		}
