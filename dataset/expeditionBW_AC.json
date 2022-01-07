@@ -11,7 +11,7 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
-			"sheetName": "Feuil2",
+			"sheetName": "Feuil1",
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "ExpéditionBW_AC.xlsx",
