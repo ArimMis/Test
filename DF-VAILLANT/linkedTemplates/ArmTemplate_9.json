@@ -13,6 +13,73 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/afctationflows')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "OTHER"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "atc_affectation_lower",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Clé Référentiel",
+						"type": "String"
+					},
+					{
+						"name": "Recherche Clé EPS",
+						"type": "String"
+					},
+					{
+						"name": "Marque",
+						"type": "String"
+					},
+					{
+						"name": "Code Postal début",
+						"type": "String"
+					},
+					{
+						"name": "Code Postal fin",
+						"type": "String"
+					},
+					{
+						"name": "Utilisateur",
+						"type": "String"
+					},
+					{
+						"name": "Fonction",
+						"type": "String"
+					},
+					{
+						"name": "Département",
+						"type": "String"
+					},
+					{
+						"name": "DR",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/allECoulementPrepared')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -2034,7 +2101,7 @@
 				"annotations": [],
 				"type": "Excel",
 				"typeProperties": {
-					"sheetName": "Feuil2",
+					"sheetName": "Feuil1",
 					"location": {
 						"type": "AzureBlobStorageLocation",
 						"fileName": "CommandeBW_AC.xlsx",
@@ -2343,212 +2410,6 @@
 					},
 					{
 						"name": "Cout standard facturé",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/compteSap')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "VENTE DIRECT BASE COMM"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "Feuil1",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "Extraction compte SAP - F.xlsx",
-						"folderPath": "Temp",
-						"container": "data-warehouse"
-					},
-					"range": "",
-					"firstRowAsHeader": true
-				},
-				"schema": [
-					{
-						"name": "Agence commerciale",
-						"type": "String"
-					},
-					{
-						"name": "ATC Client",
-						"type": "String"
-					},
-					{
-						"name": "",
-						"type": "String"
-					},
-					{
-						"name": "Niveau 1",
-						"type": "String"
-					},
-					{
-						"name": "",
-						"type": "String"
-					},
-					{
-						"name": "Niveau 2",
-						"type": "String"
-					},
-					{
-						"name": "",
-						"type": "String"
-					},
-					{
-						"name": "Niveau 3",
-						"type": "String"
-					},
-					{
-						"name": "",
-						"type": "String"
-					},
-					{
-						"name": "Client",
-						"type": "String"
-					},
-					{
-						"name": "",
-						"type": "String"
-					},
-					{
-						"name": "Rue",
-						"type": "String"
-					},
-					{
-						"name": "Dép",
-						"type": "String"
-					},
-					{
-						"name": "Code postal",
-						"type": "String"
-					},
-					{
-						"name": "Localité",
-						"type": "String"
-					},
-					{
-						"name": "Téléphone 1",
-						"type": "String"
-					},
-					{
-						"name": "Numéro de télécopie",
-						"type": "String"
-					},
-					{
-						"name": "Attribut 2",
-						"type": "String"
-					},
-					{
-						"name": "",
-						"type": "String"
-					},
-					{
-						"name": "Email",
-						"type": "String"
-					},
-					{
-						"name": "SIRET",
-						"type": "String"
-					},
-					{
-						"name": "Niveau 4",
-						"type": "String"
-					},
-					{
-						"name": "",
-						"type": "String"
-					},
-					{
-						"name": "Groupe de clients",
-						"type": "String"
-					},
-					{
-						"name": "",
-						"type": "String"
-					},
-					{
-						"name": "Groupe de clients 5",
-						"type": "String"
-					},
-					{
-						"name": "",
-						"type": "String"
-					},
-					{
-						"name": "Attribut 1",
-						"type": "String"
-					},
-					{
-						"name": "",
-						"type": "String"
-					},
-					{
-						"name": "Attribut 3",
-						"type": "String"
-					},
-					{
-						"name": "",
-						"type": "String"
-					},
-					{
-						"name": "Récept. de march.",
-						"type": "String"
-					},
-					{
-						"name": "",
-						"type": "String"
-					},
-					{
-						"name": "Destinataire facture",
-						"type": "String"
-					},
-					{
-						"name": "",
-						"type": "String"
-					},
-					{
-						"name": "Payeur",
-						"type": "String"
-					},
-					{
-						"name": "",
-						"type": "String"
-					},
-					{
-						"name": "Témoin suppr. Tous domaines",
-						"type": "String"
-					},
-					{
-						"name": "Org. commerciale",
-						"type": "String"
-					},
-					{
-						"name": "",
-						"type": "String"
-					},
-					{
-						"name": "Canal distribution",
-						"type": "String"
-					},
-					{
-						"name": "",
-						"type": "String"
-					},
-					{
-						"name": "Secteur d'activité",
-						"type": "String"
-					},
-					{
-						"name": "",
 						"type": "String"
 					}
 				]

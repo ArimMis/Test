@@ -13,6 +13,109 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/NOMENCLATURE_PRODUIT')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "NomenclatureProduit",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "NOMENCLATURE_PRODUIT",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"hierarchieArticle": {},
+									"nomenclatureProduit": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "SORTIE LOGISTIQUE"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-28T07:36:55Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_CALCUL_REM')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CALCUL REMUNERATION",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "CALCUL_REMUNERATION",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"contratCadre": {},
+									"contrat": {},
+									"article": {},
+									"baseCommerciale": {},
+									"templateContrat": {},
+									"calculRem": {},
+									"CALCULREMUNERATION": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "CONTRAT DISTRIBUTION"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-10-04T10:37:09Z"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/PL_CALCUL_SEUIL')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -1594,144 +1697,6 @@
 				},
 				"annotations": [],
 				"lastPublishTime": "2021-10-17T09:06:15Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PL_SUIVIE_OFFRE')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "DIFFUS",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "SUIVIE_OFFRE_DIFFUS",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"stgOffre": {},
-									"baseCommerciale": {},
-									"articleHierarchi": {},
-									"offreSansMatching": {},
-									"OUTputffreDiffus": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "CHANTIER",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "SUIVIE_OFFRE_CHANTIER",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"stgOffre": {},
-									"baseCommerciale": {},
-									"SUIVIEOFFRECHANTIER": {},
-									"offreEtBaseComSansMatching": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "SUIVI DES OFFRES"
-				},
-				"annotations": [],
-				"lastPublishTime": "2021-10-04T10:13:39Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PL_TEREVA')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "PREPARATION",
-						"description": "Input : \necoulement\nTEREVA_ORGANISATION\nventesDirectes\nOutput : \nTEREVA_EC_PREPARED\nTEREVA_qtenull\nTEREVA orga notfound",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "TEREVA_PREPARATION",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"ECOULEMENT": {},
-									"organisation": {},
-									"ventesDirectes": {},
-									"TEREVAECOULPREPARED": {},
-									"TEREVAORGANISATIONNOTFOUND": {},
-									"terevaQteNull": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "PREPARATION ECOULEMENT"
-				},
-				"annotations": [],
-				"lastPublishTime": "2021-10-29T13:48:44Z"
 			},
 			"dependsOn": []
 		}

@@ -13,6 +13,90 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/offreInChantier')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "REFERENTIEL_OFFRE"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "offreChantierTemp.csv",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ";",
+					"encodingName": "WINDOWS-1252",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "DateOffre",
+						"type": "String"
+					},
+					{
+						"name": "NbLogement",
+						"type": "String"
+					},
+					{
+						"name": "Référence",
+						"type": "String"
+					},
+					{
+						"name": "Marque",
+						"type": "String"
+					},
+					{
+						"name": "Produit",
+						"type": "String"
+					},
+					{
+						"name": "Quantité",
+						"type": "String"
+					},
+					{
+						"name": "Numéro interne 2",
+						"type": "String"
+					},
+					{
+						"name": "Responsable",
+						"type": "String"
+					},
+					{
+						"name": "Offre",
+						"type": "String"
+					},
+					{
+						"name": "Créateur offre",
+						"type": "String"
+					},
+					{
+						"name": "Canal",
+						"type": "String"
+					},
+					{
+						"name": "Source",
+						"type": "String"
+					},
+					{
+						"name": "UserLowerCase",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/offreInDiffus')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1742,71 +1826,6 @@
 					},
 					{
 						"name": "Code postal",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ref_atc_2021')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "REFERENTIEL_ATC"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "Bareme",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "Copie de referentiel ATC 2021 2020.xlsx",
-						"folderPath": "ATC",
-						"container": "data-input"
-					},
-					"firstRowAsHeader": true
-				},
-				"schema": [
-					{
-						"name": "ATC",
-						"type": "String"
-					},
-					{
-						"name": "NomATC",
-						"type": "String"
-					},
-					{
-						"name": "Plan primes",
-						"type": "String"
-					},
-					{
-						"name": "DR",
-						"type": "String"
-					},
-					{
-						"name": "Secteur prime",
-						"type": "String"
-					},
-					{
-						"name": "Matricule",
-						"type": "String"
-					},
-					{
-						"name": "Secteur DEC",
-						"type": "String"
-					},
-					{
-						"name": "Rallye",
-						"type": "String"
-					},
-					{
-						"name": "NomATC",
 						"type": "String"
 					}
 				]

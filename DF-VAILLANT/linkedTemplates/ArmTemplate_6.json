@@ -13,6 +13,119 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/PARTEDIS_ECOULEMENT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT/PARTEDIS"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Sheet1",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "PARTEDIS_ECOULEMENT.xlsx",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Nom Fournisseur Principal",
+						"type": "String"
+					},
+					{
+						"name": "Clients",
+						"type": "String"
+					},
+					{
+						"name": "Code Agence",
+						"type": "String"
+					},
+					{
+						"name": "Libellé Agence",
+						"type": "String"
+					},
+					{
+						"name": "Code postal agence",
+						"type": "String"
+					},
+					{
+						"name": "Ag Siret",
+						"type": "String"
+					},
+					{
+						"name": "Siren",
+						"type": "String"
+					},
+					{
+						"name": "MKT1",
+						"type": "String"
+					},
+					{
+						"name": "MKT2",
+						"type": "String"
+					},
+					{
+						"name": "MKT3",
+						"type": "String"
+					},
+					{
+						"name": "Reference Fournisseur",
+						"type": "String"
+					},
+					{
+						"name": "Libelle",
+						"type": "String"
+					},
+					{
+						"name": "Qté Livré Mois A",
+						"type": "String"
+					},
+					{
+						"name": "Qté Livré Mois A-1",
+						"type": "String"
+					},
+					{
+						"name": "Qté Livré Cumul A",
+						"type": "String"
+					},
+					{
+						"name": "Qté Livré Cumul A-1",
+						"type": "String"
+					},
+					{
+						"name": "VVA MOIS",
+						"type": "String"
+					},
+					{
+						"name": "VVA MOIS N-1",
+						"type": "String"
+					},
+					{
+						"name": "VVA CUMUL EXERCICE",
+						"type": "String"
+					},
+					{
+						"name": "VVA CUMUL EXERCICE N-1",
+						"type": "String"
+					},
+					{
+						"name": "path",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/PARTEDIS_ECOUL_PREPARED')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1812,36 +1925,6 @@
 						"type": "String"
 					}
 				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SUIVIE_OFFRE_CHANTIER')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "SUIVI OFFRE"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "Suivi Offre",
-						"container": "data-mart"
-					},
-					"columnDelimiter": ";",
-					"encodingName": "WINDOWS-1252",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": []
 			},
 			"dependsOn": []
 		}
