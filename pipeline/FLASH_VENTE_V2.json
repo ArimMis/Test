@@ -98,7 +98,8 @@
 								"url": {
 									"value": "@activity('FlashVenteDurable').output.statusQueryGetUri",
 									"type": "Expression"
-								}
+								},
+								"method": "GET"
 							}
 						}
 					],
