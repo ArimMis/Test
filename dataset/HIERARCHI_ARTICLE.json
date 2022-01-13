@@ -16,7 +16,7 @@
 				"fileName": "HIERARCHIE_ARTICLE.csv",
 				"container": "data-warehouse"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": ";",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
@@ -39,11 +39,11 @@
 				"type": "String"
 			},
 			{
-				"name": "Hiérarch.groupe",
+				"name": "Hi�rarch.groupe",
 				"type": "String"
 			},
 			{
-				"name": "Hiérarch.locale",
+				"name": "Hi�rarch.locale",
 				"type": "String"
 			},
 			{
@@ -59,11 +59,11 @@
 				"type": "String"
 			},
 			{
-				"name": "Désignation Statut",
+				"name": "D�signation Statut",
 				"type": "String"
 			},
 			{
-				"name": "Déb. val.",
+				"name": "D�b. val.",
 				"type": "String"
 			},
 			{
