@@ -13,6 +13,56 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/NOMENCLATURE_CLIENT')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "NomenclatureClient",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "NOMENCLATURE_CLIENT",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"EXtractionSAP": {},
+									"ReferentielAtc4": {},
+									"SortieNomenclatureClient": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "SORTIE LOGISTIQUE"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-28T09:12:25Z"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/NOMENCLATURE_PRODUIT')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -1609,94 +1659,6 @@
 				},
 				"annotations": [],
 				"lastPublishTime": "2021-11-07T18:13:43Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PL_REFERENTIEL_PRIX')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "DUREE PERIODE",
-						"description": "Input: \nfacturation\nplateforme\nOutpout :\ndureePeriodeOutput",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "REFERENTIEL_PRIX_MOYEN",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"facturationAC": {},
-									"plateforme": {},
-									"source1": {},
-									"facturationAP": {},
-									"dureePeriodeOutput": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "CALCUL PERIODE",
-						"type": "AzureFunctionActivity",
-						"dependsOn": [
-							{
-								"activity": "DUREE PERIODE",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"functionName": "AF_CALCUL_PERIODE",
-							"method": "POST",
-							"headers": {},
-							"body": {
-								"inputcontainer": "data-warehouse",
-								"inputpath": "Temp/TEMP_PRIX_PAR_PERIODE.csv",
-								"outputcontainer": "data-warehouse",
-								"outputpath": "referentielPrix.xlsx"
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "AzureFunctionPremium",
-							"type": "LinkedServiceReference"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "REFERENTIEL"
-				},
-				"annotations": [],
-				"lastPublishTime": "2021-10-17T09:06:15Z"
 			},
 			"dependsOn": []
 		}

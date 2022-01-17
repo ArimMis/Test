@@ -13,6 +13,93 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/PL_REFERENTIEL_PRIX')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DUREE PERIODE",
+						"description": "Input: \nfacturation\nplateforme\nOutpout :\ndureePeriodeOutput",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "REFERENTIEL_PRIX_MOYEN",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"facturationAC": {},
+									"plateforme": {},
+									"facturationAP": {},
+									"dureePeriodeOutput": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "CALCUL PERIODE",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "DUREE PERIODE",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "AF_CALCUL_PERIODE",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"inputcontainer": "data-warehouse",
+								"inputpath": "Temp/TEMP_PRIX_PAR_PERIODE.csv",
+								"outputcontainer": "data-warehouse",
+								"outputpath": "referentielPrix.xlsx"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureFunctionPremium",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "REFERENTIEL"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-10-17T09:06:15Z"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/PL_SUIVIE_OFFRE')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -887,7 +974,8 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "UNION_ECOULEMENT",
+						"name": "ATC_PERFORMANCE_ET_CLIENT_SAP",
+						"description": "Input : \nBASE_AVANT_TRAITEMENT_ATC\nsecteurFictif\nOutput : \nbaseCommercialOut",
 						"type": "ExecuteDataFlow",
 						"dependsOn": [],
 						"policy": {
@@ -900,65 +988,22 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataflow": {
-								"referenceName": "UNION_ECOULEMENT",
+								"referenceName": "ATC_PERFORMANCE_ET_CLIENT_SAP",
 								"type": "DataFlowReference",
 								"parameters": {},
 								"datasetParameters": {
-									"vfconfortPrepared": {},
-									"mabillePrepared": {},
-									"orcabPrepared": {},
-									"tereva": {},
-									"DSC": {},
-									"maillard": {},
-									"Partedis": {},
-									"EHS": {},
-									"allDistruUnioned": {}
+									"baseCommerciale": {},
+									"secteurFictif": {},
+									"ExtractionSAP": {},
+									"refAtcinput": {},
+									"inputManuel": {},
+									"outFinale": {},
+									"outDTP2": {}
 								}
 							},
 							"staging": {},
 							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "CLEANING_POST_UNION",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [
-							{
-								"activity": "UNION_ECOULEMENT",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "CLEANING_POST_UNION",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"unionEccoulement": {},
-									"articlehierarchi": {},
-									"unionsapehs": {},
-									"pricelisteReplicated": {},
-									"outputPreparationEcoulement": {},
-									"sink2": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
+								"coreCount": 16,
 								"computeType": "General"
 							},
 							"traceLevel": "Fine"
@@ -1584,100 +1629,6 @@
 				},
 				"annotations": [],
 				"lastPublishTime": "2021-10-17T09:06:16Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PL_MAIN_RH')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "LEVIER RH",
-						"description": "Input : \ndataCommerciale\nPLATEFORMES\nlevierPerformance\nOutput : \nTEMP_LEVIER_RH\nTEMP_LEVIER_PERFORMANCE\n",
-						"type": "ExecutePipeline",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "PL_LEVIER_RH",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					},
-					{
-						"name": "PREPARATION OBJECTIF RH",
-						"description": "Input : \nobjectif\nlevierPerformance\nOutput : \nPREPARATION_OBJECTIF_RH\nTEMP_LEVIER_PERFORMANCE",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "LEVIER RH",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "PL_OBJECTIF_RH",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					},
-					{
-						"name": "OBJECTIF RH",
-						"description": "Objectif RH ",
-						"type": "AzureFunctionActivity",
-						"dependsOn": [
-							{
-								"activity": "PREPARATION OBJECTIF RH",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"functionName": "AF_OBJECTIF_RH",
-							"method": "POST",
-							"headers": {},
-							"body": {
-								"objectif_container": "data-warehouse",
-								"objectif_path": "Temp/OBJECTIF_RH_PREPARED.xlsx",
-								"levier_container": "data-warehouse",
-								"levier_path": "Temp/LEVIER_RH.xlsx",
-								"output_container": "data-mart",
-								"output_path": "RH/OBJECTIFS.xlsx"
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "AzureFunctionPremium",
-							"type": "LinkedServiceReference"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "RH"
-				},
-				"annotations": [],
-				"lastPublishTime": "2021-10-29T15:17:21Z"
 			},
 			"dependsOn": []
 		}
