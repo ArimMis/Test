@@ -74,7 +74,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "DSCTEREVA2",
+						"referenceName": "DSCTEREVA",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -188,7 +188,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "Model_PARTEDIS2",
+						"referenceName": "Model_PARTEDIS",
 						"type": "DataFlowReference"
 					},
 					"compute": {

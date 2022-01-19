@@ -17,7 +17,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "Model_PARTEDIS2",
+						"referenceName": "Model_PARTEDIS",
 						"type": "DataFlowReference"
 					},
 					"compute": {
