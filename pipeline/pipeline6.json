@@ -3,33 +3,38 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "fuzzyjoin",
-				"description": "fuzzy join: atc 2020 2021 and  atc affectation",
-				"type": "AzureFunctionActivity",
+				"name": "MAIN_PREPARATION_ECOULEMENT",
+				"description": "PL Input_Load\nPL_MABILLE\nPL_ORCAB\nPL_VF_CONFORT\nPL_TEREVA\nPL_PARTEDIS\nPL_TRAITEMENT_DSC\nDF_UNION_ECOULEMENT\nPL_POST_UNION",
+				"type": "ExecutePipeline",
 				"dependsOn": [],
-				"policy": {
-					"timeout": "7.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
 				"userProperties": [],
 				"typeProperties": {
-					"functionName": "fuzzyjoin",
-					"method": "POST",
-					"body": {
-						"leftfilepath": "Temp/responsableOffreChantier.csv",
-						"rightfilepath": "Temp/refATC2021Offre.csv",
-						"leftkey": "UserLowerCase",
-						"rightkey": "NomATC",
-						"outputpath": "Temp/responsableMappingfuzzy.xlsx",
-						"containername": "data-warehouse"
+					"pipeline": {
+						"referenceName": "MAIN_PREPARATION",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PL_MAIN_BASE_COMMERCIAL",
+				"description": "PL main for : \nPREPARATION_ECC_AVOIR\nDSCTEREVA2\nModel_PARTEDIS2\nVanMarkes\nModelVenteDirecte\nUNION_BASE_COMMERCIAL\nPOST_UNION_FINISH\nATC_PERFORMANCE",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "MAIN_PREPARATION_ECOULEMENT",
+						"dependencyConditions": [
+							"Succeeded"
+						]
 					}
-				},
-				"linkedServiceName": {
-					"referenceName": "AzureFunctionPremium",
-					"type": "LinkedServiceReference"
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_MAIN_BASE_COMMERCIALE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
 				}
 			}
 		],
