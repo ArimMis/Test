@@ -1,5 +1,5 @@
 {
-	"name": "FLASH_VENTE_V2",
+	"name": "FLASH_VENTE",
 	"properties": {
 		"description": "Call durable function for flash vente\n",
 		"activities": [
