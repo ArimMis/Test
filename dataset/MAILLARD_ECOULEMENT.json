@@ -18,7 +18,7 @@
 				"container": "data-input"
 			},
 			"columnDelimiter": ";",
-			"encodingName": "WINDOWS-1252",
+			"encodingName": "ISO-8859-3",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
