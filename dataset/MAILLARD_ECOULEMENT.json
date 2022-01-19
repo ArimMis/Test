@@ -17,7 +17,7 @@
 				"folderPath": "Ecoulement/Maillard",
 				"container": "data-input"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": ";",
 			"encodingName": "WINDOWS-1252",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
