@@ -1,0 +1,58 @@
+{
+	"name": "FLASH_VENTE",
+	"properties": {
+		"activities": [
+			{
+				"name": "RunFlashVente",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 1,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": true,
+					"secureInput": true
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "Flash_vente_update",
+					"method": "POST",
+					"body": {
+						"inputContainer": "data-input",
+						"facturationAPInput": "FacturationBW/FacturationBW_AP.xlsx",
+						"facturationACInput": "FacturationBW/FacturationBW_AC.xlsx",
+						"resteALivrerInput": "Flash_Vente/Input_daily_Reste_à_livrer.xls",
+						"n3excludeInput": "Flash_Vente/Input_Filter_RAL&BW_N3_to_exclude.xlsx",
+						"ssgrExcludeInput": "Flash_Vente/Input_Filter_RAL_SGCR_to_exclude.xlsx",
+						"productHierachyInput": "Flash_Vente/Input_Ref_Product hierarchy.xlsx",
+						"productHierarchyLabeInput": "Flash_Vente/Input_Ref_Product hierarchy label.xlsx",
+						"motifCommandExclude": "Flash_Vente/Input_Filter_BW_Motif_commande_to_exclude.xlsx",
+						"n1ToKeepInput": "Flash_Vente/Input_Filter_BW_N1_to_keep.xlsx",
+						"objectifsInput": "Flash_Vente/Input_annual_objectives_v2.xlsx",
+						"calendrier": "Flash_Vente/Input_Annual_Calendrier.xls",
+						"commandeAcInput": "Flash_Vente/Input_CommandeBW_AC.xlsx",
+						"previsions": "Flash_Vente/Input_daily_FlashForecast4Azure.xlsx",
+						"productHierarchy": "Flash_Vente/Input_Ref_Product hierarchy.xlsx",
+						"budget_ex": "Flash_Vente/Input_annual_FlashBudget4Azure_v2.xlsx",
+						"outputContainer": "data-mart",
+						"bddFlashventeOutput": "Flash_Vente/Output_temp_BDD Flash vente.csv",
+						"graphChaudiereOutput": "Flash_Vente/Output_graph_Chaudiere_SD.xlsx",
+						"graphPACSDOutput": "Flash_Vente/Output_graph_PAC_SD.xlsx",
+						"graphChaudiereVAillantOuput": "Flash_Vente/Output_graph_Chaudiere_Vaillant.xlsx",
+						"graphPacVaillantOutput": "Flash_Vente/Output_graph_PAC_Vaillant.xlsx"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureFunctionPremium",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"folder": {
+			"name": "tutoriel&test"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-11-15T14:53:03Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
