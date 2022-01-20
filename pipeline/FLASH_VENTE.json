@@ -20,7 +20,7 @@
 					"method": "POST",
 					"body": {
 						"inputContainer": "data-input",
-						"facturationAPInput": "FacturationBW/FacturationBW_AP.xlsx",
+						"facturationAPInput": "FacturationBW/FacturationBW_AP.csv",
 						"facturationACInput": "FacturationBW/FacturationBW_AC.xlsx",
 						"resteALivrerInput": "Flash_Vente/Input_daily_Reste_à_livrer.xls",
 						"n3excludeInput": "Flash_Vente/Input_Filter_RAL&BW_N3_to_exclude.xlsx",
