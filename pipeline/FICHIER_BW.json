@@ -79,7 +79,7 @@
 			"name": "SORTIE LOGISTIQUE"
 		},
 		"annotations": [],
-		"lastPublishTime": "2021-09-28T09:57:54Z"
+		"lastPublishTime": "2022-01-06T12:25:16Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

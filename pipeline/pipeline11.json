@@ -30,6 +30,8 @@
 		"folder": {
 			"name": "tutoriel&test"
 		},
-		"annotations": []
-	}
+		"annotations": [],
+		"lastPublishTime": "2022-01-06T12:25:18Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
 }

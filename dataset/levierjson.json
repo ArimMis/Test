@@ -1,0 +1,19 @@
+{
+	"name": "levierjson",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "data-warehouse"
+			}
+		},
+		"schema": {}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

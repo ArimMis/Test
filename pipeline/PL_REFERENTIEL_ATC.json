@@ -63,7 +63,7 @@
 			"name": "REFERENTIEL"
 		},
 		"annotations": [],
-		"lastPublishTime": "2021-11-07T18:13:43Z"
+		"lastPublishTime": "2022-01-06T12:25:18Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

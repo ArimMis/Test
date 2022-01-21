@@ -1,12 +1,9 @@
 {
-	"name": "PREP",
+	"name": "PREPARATION_OBJECTIF_PYTHON",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "VAILLANT_ARCHITECTURE",
 			"type": "LinkedServiceReference"
-		},
-		"folder": {
-			"name": "SUIVI OFFRE"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
@@ -15,7 +12,8 @@
 				"type": "AzureBlobStorageLocation",
 				"container": "data-warehouse"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": ";",
+			"encodingName": "WINDOWS-1252",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
