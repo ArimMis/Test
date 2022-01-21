@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "test_base_commercial"
+			"name": "BASE_COMMERCIAL"
 		},
 		"annotations": [],
 		"type": "Excel",

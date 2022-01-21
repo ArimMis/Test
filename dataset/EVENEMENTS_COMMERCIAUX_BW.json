@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "SortieLogistique"
+			"name": "SORTIE LOGISTIQUE"
 		},
 		"annotations": [],
 		"type": "Excel",
