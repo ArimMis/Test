@@ -13,1083 +13,6 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/In_avoirwithIndex')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "BASE_COMMERCIAL"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "AZ_AvoirWithIndexDSClike.csv",
-						"folderPath": "Temp",
-						"container": "data-warehouse"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "Mois_Selection",
-						"type": "String"
-					},
-					{
-						"name": "NoOffre",
-						"type": "String"
-					},
-					{
-						"name": "NoArtVGF",
-						"type": "String"
-					},
-					{
-						"name": "Agence",
-						"type": "String"
-					},
-					{
-						"name": "Qte_Validee_VGF",
-						"type": "String"
-					},
-					{
-						"name": "NoCli",
-						"type": "String"
-					},
-					{
-						"name": "PA_Valide_VGF",
-						"type": "String"
-					},
-					{
-						"name": "Mois",
-						"type": "String"
-					},
-					{
-						"name": "Année",
-						"type": "String"
-					},
-					{
-						"name": "CompanyId",
-						"type": "String"
-					},
-					{
-						"name": "HubSAPid",
-						"type": "String"
-					},
-					{
-						"name": "toreplicate",
-						"type": "String"
-					},
-					{
-						"name": "ca_avoir",
-						"type": "String"
-					},
-					{
-						"name": "yearmonth",
-						"type": "String"
-					},
-					{
-						"name": "POSid",
-						"type": "String"
-					},
-					{
-						"name": "WholeSalerID",
-						"type": "String"
-					},
-					{
-						"name": "dd",
-						"type": "String"
-					},
-					{
-						"name": "indexcols2",
-						"type": "String"
-					},
-					{
-						"name": "qte_avoir",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/InallDistruUnionNed')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "BASE_COMMERCIAL"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "allDistruUnioned",
-						"folderPath": "Temp",
-						"container": "data-warehouse"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "Code postal",
-						"type": "String"
-					},
-					{
-						"name": "marque_file",
-						"type": "String"
-					},
-					{
-						"name": "ca_ecoulement",
-						"type": "String"
-					},
-					{
-						"name": "reference",
-						"type": "String"
-					},
-					{
-						"name": "qte_ecoulement",
-						"type": "String"
-					},
-					{
-						"name": "yearmonth",
-						"type": "String"
-					},
-					{
-						"name": "year",
-						"type": "String"
-					},
-					{
-						"name": "month",
-						"type": "String"
-					},
-					{
-						"name": "POSSAMidString",
-						"type": "String"
-					},
-					{
-						"name": "marque_id",
-						"type": "String"
-					},
-					{
-						"name": "HubSAPid",
-						"type": "String"
-					},
-					{
-						"name": "distributeur",
-						"type": "String"
-					},
-					{
-						"name": "agence_code",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Inbasecommercial')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "BASE_COMMERCIAL"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "base commerciale.csv",
-						"folderPath": "Temp",
-						"container": "data-warehouse"
-					},
-					"columnDelimiter": ";",
-					"encodingName": "ISO-8859-1",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "affecte/non_affecte",
-						"type": "String"
-					},
-					{
-						"name": "plateforme/vente directe",
-						"type": "String"
-					},
-					{
-						"name": "origine de la ligne",
-						"type": "String"
-					},
-					{
-						"name": "yearmonth",
-						"type": "String"
-					},
-					{
-						"name": "year",
-						"type": "String"
-					},
-					{
-						"name": "month",
-						"type": "String"
-					},
-					{
-						"name": "Code client livré",
-						"type": "String"
-					},
-					{
-						"name": "code client plateforme livree",
-						"type": "String"
-					},
-					{
-						"name": "code produit",
-						"type": "String"
-					},
-					{
-						"name": "quantite",
-						"type": "String"
-					},
-					{
-						"name": "ca",
-						"type": "String"
-					},
-					{
-						"name": "Code postal",
-						"type": "String"
-					},
-					{
-						"name": "marque",
-						"type": "String"
-					},
-					{
-						"name": "marque_code",
-						"type": "String"
-					},
-					{
-						"name": "Canal distribution",
-						"type": "String"
-					},
-					{
-						"name": "nom du canal",
-						"type": "String"
-					},
-					{
-						"name": "canal_distribution_final",
-						"type": "String"
-					},
-					{
-						"name": "canal_final",
-						"type": "String"
-					},
-					{
-						"name": "Secteur d'activité",
-						"type": "String"
-					},
-					{
-						"name": "document_vente",
-						"type": "String"
-					},
-					{
-						"name": "Agence commerciale corrigé",
-						"type": "String"
-					},
-					{
-						"name": "Donneur d'ordre",
-						"type": "String"
-					},
-					{
-						"name": "Facture",
-						"type": "String"
-					},
-					{
-						"name": "Type poste Facture",
-						"type": "String"
-					},
-					{
-						"name": "no_offre",
-						"type": "String"
-					},
-					{
-						"name": "ATC Corrigé",
-						"type": "String"
-					},
-					{
-						"name": "ATC offre",
-						"type": "String"
-					},
-					{
-						"name": "ATC livré",
-						"type": "String"
-					},
-					{
-						"name": "ATC Performance",
-						"type": "String"
-					},
-					{
-						"name": "NomATC",
-						"type": "String"
-					},
-					{
-						"name": "Matricule",
-						"type": "String"
-					},
-					{
-						"name": "Qté facturée",
-						"type": "String"
-					},
-					{
-						"name": "CA facturé",
-						"type": "String"
-					},
-					{
-						"name": "qt_ecc_enrichi",
-						"type": "String"
-					},
-					{
-						"name": "ca_ecc_enrichi",
-						"type": "String"
-					},
-					{
-						"name": "qte_ecoulement",
-						"type": "String"
-					},
-					{
-						"name": "qte plateforme final",
-						"type": "String"
-					},
-					{
-						"name": "ca plateforme final",
-						"type": "String"
-					},
-					{
-						"name": "Sum_qt_factur_e",
-						"type": "String"
-					},
-					{
-						"name": "Sum_ca_factur_",
-						"type": "String"
-					},
-					{
-						"name": "Sum_ca_ecoulement",
-						"type": "String"
-					},
-					{
-						"name": "Sum_qte_ecoulement",
-						"type": "String"
-					},
-					{
-						"name": "Motif commande",
-						"type": "String"
-					},
-					{
-						"name": "Type de facture",
-						"type": "String"
-					},
-					{
-						"name": "source_atc",
-						"type": "String"
-					},
-					{
-						"name": "Successor",
-						"type": "String"
-					},
-					{
-						"name": "CDis",
-						"type": "String"
-					},
-					{
-						"name": "Predecessor",
-						"type": "String"
-					},
-					{
-						"name": "St",
-						"type": "String"
-					},
-					{
-						"name": "Désignation Statut",
-						"type": "String"
-					},
-					{
-						"name": "Deb val",
-						"type": "String"
-					},
-					{
-						"name": "N1groupe",
-						"type": "String"
-					},
-					{
-						"name": "N2groupe",
-						"type": "String"
-					},
-					{
-						"name": "N3groupe",
-						"type": "String"
-					},
-					{
-						"name": "N4groupe",
-						"type": "String"
-					},
-					{
-						"name": "N5groupe",
-						"type": "String"
-					},
-					{
-						"name": "N6groupe",
-						"type": "String"
-					},
-					{
-						"name": "N7groupe",
-						"type": "String"
-					},
-					{
-						"name": "N1groupedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N2groupedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N3groupedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N4groupedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N5groupedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N6groupedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N7groupedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N1localedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N2localedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N3localedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N4localedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N5localedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N6localedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N7localedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N1locale",
-						"type": "String"
-					},
-					{
-						"name": "N2locale",
-						"type": "String"
-					},
-					{
-						"name": "N3locale",
-						"type": "String"
-					},
-					{
-						"name": "N4locale",
-						"type": "String"
-					},
-					{
-						"name": "N5locale",
-						"type": "String"
-					},
-					{
-						"name": "N6locale",
-						"type": "String"
-					},
-					{
-						"name": "N7locale",
-						"type": "String"
-					},
-					{
-						"name": "Hiérarchgroupe",
-						"type": "String"
-					},
-					{
-						"name": "Hiérarchlocale",
-						"type": "String"
-					},
-					{
-						"name": "Numéro du compte",
-						"type": "String"
-					},
-					{
-						"name": "EPS_Nom du compte",
-						"type": "String"
-					},
-					{
-						"name": "EPS_Groupe cible/Typologie générale",
-						"type": "String"
-					},
-					{
-						"name": "EPS_Sous groupe cible/Typologie détaillée",
-						"type": "String"
-					},
-					{
-						"name": "EPS_Compte principal: Numéro du compte",
-						"type": "String"
-					},
-					{
-						"name": "EPS_Compte principal: Nom du compte",
-						"type": "String"
-					},
-					{
-						"name": "ca_ecoulement",
-						"type": "String"
-					},
-					{
-						"name": "Client",
-						"type": "String"
-					},
-					{
-						"name": "Numéro client indirect",
-						"type": "String"
-					},
-					{
-						"name": "CODE_CMI",
-						"type": "String"
-					},
-					{
-						"name": "NOM_CMI",
-						"type": "String"
-					},
-					{
-						"name": "ATC",
-						"type": "String"
-					},
-					{
-						"name": "canal",
-						"type": "String"
-					},
-					{
-						"name": "Produit",
-						"type": "String"
-					},
-					{
-						"name": "Numéro interne 2",
-						"type": "String"
-					},
-					{
-						"name": "Nom du compte",
-						"type": "String"
-					},
-					{
-						"name": "Numero Interne_ Groupe cible/Typologie générale",
-						"type": "String"
-					},
-					{
-						"name": "Numero Interne_ Sous groupe cible/Typologie détaillée",
-						"type": "String"
-					},
-					{
-						"name": "Numero Interne_ Compte principal: Numéro du compte",
-						"type": "String"
-					},
-					{
-						"name": "Numero Interne_ Compte principal: Nom du compte",
-						"type": "String"
-					},
-					{
-						"name": "Jour calendaire",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/InputBaseCommercialMarketing')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "LEVIER RH"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "BaseCommercialeDTP2.csv",
-						"folderPath": "Temp",
-						"container": "data-warehouse"
-					},
-					"columnDelimiter": ";",
-					"encodingName": "WINDOWS-1252",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "affecte/non_affecte",
-						"type": "String"
-					},
-					{
-						"name": "plateforme/vente directe",
-						"type": "String"
-					},
-					{
-						"name": "origine de la ligne",
-						"type": "String"
-					},
-					{
-						"name": "year",
-						"type": "String"
-					},
-					{
-						"name": "month",
-						"type": "String"
-					},
-					{
-						"name": "Code client livré",
-						"type": "String"
-					},
-					{
-						"name": "code client plateforme livree",
-						"type": "String"
-					},
-					{
-						"name": "code produit",
-						"type": "String"
-					},
-					{
-						"name": "quantite",
-						"type": "String"
-					},
-					{
-						"name": "ca",
-						"type": "String"
-					},
-					{
-						"name": "Code postal",
-						"type": "String"
-					},
-					{
-						"name": "marque",
-						"type": "String"
-					},
-					{
-						"name": "marque_code",
-						"type": "String"
-					},
-					{
-						"name": "canal_distribution_final",
-						"type": "String"
-					},
-					{
-						"name": "nom du canal",
-						"type": "String"
-					},
-					{
-						"name": "canal_final",
-						"type": "String"
-					},
-					{
-						"name": "document_vente",
-						"type": "String"
-					},
-					{
-						"name": "Agence commerciale corrigé (vente directe)",
-						"type": "String"
-					},
-					{
-						"name": "Donneur d'ordre (vente directe)",
-						"type": "String"
-					},
-					{
-						"name": "Facture (vente directe)",
-						"type": "String"
-					},
-					{
-						"name": "Type poste Facture (vente directe)",
-						"type": "String"
-					},
-					{
-						"name": "no_offre",
-						"type": "String"
-					},
-					{
-						"name": "ATC offre",
-						"type": "String"
-					},
-					{
-						"name": "ATC livré",
-						"type": "String"
-					},
-					{
-						"name": "ATC Performance",
-						"type": "String"
-					},
-					{
-						"name": "NomATC",
-						"type": "String"
-					},
-					{
-						"name": "DR",
-						"type": "String"
-					},
-					{
-						"name": "Matricule",
-						"type": "String"
-					},
-					{
-						"name": "Motif commande",
-						"type": "String"
-					},
-					{
-						"name": "Type de facture",
-						"type": "String"
-					},
-					{
-						"name": "N1groupe",
-						"type": "String"
-					},
-					{
-						"name": "N2groupe",
-						"type": "String"
-					},
-					{
-						"name": "N3groupe",
-						"type": "String"
-					},
-					{
-						"name": "N4groupe",
-						"type": "String"
-					},
-					{
-						"name": "N5groupe",
-						"type": "String"
-					},
-					{
-						"name": "N6groupe",
-						"type": "String"
-					},
-					{
-						"name": "N7groupe",
-						"type": "String"
-					},
-					{
-						"name": "N1groupedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N2groupedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N3groupedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N4groupedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N5groupedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N6groupedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N7groupedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N1localedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N2localedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N3localedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N4localedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N5localedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N6localedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N7localedesignation",
-						"type": "String"
-					},
-					{
-						"name": "N1locale",
-						"type": "String"
-					},
-					{
-						"name": "N2locale",
-						"type": "String"
-					},
-					{
-						"name": "N3locale",
-						"type": "String"
-					},
-					{
-						"name": "N4locale",
-						"type": "String"
-					},
-					{
-						"name": "N5locale",
-						"type": "String"
-					},
-					{
-						"name": "N6locale",
-						"type": "String"
-					},
-					{
-						"name": "N7locale",
-						"type": "String"
-					},
-					{
-						"name": "Hiérarchgroupe",
-						"type": "String"
-					},
-					{
-						"name": "Hiérarchlocale",
-						"type": "String"
-					},
-					{
-						"name": "Numéro du compte",
-						"type": "String"
-					},
-					{
-						"name": "EPS_Nom du compte",
-						"type": "String"
-					},
-					{
-						"name": "EPS_Groupe cible/Typologie générale",
-						"type": "String"
-					},
-					{
-						"name": "EPS_Sous groupe cible/Typologie détaillée",
-						"type": "String"
-					},
-					{
-						"name": "EPS_Compte principal: Numéro du compte",
-						"type": "String"
-					},
-					{
-						"name": "EPS_Compte principal: Nom du compte",
-						"type": "String"
-					},
-					{
-						"name": "Client",
-						"type": "String"
-					},
-					{
-						"name": "Numéro client indirect",
-						"type": "String"
-					},
-					{
-						"name": "CODE_CMI",
-						"type": "String"
-					},
-					{
-						"name": "NOM_CMI",
-						"type": "String"
-					},
-					{
-						"name": "Nom du compte",
-						"type": "String"
-					},
-					{
-						"name": "Client Indirect_ Groupe cible/Typologie générale",
-						"type": "String"
-					},
-					{
-						"name": "Client Indirect_ Sous groupe cible/Typologie détaillée",
-						"type": "String"
-					},
-					{
-						"name": "Client Indirect_  Compte principal: Numéro du compte",
-						"type": "String"
-					},
-					{
-						"name": "Client Indirect_  Compte principal: Nom du compte",
-						"type": "String"
-					},
-					{
-						"name": "Client Direct - Hiérarchie N1 SAP ",
-						"type": "String"
-					},
-					{
-						"name": "Client Direct - Hiérarchie N2 SAP ",
-						"type": "String"
-					},
-					{
-						"name": "Client Indirect - Hiérarchie N1 SAP",
-						"type": "String"
-					},
-					{
-						"name": "Client Indirect - Hiérarchie N2 SAP",
-						"type": "String"
-					},
-					{
-						"name": "yearmonth",
-						"type": "String"
-					},
-					{
-						"name": "ATC Corrigé",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/InputFacturationDecrementer')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "BASE_COMMERCIAL"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "FacturationDecrementer",
-						"folderPath": "Temp",
-						"container": "data-warehouse"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "reference",
-						"type": "String"
-					},
-					{
-						"name": "HubSAPid",
-						"type": "String"
-					},
-					{
-						"name": "yearmonth",
-						"type": "String"
-					},
-					{
-						"name": "id_canal_final",
-						"type": "String"
-					},
-					{
-						"name": "marque_code",
-						"type": "String"
-					},
-					{
-						"name": "marque_name",
-						"type": "String"
-					},
-					{
-						"name": "POSSAMidString",
-						"type": "String"
-					},
-					{
-						"name": "Sum_qt_factur_e",
-						"type": "String"
-					},
-					{
-						"name": "Sum_ca_factur_",
-						"type": "String"
-					},
-					{
-						"name": "qt_plateforme_final",
-						"type": "String"
-					},
-					{
-						"name": "ca_plateforme_final",
-						"type": "String"
-					},
-					{
-						"name": "data_origin",
-						"type": "String"
-					},
-					{
-						"name": "marque_id",
-						"type": "String"
-					},
-					{
-						"name": "Sum_ca_ecoulement",
-						"type": "String"
-					},
-					{
-						"name": "Sum_qte_ecoulement",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/InputVenteDirect')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -2535,6 +1458,670 @@
 					},
 					{
 						"name": "Matricule",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/NOMENCLATURE_PRODUIT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "SORTIE LOGISTIQUE"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "Logistique",
+						"container": "data-mart"
+					},
+					"columnDelimiter": ";",
+					"encodingName": "WINDOWS-1252",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OBJECTIFS_RH')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "OBJECTIF RH"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Objectifs",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "objectifs.xlsx",
+						"folderPath": "Levier RH",
+						"container": "data-input"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Num Org",
+						"type": "String"
+					},
+					{
+						"name": "Nom Org",
+						"type": "String"
+					},
+					{
+						"name": "Nom DR",
+						"type": "String"
+					},
+					{
+						"name": "Num DR",
+						"type": "String"
+					},
+					{
+						"name": "DR",
+						"type": "String"
+					},
+					{
+						"name": "ATC (ATC- DR)",
+						"type": "String"
+					},
+					{
+						"name": "ATC (DR-ATC)",
+						"type": "String"
+					},
+					{
+						"name": "Num ATC",
+						"type": "String"
+					},
+					{
+						"name": "Nom ATC",
+						"type": "String"
+					},
+					{
+						"name": "Dept",
+						"type": "String"
+					},
+					{
+						"name": "Canal Dist",
+						"type": "String"
+					},
+					{
+						"name": "Nom Canal",
+						"type": "String"
+					},
+					{
+						"name": "Flux text",
+						"type": "String"
+					},
+					{
+						"name": "HubSAPiD",
+						"type": "String"
+					},
+					{
+						"name": "Activité",
+						"type": "String"
+					},
+					{
+						"name": "Nom Activité",
+						"type": "String"
+					},
+					{
+						"name": "Art Niv 1",
+						"type": "String"
+					},
+					{
+						"name": "Nom Niv 1",
+						"type": "String"
+					},
+					{
+						"name": "Art Niv 2",
+						"type": "String"
+					},
+					{
+						"name": "Nom Niv 2",
+						"type": "String"
+					},
+					{
+						"name": "Art Niv 3",
+						"type": "String"
+					},
+					{
+						"name": "Nom Niv 3",
+						"type": "String"
+					},
+					{
+						"name": "Art Niv 4",
+						"type": "String"
+					},
+					{
+						"name": "Nom Niv 4",
+						"type": "String"
+					},
+					{
+						"name": "Art Niv 5",
+						"type": "String"
+					},
+					{
+						"name": "Nom Niv 5",
+						"type": "String"
+					},
+					{
+						"name": "Nom Niv Combiné",
+						"type": "String"
+					},
+					{
+						"name": "PMV An",
+						"type": "String"
+					},
+					{
+						"name": "Qté Obj An",
+						"type": "String"
+					},
+					{
+						"name": "CA Obj An",
+						"type": "String"
+					},
+					{
+						"name": "Qté Mois 01",
+						"type": "String"
+					},
+					{
+						"name": "Qté Mois 02",
+						"type": "String"
+					},
+					{
+						"name": "Qté Mois 03",
+						"type": "String"
+					},
+					{
+						"name": "Qté Mois 04",
+						"type": "String"
+					},
+					{
+						"name": "Qté Mois 05",
+						"type": "String"
+					},
+					{
+						"name": "Qté Mois 06",
+						"type": "String"
+					},
+					{
+						"name": "Qté Mois 07",
+						"type": "String"
+					},
+					{
+						"name": "Qté Mois 08",
+						"type": "String"
+					},
+					{
+						"name": "Qté Mois 09",
+						"type": "String"
+					},
+					{
+						"name": "Qté Mois 10",
+						"type": "String"
+					},
+					{
+						"name": "Qté Mois 11",
+						"type": "String"
+					},
+					{
+						"name": "Qté Mois 12",
+						"type": "String"
+					},
+					{
+						"name": "CA Mois 01",
+						"type": "String"
+					},
+					{
+						"name": "CA Mois 02",
+						"type": "String"
+					},
+					{
+						"name": "CA Mois 03",
+						"type": "String"
+					},
+					{
+						"name": "CA Mois 04",
+						"type": "String"
+					},
+					{
+						"name": "CA Mois 05",
+						"type": "String"
+					},
+					{
+						"name": "CA Mois 06",
+						"type": "String"
+					},
+					{
+						"name": "CA Mois 07",
+						"type": "String"
+					},
+					{
+						"name": "CA Mois 08",
+						"type": "String"
+					},
+					{
+						"name": "CA Mois 09",
+						"type": "String"
+					},
+					{
+						"name": "CA Mois 10",
+						"type": "String"
+					},
+					{
+						"name": "CA Mois 11",
+						"type": "String"
+					},
+					{
+						"name": "CA Mois 12",
+						"type": "String"
+					},
+					{
+						"name": "Qté Trim 1",
+						"type": "String"
+					},
+					{
+						"name": "Qté Trim 2",
+						"type": "String"
+					},
+					{
+						"name": "Qté Trim 3",
+						"type": "String"
+					},
+					{
+						"name": "Qté Trim 4",
+						"type": "String"
+					},
+					{
+						"name": "CA Trim 1",
+						"type": "String"
+					},
+					{
+						"name": "CA Trim 2",
+						"type": "String"
+					},
+					{
+						"name": "CA Trim 3",
+						"type": "String"
+					},
+					{
+						"name": "CA Trim 4",
+						"type": "String"
+					},
+					{
+						"name": "Qté Cumul 01",
+						"type": "String"
+					},
+					{
+						"name": "Qté Cumul 02",
+						"type": "String"
+					},
+					{
+						"name": "Qté Cumul 03",
+						"type": "String"
+					},
+					{
+						"name": "Qté Cumul 04",
+						"type": "String"
+					},
+					{
+						"name": "Qté Cumul 05",
+						"type": "String"
+					},
+					{
+						"name": "Qté Cumul 06",
+						"type": "String"
+					},
+					{
+						"name": "Qté Cumul 07",
+						"type": "String"
+					},
+					{
+						"name": "Qté Cumul 08",
+						"type": "String"
+					},
+					{
+						"name": "Qté Cumul 09",
+						"type": "String"
+					},
+					{
+						"name": "Qté Cumul 10",
+						"type": "String"
+					},
+					{
+						"name": "Qté Cumul 11",
+						"type": "String"
+					},
+					{
+						"name": "Qté Cumul 12",
+						"type": "String"
+					},
+					{
+						"name": "CA Cumul 01",
+						"type": "String"
+					},
+					{
+						"name": "CA Cumul 02",
+						"type": "String"
+					},
+					{
+						"name": "CA Cumul 03",
+						"type": "String"
+					},
+					{
+						"name": "CA Cumul 04",
+						"type": "String"
+					},
+					{
+						"name": "CA Cumul 05",
+						"type": "String"
+					},
+					{
+						"name": "CA Cumul 06",
+						"type": "String"
+					},
+					{
+						"name": "CA Cumul 07",
+						"type": "String"
+					},
+					{
+						"name": "CA Cumul 08",
+						"type": "String"
+					},
+					{
+						"name": "CA Cumul 09",
+						"type": "String"
+					},
+					{
+						"name": "CA Cumul 10",
+						"type": "String"
+					},
+					{
+						"name": "CA Cumul 11",
+						"type": "String"
+					},
+					{
+						"name": "CA Cumul 12",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OFFRE_SANS_MATCHING_DIFFUS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "SUIVI OFFRE"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "Error_finding",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ";",
+					"encodingName": "WINDOWS-1252",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ORCAB_ECOULEMENT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT/ORCAB"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "data_4ff7fba4-15c0-4a45-bb38-971aaa6bfaaa_985cc61b-ecb2-41f3-9b06-2f13a0c784d4.csv",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"encodingName": "WINDOWS-1252",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Coopérative",
+						"type": "String"
+					},
+					{
+						"name": "Référence",
+						"type": "String"
+					},
+					{
+						"name": "Désignation",
+						"type": "String"
+					},
+					{
+						"name": "Mois",
+						"type": "String"
+					},
+					{
+						"name": "CA 2020",
+						"type": "String"
+					},
+					{
+						"name": "CA 2019",
+						"type": "String"
+					},
+					{
+						"name": "Qte 2020",
+						"type": "String"
+					},
+					{
+						"name": "Qte 2019",
+						"type": "String"
+					},
+					{
+						"name": "filename",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ORCAB_ECOULEMENT_INPUT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT/ORCAB"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Sheet1",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "ORCAB_ECOULEMENT.xlsx",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Fournisseur",
+						"type": "String"
+					},
+					{
+						"name": "Coopérative",
+						"type": "String"
+					},
+					{
+						"name": "Référence",
+						"type": "String"
+					},
+					{
+						"name": "Désignation",
+						"type": "String"
+					},
+					{
+						"name": "Mois",
+						"type": "String"
+					},
+					{
+						"name": "CA 2020",
+						"type": "String"
+					},
+					{
+						"name": "CA 2019",
+						"type": "String"
+					},
+					{
+						"name": "Qte 2020",
+						"type": "String"
+					},
+					{
+						"name": "Qte 2019",
+						"type": "String"
+					},
+					{
+						"name": "path",
+						"type": "String"
+					},
+					{
+						"name": "qte_ecoulement",
+						"type": "String"
+					},
+					{
+						"name": "Famille",
+						"type": "String"
+					},
+					{
+						"name": "Sous Famille",
+						"type": "String"
+					},
+					{
+						"name": "REFFOURNISSEUR",
+						"type": "String"
+					},
+					{
+						"name": "Qte Livrée 2020",
+						"type": "String"
+					},
+					{
+						"name": "Qte Livrée 2019",
+						"type": "String"
+					},
+					{
+						"name": "Code Dispo Cde",
+						"type": "String"
+					},
+					{
+						"name": "Code SAPAIG",
+						"type": "String"
+					},
+					{
+						"name": "CA sans Marge",
+						"type": "String"
+					},
+					{
+						"name": "CA sans Marge A-1",
+						"type": "String"
+					},
+					{
+						"name": "Evol. CA A/A-1",
+						"type": "String"
+					},
+					{
+						"name": "Qte Livrée",
+						"type": "String"
+					},
+					{
+						"name": "Qte Livrée A-1",
+						"type": "String"
+					},
+					{
+						"name": "Evol. Qte A/A-1",
+						"type": "String"
+					},
+					{
+						"name": "Qté Livrée 2020",
+						"type": "String"
+					},
+					{
+						"name": "Qté Livrée 2019",
 						"type": "String"
 					}
 				]
