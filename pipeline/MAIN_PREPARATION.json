@@ -258,7 +258,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "InputLoad",
+						"referenceName": "INPUT_LOAD",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true

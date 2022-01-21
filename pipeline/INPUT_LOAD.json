@@ -1,5 +1,5 @@
 {
-	"name": "InputLoad",
+	"name": "INPUT_LOAD",
 	"properties": {
 		"description": "prepare azure function load",
 		"activities": [
