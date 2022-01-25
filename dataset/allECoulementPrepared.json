@@ -2,7 +2,7 @@
 	"name": "allECoulementPrepared",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "VAILLANT_ARCHITECTURE",
+			"referenceName": "PREPROD_VAILLANT_ARCHITECTURE",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
