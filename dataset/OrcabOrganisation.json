@@ -1,0 +1,44 @@
+{
+	"name": "OrcabOrganisation",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "tuto_file",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sectorisation",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Organisation_Orcab.xlsx",
+				"folderPath": "input",
+				"container": "aymeric"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Nom Coopérative",
+				"type": "String"
+			},
+			{
+				"name": "CP Coop.",
+				"type": "String"
+			},
+			{
+				"name": "POSSAMid",
+				"type": "String"
+			},
+			{
+				"name": "HubSAPid",
+				"type": "String"
+			},
+			{
+				"name": "BrandID",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

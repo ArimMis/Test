@@ -1,0 +1,63 @@
+{
+	"name": "VenteDirectModel",
+	"properties": {
+		"folder": {
+			"name": "Ignace"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "aymeric_preparation2",
+						"type": "DatasetReference"
+					},
+					"name": "aymericVenteDirecte"
+				},
+				{
+					"dataset": {
+						"referenceName": "aymeric_extraction_compte_SAP",
+						"type": "DatasetReference"
+					},
+					"name": "aymericSAP"
+				},
+				{
+					"dataset": {
+						"referenceName": "ref_atc",
+						"type": "DatasetReference"
+					},
+					"name": "ATC"
+				}
+			],
+			"sinks": [
+				{
+					"name": "aymericVenteDirectePrepared"
+				}
+			],
+			"transformations": [
+				{
+					"name": "aymericpreparederivee"
+				},
+				{
+					"name": "aymericSAPFiltre"
+				},
+				{
+					"name": "SAPUnique"
+				},
+				{
+					"name": "endAtc"
+				},
+				{
+					"name": "Join1"
+				},
+				{
+					"name": "Join2"
+				},
+				{
+					"name": "Select1"
+				}
+			],
+			"script": "source(output(\n\t\t{Org. commerciale} as string,\n\t\t{Canal distribution} as string,\n\t\t{Secteur d'activité} as string,\n\t\t{Document de vente} as string,\n\t\tPoste as string,\n\t\t{Jour calendaire} as string,\n\t\t{Agence commerciale corrigé} as string,\n\t\t{ATC Corrigé} as string,\n\t\t{Donneur d'ordre} as string,\n\t\t{Récept. de march.} as string,\n\t\t{Destinataire facture} as string,\n\t\tArticle as string,\n\t\t{Type doc. vente} as string,\n\t\t{Type de poste} as string,\n\t\tLivraison as string,\n\t\t{Type de livraison} as string,\n\t\t{Type poste Livraison} as string,\n\t\tFacture as string,\n\t\t{Type de facture} as string,\n\t\t{Type poste Facture} as string,\n\t\t{Mois calendrier} as string,\n\t\t{Année civile} as string,\n\t\t{Motif commande} as string,\n\t\t{Qté cdée} as string,\n\t\t{CA cdé} as string,\n\t\t{Qté livrée} as string,\n\t\t{CA livré} as string,\n\t\t{Qté facturée} as string,\n\t\t{CA facturé} as string,\n\t\t{Cout standard cdé} as string,\n\t\t{Cout fabrication} as string,\n\t\t{Cout standard livré} as string,\n\t\t{Cout standard facturé} as string,\n\t\tdate_id as string,\n\t\tyear as string,\n\t\tyearmonth as string,\n\t\tWholeSalerID as string,\n\t\tWholeSalerHubID as string,\n\t\tHubName as string,\n\t\tHubSAPid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tlimit: 100,\n\tignoreNoFilesFound: false,\n\tpartitionBy('hash', 1)) ~> aymericVenteDirecte\nsource(output(\n\t\t{Agence commerciale} as string,\n\t\t{ATC Client} as string,\n\t\tColumn_3 as string,\n\t\t{Niveau 1} as string,\n\t\tColumn_5 as string,\n\t\t{Niveau 2} as string,\n\t\tColumn_7 as string,\n\t\t{Niveau 3} as string,\n\t\tColumn_9 as string,\n\t\tClient as string,\n\t\tColumn_11 as string,\n\t\tRue as string,\n\t\t{Dép} as string,\n\t\t{Code postal} as string,\n\t\t{Localité} as string,\n\t\t{Téléphone 1} as string,\n\t\t{Numéro de télécopie} as string,\n\t\t{Attribut 2} as string,\n\t\tColumn_19 as string,\n\t\tEmail as string,\n\t\tSIRET as string,\n\t\t{Niveau 4} as string,\n\t\tColumn_23 as string,\n\t\t{Groupe de clients} as string,\n\t\tColumn_25 as string,\n\t\t{Groupe de clients 5} as string,\n\t\tColumn_27 as string,\n\t\t{Attribut 1} as string,\n\t\tColumn_29 as string,\n\t\t{Attribut 3} as string,\n\t\tColumn_31 as string,\n\t\t{Récept. de march.} as string,\n\t\tColumn_33 as string,\n\t\t{Destinataire facture} as string,\n\t\tColumn_35 as string,\n\t\tPayeur as string,\n\t\tColumn_37 as string,\n\t\t{Témoin suppr. Tous domaines} as string,\n\t\t{Org. commerciale} as string,\n\t\tColumn_40 as string,\n\t\t{Canal distribution} as string,\n\t\tColumn_42 as string,\n\t\t{Secteur d'activité} as string,\n\t\tColumn_44 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> aymericSAP\nsource(output(\n\t\t{Clé Référentiel} as string,\n\t\t{Recherche Clé EPS} as string,\n\t\tMarque as string,\n\t\t{Code Postal début} as string,\n\t\t{Code Postal fin} as string,\n\t\tUtilisateur as string,\n\t\tFonction as string,\n\t\t{Département} as string,\n\t\tDR as string,\n\t\tUser_lowerCase as string,\n\t\tsource as string,\n\t\tRight_DR as string,\n\t\tRight_User_lowerCase as string,\n\t\tATC as string,\n\t\tNomATC as string,\n\t\t{Plan primes} as string,\n\t\t{Secteur prime} as string,\n\t\tMatricule as string,\n\t\t{Secteur DEC} as string,\n\t\tRallye as string,\n\t\t{Canal final} as string,\n\t\tcode_postal_atc as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> ATC\naymericVenteDirecte derive(DiffusChantier = iif({Canal distribution}==\"43\",\"Chantier\",\"Diffus\"),\n\t\tMarque = iif({Org. commerciale}==\"1604\",\"SaunierDuval\",\"Vaillant\")) ~> aymericpreparederivee\naymericSAP select(mapColumn(\n\t\t{Agence commerciale},\n\t\tClient,\n\t\t{Code postal}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> aymericSAPFiltre\naymericSAPFiltre aggregate(groupBy(Client,\n\t\t{Code postal}),\n\t{Agence commerciale} = first({Agence commerciale})) ~> SAPUnique\nATC select(mapColumn(\n\t\tMarque,\n\t\t{Code Postal début},\n\t\t{Code Postal fin},\n\t\tUtilisateur,\n\t\tATC,\n\t\tNomATC,\n\t\tMatricule,\n\t\t{Canal final},\n\t\tcode_postal_atc\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> endAtc\naymericpreparederivee, SAPUnique join({Récept. de march.} == Client,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join1\nJoin1, endAtc join({Code postal} == code_postal_atc\n\t&& DiffusChantier == {Canal final}\n\t&& aymericpreparederivee@Marque == endAtc@Marque,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join2\nJoin2 select(mapColumn(\n\t\teach(match(true()))\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tstore: 'cache',\n\tformat: 'inline',\n\toutput: false,\n\tsaveOrder: 1) ~> aymericVenteDirectePrepared"
+		}
+	}
+}

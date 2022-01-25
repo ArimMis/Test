@@ -1,112 +1,125 @@
 {
-	"name": "ref_atc",
+	"name": "EcoulementOrcab",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "tuto_file",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
-		"type": "DelimitedText",
+		"type": "Excel",
 		"typeProperties": {
+			"sheetName": "Sheet1",
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "referentiel_atc_4.csv",
+				"fileName": "ORCAB_ECOULEMENT.xlsx",
 				"folderPath": "input",
 				"container": "aymeric"
 			},
-			"columnDelimiter": ",",
-			"encodingName": "WINDOWS-1252",
-			"escapeChar": "\\",
-			"firstRowAsHeader": true,
-			"quoteChar": "\""
+			"firstRowAsHeader": true
 		},
 		"schema": [
 			{
-				"name": "Clé Référentiel",
+				"name": "Fournisseur",
 				"type": "String"
 			},
 			{
-				"name": "Recherche Clé EPS",
+				"name": "Coopérative",
 				"type": "String"
 			},
 			{
-				"name": "Marque",
+				"name": "Référence",
 				"type": "String"
 			},
 			{
-				"name": "Code Postal début",
+				"name": "Désignation",
 				"type": "String"
 			},
 			{
-				"name": "Code Postal fin",
+				"name": "Mois",
 				"type": "String"
 			},
 			{
-				"name": "Utilisateur",
+				"name": "CA 2020",
 				"type": "String"
 			},
 			{
-				"name": "Fonction",
+				"name": "CA 2019",
 				"type": "String"
 			},
 			{
-				"name": "Département",
+				"name": "Qte 2020",
 				"type": "String"
 			},
 			{
-				"name": "DR",
+				"name": "Qte 2019",
 				"type": "String"
 			},
 			{
-				"name": "User_lowerCase",
+				"name": "path",
 				"type": "String"
 			},
 			{
-				"name": "source",
+				"name": "qte_ecoulement",
 				"type": "String"
 			},
 			{
-				"name": "Right_DR",
+				"name": "Famille",
 				"type": "String"
 			},
 			{
-				"name": "Right_User_lowerCase",
+				"name": "Sous Famille",
 				"type": "String"
 			},
 			{
-				"name": "ATC",
+				"name": "REFFOURNISSEUR",
 				"type": "String"
 			},
 			{
-				"name": "NomATC",
+				"name": "Qte Livrée 2020",
 				"type": "String"
 			},
 			{
-				"name": "Plan primes",
+				"name": "Qte Livrée 2019",
 				"type": "String"
 			},
 			{
-				"name": "Secteur prime",
+				"name": "Code Dispo Cde",
 				"type": "String"
 			},
 			{
-				"name": "Matricule",
+				"name": "Code SAPAIG",
 				"type": "String"
 			},
 			{
-				"name": "Secteur DEC",
+				"name": "CA sans Marge",
 				"type": "String"
 			},
 			{
-				"name": "Rallye",
+				"name": "CA sans Marge A-1",
 				"type": "String"
 			},
 			{
-				"name": "Canal final",
+				"name": "Evol. CA A/A-1",
 				"type": "String"
 			},
 			{
-				"name": "code_postal_atc",
+				"name": "Qte Livrée",
+				"type": "String"
+			},
+			{
+				"name": "Qte Livrée A-1",
+				"type": "String"
+			},
+			{
+				"name": "Evol. Qte A/A-1",
+				"type": "String"
+			},
+			{
+				"name": "Qté Livrée 2020",
+				"type": "String"
+			},
+			{
+				"name": "Qté Livrée 2019",
 				"type": "String"
 			}
 		]

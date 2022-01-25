@@ -1,0 +1,9 @@
+{
+	"name": "DF-Tutoriel",
+	"location": "westeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "3978b2b0-16d4-4329-9727-02ac9bacff45",
+		"tenantId": "67e4db54-80ae-4739-b54d-5ee94bd6472e"
+	}
+}

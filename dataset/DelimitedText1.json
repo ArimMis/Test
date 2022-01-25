@@ -1,5 +1,5 @@
 {
-	"name": "ref_atc",
+	"name": "DelimitedText1",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "tuto_file",
