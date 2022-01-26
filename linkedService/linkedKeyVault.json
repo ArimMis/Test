@@ -1,0 +1,10 @@
+{
+	"name": "linkedKeyVault",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://KVNVAILLANT.vault.azure.net/"
+		}
+	}
+}
