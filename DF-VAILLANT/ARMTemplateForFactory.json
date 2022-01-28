@@ -23,9 +23,9 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'BLOB'"
 		},
-		"VAILLANT_ARCHITECTURE_connectionString": {
+		"PREPROD_VAILLANT_ARCHITECTURE_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'VAILLANT_ARCHITECTURE'"
+			"metadata": "Secure string for 'connectionString' of 'PREPROD_VAILLANT_ARCHITECTURE'"
 		},
 		"data transformation azure function_functionKey": {
 			"type": "secureString",
@@ -43,6 +43,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'dstuto'"
 		},
+		"tuto_file_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'tuto_file'"
+		},
+		"AKVVAILLANT_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://KVNVAILLANT.vault.azure.net/"
+		},
 		"AzureFunctionPremium_properties_typeProperties_functionAppUrl": {
 			"type": "string",
 			"defaultValue": "https://fa-datatransfoprem.azurewebsites.net"
@@ -55,9 +63,21 @@
 			"type": "string",
 			"defaultValue": "MiradoMick"
 		},
+		"VAILLANT_ARCHITECTURE_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "sk-dsvaillantfr"
+		},
 		"data transformation azure function_properties_typeProperties_functionAppUrl": {
 			"type": "string",
 			"defaultValue": "https://fa-datafacto-transfo-fr.azurewebsites.net"
+		},
+		"kvntest_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://KVNVAILLANT.vault.azure.net/"
+		},
+		"linkedKeyVault_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://KVNVAILLANT.vault.azure.net/"
 		}
 	},
 	"variables": {
@@ -298,7 +318,7 @@
 					"cancelAfter": {}
 				},
 				"annotations": [],
-				"lastPublishTime": "2022-01-20T15:23:55Z"
+				"lastPublishTime": "2022-01-27T14:17:45Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureFunctionPremium')]"
@@ -532,7 +552,7 @@
 					"name": "PREPARATION ECOULEMENT"
 				},
 				"annotations": [],
-				"lastPublishTime": "2022-01-06T12:24:49Z"
+				"lastPublishTime": "2022-01-27T14:17:45Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/data transformation azure function')]",
@@ -1209,7 +1229,7 @@
 					"name": "PREPARATION ECOULEMENT"
 				},
 				"annotations": [],
-				"lastPublishTime": "2022-01-06T12:25:19Z"
+				"lastPublishTime": "2022-01-21T11:37:14Z"
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/PL_POST_UNION')]",
@@ -9802,7 +9822,7 @@
 						"fileName": "HIERARCHIE_ARTICLE.csv",
 						"container": "data-warehouse"
 					},
-					"columnDelimiter": ",",
+					"columnDelimiter": ";",
 					"encodingName": "WINDOWS-1252",
 					"escapeChar": "\\",
 					"firstRowAsHeader": true,
@@ -10177,7 +10197,7 @@
 					"sheetName": "SD",
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "Hiérarchie MKT_SD&VA_2021.06.15.xlsx",
+						"fileName": "Hiérarchie MKT_SD&VA.xlsx",
 						"folderPath": "ReferentielArticle",
 						"container": "data-input"
 					},
@@ -10232,7 +10252,7 @@
 					"sheetName": "VA",
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "Hiérarchie MKT_SD&VA_2021.06.15.xlsx",
+						"fileName": "Hiérarchie MKT_SD&VA.xlsx",
 						"folderPath": "ReferentielArticle",
 						"container": "data-input"
 					},
@@ -33771,6 +33791,19 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AKVVAILLANT')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('AKVVAILLANT_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -33825,6 +33858,16 @@
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"parameters": {
+					"storageName": {
+						"type": "String",
+						"defaultValue": "dsvaillantfr"
+					},
+					"key": {
+						"type": "String",
+						"defaultValue": "Mt+H5mVro51BjP/xWsSfrZoVNMRopaiWymXTPb6LCzrQBm8fCRSWBPZpr88CXds8C6i+ce5pXPBmhcemKsZAnw=="
+					}
+				},
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
@@ -33834,6 +33877,25 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/PREPROD_VAILLANT_ARCHITECTURE')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('PREPROD_VAILLANT_ARCHITECTURE_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/VAILLANT_ARCHITECTURE')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -33841,10 +33903,19 @@
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"connectionString": "[parameters('VAILLANT_ARCHITECTURE_connectionString')]"
+					"connectionString": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AKVVAILLANT",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "[parameters('VAILLANT_ARCHITECTURE_properties_typeProperties_connectionString_secretName')]"
+					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AKVVAILLANT')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/data transformation azure function')]",
@@ -33900,6 +33971,45 @@
 				"type": "AzureBlobStorage",
 				"typeProperties": {
 					"connectionString": "[parameters('dstuto_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/kvntest')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('kvntest_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/linkedKeyVault')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('linkedKeyVault_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/tuto_file')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('tuto_file_connectionString')]"
 				}
 			},
 			"dependsOn": []
@@ -34816,9 +34926,27 @@
 						},
 						{
 							"name": "DerivedColumn3"
+						},
+						{
+							"name": "Join1"
+						},
+						{
+							"name": "Select1"
+						},
+						{
+							"name": "uniqueYear"
+						},
+						{
+							"name": "columnToJoin"
+						},
+						{
+							"name": "DerivedColumn4"
+						},
+						{
+							"name": "addAllYear"
 						}
 					],
-					"script": "source(output(\n\t\t{ID contrat cadre} as string,\n\t\tLeviers as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> contratCadre\nsource(output(\n\t\t{ID contrat (unique)} as string,\n\t\t{ID contrat cadre} as string,\n\t\t{Liste des POS participants} as string,\n\t\t{Liste des ATC référents du contrat (pour la visualisation)} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> contrat\nsource(output(\n\t\t{ID levier} as string,\n\t\t{Code produit} as string,\n\t\t{Code produits exclus} as string,\n\t\t{Famille produit} as string,\n\t\t{Famille produit exclus} as string,\n\t\tCanal as string,\n\t\t{Date de début} as string,\n\t\t{Date de fin} as string,\n\t\t{Type de seuil} as string,\n\t\t{ID seuil} as string,\n\t\tMarque as string,\n\t\t{Seuil min} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> levier\nsource(output(\n\t\tOrgCm as string,\n\t\tCDis as string,\n\t\tArticle as string,\n\t\tDescription as string,\n\t\t{Hiérarch.groupe} as string,\n\t\t{Hiérarch.locale} as string,\n\t\tPredecessor as string,\n\t\tSuccessor as string,\n\t\tSt as string,\n\t\t{Désignation Statut} as string,\n\t\t{Déb. val.} as string,\n\t\t{N1.groupe} as string,\n\t\t{N2.groupe} as string,\n\t\t{N3.groupe} as string,\n\t\t{N4.groupe} as string,\n\t\t{N5.groupe} as string,\n\t\t{N6.groupe} as string,\n\t\t{N7.groupe} as string,\n\t\t{N1.locale} as string,\n\t\t{N2.locale} as string,\n\t\t{N3.locale} as string,\n\t\t{N4.locale} as string,\n\t\t{N5.locale} as string,\n\t\t{N6.locale} as string,\n\t\t{N7.locale} as string,\n\t\t{N1.groupe.designation} as string,\n\t\t{N2.groupe.designation} as string,\n\t\t{N3.groupe.designation} as string,\n\t\t{N4.groupe.designation} as string,\n\t\t{N5.groupe.designation} as string,\n\t\t{N6.groupe.designation} as string,\n\t\t{N7.groupe.designation} as string,\n\t\t{N1.locale.designation} as string,\n\t\t{N2.locale.designation} as string,\n\t\t{N3.locale.designation} as string,\n\t\t{N4.locale.designation} as string,\n\t\t{N5.locale.designation} as string,\n\t\t{N6.locale.designation} as string,\n\t\t{N7.locale.designation} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> article\nsource(output(\n\t\t{affecte/non_affecte} as string,\n\t\t{plateforme/vente directe} as string,\n\t\t{origine de la ligne} as string,\n\t\tyearmonth as string,\n\t\tyear as string,\n\t\tmonth as string,\n\t\t{Code client livré} as string,\n\t\t{code client plateforme livree} as string,\n\t\t{code produit} as string,\n\t\tquantite as string,\n\t\tca as string,\n\t\t{Code postal} as string,\n\t\tmarque as string,\n\t\tmarque_code as string,\n\t\t{Canal distribution} as string,\n\t\t{nom du canal} as string,\n\t\tcanal_distribution_final as string,\n\t\tcanal_final as string,\n\t\t{Secteur d'activité} as string,\n\t\tdocument_vente as string,\n\t\t{Agence commerciale corrigé} as string,\n\t\t{Donneur d'ordre} as string,\n\t\tFacture as string,\n\t\t{Type poste Facture} as string,\n\t\tno_offre as string,\n\t\t{ATC Corrigé} as string,\n\t\t{ATC offre} as string,\n\t\t{ATC livré} as string,\n\t\t{ATC Performance} as string,\n\t\tNomATC as string,\n\t\tMatricule as string,\n\t\t{Qté facturée} as string,\n\t\t{CA facturé} as string,\n\t\tqt_ecc_enrichi as string,\n\t\tca_ecc_enrichi as string,\n\t\tqte_ecoulement as string,\n\t\t{qte plateforme final} as string,\n\t\t{ca plateforme final} as string,\n\t\tSum_qt_factur_e as string,\n\t\tSum_ca_factur_ as string,\n\t\tSum_ca_ecoulement as string,\n\t\tSum_qte_ecoulement as string,\n\t\t{Motif commande} as string,\n\t\t{Type de facture} as string,\n\t\tsource_atc as string,\n\t\tSuccessor as string,\n\t\tCDis as string,\n\t\tPredecessor as string,\n\t\tSt as string,\n\t\t{Désignation Statut} as string,\n\t\t{Deb val} as string,\n\t\tN1groupe as string,\n\t\tN2groupe as string,\n\t\tN3groupe as string,\n\t\tN4groupe as string,\n\t\tN5groupe as string,\n\t\tN6groupe as string,\n\t\tN7groupe as string,\n\t\tN1groupedesignation as string,\n\t\tN2groupedesignation as string,\n\t\tN3groupedesignation as string,\n\t\tN4groupedesignation as string,\n\t\tN5groupedesignation as string,\n\t\tN6groupedesignation as string,\n\t\tN7groupedesignation as string,\n\t\tN1localedesignation as string,\n\t\tN2localedesignation as string,\n\t\tN3localedesignation as string,\n\t\tN4localedesignation as string,\n\t\tN5localedesignation as string,\n\t\tN6localedesignation as string,\n\t\tN7localedesignation as string,\n\t\tN1locale as string,\n\t\tN2locale as string,\n\t\tN3locale as string,\n\t\tN4locale as string,\n\t\tN5locale as string,\n\t\tN6locale as string,\n\t\tN7locale as string,\n\t\t{Hiérarchgroupe} as string,\n\t\t{Hiérarchlocale} as string,\n\t\t{Numéro du compte} as string,\n\t\t{EPS_Nom du compte} as string,\n\t\t{EPS_Groupe cible/Typologie générale} as string,\n\t\t{EPS_Sous groupe cible/Typologie détaillée} as string,\n\t\t{EPS_Compte principal: Numéro du compte} as string,\n\t\t{EPS_Compte principal: Nom du compte} as string,\n\t\tca_ecoulement as string,\n\t\tClient as string,\n\t\t{Numéro client indirect} as string,\n\t\tCODE_CMI as string,\n\t\tNOM_CMI as string,\n\t\tATC as string,\n\t\tcanal as string,\n\t\tProduit as string,\n\t\t{Numéro interne 2} as string,\n\t\t{Nom du compte} as string,\n\t\t{Numero Interne_ Groupe cible/Typologie générale} as string,\n\t\t{Numero Interne_ Sous groupe cible/Typologie détaillée} as string,\n\t\t{Numero Interne_ Compte principal: Numéro du compte} as string,\n\t\t{Numero Interne_ Compte principal: Nom du compte} as string,\n\t\t{Jour calendaire} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> baseCommerciale\nsource(output(\n\t\t{ID contrat cadre} as string,\n\t\t{ID contrat} as string,\n\t\t{ID levier} as string,\n\t\t{ID Seuil} as string,\n\t\t{Objectif (avec règles de validation)} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> templateContrat\nsource(output(\n\t\t{ID levier} as string,\n\t\t{Code produit} as string,\n\t\t{Code produits exclus} as string,\n\t\t{Famille produit} as string,\n\t\t{Famille produit exclus} as string,\n\t\tCanal as string,\n\t\t{Date de début} as string,\n\t\t{Date de fin} as string,\n\t\t{Type de seuil} as string,\n\t\t{Contrepartie seuil} as string,\n\t\t{ID seuil} as string,\n\t\tMarque as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> calculRem\ncontratCadre, contrat join(contratCadre@{ID contrat cadre} == contrat@{ID contrat cadre},\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> joinContrat\njoinContrat select(mapColumn(\n\t\t{ID contrat cadre} = contratCadre@{ID contrat cadre},\n\t\tLeviers,\n\t\t{ID contrat} = {ID contrat (unique)},\n\t\t{Liste des POS participants},\n\t\t{Liste des ATC référents du contrat (pour la visualisation)}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> uniqueColumnContrat\nuniqueColumnContrat, levier join(Leviers == {ID levier},\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> innerContratLevier\ninnerContratLevier select(mapColumn(\n\t\t{ID contrat cadre},\n\t\t{ID contrat},\n\t\t{Liste des POS participants},\n\t\t{Liste des ATC référents du contrat (pour la visualisation)},\n\t\t{ID levier},\n\t\tcode_produit = {Code produit},\n\t\t{Code produits exclus},\n\t\tfamille_produit = {Famille produit},\n\t\t{Famille produit exclus},\n\t\tCanal,\n\t\t{Date de début},\n\t\t{Date de fin},\n\t\t{Type de seuil},\n\t\t{ID seuil},\n\t\tMarque\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> uniqueColumnLevier\nuniqueColumnLevier derive(Canal = replace(Canal, \"<> \", \"\")) ~> canal\ncanal aggregate(groupBy({ID contrat cadre},\n\t\t{ID contrat},\n\t\t{ID levier}),\n\t{Liste des POS participants} = max({Liste des POS participants}),\n\t\t{Liste des ATC référents du contrat (pour la visualisation)} = max({Liste des ATC référents du contrat (pour la visualisation)}),\n\t\tcode_produit = max(code_produit),\n\t\t{Code produits exclus} = max({Code produits exclus}),\n\t\t{Famille produit} = max(famille_produit),\n\t\t{Famille produit exclus} = max({Famille produit exclus}),\n\t\tCanal = max(Canal),\n\t\t{Date de début} = max({Date de début}),\n\t\t{Date de fin} = max({Date de fin}),\n\t\t{Type de seuil} = max({Type de seuil}),\n\t\t{ID seuil} = max({ID seuil}),\n\t\tMarque = max(Marque)) ~> uniqueIDContrat\ngetArticleList derive(code_produit = split(code_produit, \";\"),\n\t\t{Code produits exclus} = split({Code produits exclus}, \";\")) ~> codeProduitToList\ndropArticleList foldDown(unroll(code_produit),\n\tmapColumn(\n\t\t{ID contrat cadre},\n\t\t{ID contrat},\n\t\t{ID levier},\n\t\t{Liste des POS participants},\n\t\t{Liste des ATC référents du contrat (pour la visualisation)},\n\t\tcode_produit,\n\t\tCode_produits_exclus,\n\t\t{Famille produit},\n\t\t{Famille produit exclus},\n\t\tCanal,\n\t\t{Date de début},\n\t\t{Date de fin},\n\t\t{Type de seuil},\n\t\t{ID seuil},\n\t\tMarque\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> FlattenCodeProduit\nname aggregate(groupBy(name),\n\tarticle_list = collect(Article)) ~> articleToLIst\narticle aggregate(groupBy(Article,\n\t\t{Hiérarch.locale}),\n\tcount = count(Article)) ~> uniqueReferenceArticle\nuniqueReferenceArticle derive(name = \"tous\") ~> name\nuniqueIDContrat, articleToLIst join(lower(code_produit) == lower(name),\n\tjoinType:'left',\n\tbroadcast: 'auto')~> getArticleList\ncodeProduitToList derive(code_produit = iif(lower(code_produit[1])==\"tous\", article_list, code_produit)) ~> newCodeProduit\nnewCodeProduit select(mapColumn(\n\t\t{ID contrat cadre},\n\t\t{ID contrat},\n\t\t{ID levier},\n\t\t{Liste des POS participants},\n\t\t{Liste des ATC référents du contrat (pour la visualisation)},\n\t\tCode_produits_exclus = {Code produits exclus},\n\t\t{Famille produit},\n\t\t{Famille produit exclus},\n\t\tCanal,\n\t\t{Date de début},\n\t\t{Date de fin},\n\t\t{Type de seuil},\n\t\t{ID seuil},\n\t\tMarque,\n\t\tname,\n\t\tcode_produit\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> dropArticleList\nFlattenCodeProduit foldDown(unroll(Code_produits_exclus),\n\tmapColumn(\n\t\t{ID contrat cadre},\n\t\t{ID contrat},\n\t\t{ID levier},\n\t\t{Liste des POS participants},\n\t\t{Liste des ATC référents du contrat (pour la visualisation)},\n\t\tcode_produit,\n\t\t{Code produits exclus} = Code_produits_exclus,\n\t\t{Famille produit},\n\t\t{Famille produit exclus},\n\t\tCanal,\n\t\t{Date de début},\n\t\t{Date de fin},\n\t\t{Type de seuil},\n\t\t{ID seuil},\n\t\tMarque\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> FlattenCodeProduitExclu\nFlattenCodeProduitExclu derive(ToDelete = iif(code_produit=={Code produits exclus}, 1, 0)) ~> toDeleteCode\ntoDeleteCode filter(ToDelete!=1) ~> deleteCodeProduitExclu\ndeleteCodeProduitExclu, uniqueReferenceArticle join(code_produit == Article,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> getHierarchieLocale\ngetHierarchieLocale derive(Famille_produit = split({Famille produit}, \";\"),\n\t\tFamille_produit_exclus = split({Famille produit exclus}, \";\")) ~> familleProduitToList\nfamilleProduitToList foldDown(unroll(Famille_produit),\n\tmapColumn(\n\t\t{ID contrat cadre},\n\t\t{ID contrat},\n\t\t{ID levier},\n\t\t{Liste des POS participants},\n\t\t{Liste des ATC référents du contrat (pour la visualisation)},\n\t\tcode_produit,\n\t\t{Code produits exclus},\n\t\tCanal,\n\t\t{Date de début},\n\t\t{Date de fin},\n\t\t{Type de seuil},\n\t\t{ID seuil},\n\t\tMarque,\n\t\tToDelete,\n\t\tArticle,\n\t\t{Hiérarch.locale},\n\t\tcount,\n\t\tFamille_produit,\n\t\tFamille_produit_exclus\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> FlattenFamille\nFlattenFamille foldDown(unroll(Famille_produit_exclus),\n\tmapColumn(\n\t\t{ID contrat cadre},\n\t\t{ID contrat},\n\t\t{ID levier},\n\t\t{Liste des POS participants},\n\t\t{Liste des ATC référents du contrat (pour la visualisation)},\n\t\tcode_produit,\n\t\t{Code produits exclus},\n\t\tCanal,\n\t\t{Date de début},\n\t\t{Date de fin},\n\t\t{Type de seuil},\n\t\t{ID seuil},\n\t\tMarque,\n\t\tToDelete,\n\t\tArticle,\n\t\t{Hiérarch.locale},\n\t\tcount,\n\t\tFamille_produit,\n\t\tFamille_produit_exclus\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> FlattenFamilleExclu\nFlattenFamilleExclu filter(lower(Famille_produit)==\"toutes\") ~> touteFamille\ntouteFamille derive(ToDelete = iif(substring({Hiérarch.locale},1,length(Famille_produit_exclus))==Famille_produit_exclus,1,0)) ~> touteFamilleToDelete\ntouteFamilleToDelete filter(ToDelete==0) ~> toKeep1\nFlattenFamilleExclu filter(lower(Famille_produit)!=\"toutes\") ~> pasTouteFamille\npasTouteFamille derive(ToDelete = iif(substring({Hiérarch.locale},1,length(Famille_produit))!=Famille_produit || Famille_produit==Famille_produit_exclus,1,0)) ~> pasTouteFamilleToDelete\npasTouteFamilleToDelete filter(ToDelete==0) ~> toKeep\ntoKeep1, toKeep union(byName: true)~> UniontoKeep\nUniontoKeep derive(Canal = split(Canal, \";\"),\n\t\tListe_des_POS_participants = split({Liste des POS participants}, \";\")) ~> canalToList\ncanalToList foldDown(unroll(Canal),\n\tmapColumn(\n\t\t{ID contrat cadre},\n\t\t{ID contrat},\n\t\t{ID levier},\n\t\tListe_des_POS_participants,\n\t\t{Liste des ATC référents du contrat (pour la visualisation)},\n\t\tcode_produit,\n\t\t{Code produits exclus},\n\t\tCanal,\n\t\t{Date de début},\n\t\t{Date de fin},\n\t\t{Type de seuil},\n\t\t{ID seuil},\n\t\tMarque,\n\t\tToDelete,\n\t\tArticle,\n\t\t{Hiérarch.locale},\n\t\tcount,\n\t\tFamille_produit,\n\t\tFamille_produit_exclus\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> FlattenCanal\nFlattenCanal foldDown(unroll(Liste_des_POS_participants),\n\tmapColumn(\n\t\t{ID contrat cadre},\n\t\t{ID contrat},\n\t\t{ID levier},\n\t\t{Liste des POS participants} = Liste_des_POS_participants,\n\t\t{Liste des ATC référents du contrat (pour la visualisation)},\n\t\tcode_produit,\n\t\t{Code produits exclus},\n\t\tCanal,\n\t\t{Date de début},\n\t\t{Date de fin},\n\t\t{Type de seuil},\n\t\t{ID seuil},\n\t\tMarque,\n\t\tToDelete,\n\t\tArticle,\n\t\t{Hiérarch.locale},\n\t\tcount,\n\t\tFamille_produit,\n\t\tFamille_produit_exclus\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> FlattenPOS\nFlattenPOS, baseColumnChoice join(code_produit == {code produit},\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> innerBaseCommerciale\ninnerBaseCommerciale select(mapColumn(\n\t\t{ID contrat cadre},\n\t\t{ID contrat},\n\t\t{ID levier},\n\t\t{Liste des POS participants},\n\t\t{Liste des ATC référents du contrat (pour la visualisation)},\n\t\tcode_produit,\n\t\t{Code produits exclus},\n\t\tCanal,\n\t\t{Date de début},\n\t\t{Date de fin},\n\t\t{Type de seuil},\n\t\t{ID seuil},\n\t\tMarque,\n\t\tToDelete,\n\t\tArticle,\n\t\tlocale = {Hiérarch.locale},\n\t\tFamille_produit,\n\t\tFamille_produit_exclus,\n\t\tyear,\n\t\t{Code client livré},\n\t\tquantite,\n\t\tca,\n\t\t{nom du canal}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> columnChoice\nDerivedColumn3 select(mapColumn(\n\t\tyear,\n\t\t{Code client livré},\n\t\t{code produit},\n\t\tquantite,\n\t\tca,\n\t\t{nom du canal}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> baseColumnChoice\ncolumnChoice derive(ToDelete = iif({Liste des POS participants}==\"\" || {Liste des POS participants}=={Code client livré}, 0, 1)) ~> toDelete\ntoDelete filter(ToDelete==0) ~> filtreListePOS\nfiltreListePOS derive(ToDelete = iif(Canal=={nom du canal}, 1, 0)) ~> DerivedColumn2\nDerivedColumn2 filter(ToDelete==0) ~> filtreCanal\nfiltreCanal filter(instr(lower({Type de seuil}),\"ca\")>0) ~> CA\nCA aggregate(groupBy({ID contrat cadre},\n\t\t{ID contrat},\n\t\t{ID levier},\n\t\tyear),\n\tca = sum(toDouble(ca)),\n\t\t{Réalisé} = sum(toDouble(ca))) ~> uniqueForCA\nfiltreCanal filter(instr(lower({Type de seuil}),\"ca\")==0) ~> quantite\nquantite aggregate(groupBy({ID contrat cadre},\n\t\t{ID contrat},\n\t\t{ID levier},\n\t\tyear),\n\t{Somme quantité} = sum(toInteger(quantite)),\n\t\t{Réalisé} = sum(toInteger(quantite))) ~> uniqueForQuantity\nuniqueForCA, uniqueForQuantity union(byName: true)~> UnionCAQuantity\nUnionCAQuantity, templateContrat join(UnionCAQuantity@{ID contrat cadre} == templateContrat@{ID contrat cadre}\n\t&& UnionCAQuantity@{ID contrat} == templateContrat@{ID contrat}\n\t&& UnionCAQuantity@{ID levier} == templateContrat@{ID levier},\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> innerTemplateContrat\ninnerTemplateContrat select(mapColumn(\n\t\t{ID contrat cadre} = UnionCAQuantity@{ID contrat cadre},\n\t\t{ID contrat} = UnionCAQuantity@{ID contrat},\n\t\t{ID levier} = UnionCAQuantity@{ID levier},\n\t\tyear,\n\t\tca,\n\t\t{Réalisé},\n\t\t{Somme quantité},\n\t\t{ID Seuil},\n\t\t{Objectif (avec règles de validation)}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> dropColumns\ndropColumns filter({Réalisé}>=toDouble({Objectif (avec règles de validation)})) ~> Realise\nRealise aggregate(groupBy(year,\n\t\t{ID contrat cadre},\n\t\t{ID contrat},\n\t\t{ID levier}),\n\t{Max ID Seuil} = max(toInteger({ID Seuil}))) ~> unique\nunique, calculRem join(unique@{ID levier} == calculRem@{ID levier}\n\t&& toInteger({Max ID Seuil}) == toInteger({ID seuil}),\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> innerTemplateRemuneration\ninnerTemplateRemuneration select(mapColumn(\n\t\tyear,\n\t\t{ID contrat cadre},\n\t\t{ID contrat},\n\t\t{ID levier} = unique@{ID levier},\n\t\t{Max ID Seuil},\n\t\t{Contrepartie seuil}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> dropColumnsInCommon\nbaseCommerciale derive(ca = replace(ca, \",\", \".\")) ~> DerivedColumn3\ndropColumnsInCommon sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tArticle as string,\n\t\tNoCanalDist as string,\n\t\tNoArt as string,\n\t\tNoNiv1 as string,\n\t\tNoNiv2 as string,\n\t\tNoNiv3 as string,\n\t\tNoNiv4 as string,\n\t\tNoNiv5 as string,\n\t\tNoNiv6 as string,\n\t\tNoNiv7 as string,\n\t\tNiv1 as string,\n\t\tNiv2 as string,\n\t\tNiv3 as string,\n\t\tNiv4 as string,\n\t\tNiv6 as string,\n\t\tNiv7 as string,\n\t\tCanalDist as string\n\t),\n\tpartitionFileNames:['CALCUL_SEUIL.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> CALCULSEUIL"
+					"script": "source(output(\n\t\t{ID contrat cadre} as string,\n\t\tLeviers as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> contratCadre\nsource(output(\n\t\t{ID contrat (unique)} as string,\n\t\t{ID contrat cadre} as string,\n\t\t{Liste des POS participants} as string,\n\t\t{Liste des ATC référents du contrat (pour la visualisation)} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> contrat\nsource(output(\n\t\t{ID levier} as string,\n\t\t{Code produit} as string,\n\t\t{Code produits exclus} as string,\n\t\t{Famille produit} as string,\n\t\t{Famille produit exclus} as string,\n\t\tCanal as string,\n\t\t{Date de début} as string,\n\t\t{Date de fin} as string,\n\t\t{Type de seuil} as string,\n\t\t{ID seuil} as string,\n\t\tMarque as string,\n\t\t{Seuil min} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> levier\nsource(output(\n\t\tOrgCm as string,\n\t\tCDis as string,\n\t\tArticle as string,\n\t\tDescription as string,\n\t\t{Hiérarch.groupe} as string,\n\t\t{Hiérarch.locale} as string,\n\t\tPredecessor as string,\n\t\tSuccessor as string,\n\t\tSt as string,\n\t\t{Désignation Statut} as string,\n\t\t{Déb. val.} as string,\n\t\t{N1.groupe} as string,\n\t\t{N2.groupe} as string,\n\t\t{N3.groupe} as string,\n\t\t{N4.groupe} as string,\n\t\t{N5.groupe} as string,\n\t\t{N6.groupe} as string,\n\t\t{N7.groupe} as string,\n\t\t{N1.locale} as string,\n\t\t{N2.locale} as string,\n\t\t{N3.locale} as string,\n\t\t{N4.locale} as string,\n\t\t{N5.locale} as string,\n\t\t{N6.locale} as string,\n\t\t{N7.locale} as string,\n\t\t{N1.groupe.designation} as string,\n\t\t{N2.groupe.designation} as string,\n\t\t{N3.groupe.designation} as string,\n\t\t{N4.groupe.designation} as string,\n\t\t{N5.groupe.designation} as string,\n\t\t{N6.groupe.designation} as string,\n\t\t{N7.groupe.designation} as string,\n\t\t{N1.locale.designation} as string,\n\t\t{N2.locale.designation} as string,\n\t\t{N3.locale.designation} as string,\n\t\t{N4.locale.designation} as string,\n\t\t{N5.locale.designation} as string,\n\t\t{N6.locale.designation} as string,\n\t\t{N7.locale.designation} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> article\nsource(output(\n\t\t{affecte/non_affecte} as string,\n\t\t{plateforme/vente directe} as string,\n\t\t{origine de la ligne} as string,\n\t\tyearmonth as string,\n\t\tyear as string,\n\t\tmonth as string,\n\t\t{Code client livré} as string,\n\t\t{code client plateforme livree} as string,\n\t\t{code produit} as string,\n\t\tquantite as string,\n\t\tca as string,\n\t\t{Code postal} as string,\n\t\tmarque as string,\n\t\tmarque_code as string,\n\t\t{Canal distribution} as string,\n\t\t{nom du canal} as string,\n\t\tcanal_distribution_final as string,\n\t\tcanal_final as string,\n\t\t{Secteur d'activité} as string,\n\t\tdocument_vente as string,\n\t\t{Agence commerciale corrigé} as string,\n\t\t{Donneur d'ordre} as string,\n\t\tFacture as string,\n\t\t{Type poste Facture} as string,\n\t\tno_offre as string,\n\t\t{ATC Corrigé} as string,\n\t\t{ATC offre} as string,\n\t\t{ATC livré} as string,\n\t\t{ATC Performance} as string,\n\t\tNomATC as string,\n\t\tMatricule as string,\n\t\t{Qté facturée} as string,\n\t\t{CA facturé} as string,\n\t\tqt_ecc_enrichi as string,\n\t\tca_ecc_enrichi as string,\n\t\tqte_ecoulement as string,\n\t\t{qte plateforme final} as string,\n\t\t{ca plateforme final} as string,\n\t\tSum_qt_factur_e as string,\n\t\tSum_ca_factur_ as string,\n\t\tSum_ca_ecoulement as string,\n\t\tSum_qte_ecoulement as string,\n\t\t{Motif commande} as string,\n\t\t{Type de facture} as string,\n\t\tsource_atc as string,\n\t\tSuccessor as string,\n\t\tCDis as string,\n\t\tPredecessor as string,\n\t\tSt as string,\n\t\t{Désignation Statut} as string,\n\t\t{Deb val} as string,\n\t\tN1groupe as string,\n\t\tN2groupe as string,\n\t\tN3groupe as string,\n\t\tN4groupe as string,\n\t\tN5groupe as string,\n\t\tN6groupe as string,\n\t\tN7groupe as string,\n\t\tN1groupedesignation as string,\n\t\tN2groupedesignation as string,\n\t\tN3groupedesignation as string,\n\t\tN4groupedesignation as string,\n\t\tN5groupedesignation as string,\n\t\tN6groupedesignation as string,\n\t\tN7groupedesignation as string,\n\t\tN1localedesignation as string,\n\t\tN2localedesignation as string,\n\t\tN3localedesignation as string,\n\t\tN4localedesignation as string,\n\t\tN5localedesignation as string,\n\t\tN6localedesignation as string,\n\t\tN7localedesignation as string,\n\t\tN1locale as string,\n\t\tN2locale as string,\n\t\tN3locale as string,\n\t\tN4locale as string,\n\t\tN5locale as string,\n\t\tN6locale as string,\n\t\tN7locale as string,\n\t\t{Hiérarchgroupe} as string,\n\t\t{Hiérarchlocale} as string,\n\t\t{Numéro du compte} as string,\n\t\t{EPS_Nom du compte} as string,\n\t\t{EPS_Groupe cible/Typologie générale} as string,\n\t\t{EPS_Sous groupe cible/Typologie détaillée} as string,\n\t\t{EPS_Compte principal: Numéro du compte} as string,\n\t\t{EPS_Compte principal: Nom du compte} as string,\n\t\tca_ecoulement as string,\n\t\tClient as string,\n\t\t{Numéro client indirect} as string,\n\t\tCODE_CMI as string,\n\t\tNOM_CMI as string,\n\t\tATC as string,\n\t\tcanal as string,\n\t\tProduit as string,\n\t\t{Numéro interne 2} as string,\n\t\t{Nom du compte} as string,\n\t\t{Numero Interne_ Groupe cible/Typologie générale} as string,\n\t\t{Numero Interne_ Sous groupe cible/Typologie détaillée} as string,\n\t\t{Numero Interne_ Compte principal: Numéro du compte} as string,\n\t\t{Numero Interne_ Compte principal: Nom du compte} as string,\n\t\t{Jour calendaire} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> baseCommerciale\nsource(output(\n\t\t{ID contrat cadre} as string,\n\t\t{ID contrat} as string,\n\t\t{ID levier} as string,\n\t\t{ID Seuil} as string,\n\t\t{Objectif (avec règles de validation)} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> templateContrat\nsource(output(\n\t\t{ID levier} as string,\n\t\t{Code produit} as string,\n\t\t{Code produits exclus} as string,\n\t\t{Famille produit} as string,\n\t\t{Famille produit exclus} as string,\n\t\tCanal as string,\n\t\t{Date de début} as string,\n\t\t{Date de fin} as string,\n\t\t{Type de seuil} as string,\n\t\t{Contrepartie seuil} as string,\n\t\t{ID seuil} as string,\n\t\tMarque as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> calculRem\ncontratCadre, contrat join(contratCadre@{ID contrat cadre} == contrat@{ID contrat cadre},\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> joinContrat\njoinContrat select(mapColumn(\n\t\t{ID contrat cadre} = contratCadre@{ID contrat cadre},\n\t\tLeviers,\n\t\t{ID contrat} = {ID contrat (unique)},\n\t\t{Liste des POS participants},\n\t\t{Liste des ATC référents du contrat (pour la visualisation)}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> uniqueColumnContrat\nuniqueColumnContrat, levier join(Leviers == {ID levier},\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> innerContratLevier\ninnerContratLevier select(mapColumn(\n\t\t{ID contrat cadre},\n\t\t{ID contrat},\n\t\t{Liste des POS participants},\n\t\t{Liste des ATC référents du contrat (pour la visualisation)},\n\t\t{ID levier},\n\t\tcode_produit = {Code produit},\n\t\t{Code produits exclus},\n\t\tfamille_produit = {Famille produit},\n\t\t{Famille produit exclus},\n\t\tCanal,\n\t\t{Date de début},\n\t\t{Date de fin},\n\t\t{Type de seuil},\n\t\t{ID seuil},\n\t\tMarque\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> uniqueColumnLevier\nuniqueColumnLevier derive(Canal = replace(Canal, \"<> \", \"\")) ~> canal\ncanal aggregate(groupBy({ID contrat cadre},\n\t\t{ID contrat},\n\t\t{ID levier}),\n\t{Liste des POS participants} = max({Liste des POS participants}),\n\t\t{Liste des ATC référents du contrat (pour la visualisation)} = max({Liste des ATC référents du contrat (pour la visualisation)}),\n\t\tcode_produit = max(code_produit),\n\t\t{Code produits exclus} = max({Code produits exclus}),\n\t\t{Famille produit} = max(famille_produit),\n\t\t{Famille produit exclus} = max({Famille produit exclus}),\n\t\tCanal = max(Canal),\n\t\t{Date de début} = max({Date de début}),\n\t\t{Date de fin} = max({Date de fin}),\n\t\t{Type de seuil} = max({Type de seuil}),\n\t\t{ID seuil} = max({ID seuil}),\n\t\tMarque = max(Marque)) ~> uniqueIDContrat\ngetArticleList derive(code_produit = split(code_produit, \";\"),\n\t\t{Code produits exclus} = split({Code produits exclus}, \";\")) ~> codeProduitToList\ndropArticleList foldDown(unroll(code_produit),\n\tmapColumn(\n\t\t{ID contrat cadre},\n\t\t{ID contrat},\n\t\t{ID levier},\n\t\t{Liste des POS participants},\n\t\t{Liste des ATC référents du contrat (pour la visualisation)},\n\t\tcode_produit,\n\t\tCode_produits_exclus,\n\t\t{Famille produit},\n\t\t{Famille produit exclus},\n\t\tCanal,\n\t\t{Date de début},\n\t\t{Date de fin},\n\t\t{Type de seuil},\n\t\t{ID seuil},\n\t\tMarque\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> FlattenCodeProduit\nname aggregate(groupBy(name),\n\tarticle_list = collect(Article)) ~> articleToLIst\narticle aggregate(groupBy(Article,\n\t\t{Hiérarch.locale}),\n\tcount = count(Article)) ~> uniqueReferenceArticle\nuniqueReferenceArticle derive(name = \"tous\") ~> name\nuniqueIDContrat, articleToLIst join(lower(code_produit) == lower(name),\n\tjoinType:'left',\n\tbroadcast: 'auto')~> getArticleList\ncodeProduitToList derive(code_produit = iif(lower(code_produit[1])==\"tous\", article_list, code_produit)) ~> newCodeProduit\nnewCodeProduit select(mapColumn(\n\t\t{ID contrat cadre},\n\t\t{ID contrat},\n\t\t{ID levier},\n\t\t{Liste des POS participants},\n\t\t{Liste des ATC référents du contrat (pour la visualisation)},\n\t\tCode_produits_exclus = {Code produits exclus},\n\t\t{Famille produit},\n\t\t{Famille produit exclus},\n\t\tCanal,\n\t\t{Date de début},\n\t\t{Date de fin},\n\t\t{Type de seuil},\n\t\t{ID seuil},\n\t\tMarque,\n\t\tname,\n\t\tcode_produit\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> dropArticleList\nFlattenCodeProduit foldDown(unroll(Code_produits_exclus),\n\tmapColumn(\n\t\t{ID contrat cadre},\n\t\t{ID contrat},\n\t\t{ID levier},\n\t\t{Liste des POS participants},\n\t\t{Liste des ATC référents du contrat (pour la visualisation)},\n\t\tcode_produit,\n\t\t{Code produits exclus} = Code_produits_exclus,\n\t\t{Famille produit},\n\t\t{Famille produit exclus},\n\t\tCanal,\n\t\t{Date de début},\n\t\t{Date de fin},\n\t\t{Type de seuil},\n\t\t{ID seuil},\n\t\tMarque\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> FlattenCodeProduitExclu\nFlattenCodeProduitExclu derive(ToDelete = iif(code_produit=={Code produits exclus}, 1, 0)) ~> toDeleteCode\ntoDeleteCode filter(ToDelete!=1) ~> deleteCodeProduitExclu\ndeleteCodeProduitExclu, uniqueReferenceArticle join(code_produit == Article,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> getHierarchieLocale\ngetHierarchieLocale derive(Famille_produit = split({Famille produit}, \";\"),\n\t\tFamille_produit_exclus = split({Famille produit exclus}, \";\")) ~> familleProduitToList\nfamilleProduitToList foldDown(unroll(Famille_produit),\n\tmapColumn(\n\t\t{ID contrat cadre},\n\t\t{ID contrat},\n\t\t{ID levier},\n\t\t{Liste des POS participants},\n\t\t{Liste des ATC référents du contrat (pour la visualisation)},\n\t\tcode_produit,\n\t\t{Code produits exclus},\n\t\tCanal,\n\t\t{Date de début},\n\t\t{Date de fin},\n\t\t{Type de seuil},\n\t\t{ID seuil},\n\t\tMarque,\n\t\tToDelete,\n\t\tArticle,\n\t\t{Hiérarch.locale},\n\t\tcount,\n\t\tFamille_produit,\n\t\tFamille_produit_exclus\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> FlattenFamille\nFlattenFamille foldDown(unroll(Famille_produit_exclus),\n\tmapColumn(\n\t\t{ID contrat cadre},\n\t\t{ID contrat},\n\t\t{ID levier},\n\t\t{Liste des POS participants},\n\t\t{Liste des ATC référents du contrat (pour la visualisation)},\n\t\tcode_produit,\n\t\t{Code produits exclus},\n\t\tCanal,\n\t\t{Date de début},\n\t\t{Date de fin},\n\t\t{Type de seuil},\n\t\t{ID seuil},\n\t\tMarque,\n\t\tToDelete,\n\t\tArticle,\n\t\t{Hiérarch.locale},\n\t\tcount,\n\t\tFamille_produit,\n\t\tFamille_produit_exclus\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> FlattenFamilleExclu\nFlattenFamilleExclu filter(lower(Famille_produit)==\"toutes\") ~> touteFamille\ntouteFamille derive(ToDelete = iif(substring({Hiérarch.locale},1,length(Famille_produit_exclus))==Famille_produit_exclus,1,0)) ~> touteFamilleToDelete\ntouteFamilleToDelete filter(ToDelete==0) ~> toKeep1\nFlattenFamilleExclu filter(lower(Famille_produit)!=\"toutes\") ~> pasTouteFamille\npasTouteFamille derive(ToDelete = iif(substring({Hiérarch.locale},1,length(Famille_produit))!=Famille_produit || Famille_produit==Famille_produit_exclus,1,0)) ~> pasTouteFamilleToDelete\npasTouteFamilleToDelete filter(ToDelete==0) ~> toKeep\ntoKeep1, toKeep union(byName: true)~> UniontoKeep\nUniontoKeep derive(Canal = split(Canal, \";\"),\n\t\tListe_des_POS_participants = split({Liste des POS participants}, \";\")) ~> canalToList\ncanalToList foldDown(unroll(Canal),\n\tmapColumn(\n\t\t{ID contrat cadre},\n\t\t{ID contrat},\n\t\t{ID levier},\n\t\tListe_des_POS_participants,\n\t\t{Liste des ATC référents du contrat (pour la visualisation)},\n\t\tcode_produit,\n\t\t{Code produits exclus},\n\t\tCanal,\n\t\t{Date de début},\n\t\t{Date de fin},\n\t\t{Type de seuil},\n\t\t{ID seuil},\n\t\tMarque,\n\t\tToDelete,\n\t\tArticle,\n\t\t{Hiérarch.locale},\n\t\tcount,\n\t\tFamille_produit,\n\t\tFamille_produit_exclus\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> FlattenCanal\nFlattenCanal foldDown(unroll(Liste_des_POS_participants),\n\tmapColumn(\n\t\t{ID contrat cadre},\n\t\t{ID contrat},\n\t\t{ID levier},\n\t\t{Liste des POS participants} = Liste_des_POS_participants,\n\t\t{Liste des ATC référents du contrat (pour la visualisation)},\n\t\tcode_produit,\n\t\t{Code produits exclus},\n\t\tCanal,\n\t\t{Date de début},\n\t\t{Date de fin},\n\t\t{Type de seuil},\n\t\t{ID seuil},\n\t\tMarque,\n\t\tToDelete,\n\t\tArticle,\n\t\t{Hiérarch.locale},\n\t\tcount,\n\t\tFamille_produit,\n\t\tFamille_produit_exclus\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> FlattenPOS\nFlattenPOS, baseColumnChoice join(code_produit == {code produit},\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> innerBaseCommerciale\ninnerBaseCommerciale select(mapColumn(\n\t\t{ID contrat cadre},\n\t\t{ID contrat},\n\t\t{ID levier},\n\t\t{Liste des POS participants},\n\t\t{Liste des ATC référents du contrat (pour la visualisation)},\n\t\tcode_produit,\n\t\t{Code produits exclus},\n\t\tCanal,\n\t\t{Date de début},\n\t\t{Date de fin},\n\t\t{Type de seuil},\n\t\t{ID seuil},\n\t\tMarque,\n\t\tToDelete,\n\t\tArticle,\n\t\tlocale = {Hiérarch.locale},\n\t\tFamille_produit,\n\t\tFamille_produit_exclus,\n\t\tyear,\n\t\t{Code client livré},\n\t\tquantite,\n\t\tca,\n\t\t{nom du canal}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> columnChoice\nDerivedColumn3 select(mapColumn(\n\t\tyear,\n\t\t{Code client livré},\n\t\t{code produit},\n\t\tquantite,\n\t\tca,\n\t\t{nom du canal}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> baseColumnChoice\ncolumnChoice derive(ToDelete = iif({Liste des POS participants}==\"\" || {Liste des POS participants}=={Code client livré}, 0, 1)) ~> toDelete\ntoDelete filter(ToDelete==0) ~> filtreListePOS\nfiltreListePOS derive(ToDelete = iif(Canal=={nom du canal}, 1, 0)) ~> DerivedColumn2\nDerivedColumn2 filter(ToDelete==0) ~> filtreCanal\nfiltreCanal filter(instr(lower({Type de seuil}),\"ca\")>0) ~> CA\nCA aggregate(groupBy({ID contrat cadre},\n\t\t{ID contrat},\n\t\t{ID levier},\n\t\tyear),\n\tca = sum(toDouble(ca)),\n\t\t{Réalisé} = sum(toDouble(ca))) ~> uniqueForCA\nfiltreCanal filter(instr(lower({Type de seuil}),\"ca\")==0) ~> quantite\nquantite aggregate(groupBy({ID contrat cadre},\n\t\t{ID contrat},\n\t\t{ID levier},\n\t\tyear),\n\t{Somme quantité} = sum(toInteger(quantite)),\n\t\t{Réalisé} = sum(toInteger(quantite))) ~> uniqueForQuantity\nuniqueForCA, uniqueForQuantity union(byName: true)~> UnionCAQuantity\nUnionCAQuantity, templateContrat join(UnionCAQuantity@{ID contrat cadre} == templateContrat@{ID contrat cadre}\n\t&& UnionCAQuantity@{ID contrat} == templateContrat@{ID contrat}\n\t&& UnionCAQuantity@{ID levier} == templateContrat@{ID levier},\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> innerTemplateContrat\ninnerTemplateContrat select(mapColumn(\n\t\t{ID contrat cadre} = UnionCAQuantity@{ID contrat cadre},\n\t\t{ID contrat} = UnionCAQuantity@{ID contrat},\n\t\t{ID levier} = UnionCAQuantity@{ID levier},\n\t\tyear,\n\t\tca,\n\t\t{Réalisé},\n\t\t{Somme quantité},\n\t\t{ID Seuil},\n\t\t{Objectif (avec règles de validation)}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> dropColumns\ndropColumns filter({Réalisé}>=toDouble({Objectif (avec règles de validation)})) ~> Realise\nRealise aggregate(groupBy(year,\n\t\t{ID contrat cadre},\n\t\t{ID contrat},\n\t\t{ID levier}),\n\t{Max ID Seuil} = max(toInteger({ID Seuil}))) ~> unique\nunique, calculRem join(unique@{ID levier} == calculRem@{ID levier}\n\t&& toInteger({Max ID Seuil}) == toInteger({ID seuil}),\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> innerTemplateRemuneration\ninnerTemplateRemuneration select(mapColumn(\n\t\tyear,\n\t\t{ID contrat cadre},\n\t\t{ID contrat},\n\t\t{ID levier} = unique@{ID levier},\n\t\t{Max ID Seuil},\n\t\t{Contrepartie seuil}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> dropColumnsInCommon\nbaseCommerciale derive(ca = replace(ca, \",\", \".\")) ~> DerivedColumn3\ndropColumnsInCommon, addAllYear join(dropColumnsInCommon@{ID contrat cadre} == dropArticleList@{ID contrat cadre}\n\t&& dropColumnsInCommon@{ID contrat} == dropArticleList@{ID contrat}\n\t&& dropColumnsInCommon@{ID levier} == dropArticleList@{ID levier}\n\t&& dropColumnsInCommon@year == uniqueYear@year,\n\tjoinType:'right',\n\tbroadcast: 'auto')~> Join1\nJoin1 select(mapColumn(\n\t\t{Max ID Seuil},\n\t\t{Contrepartie seuil},\n\t\t{ID contrat cadre} = dropArticleList@{ID contrat cadre},\n\t\t{ID contrat} = dropArticleList@{ID contrat},\n\t\t{ID levier} = dropArticleList@{ID levier},\n\t\tyear = uniqueYear@year\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\ndropColumnsInCommon aggregate(groupBy(year),\n\tjoin = max({ID contrat cadre})) ~> uniqueYear\nuniqueYear derive(join = 1) ~> columnToJoin\ndropArticleList derive(join = 1) ~> DerivedColumn4\nDerivedColumn4, columnToJoin join(DerivedColumn4@join == columnToJoin@join,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> addAllYear\nSelect1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tArticle as string,\n\t\tNoCanalDist as string,\n\t\tNoArt as string,\n\t\tNoNiv1 as string,\n\t\tNoNiv2 as string,\n\t\tNoNiv3 as string,\n\t\tNoNiv4 as string,\n\t\tNoNiv5 as string,\n\t\tNoNiv6 as string,\n\t\tNoNiv7 as string,\n\t\tNiv1 as string,\n\t\tNiv2 as string,\n\t\tNiv3 as string,\n\t\tNiv4 as string,\n\t\tNiv6 as string,\n\t\tNiv7 as string,\n\t\tCanalDist as string\n\t),\n\tpartitionFileNames:['CALCUL_SEUIL.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> CALCULSEUIL"
 				}
 			},
 			"dependsOn": [
@@ -34876,9 +35004,21 @@
 						},
 						{
 							"name": "dropColumns"
+						},
+						{
+							"name": "fullLeftJoin"
+						},
+						{
+							"name": "dropInner"
+						},
+						{
+							"name": "dropColumnsLeft"
+						},
+						{
+							"name": "Union"
 						}
 					],
-					"script": "source(output(\n\t\tyear as string,\n\t\t{ID contrat cadre} as string,\n\t\t{ID contrat} as string,\n\t\t{ID levier} as string,\n\t\t{Max ID Seuil} as string,\n\t\t{Contrepartie seuil} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> seuil\nsource(output(\n\t\t{ID contrat cadre} as string,\n\t\t{ID contrat} as string,\n\t\t{ID levier} as string,\n\t\tyear as string,\n\t\tca as string,\n\t\t{Réalisé} as string,\n\t\t{Somme quantité} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> remuneration\nseuil, remuneration join(seuil@{ID contrat cadre} == remuneration@{ID contrat cadre}\n\t&& seuil@{ID contrat} == remuneration@{ID contrat}\n\t&& seuil@{ID levier} == remuneration@{ID levier},\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> innerJoin\ndropColumns derive({Rémunération} = toDouble({Réalisé})*toDouble({Contrepartie seuil})) ~> remunerationColumn\ninnerJoin select(mapColumn(\n\t\tyear = seuil@year,\n\t\t{ID contrat cadre} = seuil@{ID contrat cadre},\n\t\t{ID contrat} = seuil@{ID contrat},\n\t\t{ID levier} = seuil@{ID levier},\n\t\t{ID Seuil} = {Max ID Seuil},\n\t\t{Contrepartie seuil},\n\t\tca,\n\t\t{Réalisé},\n\t\t{Somme quantité}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> dropColumns\nremunerationColumn sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['CONTRAT_DISTRIBUTION.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> CONTRATDISTRIBUTION"
+					"script": "source(output(\n\t\tyear as string,\n\t\t{ID contrat cadre} as string,\n\t\t{ID contrat} as string,\n\t\t{ID levier} as string,\n\t\t{Max ID Seuil} as string,\n\t\t{Contrepartie seuil} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> seuil\nsource(output(\n\t\t{ID contrat cadre} as string,\n\t\t{ID contrat} as string,\n\t\t{ID levier} as string,\n\t\tyear as string,\n\t\tca as string,\n\t\t{Réalisé} as string,\n\t\t{Somme quantité} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> remuneration\nseuil, remuneration join(seuil@{ID contrat cadre} == remuneration@{ID contrat cadre}\n\t&& seuil@{ID contrat} == remuneration@{ID contrat}\n\t&& seuil@{ID levier} == remuneration@{ID levier}\n\t&& seuil@year == remuneration@year,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> innerJoin\nUnion derive({Rémunération} = toDouble({Réalisé})*toDouble({Contrepartie seuil})) ~> remunerationColumn\ninnerJoin select(mapColumn(\n\t\tyear = seuil@year,\n\t\t{ID contrat cadre} = seuil@{ID contrat cadre},\n\t\t{ID contrat} = seuil@{ID contrat},\n\t\t{ID levier} = seuil@{ID levier},\n\t\t{ID Seuil} = {Max ID Seuil},\n\t\t{Contrepartie seuil},\n\t\tca,\n\t\t{quantité} = {Somme quantité},\n\t\t{Réalisé}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> dropColumns\nseuil, remuneration join(seuil@{ID contrat cadre} == remuneration@{ID contrat cadre}\n\t&& seuil@{ID contrat} == remuneration@{ID contrat}\n\t&& seuil@{ID levier} == remuneration@{ID levier}\n\t&& seuil@year == remuneration@year,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> fullLeftJoin\nfullLeftJoin filter(isNull(remuneration@{ID contrat cadre}) && isNull(remuneration@{ID contrat}) && isNull(remuneration@{ID levier}) && isNull(remuneration@year)) ~> dropInner\ndropInner select(mapColumn(\n\t\tyear = seuil@year,\n\t\t{ID contrat cadre} = seuil@{ID contrat cadre},\n\t\t{ID contrat} = seuil@{ID contrat},\n\t\t{ID levier} = seuil@{ID levier},\n\t\t{ID Seuil} = {Max ID Seuil},\n\t\t{Contrepartie seuil},\n\t\tca,\n\t\t{Réalisé},\n\t\t{Somme quantité}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> dropColumnsLeft\ndropColumns, dropColumnsLeft union(byName: true)~> Union\nremunerationColumn sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['CONTRAT_DISTRIBUTION.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> CONTRATDISTRIBUTION"
 				}
 			},
 			"dependsOn": [
