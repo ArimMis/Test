@@ -1,11 +1,6 @@
 {
 	"name": "VAILLANT_ARCHITECTURE",
 	"properties": {
-		"parameters": {
-			"environment": {
-				"type": "String"
-			}
-		},
 		"annotations": [],
 		"type": "AzureBlobStorage",
 		"typeProperties": {
