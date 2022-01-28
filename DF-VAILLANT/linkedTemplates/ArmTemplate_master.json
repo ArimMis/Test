@@ -11,14 +11,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'functionKey' of 'AzureFunctionPremium'"
 		},
-		"data transformation azure function_functionKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'functionKey' of 'data transformation azure function'"
-		},
-		"data_input_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'data_input'"
-		},
 		"AKVVAILLANT_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://KVNVAILLANT.vault.azure.net/"
@@ -34,10 +26,6 @@
 		"VAILLANT_ARCHITECTURE_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
 			"defaultValue": "sk-dsvaillantfr"
-		},
-		"data transformation azure function_properties_typeProperties_functionAppUrl": {
-			"type": "string",
-			"defaultValue": "https://fa-datafacto-transfo-fr.azurewebsites.net"
 		},
 		"containerUri": {
 			"type": "string",
@@ -69,20 +57,11 @@
 					"AzureFunctionPremium_functionKey": {
 						"value": "[parameters('AzureFunctionPremium_functionKey')]"
 					},
-					"data transformation azure function_functionKey": {
-						"value": "[parameters('data transformation azure function_functionKey')]"
-					},
-					"data_input_connectionString": {
-						"value": "[parameters('data_input_connectionString')]"
-					},
 					"AKVVAILLANT_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AKVVAILLANT_properties_typeProperties_baseUrl')]"
 					},
 					"AzureFunctionPremium_properties_typeProperties_functionAppUrl": {
 						"value": "[parameters('AzureFunctionPremium_properties_typeProperties_functionAppUrl')]"
-					},
-					"data transformation azure function_properties_typeProperties_functionAppUrl": {
-						"value": "[parameters('data transformation azure function_properties_typeProperties_functionAppUrl')]"
 					},
 					"PREPROD_VAILLANT_ARCHITECTURE_properties_typeProperties_connectionString_secretName": {
 						"value": "[parameters('PREPROD_VAILLANT_ARCHITECTURE_properties_typeProperties_connectionString_secretName')]"

@@ -11,14 +11,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'functionKey' of 'AzureFunctionPremium'"
 		},
-		"data transformation azure function_functionKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'functionKey' of 'data transformation azure function'"
-		},
-		"data_input_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'data_input'"
-		},
 		"AKVVAILLANT_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://KVNVAILLANT.vault.azure.net/"
@@ -26,10 +18,6 @@
 		"AzureFunctionPremium_properties_typeProperties_functionAppUrl": {
 			"type": "string",
 			"defaultValue": "https://fa-datatransfoprem.azurewebsites.net"
-		},
-		"data transformation azure function_properties_typeProperties_functionAppUrl": {
-			"type": "string",
-			"defaultValue": "https://fa-datafacto-transfo-fr.azurewebsites.net"
 		},
 		"PREPROD_VAILLANT_ARCHITECTURE_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
@@ -72,38 +60,6 @@
 						"value": "[parameters('AzureFunctionPremium_functionKey')]"
 					},
 					"authentication": "Anonymous"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/data transformation azure function')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "this is service group the python data transformation we used in this project",
-				"annotations": [],
-				"type": "AzureFunction",
-				"typeProperties": {
-					"functionAppUrl": "[parameters('data transformation azure function_properties_typeProperties_functionAppUrl')]",
-					"functionKey": {
-						"type": "SecureString",
-						"value": "[parameters('data transformation azure function_functionKey')]"
-					},
-					"authentication": "Anonymous"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/data_input')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('data_input_connectionString')]"
 				}
 			},
 			"dependsOn": []
@@ -448,7 +404,7 @@
 							}
 						},
 						"linkedServiceName": {
-							"referenceName": "data transformation azure function",
+							"referenceName": "AzureFunctionPremium",
 							"type": "LinkedServiceReference"
 						}
 					},
@@ -492,8 +448,7 @@
 				"lastPublishTime": "2022-01-27T14:17:45Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureFunctionPremium')]",
-				"[concat(variables('factoryId'), '/linkedServices/data transformation azure function')]"
+				"[concat(variables('factoryId'), '/linkedServices/AzureFunctionPremium')]"
 			]
 		},
 		{
@@ -2531,6 +2486,437 @@
 					},
 					{
 						"name": "qte_ecc",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/VAILLANT_ARCHITECTURE')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AvoirForVanMarkesInput')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "VANMARKES"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "AvoirForVanMarkes.csv",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Mois_Selection",
+						"type": "String"
+					},
+					{
+						"name": "Code_depot",
+						"type": "String"
+					},
+					{
+						"name": "NoOffre",
+						"type": "String"
+					},
+					{
+						"name": "NoArtVGF",
+						"type": "String"
+					},
+					{
+						"name": "Agence",
+						"type": "String"
+					},
+					{
+						"name": "Qte_Validee_VGF",
+						"type": "String"
+					},
+					{
+						"name": "NoCli",
+						"type": "String"
+					},
+					{
+						"name": "PA_Valide_VGF",
+						"type": "String"
+					},
+					{
+						"name": "Mois",
+						"type": "String"
+					},
+					{
+						"name": "Année",
+						"type": "String"
+					},
+					{
+						"name": "CompanyId",
+						"type": "String"
+					},
+					{
+						"name": "HubSAPid",
+						"type": "String"
+					},
+					{
+						"name": "toreplicate",
+						"type": "String"
+					},
+					{
+						"name": "ca_avoir",
+						"type": "String"
+					},
+					{
+						"name": "yearmonth",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/VAILLANT_ARCHITECTURE')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BASE_AVANT_TRAITEMENT_ATC')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "BASE_COMMERCIAL"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "base commerciale.csv",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ";",
+					"encodingName": "WINDOWS-1252",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "affecte/non_affecte",
+						"type": "String"
+					},
+					{
+						"name": "plateforme/vente directe",
+						"type": "String"
+					},
+					{
+						"name": "origine de la ligne",
+						"type": "String"
+					},
+					{
+						"name": "year",
+						"type": "String"
+					},
+					{
+						"name": "month",
+						"type": "String"
+					},
+					{
+						"name": "Code client livré",
+						"type": "String"
+					},
+					{
+						"name": "code client plateforme livree",
+						"type": "String"
+					},
+					{
+						"name": "code produit",
+						"type": "String"
+					},
+					{
+						"name": "quantite",
+						"type": "String"
+					},
+					{
+						"name": "ca",
+						"type": "String"
+					},
+					{
+						"name": "Code postal du client livré",
+						"type": "String"
+					},
+					{
+						"name": "marque",
+						"type": "String"
+					},
+					{
+						"name": "ID marque",
+						"type": "String"
+					},
+					{
+						"name": "ID canal de distribution",
+						"type": "String"
+					},
+					{
+						"name": "Nom du canal",
+						"type": "String"
+					},
+					{
+						"name": "Diffus/Chantier",
+						"type": "String"
+					},
+					{
+						"name": "document_vente (vente directe)",
+						"type": "String"
+					},
+					{
+						"name": "Agence commerciale corrigé (vente directe)",
+						"type": "String"
+					},
+					{
+						"name": "Donneur d'ordre (vente directe)",
+						"type": "String"
+					},
+					{
+						"name": "Facture (vente directe)",
+						"type": "String"
+					},
+					{
+						"name": "Type poste Facture (vente directe)",
+						"type": "String"
+					},
+					{
+						"name": "Numéro offre",
+						"type": "String"
+					},
+					{
+						"name": "ATC Corrigé (vente directe)",
+						"type": "String"
+					},
+					{
+						"name": "ATC offre",
+						"type": "String"
+					},
+					{
+						"name": "ATC livré",
+						"type": "String"
+					},
+					{
+						"name": "ATC Performance",
+						"type": "String"
+					},
+					{
+						"name": "NomATC",
+						"type": "String"
+					},
+					{
+						"name": "Matricule",
+						"type": "String"
+					},
+					{
+						"name": "Motif commande (vente directe)",
+						"type": "String"
+					},
+					{
+						"name": "Type de facture (vente directe)",
+						"type": "String"
+					},
+					{
+						"name": "Description",
+						"type": "String"
+					},
+					{
+						"name": "N1groupe",
+						"type": "String"
+					},
+					{
+						"name": "N2groupe",
+						"type": "String"
+					},
+					{
+						"name": "N3groupe",
+						"type": "String"
+					},
+					{
+						"name": "N4groupe",
+						"type": "String"
+					},
+					{
+						"name": "N5groupe",
+						"type": "String"
+					},
+					{
+						"name": "N6groupe",
+						"type": "String"
+					},
+					{
+						"name": "N7groupe",
+						"type": "String"
+					},
+					{
+						"name": "N1groupedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N2groupedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N3groupedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N4groupedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N5groupedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N6groupedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N7groupedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N1localedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N2localedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N3localedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N4localedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N5localedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N6localedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N7localedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N1locale",
+						"type": "String"
+					},
+					{
+						"name": "N2locale",
+						"type": "String"
+					},
+					{
+						"name": "N3locale",
+						"type": "String"
+					},
+					{
+						"name": "N4locale",
+						"type": "String"
+					},
+					{
+						"name": "N5locale",
+						"type": "String"
+					},
+					{
+						"name": "N6locale",
+						"type": "String"
+					},
+					{
+						"name": "N7locale",
+						"type": "String"
+					},
+					{
+						"name": "Hiérarchgroupe",
+						"type": "String"
+					},
+					{
+						"name": "Hiérarchlocale",
+						"type": "String"
+					},
+					{
+						"name": "Numéro du compte",
+						"type": "String"
+					},
+					{
+						"name": "EPS_Nom du compte",
+						"type": "String"
+					},
+					{
+						"name": "EPS_Groupe cible/Typologie générale",
+						"type": "String"
+					},
+					{
+						"name": "EPS_Sous groupe cible/Typologie détaillée",
+						"type": "String"
+					},
+					{
+						"name": "EPS_Compte principal: Numéro du compte",
+						"type": "String"
+					},
+					{
+						"name": "EPS_Compte principal: Nom du compte",
+						"type": "String"
+					},
+					{
+						"name": "Client",
+						"type": "String"
+					},
+					{
+						"name": "Numéro client indirect",
+						"type": "String"
+					},
+					{
+						"name": "CODE_CMI",
+						"type": "String"
+					},
+					{
+						"name": "NOM_CMI",
+						"type": "String"
+					},
+					{
+						"name": "Nom du compte",
+						"type": "String"
+					},
+					{
+						"name": "Client Indirect_ Groupe cible/Typologie générale",
+						"type": "String"
+					},
+					{
+						"name": "Client Indirect_ Sous groupe cible/Typologie détaillée",
+						"type": "String"
+					},
+					{
+						"name": "Client Indirect_  Compte principal: Numéro du compte",
+						"type": "String"
+					},
+					{
+						"name": "Client Indirect_  Compte principal: Nom du compte",
 						"type": "String"
 					}
 				]

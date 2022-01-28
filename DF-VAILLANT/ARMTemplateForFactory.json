@@ -11,14 +11,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'functionKey' of 'AzureFunctionPremium'"
 		},
-		"data transformation azure function_functionKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'functionKey' of 'data transformation azure function'"
-		},
-		"data_input_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'data_input'"
-		},
 		"AKVVAILLANT_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://KVNVAILLANT.vault.azure.net/"
@@ -34,10 +26,6 @@
 		"VAILLANT_ARCHITECTURE_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
 			"defaultValue": "sk-dsvaillantfr"
-		},
-		"data transformation azure function_properties_typeProperties_functionAppUrl": {
-			"type": "string",
-			"defaultValue": "https://fa-datafacto-transfo-fr.azurewebsites.net"
 		}
 	},
 	"variables": {
@@ -471,7 +459,7 @@
 							}
 						},
 						"linkedServiceName": {
-							"referenceName": "data transformation azure function",
+							"referenceName": "AzureFunctionPremium",
 							"type": "LinkedServiceReference"
 						}
 					},
@@ -515,8 +503,7 @@
 				"lastPublishTime": "2022-01-27T14:17:45Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureFunctionPremium')]",
-				"[concat(variables('factoryId'), '/linkedServices/data transformation azure function')]"
+				"[concat(variables('factoryId'), '/linkedServices/AzureFunctionPremium')]"
 			]
 		},
 		{
@@ -33796,38 +33783,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AKVVAILLANT')]"
 			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/data transformation azure function')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "this is service group the python data transformation we used in this project",
-				"annotations": [],
-				"type": "AzureFunction",
-				"typeProperties": {
-					"functionAppUrl": "[parameters('data transformation azure function_properties_typeProperties_functionAppUrl')]",
-					"functionKey": {
-						"type": "SecureString",
-						"value": "[parameters('data transformation azure function_functionKey')]"
-					},
-					"authentication": "Anonymous"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/data_input')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('data_input_connectionString')]"
-				}
-			},
-			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Trigger_sq4')]",

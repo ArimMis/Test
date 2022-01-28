@@ -8,12 +8,6 @@
 		"AzureFunctionPremium_functionKey": {
 			"value": ""
 		},
-		"data transformation azure function_functionKey": {
-			"value": ""
-		},
-		"data_input_connectionString": {
-			"value": ""
-		},
 		"AKVVAILLANT_properties_typeProperties_baseUrl": {
 			"value": "https://KVNVAILLANT.vault.azure.net/"
 		},
@@ -25,9 +19,6 @@
 		},
 		"VAILLANT_ARCHITECTURE_properties_typeProperties_connectionString_secretName": {
 			"value": "sk-dsvaillantfr"
-		},
-		"data transformation azure function_properties_typeProperties_functionAppUrl": {
-			"value": "https://fa-datafacto-transfo-fr.azurewebsites.net"
 		},
 		"containerUri": {
 			"value": ""
