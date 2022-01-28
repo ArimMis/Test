@@ -3,8 +3,7 @@
 	"properties": {
 		"parameters": {
 			"environment": {
-				"type": "String",
-				"defaultValue": "sk-dspreprodvaillant"
+				"type": "String"
 			}
 		},
 		"annotations": [],
