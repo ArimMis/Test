@@ -1,6 +1,12 @@
 {
 	"name": "VAILLANT_ARCHITECTURE",
 	"properties": {
+		"parameters": {
+			"environment": {
+				"type": "String",
+				"defaultValue": "sk-dspreprodvaillant"
+			}
+		},
 		"annotations": [],
 		"type": "AzureBlobStorage",
 		"typeProperties": {
@@ -10,7 +16,10 @@
 					"referenceName": "AKVVAILLANT",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "sk-dsvaillantfr"
+				"secretName": {
+					"value": "@linkedService().environment",
+					"type": "Expression"
+				}
 			}
 		}
 	},
