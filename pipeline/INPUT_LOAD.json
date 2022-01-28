@@ -34,7 +34,7 @@
 					}
 				},
 				"linkedServiceName": {
-					"referenceName": "data transformation azure function",
+					"referenceName": "AzureFunctionPremium",
 					"type": "LinkedServiceReference"
 				}
 			},
@@ -68,7 +68,7 @@
 					}
 				},
 				"linkedServiceName": {
-					"referenceName": "data transformation azure function",
+					"referenceName": "AzureFunctionPremium",
 					"type": "LinkedServiceReference"
 				}
 			},
@@ -96,7 +96,7 @@
 					}
 				},
 				"linkedServiceName": {
-					"referenceName": "data transformation azure function",
+					"referenceName": "AzureFunctionPremium",
 					"type": "LinkedServiceReference"
 				}
 			},
@@ -131,7 +131,7 @@
 					}
 				},
 				"linkedServiceName": {
-					"referenceName": "data transformation azure function",
+					"referenceName": "AzureFunctionPremium",
 					"type": "LinkedServiceReference"
 				}
 			},
@@ -178,7 +178,7 @@
 					}
 				},
 				"linkedServiceName": {
-					"referenceName": "AzureFunctionPremium",
+					"referenceName": "data transformation azure function",
 					"type": "LinkedServiceReference"
 				}
 			},
