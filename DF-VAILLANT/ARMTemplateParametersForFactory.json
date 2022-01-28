@@ -5,19 +5,7 @@
 		"factoryName": {
 			"value": "DF-VAILLANT"
 		},
-		"AzureBlobStorage1_connectionString": {
-			"value": ""
-		},
 		"AzureFunctionPremium_functionKey": {
-			"value": ""
-		},
-		"BASE COMMERCIALE_password": {
-			"value": ""
-		},
-		"BLOB_connectionString": {
-			"value": ""
-		},
-		"PREPROD_VAILLANT_ARCHITECTURE_connectionString": {
 			"value": ""
 		},
 		"data transformation azure function_functionKey": {
@@ -26,38 +14,20 @@
 		"data_input_connectionString": {
 			"value": ""
 		},
-		"data_mart_connectionString": {
-			"value": ""
-		},
-		"dstuto_connectionString": {
-			"value": ""
-		},
-		"tuto_file_connectionString": {
-			"value": ""
-		},
 		"AKVVAILLANT_properties_typeProperties_baseUrl": {
 			"value": "https://KVNVAILLANT.vault.azure.net/"
 		},
 		"AzureFunctionPremium_properties_typeProperties_functionAppUrl": {
 			"value": "https://fa-datatransfoprem.azurewebsites.net"
 		},
-		"BASE COMMERCIALE_properties_typeProperties_host": {
-			"value": "C:\\Users\\h4h\\Desktop\\Projet H4H\\VAILLANT\\ALTERYX\\-vaillant_pilotage_commerciale\\data_warehouse"
-		},
-		"BASE COMMERCIALE_properties_typeProperties_userId": {
-			"value": "MiradoMick"
+		"PREPROD_VAILLANT_ARCHITECTURE_properties_typeProperties_connectionString_secretName": {
+			"value": "sk-dspreprodvaillant"
 		},
 		"VAILLANT_ARCHITECTURE_properties_typeProperties_connectionString_secretName": {
 			"value": "sk-dsvaillantfr"
 		},
 		"data transformation azure function_properties_typeProperties_functionAppUrl": {
 			"value": "https://fa-datafacto-transfo-fr.azurewebsites.net"
-		},
-		"kvntest_properties_typeProperties_baseUrl": {
-			"value": "https://KVNVAILLANT.vault.azure.net/"
-		},
-		"linkedKeyVault_properties_typeProperties_baseUrl": {
-			"value": "https://KVNVAILLANT.vault.azure.net/"
 		}
 	}
 }
