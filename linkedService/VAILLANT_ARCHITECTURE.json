@@ -15,10 +15,7 @@
 					"referenceName": "AKVVAILLANT",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": {
-					"value": "@linkedService().environment",
-					"type": "Expression"
-				}
+				"secretName": "sk-dsvaillantfr"
 			}
 		}
 	},
