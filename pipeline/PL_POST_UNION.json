@@ -49,7 +49,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "EPS_CLEANING_POST_UNION_copy1",
+						"referenceName": "EPS_CLEANING_POST_UNION",
 						"type": "DataFlowReference"
 					},
 					"compute": {
