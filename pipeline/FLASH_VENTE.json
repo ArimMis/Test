@@ -36,7 +36,7 @@
 						"productHierarchy": "ReferentielArticle/Articles_avec_hiérarchie_Articles_groupe_et_locale.xlsx",
 						"budget_ex": "Flash_Vente/Input_annual_FlashBudget4Azure_v2.xlsx",
 						"outputContainer": "data-mart",
-						"bddFlashventeOutput": "Flash_Vente/Output_temp_BDD Flash vente.csv",
+						"bddFlashventeOutput": "Flash_Vente/Output_BDD Flash vente.xlsx",
 						"graphChaudiereOutput": "Flash_Vente/Output_graph_Chaudiere_SD.xlsx",
 						"graphPACSDOutput": "Flash_Vente/Output_graph_PAC_SD.xlsx",
 						"graphChaudiereVAillantOuput": "Flash_Vente/Output_graph_Chaudiere_Vaillant.xlsx",
