@@ -231,7 +231,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataflow": {
-								"referenceName": "EPS_CLEANING_POST_UNION_copy1",
+								"referenceName": "EPS_CLEANING_POST_UNION",
 								"type": "DataFlowReference",
 								"parameters": {},
 								"datasetParameters": {
@@ -776,7 +776,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataflow": {
-								"referenceName": "BaseCommercialePOSTUnion_Model",
+								"referenceName": "BaseCommercialePOSTUnion",
 								"type": "DataFlowReference",
 								"parameters": {},
 								"datasetParameters": {
@@ -864,61 +864,6 @@
 				},
 				"annotations": [],
 				"lastPublishTime": "2022-01-06T12:25:16Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pipeline3')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "ATC_PERFORMANCE_ET_CLIENT_SAP",
-						"description": "Input : \nBASE_AVANT_TRAITEMENT_ATC\nsecteurFictif\nOutput : \nbaseCommercialOut",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "ATC_PERFORMANCE_ET_CLIENT_SAP",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"baseCommerciale": {},
-									"secteurFictif": {},
-									"ExtractionSAP": {},
-									"refAtcinput": {},
-									"inputManuel": {},
-									"outFinale": {},
-									"outDTP2": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 16,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "PREPARATION ECOULEMENT/test"
-				},
-				"annotations": [],
-				"lastPublishTime": "2022-01-17T07:27:34Z"
 			},
 			"dependsOn": []
 		},
