@@ -17,6 +17,7 @@
 				"container": "data-warehouse"
 			},
 			"columnDelimiter": ";",
+			"encodingName": "WINDOWS-1252",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
@@ -39,11 +40,11 @@
 				"type": "String"
 			},
 			{
-				"name": "Hi�rarch.groupe",
+				"name": "Hiérarch.groupe",
 				"type": "String"
 			},
 			{
-				"name": "Hi�rarch.locale",
+				"name": "Hiérarch.locale",
 				"type": "String"
 			},
 			{
@@ -59,11 +60,11 @@
 				"type": "String"
 			},
 			{
-				"name": "D�signation Statut",
+				"name": "Désignation Statut",
 				"type": "String"
 			},
 			{
-				"name": "D�b. val.",
+				"name": "Déb. val.",
 				"type": "String"
 			},
 			{
