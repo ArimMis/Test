@@ -53,31 +53,6 @@
 				}
 			},
 			{
-				"name": "TDataSD",
-				"description": "Input : \nFacturationBW\nOutput : \nSortieTDataSD",
-				"type": "ExecuteDataFlow",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "1.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataflow": {
-						"referenceName": "FacturationBW",
-						"type": "DataFlowReference"
-					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
-				}
-			},
-			{
 				"name": "FICHIER_BW",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
