@@ -11,7 +11,7 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
-			"sheetName": "Sheet1",
+			"sheetName": "Sheet 1",
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "ArticulationSap.xlsx",
