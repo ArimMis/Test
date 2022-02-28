@@ -11,13 +11,13 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
-			"sheetName": "Sheet 1",
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "ArticulationSap.xlsx",
 				"folderPath": "Offre",
 				"container": "data-input"
 			},
+			"sheetIndex": 0,
 			"firstRowAsHeader": true
 		},
 		"schema": [
