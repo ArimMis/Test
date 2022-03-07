@@ -43,6 +43,19 @@
 					},
 					"waitOnCompletion": true
 				}
+			},
+			{
+				"name": "PL_REFERENTIEL_PRIX",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_REFERENTIEL_PRIX",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
 			}
 		],
 		"folder": {
