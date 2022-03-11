@@ -11,13 +11,13 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
-			"sheetName": "Feuil1",
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "input_manuel.xlsx",
 				"folderPath": "Ajout Manuel",
 				"container": "data-input"
 			},
+			"sheetIndex": 0,
 			"firstRowAsHeader": true
 		},
 		"schema": [
