@@ -145,6 +145,10 @@
 				"type": "String"
 			},
 			{
+				"name": "Description",
+				"type": "String"
+			},
+			{
 				"name": "N1groupe",
 				"type": "String"
 			},
@@ -346,6 +350,26 @@
 			},
 			{
 				"name": "ATC Corrigé",
+				"type": "String"
+			},
+			{
+				"name": "Client_direct_Nom du compte",
+				"type": "String"
+			},
+			{
+				"name": "Client direct_Groupe cible/Typologie générale",
+				"type": "String"
+			},
+			{
+				"name": "Client direct_Sous groupe cible/Typologie détaillée",
+				"type": "String"
+			},
+			{
+				"name": "Client direct_Compte principal: Numéro du compte",
+				"type": "String"
+			},
+			{
+				"name": "Client direct_Compte principal: Nom du compte",
 				"type": "String"
 			}
 		]
