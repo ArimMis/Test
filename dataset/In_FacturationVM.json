@@ -48,6 +48,10 @@
 				"type": "String"
 			},
 			{
+				"name": "1ereDateLivrDdee",
+				"type": "String"
+			},
+			{
 				"name": "Agence commerciale corrigé",
 				"type": "String"
 			},
@@ -72,7 +76,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Type doc. vente",
+				"name": " vente",
 				"type": "String"
 			},
 			{
@@ -156,7 +160,7 @@
 				"type": "String"
 			},
 			{
-				"name": "date_id",
+				"name": "Prop_0",
 				"type": "String"
 			},
 			{
@@ -165,6 +169,10 @@
 			},
 			{
 				"name": "yearmonth",
+				"type": "String"
+			},
+			{
+				"name": "date_id",
 				"type": "String"
 			},
 			{
@@ -213,6 +221,22 @@
 			},
 			{
 				"name": "year_month",
+				"type": "String"
+			},
+			{
+				"name": "WholeSalerID",
+				"type": "String"
+			},
+			{
+				"name": "WholeSalerHubID",
+				"type": "String"
+			},
+			{
+				"name": "HubName",
+				"type": "String"
+			},
+			{
+				"name": "HubSAPid",
 				"type": "String"
 			}
 		]
