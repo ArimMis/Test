@@ -6,7 +6,14 @@
 				"name": "Marketing",
 				"description": "Input : \nBASE_COMMERCIALE\nHierarchieMKTSD\nHerarchieMKTVA\nStgOffreChantier\nArticleHierarchi\nOutput : \nSORTIE_MARKETING",
 				"type": "ExecuteDataFlow",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "REFERENTIEL VMC",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "1.00:00:00",
 					"retry": 0,
@@ -18,6 +25,30 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "Marketing",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "REFERENTIEL VMC",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "REFERENTIEL_VMC",
 						"type": "DataFlowReference"
 					},
 					"compute": {
