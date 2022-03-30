@@ -17,7 +17,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "CALCUL_SEUIL",
+						"referenceName": "CALCUL_SEUIL_WITH_DATE",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -42,7 +42,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "CALCUL_REMUNERATION",
+						"referenceName": "CALCUL_REMUNERATION_WITH_DATE",
 						"type": "DataFlowReference"
 					},
 					"compute": {
