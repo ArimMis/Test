@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "CALCUL_REMUNERATION",
+						"referenceName": "CALCUL_REMUNERATION_WITH_DATE",
 						"type": "DataFlowReference"
 					},
 					"compute": {
