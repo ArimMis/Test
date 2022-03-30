@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "CALCUL_SEUIL",
+						"referenceName": "CALCUL_SEUIL_WITH_DATE",
 						"type": "DataFlowReference"
 					},
 					"compute": {
