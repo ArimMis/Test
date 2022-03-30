@@ -13,6 +13,186 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/VENTES_DIRECTES_PREPARATION')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "PREPARATION ECOULEMENT"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "facturationForVenteDirect",
+								"type": "DatasetReference"
+							},
+							"name": "ventesDirectes"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "VENTES_DIRECTES_PREPARATION",
+								"type": "DatasetReference"
+							},
+							"name": "VENTESDIRECTESPREPARATION"
+						}
+					],
+					"transformations": [
+						{
+							"name": "Cleansing"
+						},
+						{
+							"name": "SumQuantity"
+						},
+						{
+							"name": "RenameColumn"
+						},
+						{
+							"name": "Uniformisation"
+						},
+						{
+							"name": "Addcolumn"
+						},
+						{
+							"name": "rename"
+						}
+					],
+					"script": "source(output(\n\t\t{ Org. commerciale} as string,\n\t\t{Canal distribution} as string,\n\t\t{Secteur d'activité} as string,\n\t\t{Document de vente} as string,\n\t\tPoste as string,\n\t\t{Jour calendaire} as string,\n\t\t{Agence commerciale corrigé} as string,\n\t\t{ATC Corrigé} as string,\n\t\t{Donneur d'ordre} as string,\n\t\t{Récept. de march.} as string,\n\t\t{Destinataire facture} as string,\n\t\t{ vente} as string,\n\t\t{Type de poste} as string,\n\t\tLivraison as string,\n\t\t{Type de livraison} as string,\n\t\t{Type poste Livraison} as string,\n\t\tFacture as string,\n\t\t{Type de facture} as string,\n\t\t{Type poste Facture} as string,\n\t\t{Mois calendrier} as string,\n\t\t{Année civile} as string,\n\t\t{Motif commande} as string,\n\t\t{Qté cdée} as string,\n\t\t{CA cdé} as string,\n\t\t{Qté livrée} as string,\n\t\t{CA livré} as string,\n\t\t{Qté facturée} as string,\n\t\t{CA facturé} as string,\n\t\t{Cout standard cdé} as string,\n\t\t{Cout fabrication} as string,\n\t\t{Cout standard livré} as string,\n\t\t{Cout standard facturé} as string,\n\t\tdate_id as string,\n\t\tyear as string,\n\t\tyearmonth as string,\n\t\tfact_filter as string,\n\t\tqt_cd_e as string,\n\t\tca_cd_ as string,\n\t\tqt_livr_e as string,\n\t\tca_livr_ as string,\n\t\tqt_factur_e as string,\n\t\tca_factur_ as string,\n\t\tcout_standard_cd_ as string,\n\t\tcout_fabrication as string,\n\t\tcout_standard_livr_ as string,\n\t\tcout_standard_factur_ as string,\n\t\tyear_month as string,\n\t\treference as string,\n\t\tWholeSalerID as string,\n\t\tWholeSalerHubID as string,\n\t\tHubName as string,\n\t\tHubSAPid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> ventesDirectes\nrename derive({Code client} = replace( {Code client}, \" \", \"\"),\n\t\t{Qté facturée} = toDouble({Qté facturée}),\n\t\tyearmonth = replace(yearmonth, \" \", \"\"),\n\t\tArticle = replace(reference, \" \", \"\")) ~> Cleansing\nCleansing aggregate(groupBy(yearmonth,\n\t\tArticle,\n\t\t{Code client}),\n\t{Qté facturée} = sum({Qté facturée})) ~> SumQuantity\nSumQuantity select(mapColumn(\n\t\tyearmonth,\n\t\tArticle,\n\t\t{Code client},\n\t\t{Qté vente directe} = {Qté facturée}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> RenameColumn\nAddcolumn select(mapColumn(\n\t\tyearmonth,\n\t\treference = Article,\n\t\t{Code client},\n\t\tqte_ecoulement = {Qté vente directe}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Uniformisation\nRenameColumn derive(canal = '',\n\t\tDept = '') ~> Addcolumn\nventesDirectes select(mapColumn(\n\t\t{ commerciale} = { Org. commerciale},\n\t\t{Canal distribution},\n\t\t{Secteur d'activité},\n\t\t{Document de vente},\n\t\tPoste,\n\t\t{Jour calendaire},\n\t\t{Agence commerciale corrigé},\n\t\t{ATC Corrigé},\n\t\t{Donneur d'ordre},\n\t\t{Code client} = {Récept. de march.},\n\t\t{Destinataire facture},\n\t\t{ vente},\n\t\t{Type de poste},\n\t\tLivraison,\n\t\t{Type de livraison},\n\t\t{Type poste Livraison},\n\t\tFacture,\n\t\t{Type de facture},\n\t\t{Type poste Facture},\n\t\t{Mois calendrier},\n\t\t{Année civile},\n\t\t{Motif commande},\n\t\t{Qté cdée},\n\t\t{CA cdé},\n\t\t{Qté livrée},\n\t\t{CA livré},\n\t\t{Qté facturée},\n\t\t{CA facturé},\n\t\t{Cout standard cdé},\n\t\t{Cout fabrication},\n\t\t{Cout standard livré},\n\t\t{Cout standard facturé},\n\t\tdate_id,\n\t\tyear,\n\t\tyearmonth,\n\t\tfact_filter,\n\t\tqt_cd_e,\n\t\tca_cd_,\n\t\tqt_livr_e,\n\t\tca_livr_,\n\t\tqt_factur_e,\n\t\tca_factur_,\n\t\tcout_standard_cd_,\n\t\tcout_fabrication,\n\t\tcout_standard_livr_,\n\t\tcout_standard_factur_,\n\t\tyear_month,\n\t\treference,\n\t\tWholeSalerID,\n\t\tWholeSalerHubID,\n\t\tHubName,\n\t\tHubSAPid\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> rename\nUniformisation sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['VENTES_DIRECTES_PREPARATION.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> VENTESDIRECTESPREPARATION"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/VF_CONFORT_PREPARATION')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "PREPARATION ECOULEMENT"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "VFINPUT",
+								"type": "DatasetReference"
+							},
+							"name": "ecoulement"
+						},
+						{
+							"dataset": {
+								"referenceName": "CONFORT_ORGANISATION",
+								"type": "DatasetReference"
+							},
+							"name": "organisation"
+						},
+						{
+							"dataset": {
+								"referenceName": "VENTES_DIRECTES_PREPARED",
+								"type": "DatasetReference"
+							},
+							"name": "ventesDirectes"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "CONFORT_QTE_NULL",
+								"type": "DatasetReference"
+							},
+							"name": "outputQuantityNull"
+						},
+						{
+							"dataset": {
+								"referenceName": "VFCONFORT_ECOULEMENT_PREPARED",
+								"type": "DatasetReference"
+							},
+							"name": "VFCONFORTECOULPREPARED"
+						},
+						{
+							"dataset": {
+								"referenceName": "VFCONFORT_ORGANISATION_NOTFOUND",
+								"type": "DatasetReference"
+							},
+							"name": "VFCONFORTORGANISATIONNOTFOUND"
+						}
+					],
+					"transformations": [
+						{
+							"name": "yearmonth"
+						},
+						{
+							"name": "yearAndMonth"
+						},
+						{
+							"name": "quantityNull"
+						},
+						{
+							"name": "quantityNotNull"
+						},
+						{
+							"name": "MapDrifted1",
+							"description": "Creates an explicit mapping for each drifted column"
+						},
+						{
+							"name": "rename"
+						},
+						{
+							"name": "codePointVenteNotNull"
+						},
+						{
+							"name": "cleansing"
+						},
+						{
+							"name": "posidNotNull"
+						},
+						{
+							"name": "uniqueOrganisation"
+						},
+						{
+							"name": "innerOrganisation"
+						},
+						{
+							"name": "RenameVentesDirectes"
+						},
+						{
+							"name": "innerVentesDirectes"
+						},
+						{
+							"name": "leftVentesDirectes"
+						},
+						{
+							"name": "enleverVentesDirectes"
+						},
+						{
+							"name": "outerleftVentesDirectes"
+						},
+						{
+							"name": "uniformisation"
+						},
+						{
+							"name": "fullLeftUnion"
+						},
+						{
+							"name": "Addcolumn"
+						},
+						{
+							"name": "leftOrganisation"
+						},
+						{
+							"name": "posidNULL"
+						}
+					],
+					"script": "source(output(\n\t\t{Représentant} as string,\n\t\t{N° Département} as string,\n\t\t{Département} as string,\n\t\t{Code point de vente} as string,\n\t\t{Libellé point de vente} as string,\n\t\t{Code Depot source} as string,\n\t\t{Code client} as string,\n\t\tClient as string,\n\t\t{N° Siret} as string,\n\t\t{Code postal} as string,\n\t\tVille as string,\n\t\t{Année livraison} as string,\n\t\t{Mois livraison} as string,\n\t\t{code fournisseur} as string,\n\t\t{fournisseur principal} as string,\n\t\t{Code produit} as string,\n\t\tproduit as string,\n\t\t{Réference} as string,\n\t\t{Qte en unité de vente} as string,\n\t\t{Montant prv net} as string,\n\t\tpath as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> ecoulement\nsource(output(\n\t\tWholeSalerID as string,\n\t\tWholeSalerShortName as string,\n\t\tUnitID as string,\n\t\tPOSid as string,\n\t\tPOSdescription as string,\n\t\tCounty as string,\n\t\tPOSSAMid as string,\n\t\tPOSSAMidString as string,\n\t\tSupplierID as string,\n\t\tBrandID as string,\n\t\tWholeSalerHubID as string,\n\t\tHubName as string,\n\t\tHubSAPid as string,\n\t\tSectorID as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> organisation\nsource(output(\n\t\tyearmonth as string,\n\t\tArticle as string,\n\t\t{Code client} as string,\n\t\t{Qt� vente directe} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> ventesDirectes\nrename derive(yearmonth = regexExtract(fileName , '(\\\\d+)'),\n\t\tqte_ecoulement = toDouble(qte_ecoulement)) ~> yearmonth\nyearmonth derive(year = substring(yearmonth, 1, 4),\n\t\tmonth = substring(yearmonth, 5 ,2)) ~> yearAndMonth\nyearAndMonth filter(isNull(qte_ecoulement)) ~> quantityNull\nyearAndMonth filter(!isNull(qte_ecoulement)) ~> quantityNotNull\necoulement derive({Représentant} = toString(byName('Représentant')),\n\t\t{N° Département} = toString(byName('N° Département')),\n\t\t{Département} = toString(byName('Département')),\n\t\t{Libellé point de vente} = toString(byName('Libellé point de vente')),\n\t\t{N° Siret} = toString(byName('N° Siret')),\n\t\t{Année livraison} = toString(byName('Année livraison')),\n\t\t{Réference} = toString(byName('Réference')),\n\t\t{Qte en unité de vente} = toString(byName('Qte en unité de vente'))) ~> MapDrifted1\nMapDrifted1 select(mapColumn(\n\t\t{Code point de vente},\n\t\t{Code Depot source},\n\t\t{Code client},\n\t\tClient,\n\t\t{Code postal},\n\t\tVille,\n\t\t{Mois livraison},\n\t\t{code fournisseur},\n\t\t{fournisseur principal},\n\t\t{Code produit},\n\t\tproduit,\n\t\t{Montant prv net},\n\t\t{Représentant},\n\t\t{N° Département},\n\t\t{Département},\n\t\t{Libellé point de vente},\n\t\t{N° Siret},\n\t\t{Année livraison},\n\t\t{Réference},\n\t\tqte_ecoulement = {Qte en unité de vente},\n\t\tfileName = path\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> rename\nquantityNotNull filter(!isNull({Code point de vente})) ~> codePointVenteNotNull\norganisation derive(POSid = trim(POSid, \" \"),\n\t\tHubSAPid = trim(HubSAPid, \" \")) ~> cleansing\ncleansing filter(!isNull(POSid)) ~> posidNotNull\nposidNotNull aggregate(groupBy(POSid,\n\t\tHubSAPid),\n\tWholeSalerID = max(WholeSalerID),\n\t\tWholeSalerShortName = max(WholeSalerShortName),\n\t\tUnitID = max(UnitID),\n\t\tPOSdescription = max(POSdescription),\n\t\tCounty = max(County),\n\t\tPOSSAMid = max(POSSAMid),\n\t\tPOSSAMidString = max(POSSAMidString),\n\t\tSupplierID = max(SupplierID),\n\t\tBrandID = max(BrandID),\n\t\tWholeSalerHubID = max(WholeSalerHubID),\n\t\tHubName = max(HubName),\n\t\tSectorID = max(SectorID)) ~> uniqueOrganisation\ncodePointVenteNotNull, organisation join({Code point de vente} == POSid,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> innerOrganisation\nventesDirectes select(mapColumn(\n\t\tyearmonth_right = yearmonth,\n\t\tArticle,\n\t\t{Code client_right} = {Code client},\n\t\t{Qté ventes directes} = {Qt� vente directe}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> RenameVentesDirectes\ninnerOrganisation, RenameVentesDirectes join(yearmonth == yearmonth_right\n\t&& {Réference} == Article\n\t&& POSSAMid == {Code client_right},\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> innerVentesDirectes\ninnerOrganisation, RenameVentesDirectes join(yearmonth == yearmonth_right\n\t&& {Réference} == Article\n\t&& POSSAMid == {Code client_right},\n\tjoinType:'left',\n\tbroadcast: 'auto')~> leftVentesDirectes\ninnerVentesDirectes derive(qte_ecoulement = qte_ecoulement-toDouble({Qté ventes directes})) ~> enleverVentesDirectes\nleftVentesDirectes filter(isNull(yearmonth) || isNull(Article) || isNull({Code client_right})) ~> outerleftVentesDirectes\nAddcolumn select(mapColumn(\n\t\t{Code postal},\n\t\tmarque_file = {fournisseur principal},\n\t\tarticle = produit,\n\t\tca_ecoulement = {Montant prv net},\n\t\t{Représentant},\n\t\tdepartement_id = {N° Département},\n\t\treference = {Réference},\n\t\tqte_ecoulement,\n\t\tyearmonth,\n\t\tyear,\n\t\tmonth,\n\t\tUnitID,\n\t\tCounty,\n\t\tPOSSAMidString,\n\t\tmarque_id = BrandID,\n\t\tHubSAPid,\n\t\tdistributeur\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> uniformisation\nenleverVentesDirectes, outerleftVentesDirectes union(byName: true)~> fullLeftUnion\nfullLeftUnion derive(canal = '',\n\t\tdistributeur = \"vf_confort\") ~> Addcolumn\ncodePointVenteNotNull, organisation join({Code point de vente} == POSid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> leftOrganisation\nleftOrganisation filter(isNull(POSid)) ~> posidNULL\nquantityNull sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['VFCONFORT_QTE_NULL.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> outputQuantityNull\nuniformisation sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\t{Région Statistique} as string,\n\t\tEnseigne as string,\n\t\t{Marque DESC} as string,\n\t\t{Marque Code} as string,\n\t\t{Sous Famille} as string,\n\t\t{Référence Article Fournisseur} as string,\n\t\t{Article National DESC} as string,\n\t\t{Article National Code} as string,\n\t\t{Agence Code} as string,\n\t\t{Agence DESC} as string,\n\t\t{Département DESC} as string,\n\t\t{Département ID} as string,\n\t\tSecteur as string,\n\t\t{Quantité en UV BL} as string,\n\t\t{Année Précédente (Quantité en UV BL)} as string,\n\t\t{Cumul Exercice (Quantité en UV BL)} as string,\n\t\t{Cumul Exercice A-1 (Quantité en UV BL)} as string,\n\t\t{MOIS CA PRR N} as string,\n\t\t{MOIS CA PRR N-1} as string,\n\t\t{CA PRR au cumul} as string,\n\t\t{CA PRR au cumul N-1} as string,\n\t\tfileName as string\n\t),\n\tpartitionFileNames:['VFCONFORT_ECOUL_PREPARED.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> VFCONFORTECOULPREPARED\nposidNULL sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\t{Marque DESC} as string,\n\t\t{Marque Code} as string,\n\t\t{Sous Famille} as string,\n\t\t{Référence Article Fournisseur} as string,\n\t\t{Agence Code} as string,\n\t\t{Département ID} as string,\n\t\t{Quantité en UV BL} as string,\n\t\tyearmonth as string,\n\t\tyear as string,\n\t\tmonth as string,\n\t\tPOSid as string,\n\t\tWholeSalerID as string,\n\t\tPOSSAMidString as string,\n\t\tHubSAPid as string,\n\t\tBrandID as string\n\t),\n\tpartitionFileNames:['VFCONFORT_ORGANISATION_NOTFOUND.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> VFCONFORTORGANISATIONNOTFOUND"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/VanMarkes')]",
 			"type": "Microsoft.DataFactory/factories/dataflows",
 			"apiVersion": "2018-06-01",
@@ -661,7 +841,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataflow": {
-								"referenceName": "CALCUL_REMUNERATION",
+								"referenceName": "CALCUL_REMUNERATION_WITH_DATE",
 								"type": "DataFlowReference",
 								"parameters": {},
 								"datasetParameters": {
@@ -715,7 +895,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataflow": {
-								"referenceName": "CALCUL_SEUIL",
+								"referenceName": "CALCUL_SEUIL_WITH_DATE",
 								"type": "DataFlowReference",
 								"parameters": {},
 								"datasetParameters": {
@@ -771,7 +951,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataflow": {
-								"referenceName": "CALCUL_SEUIL",
+								"referenceName": "CALCUL_SEUIL_WITH_DATE",
 								"type": "DataFlowReference",
 								"parameters": {},
 								"datasetParameters": {
@@ -808,7 +988,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataflow": {
-								"referenceName": "CALCUL_REMUNERATION",
+								"referenceName": "CALCUL_REMUNERATION_WITH_DATE",
 								"type": "DataFlowReference",
 								"parameters": {},
 								"datasetParameters": {
@@ -1739,112 +1919,6 @@
 				},
 				"folder": {
 					"name": "RH"
-				},
-				"annotations": [],
-				"lastPublishTime": "2022-01-06T12:25:16Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PL_OFFRE')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "UNIFORMISATION OFFRE",
-						"description": "Input : \noffreDiffusInput\noffreChantierInput\nreferentielATCinput\nOutput : \noffreDiffusTemp\nStg_offre_diffus\noffreChantierTemp\nstagingChantier\noffreAtcTemp\n",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "UNIFORMISATION_OFFRE",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"offreDiffusInput": {},
-									"offreChantierInput": {},
-									"stagingDiffus": {},
-									"stagingChantier": {},
-									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "REFERENTIEL"
-				},
-				"annotations": [],
-				"lastPublishTime": "2022-01-06T12:25:17Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PL_ORCAB')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "ORCAB_PREPARATION",
-						"description": "Input : \n-ORCAB_ECOULEMENT_INPUT\n-ORCAB_ORGANISATION\n-ventesDirectes\nOutput : \n-ORCAB_QTE_NULL\n-organisationNotFound\n-ORCAB_ECOULEMENT_PREPARED",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "ORCAB_PREPARATION",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"ecoulement": {},
-									"organisation": {},
-									"ORCABECOULPREPARED": {},
-									"quantityNullOutput": {},
-									"organisationNotFound": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "PREPARATION ECOULEMENT"
 				},
 				"annotations": [],
 				"lastPublishTime": "2022-01-06T12:25:16Z"

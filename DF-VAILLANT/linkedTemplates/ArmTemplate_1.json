@@ -101,7 +101,11 @@
 				},
 				"schema": [
 					{
-						"name": "year",
+						"name": "Max ID Seuil",
+						"type": "String"
+					},
+					{
+						"name": "Contrepartie seuil",
 						"type": "String"
 					},
 					{
@@ -117,11 +121,7 @@
 						"type": "String"
 					},
 					{
-						"name": "Max ID Seuil",
-						"type": "String"
-					},
-					{
-						"name": "Contrepartie seuil",
+						"name": "year",
 						"type": "String"
 					}
 				]
