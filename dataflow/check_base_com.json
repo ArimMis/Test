@@ -13,7 +13,17 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "aggregate1"
+				},
+				{
+					"name": "filter1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          {affecte/non_affecte} as string,",
@@ -106,7 +116,14 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> source1"
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source1 derive(ca = toDouble(replace(ca,\",\",\".\")),",
+				"          quantite = toInteger(quantite),",
+				"          column1 = 1) ~> derivedColumn1",
+				"filter1 aggregate(groupBy(column1),",
+				"     ca = sum(ca),",
+				"          quantite = sum(quantite)) ~> aggregate1",
+				"derivedColumn1 filter(year==\"2021\" && {nom du canal}!=\"FC\") ~> filter1"
 			]
 		}
 	}
