@@ -22,6 +22,9 @@
 				},
 				{
 					"name": "filter1"
+				},
+				{
+					"name": "filter2"
 				}
 			],
 			"scriptLines": [
@@ -123,7 +126,8 @@
 				"filter1 aggregate(groupBy(column1),",
 				"     ca = sum(ca),",
 				"          quantite = sum(quantite)) ~> aggregate1",
-				"derivedColumn1 filter(year==\"2021\" && {nom du canal}!=\"FC\") ~> filter1"
+				"filter2 filter(year==\"2021\" && {nom du canal}!=\"FC\") ~> filter1",
+				"derivedColumn1 filter({Code client livré}==\"16000761\" || {Code client livré}==\"16000475\") ~> filter2"
 			]
 		}
 	}
