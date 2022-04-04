@@ -34,16 +34,7 @@
 					"name": "filter2"
 				},
 				{
-					"name": "derivedColumn2"
-				},
-				{
 					"name": "filter3"
-				},
-				{
-					"name": "filter4"
-				},
-				{
-					"name": "aggregate2"
 				}
 			],
 			"scriptLines": [
@@ -231,14 +222,7 @@
 				"          quantite = sum(quantite)) ~> aggregate1",
 				"filter2 filter(year==\"2021\" && {nom du canal} != \"FC\" && marque==\"Vaillant\") ~> filter1",
 				"derivedColumn1 filter({Code client livré}==\"16000761\" || {Code client livré}==\"16000475\" || {Code client livré}==\"\") ~> filter2",
-				"source2 derive(ca = toDouble(replace(ca,\",\",\".\")),",
-				"          quantite = toInteger(quantite),",
-				"          column1 = 1) ~> derivedColumn2",
-				"derivedColumn2 filter({Code client livré}==\"16000761\" || {Code client livré}==\"16000475\" || {Code client livré}==\"\") ~> filter3",
-				"filter3 filter(year==\"2021\" && {Nom du canal} != \"FC\" && marque==\"Vaillant\") ~> filter4",
-				"filter4 aggregate(groupBy(column1),",
-				"     ca = sum(ca),",
-				"          quantite = sum(quantite)) ~> aggregate2"
+				"source2 filter({plateforme/vente directe}==\"plateforme sonac\") ~> filter3"
 			]
 		}
 	}
