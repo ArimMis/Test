@@ -221,7 +221,7 @@
 				"     ca = sum(ca),",
 				"          quantite = sum(quantite)) ~> aggregate1",
 				"filter2 filter(year==\"2021\" && {nom du canal} != \"FC\" && marque==\"Vaillant\") ~> filter1",
-				"derivedColumn1 filter({Code client livré}==\"16000761\" || {Code client livré}==\"16000475\" || {Code client livré}==\"\") ~> filter2",
+				"derivedColumn1 filter({Code client livré}==\"16000761\" || {Code client livré}==\"16000475\") ~> filter2",
 				"source2 filter({plateforme/vente directe}==\"plateforme sonac\") ~> filter3"
 			]
 		}
