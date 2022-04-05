@@ -2145,7 +2145,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/baseCommercialOut')]",
+			"name": "[concat(parameters('factoryName'), '/baseComInput')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -2153,14 +2153,12 @@
 					"referenceName": "VAILLANT_ARCHITECTURE",
 					"type": "LinkedServiceReference"
 				},
-				"folder": {
-					"name": "BASE_COMMERCIAL"
-				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
+						"fileName": "base commerciale.csv",
 						"container": "data-warehouse"
 					},
 					"columnDelimiter": ";",
@@ -2171,47 +2169,111 @@
 				},
 				"schema": [
 					{
-						"name": "Clé Référentiel",
+						"name": "affecte/non_affecte",
 						"type": "String"
 					},
 					{
-						"name": "Recherche Clé EPS",
+						"name": "plateforme/vente directe",
 						"type": "String"
 					},
 					{
-						"name": "Marque",
+						"name": "origine de la ligne",
 						"type": "String"
 					},
 					{
-						"name": "Code Postal début",
+						"name": "year",
 						"type": "String"
 					},
 					{
-						"name": "Code Postal fin",
+						"name": "month",
 						"type": "String"
 					},
 					{
-						"name": "Utilisateur",
+						"name": "Code client livré",
 						"type": "String"
 					},
 					{
-						"name": "Fonction",
+						"name": "code client plateforme livree",
 						"type": "String"
 					},
 					{
-						"name": "Département",
+						"name": "code produit",
 						"type": "String"
 					},
 					{
-						"name": "DR_x",
+						"name": "quantite",
 						"type": "String"
 					},
 					{
-						"name": "matches",
+						"name": "ca",
 						"type": "String"
 					},
 					{
-						"name": "ATC",
+						"name": "Code postal du client livré",
+						"type": "String"
+					},
+					{
+						"name": "marque",
+						"type": "String"
+					},
+					{
+						"name": "ID marque",
+						"type": "String"
+					},
+					{
+						"name": "ID canal de distribution",
+						"type": "String"
+					},
+					{
+						"name": "Nom du canal",
+						"type": "String"
+					},
+					{
+						"name": "Diffus/Chantier",
+						"type": "String"
+					},
+					{
+						"name": "document_vente (vente directe)",
+						"type": "String"
+					},
+					{
+						"name": "Agence commerciale corrigé (vente directe)",
+						"type": "String"
+					},
+					{
+						"name": "Donneur d'ordre (vente directe)",
+						"type": "String"
+					},
+					{
+						"name": "Facture (vente directe)",
+						"type": "String"
+					},
+					{
+						"name": "Type poste Facture (vente directe)",
+						"type": "String"
+					},
+					{
+						"name": "Numéro offre",
+						"type": "String"
+					},
+					{
+						"name": "ATC Corrigé (vente directe)",
+						"type": "String"
+					},
+					{
+						"name": "ATC offre",
+						"type": "String"
+					},
+					{
+						"name": "ATC livré",
+						"type": "String"
+					},
+					{
+						"name": "DR (ATC Performance)",
+						"type": "String"
+					},
+					{
+						"name": "ATC Performance",
 						"type": "String"
 					},
 					{
@@ -2219,43 +2281,207 @@
 						"type": "String"
 					},
 					{
-						"name": "Plan primes",
+						"name": "Motif commande (vente directe)",
 						"type": "String"
 					},
 					{
-						"name": "DR_y",
+						"name": "Type de facture (vente directe)",
 						"type": "String"
 					},
 					{
-						"name": "Secteur prime",
+						"name": "Description",
 						"type": "String"
 					},
 					{
-						"name": "Matricule",
+						"name": "N1groupe",
 						"type": "String"
 					},
 					{
-						"name": "Secteur DEC",
+						"name": "N2groupe",
 						"type": "String"
 					},
 					{
-						"name": "Rallye",
+						"name": "N3groupe",
 						"type": "String"
 					},
 					{
-						"name": "Canal final",
+						"name": "N4groupe",
 						"type": "String"
 					},
 					{
-						"name": "toreplicate",
+						"name": "N5groupe",
 						"type": "String"
 					},
 					{
-						"name": "dd",
+						"name": "N6groupe",
 						"type": "String"
 					},
 					{
-						"name": "Code postal",
+						"name": "N7groupe",
+						"type": "String"
+					},
+					{
+						"name": "N1groupedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N2groupedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N3groupedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N4groupedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N5groupedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N6groupedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N7groupedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N1localedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N2localedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N3localedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N4localedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N5localedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N6localedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N7localedesignation",
+						"type": "String"
+					},
+					{
+						"name": "N1locale",
+						"type": "String"
+					},
+					{
+						"name": "N2locale",
+						"type": "String"
+					},
+					{
+						"name": "N3locale",
+						"type": "String"
+					},
+					{
+						"name": "N4locale",
+						"type": "String"
+					},
+					{
+						"name": "N5locale",
+						"type": "String"
+					},
+					{
+						"name": "N6locale",
+						"type": "String"
+					},
+					{
+						"name": "N7locale",
+						"type": "String"
+					},
+					{
+						"name": "Hiérarchgroupe",
+						"type": "String"
+					},
+					{
+						"name": "Hiérarchlocale",
+						"type": "String"
+					},
+					{
+						"name": "Client_direct_Nom du compte",
+						"type": "String"
+					},
+					{
+						"name": "Client direct_Groupe cible/Typologie générale",
+						"type": "String"
+					},
+					{
+						"name": "Client direct_Sous groupe cible/Typologie détaillée",
+						"type": "String"
+					},
+					{
+						"name": "Client direct_Compte principal: Numéro du compte",
+						"type": "String"
+					},
+					{
+						"name": "Client direct_Compte principal: Nom du compte",
+						"type": "String"
+					},
+					{
+						"name": "Client",
+						"type": "String"
+					},
+					{
+						"name": "Numéro client indirect",
+						"type": "String"
+					},
+					{
+						"name": "CODE_CMI",
+						"type": "String"
+					},
+					{
+						"name": "NOM_CMI",
+						"type": "String"
+					},
+					{
+						"name": "Nom du compte",
+						"type": "String"
+					},
+					{
+						"name": "Client Indirect_ Groupe cible/Typologie générale",
+						"type": "String"
+					},
+					{
+						"name": "Client Indirect_ Sous groupe cible/Typologie détaillée",
+						"type": "String"
+					},
+					{
+						"name": "Client Indirect_  Compte principal: Numéro du compte",
+						"type": "String"
+					},
+					{
+						"name": "Client Indirect_  Compte principal: Nom du compte",
+						"type": "String"
+					},
+					{
+						"name": "Client Direct - Hiérarchie N1 SAP ",
+						"type": "String"
+					},
+					{
+						"name": "Client Direct - Hiérarchie N2 SAP ",
+						"type": "String"
+					},
+					{
+						"name": "Client Indirect - Hiérarchie N1 SAP",
+						"type": "String"
+					},
+					{
+						"name": "Client Indirect - Hiérarchie N2 SAP",
 						"type": "String"
 					}
 				]
