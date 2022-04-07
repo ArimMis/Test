@@ -43,6 +43,9 @@
 				},
 				{
 					"name": "filter3"
+				},
+				{
+					"name": "derivedColumn2"
 				}
 			],
 			"scriptLines": [
@@ -225,11 +228,12 @@
 				"source1 derive(ca = toDouble(replace(ca,\",\",\".\")),",
 				"          quantite = toInteger(quantite),",
 				"          column1 = 1) ~> derivedColumn1",
-				"filter1 aggregate(groupBy({code produit}),",
-				"     nombre = count({code produit})) ~> aggregate1",
+				"derivedColumn2 aggregate(groupBy(year),",
+				"     ca = sum(toDouble(ca))) ~> aggregate1",
 				"filter2 filter(year==\"2021\" && {nom du canal} != \"FC\" && marque==\"Vaillant\") ~> filter1",
 				"derivedColumn1 filter({Code client livré}==\"16000761\" || {Code client livré}==\"16000475\") ~> filter2",
 				"source2 filter({plateforme/vente directe}==\"plateforme orcab\" && year==\"2021\" && month==\"03\") ~> filter3",
+				"filter1 derive({code produit} = coalesce(toString(toInteger(replace({code produit}, \" \", \"\"))),replace({code produit}, \" \", \"\"))) ~> derivedColumn2",
 				"aggregate1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
