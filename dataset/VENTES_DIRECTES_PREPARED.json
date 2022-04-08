@@ -13,30 +13,226 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "VENTES_DIRECTES_PREPARATION",
+				"fileName": "facturationForVenteDirect.csv",
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": ";",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": [
 			{
+				"name": " Org. commerciale",
+				"type": "String"
+			},
+			{
+				"name": "Canal distribution",
+				"type": "String"
+			},
+			{
+				"name": "Secteur d'activit�",
+				"type": "String"
+			},
+			{
+				"name": "Document de vente",
+				"type": "String"
+			},
+			{
+				"name": "Poste",
+				"type": "String"
+			},
+			{
+				"name": "Jour calendaire",
+				"type": "String"
+			},
+			{
+				"name": "1ereDateLivrDdee",
+				"type": "String"
+			},
+			{
+				"name": "Agence commerciale corrig�",
+				"type": "String"
+			},
+			{
+				"name": "ATC Corrig�",
+				"type": "String"
+			},
+			{
+				"name": "Donneur d'ordre",
+				"type": "String"
+			},
+			{
+				"name": "R�cept. de march.",
+				"type": "String"
+			},
+			{
+				"name": "Destinataire facture",
+				"type": "String"
+			},
+			{
+				"name": " vente",
+				"type": "String"
+			},
+			{
+				"name": "Type de poste",
+				"type": "String"
+			},
+			{
+				"name": "Livraison",
+				"type": "String"
+			},
+			{
+				"name": "Type de livraison",
+				"type": "String"
+			},
+			{
+				"name": "Type poste Livraison",
+				"type": "String"
+			},
+			{
+				"name": "Facture",
+				"type": "String"
+			},
+			{
+				"name": "Type de facture",
+				"type": "String"
+			},
+			{
+				"name": "Type poste Facture",
+				"type": "String"
+			},
+			{
+				"name": "Mois calendrier",
+				"type": "String"
+			},
+			{
+				"name": "Ann�e civile",
+				"type": "String"
+			},
+			{
+				"name": "Motif commande",
+				"type": "String"
+			},
+			{
+				"name": "Qt� cd�e",
+				"type": "String"
+			},
+			{
+				"name": "CA cd�",
+				"type": "String"
+			},
+			{
+				"name": "Qt� livr�e",
+				"type": "String"
+			},
+			{
+				"name": "CA livr�",
+				"type": "String"
+			},
+			{
+				"name": "Qt� factur�e",
+				"type": "String"
+			},
+			{
+				"name": "CA factur�",
+				"type": "String"
+			},
+			{
+				"name": "Cout standard cd�",
+				"type": "String"
+			},
+			{
+				"name": "Cout fabrication",
+				"type": "String"
+			},
+			{
+				"name": "Cout standard livr�",
+				"type": "String"
+			},
+			{
+				"name": "Cout standard factur�",
+				"type": "String"
+			},
+			{
+				"name": "date_id",
+				"type": "String"
+			},
+			{
+				"name": "year",
+				"type": "String"
+			},
+			{
 				"name": "yearmonth",
 				"type": "String"
 			},
 			{
-				"name": "Article",
+				"name": "fact_filter",
 				"type": "String"
 			},
 			{
-				"name": "Code client",
+				"name": "qt_cd_e",
 				"type": "String"
 			},
 			{
-				"name": "Qt� vente directe",
+				"name": "ca_cd_",
+				"type": "String"
+			},
+			{
+				"name": "qt_livr_e",
+				"type": "String"
+			},
+			{
+				"name": "ca_livr_",
+				"type": "String"
+			},
+			{
+				"name": "qt_factur_e",
+				"type": "String"
+			},
+			{
+				"name": "ca_factur_",
+				"type": "String"
+			},
+			{
+				"name": "cout_standard_cd_",
+				"type": "String"
+			},
+			{
+				"name": "cout_fabrication",
+				"type": "String"
+			},
+			{
+				"name": "cout_standard_livr_",
+				"type": "String"
+			},
+			{
+				"name": "cout_standard_factur_",
+				"type": "String"
+			},
+			{
+				"name": "year_month",
+				"type": "String"
+			},
+			{
+				"name": "reference",
+				"type": "String"
+			},
+			{
+				"name": "WholeSalerID",
+				"type": "String"
+			},
+			{
+				"name": "WholeSalerHubID",
+				"type": "String"
+			},
+			{
+				"name": "HubName",
+				"type": "String"
+			},
+			{
+				"name": "HubSAPid",
 				"type": "String"
 			}
 		]
