@@ -22,58 +22,6 @@
 		},
 		"schema": [
 			{
-				"name": "WholeSalerID",
-				"type": "String"
-			},
-			{
-				"name": "POSid",
-				"type": "String"
-			},
-			{
-				"name": "UnitID",
-				"type": "String"
-			},
-			{
-				"name": "POSdescription",
-				"type": "String"
-			},
-			{
-				"name": "POSaddress",
-				"type": "String"
-			},
-			{
-				"name": "PostalCode",
-				"type": "String"
-			},
-			{
-				"name": "POScity",
-				"type": "String"
-			},
-			{
-				"name": "POSSAMid",
-				"type": "String"
-			},
-			{
-				"name": "Unnamed: 8",
-				"type": "String"
-			},
-			{
-				"name": "Unnamed: 9",
-				"type": "String"
-			},
-			{
-				"name": "Code point de vente",
-				"type": "String"
-			},
-			{
-				"name": "Unnamed: 11",
-				"type": "String"
-			},
-			{
-				"name": "path",
-				"type": "String"
-			},
-			{
 				"name": "Représentant",
 				"type": "String"
 			},
@@ -83,6 +31,10 @@
 			},
 			{
 				"name": "Département",
+				"type": "String"
+			},
+			{
+				"name": "Code point de vente",
 				"type": "String"
 			},
 			{
@@ -147,6 +99,10 @@
 			},
 			{
 				"name": "Montant prv net",
+				"type": "String"
+			},
+			{
+				"name": "path",
 				"type": "String"
 			},
 			{
