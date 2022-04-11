@@ -311,6 +311,66 @@
 					{
 						"name": "path",
 						"type": "String"
+					},
+					{
+						"name": "Code Point de Vente",
+						"type": "String"
+					},
+					{
+						"name": "Libellé Point de Vente",
+						"type": "String"
+					},
+					{
+						"name": "Code Depot Source",
+						"type": "String"
+					},
+					{
+						"name": "Code Client",
+						"type": "String"
+					},
+					{
+						"name": "N° SIRET",
+						"type": "String"
+					},
+					{
+						"name": "Code Postal",
+						"type": "String"
+					},
+					{
+						"name": "Numéro Fournisseur",
+						"type": "String"
+					},
+					{
+						"name": "Année Livraison",
+						"type": "String"
+					},
+					{
+						"name": "Mois Livraison",
+						"type": "String"
+					},
+					{
+						"name": "Code Fournisseur",
+						"type": "String"
+					},
+					{
+						"name": "Fournisseur Principal",
+						"type": "String"
+					},
+					{
+						"name": "Code Produit",
+						"type": "String"
+					},
+					{
+						"name": "Produit",
+						"type": "String"
+					},
+					{
+						"name": "Qte en Unité de Vente",
+						"type": "String"
+					},
+					{
+						"name": "Montant PRV Net",
+						"type": "String"
 					}
 				]
 			},
