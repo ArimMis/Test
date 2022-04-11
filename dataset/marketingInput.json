@@ -1,0 +1,154 @@
+{
+	"name": "marketingInput",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "SORTIE_MARKETING.csv",
+				"folderPath": "Marketing",
+				"container": "data-mart"
+			},
+			"columnDelimiter": ";",
+			"encodingName": "WINDOWS-1252",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Code article",
+				"type": "String"
+			},
+			{
+				"name": "Description article",
+				"type": "String"
+			},
+			{
+				"name": "eShop level 1 - CATALOG - désignation",
+				"type": "String"
+			},
+			{
+				"name": "eShop level 2 - RANGE - désignation",
+				"type": "String"
+			},
+			{
+				"name": "eShop level 3 - FAMILY - désignation",
+				"type": "String"
+			},
+			{
+				"name": "N1groupe",
+				"type": "String"
+			},
+			{
+				"name": "N1groupedesignation",
+				"type": "String"
+			},
+			{
+				"name": "N2groupe",
+				"type": "String"
+			},
+			{
+				"name": "N2groupedesignation",
+				"type": "String"
+			},
+			{
+				"name": "N3groupe",
+				"type": "String"
+			},
+			{
+				"name": "N3groupedesignation",
+				"type": "String"
+			},
+			{
+				"name": "N4groupe",
+				"type": "String"
+			},
+			{
+				"name": "N4groupedesignation",
+				"type": "String"
+			},
+			{
+				"name": "N5groupedesignation",
+				"type": "String"
+			},
+			{
+				"name": "N6groupe",
+				"type": "String"
+			},
+			{
+				"name": "N6groupedesignation",
+				"type": "String"
+			},
+			{
+				"name": "N7groupe",
+				"type": "String"
+			},
+			{
+				"name": "N7groupedesignation",
+				"type": "String"
+			},
+			{
+				"name": "Quantité",
+				"type": "String"
+			},
+			{
+				"name": "CA net",
+				"type": "String"
+			},
+			{
+				"name": "Typologie client direct",
+				"type": "String"
+			},
+			{
+				"name": "Typologie client indirect",
+				"type": "String"
+			},
+			{
+				"name": "Canal de distribution",
+				"type": "String"
+			},
+			{
+				"name": "Typologie offre si diffus",
+				"type": "String"
+			},
+			{
+				"name": "Typologie projet",
+				"type": "String"
+			},
+			{
+				"name": "Date",
+				"type": "String"
+			},
+			{
+				"name": "year",
+				"type": "String"
+			},
+			{
+				"name": "DR",
+				"type": "String"
+			},
+			{
+				"name": "ATC Performance",
+				"type": "String"
+			},
+			{
+				"name": "code article \"groupe\"",
+				"type": "String"
+			},
+			{
+				"name": "Prix de vente unitaire",
+				"type": "String"
+			},
+			{
+				"name": "VMC",
+				"type": "String"
+			}
+		]
+	}
+}
