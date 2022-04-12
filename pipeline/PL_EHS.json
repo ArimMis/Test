@@ -17,7 +17,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "EHS",
+						"referenceName": "EHS_PREPARATION",
 						"type": "DataFlowReference"
 					},
 					"compute": {
