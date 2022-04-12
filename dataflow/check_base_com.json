@@ -275,7 +275,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source3",
-				"source1 derive(ca = toInteger(replace(ca,\",\",\".\")),",
+				"source1 derive(ca = toDouble(replace(ca,\",\",\".\")),",
 				"          quantite = toInteger(quantite),",
 				"          column1 = 1) ~> derivedColumn1",
 				"derivedColumn1 aggregate(groupBy(year),",
