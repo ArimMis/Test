@@ -13,11 +13,11 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "VENTES_DIRECTES_PREPARATION",
+				"fileName": "VENTES_DIRECTES_PREPARATION.csv",
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": ";",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
@@ -28,7 +28,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Article",
+				"name": "reference",
 				"type": "String"
 			},
 			{
@@ -36,7 +36,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Qt� vente directe",
+				"name": "qte_ecoulement",
 				"type": "String"
 			}
 		]
