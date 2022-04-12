@@ -53,6 +53,12 @@
 				},
 				{
 					"name": "aggregate3"
+				},
+				{
+					"name": "derivedColumn4"
+				},
+				{
+					"name": "derivedColumn5"
 				}
 			],
 			"scriptLines": [
@@ -269,10 +275,10 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source3",
-				"source1 derive(ca = toDouble(replace(ca,\",\",\".\")),",
+				"source1 derive(ca = toInteger(replace(ca,\",\",\".\")),",
 				"          quantite = toInteger(quantite),",
 				"          column1 = 1) ~> derivedColumn1",
-				"derivedColumn1 aggregate(groupBy(column1),",
+				"derivedColumn1 aggregate(groupBy(year),",
 				"     ca = sum(toDouble(ca)),",
 				"          quantite = sum(toInteger(quantite))) ~> aggregate1",
 				"source2 derive(ca = toDouble(replace(ca,\",\",\".\")),",
@@ -284,10 +290,14 @@
 				"source3 derive({CA net} = toDouble(replace({CA net},\",\",\".\")),",
 				"          {Quantité} = toInteger({Quantité}),",
 				"          column1 = 1) ~> derivedColumn3",
-				"derivedColumn3 aggregate(groupBy(column1),",
+				"derivedColumn3 aggregate(groupBy(year),",
 				"     ca = sum({CA net}),",
-				"          {Quantité} = sum({Quantité})) ~> aggregate3",
-				"aggregate1 sink(allowSchemaDrift: true,",
+				"          qtt = sum({Quantité})) ~> aggregate3",
+				"aggregate3 derive(ca = replace(toString(ca),\".\",\",\"),",
+				"          quantite = replace(toString(qtt),\".\",\",\")) ~> derivedColumn4",
+				"aggregate1 derive(ca = replace(toString(ca),\".\",\",\"),",
+				"          quantite = replace(toString(quantite),\".\",\",\")) ~> derivedColumn5",
+				"derivedColumn5 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          Column_1 as string",
