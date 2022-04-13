@@ -106,10 +106,6 @@
 				"type": "String"
 			},
 			{
-				"name": "Code Point de Vente",
-				"type": "String"
-			},
-			{
 				"name": "Libellé Point de Vente",
 				"type": "String"
 			},
@@ -155,6 +151,10 @@
 			},
 			{
 				"name": "Produit",
+				"type": "String"
+			},
+			{
+				"name": "Code Point de Vente",
 				"type": "String"
 			},
 			{
