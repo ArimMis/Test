@@ -13,7 +13,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "prixmoyensplit",
+				"fileName": "prixmoyensplit.csv",
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
@@ -22,6 +22,12 @@
 			"quoteChar": "\""
 		},
 		"schema": [
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
 			{
 				"type": "String"
 			},
