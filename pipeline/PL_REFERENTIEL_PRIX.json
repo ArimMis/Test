@@ -60,6 +60,38 @@
 					"referenceName": "AzureFunctionPremium",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "prix_moyen",
+				"description": "Input : \nREFERENTIEL_PRIX\nOutput : \nprixMoyenSplited",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "CALCUL PERIODE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "PRIX_MOYEN_PREPARATION",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
 			}
 		],
 		"folder": {
