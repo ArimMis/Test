@@ -70,6 +70,10 @@
 			{
 				"name": "dd",
 				"type": "String"
+			},
+			{
+				"name": "month",
+				"type": "String"
 			}
 		]
 	},
