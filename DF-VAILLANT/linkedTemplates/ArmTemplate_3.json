@@ -13,6 +13,35 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/HIERARCHIE_ARTICLE')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "REFERENTIEL ARTICLE"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ";",
+					"encodingName": "WINDOWS-1252",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/HIERARCHIE_ARTICLE_PREPARED')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1009,6 +1038,10 @@
 					},
 					{
 						"name": "dd",
+						"type": "String"
+					},
+					{
+						"name": "month",
 						"type": "String"
 					}
 				]
@@ -3041,95 +3074,6 @@
 					},
 					{
 						"name": "fileName",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/MABILE_ORGANISATION')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "PREPARATION ECOULEMENT/MABILE"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "WholeSalerOrganizationExploded",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "Organisation_Mabille_Sonac.xlsx",
-						"folderPath": "Organisation",
-						"container": "data-input"
-					},
-					"firstRowAsHeader": true
-				},
-				"schema": [
-					{
-						"name": "WholeSalerID",
-						"type": "String"
-					},
-					{
-						"name": "WholeSalerShortName",
-						"type": "String"
-					},
-					{
-						"name": "UnitID",
-						"type": "String"
-					},
-					{
-						"name": "POSid",
-						"type": "String"
-					},
-					{
-						"name": "POSdescription",
-						"type": "String"
-					},
-					{
-						"name": "County",
-						"type": "String"
-					},
-					{
-						"name": "POSSAMid",
-						"type": "String"
-					},
-					{
-						"name": "POSSAMidString",
-						"type": "String"
-					},
-					{
-						"name": "SupplierID",
-						"type": "String"
-					},
-					{
-						"name": "BrandID",
-						"type": "String"
-					},
-					{
-						"name": "WholeSalerHubID",
-						"type": "String"
-					},
-					{
-						"name": "HubName",
-						"type": "String"
-					},
-					{
-						"name": "HubSAPid",
-						"type": "String"
-					},
-					{
-						"name": "SectorID",
-						"type": "String"
-					},
-					{
-						"name": "Commentaire",
 						"type": "String"
 					}
 				]
