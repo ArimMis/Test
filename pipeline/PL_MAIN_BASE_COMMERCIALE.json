@@ -17,7 +17,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "TRAITEMENTECOULEMENT_AVOIR",
+						"referenceName": "TRAITEMENTECOULEMENT_AVOIR_PERIOD",
 						"type": "DataFlowReference"
 					},
 					"compute": {
