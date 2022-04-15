@@ -306,7 +306,7 @@
 				"          quantite = replace(toString(qtt),\".\",\",\")) ~> derivedColumn4",
 				"aggregate1 derive(ca = replace(toString(ca),\".\",\",\"),",
 				"          quantite = replace(toString(quantite),\".\",\",\")) ~> derivedColumn5",
-				"source1 filter(year==\"2021\") ~> filter1",
+				"source1 filter(year==\"2021\" && {code produit}=='20219517') ~> filter1",
 				"filter1 aggregate(groupBy({plateforme/vente directe},",
 				"          {origine de la ligne}),",
 				"     quantite = sum(toDouble(quantite)),",
