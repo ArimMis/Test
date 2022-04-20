@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "ATC_PERFORMANCE_ET_CLIENT_SAP",
+						"referenceName": "check_base_com",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -24,26 +24,6 @@
 						"computeType": "General"
 					},
 					"traceLevel": "Fine"
-				}
-			},
-			{
-				"name": "PL_MAIN_RH",
-				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "ATC_PERFORMANCE_ET_CLIENT_SAP",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "PL_MAIN_RH",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true
 				}
 			}
 		],
