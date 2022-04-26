@@ -1581,6 +1581,12 @@
 						},
 						{
 							"name": "derivedColumn6"
+						},
+						{
+							"name": "filter3"
+						},
+						{
+							"name": "filter4"
 						}
 					],
 					"scriptLines": [
@@ -1679,7 +1685,7 @@
 						"source1 derive(ca = toDouble(replace(ca,\",\",\".\")),",
 						"          quantite = toInteger(quantite),",
 						"          column1 = 1) ~> derivedColumn1",
-						"derivedColumn1 aggregate(groupBy(year),",
+						"filter4 aggregate(groupBy({plateforme/vente directe}),",
 						"     ca = sum(toDouble(ca)),",
 						"          quantite = sum(toInteger(quantite))) ~> aggregate1",
 						"aggregate1 derive(ca = replace(toString(ca),\".\",\",\"),",
@@ -1689,6 +1695,8 @@
 						"derivedColumn6 aggregate(groupBy({code produit}),",
 						"     nombre = count({code produit})) ~> aggregate4",
 						"filter2 derive({code produit} = coalesce(toString(toInteger(replace({code produit}, \" \", \"\"))),replace({code produit}, \" \", \"\"))) ~> derivedColumn6",
+						"derivedColumn1 filter(year==\"2021\") ~> filter3",
+						"filter3 filter(in([\"facturation sans ecoulement\",\"facturation avec matching\"],{origine de la ligne})) ~> filter4",
 						"aggregate4 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     input(",
