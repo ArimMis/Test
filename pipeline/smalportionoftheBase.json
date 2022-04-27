@@ -186,6 +186,9 @@
 				}
 			}
 		],
+		"folder": {
+			"name": "test"
+		},
 		"annotations": []
 	}
 }
