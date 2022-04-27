@@ -3618,6 +3618,9 @@
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
 				},
+				"folder": {
+					"name": "test"
+				},
 				"annotations": []
 			},
 			"dependsOn": [
@@ -3892,6 +3895,9 @@
 				"policy": {
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "test"
 				},
 				"annotations": []
 			},
@@ -12235,8 +12241,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "BaseCommercialeDTP2.csv",
-						"folderPath": "Temp",
+						"fileName": "base commerciale.csv",
 						"container": "data-warehouse"
 					},
 					"columnDelimiter": ";",
@@ -12287,7 +12292,7 @@
 						"type": "String"
 					},
 					{
-						"name": "Code postal",
+						"name": "Code postal du client livré",
 						"type": "String"
 					},
 					{
@@ -12295,23 +12300,23 @@
 						"type": "String"
 					},
 					{
-						"name": "marque_code",
+						"name": "ID marque",
 						"type": "String"
 					},
 					{
-						"name": "canal_distribution_final",
+						"name": "ID canal de distribution",
 						"type": "String"
 					},
 					{
-						"name": "nom du canal",
+						"name": "Nom du canal",
 						"type": "String"
 					},
 					{
-						"name": "canal_final",
+						"name": "Diffus/Chantier",
 						"type": "String"
 					},
 					{
-						"name": "document_vente",
+						"name": "document_vente (vente directe)",
 						"type": "String"
 					},
 					{
@@ -12331,7 +12336,11 @@
 						"type": "String"
 					},
 					{
-						"name": "no_offre",
+						"name": "Numéro offre",
+						"type": "String"
+					},
+					{
+						"name": "ATC Corrigé (vente directe)",
 						"type": "String"
 					},
 					{
@@ -12343,6 +12352,10 @@
 						"type": "String"
 					},
 					{
+						"name": "DR (ATC Performance)",
+						"type": "String"
+					},
+					{
 						"name": "ATC Performance",
 						"type": "String"
 					},
@@ -12351,19 +12364,11 @@
 						"type": "String"
 					},
 					{
-						"name": "DR",
+						"name": "Motif commande (vente directe)",
 						"type": "String"
 					},
 					{
-						"name": "Matricule",
-						"type": "String"
-					},
-					{
-						"name": "Motif commande",
-						"type": "String"
-					},
-					{
-						"name": "Type de facture",
+						"name": "Type de facture (vente directe)",
 						"type": "String"
 					},
 					{
@@ -12491,27 +12496,23 @@
 						"type": "String"
 					},
 					{
-						"name": "Numéro du compte",
+						"name": "Client_direct_Nom du compte",
 						"type": "String"
 					},
 					{
-						"name": "EPS_Nom du compte",
+						"name": "Client direct_Groupe cible/Typologie générale",
 						"type": "String"
 					},
 					{
-						"name": "EPS_Groupe cible/Typologie générale",
+						"name": "Client direct_Sous groupe cible/Typologie détaillée",
 						"type": "String"
 					},
 					{
-						"name": "EPS_Sous groupe cible/Typologie détaillée",
+						"name": "Client direct_Compte principal: Numéro du compte",
 						"type": "String"
 					},
 					{
-						"name": "EPS_Compte principal: Numéro du compte",
-						"type": "String"
-					},
-					{
-						"name": "EPS_Compte principal: Nom du compte",
+						"name": "Client direct_Compte principal: Nom du compte",
 						"type": "String"
 					},
 					{
@@ -12564,34 +12565,6 @@
 					},
 					{
 						"name": "Client Indirect - Hiérarchie N2 SAP",
-						"type": "String"
-					},
-					{
-						"name": "yearmonth",
-						"type": "String"
-					},
-					{
-						"name": "ATC Corrigé",
-						"type": "String"
-					},
-					{
-						"name": "Client_direct_Nom du compte",
-						"type": "String"
-					},
-					{
-						"name": "Client direct_Groupe cible/Typologie générale",
-						"type": "String"
-					},
-					{
-						"name": "Client direct_Sous groupe cible/Typologie détaillée",
-						"type": "String"
-					},
-					{
-						"name": "Client direct_Compte principal: Numéro du compte",
-						"type": "String"
-					},
-					{
-						"name": "Client direct_Compte principal: Nom du compte",
 						"type": "String"
 					}
 				]
@@ -41209,6 +41182,21 @@
 						},
 						{
 							"name": "filter4"
+						},
+						{
+							"name": "derivedColumn7"
+						},
+						{
+							"name": "filter5"
+						},
+						{
+							"name": "aggregate5"
+						},
+						{
+							"name": "derivedColumn8"
+						},
+						{
+							"name": "filter6"
 						}
 					],
 					"scriptLines": [
@@ -41223,26 +41211,26 @@
 						"          {code produit} as string,",
 						"          quantite as string,",
 						"          ca as string,",
-						"          {Code postal} as string,",
+						"          {Code postal du client livré} as string,",
 						"          marque as string,",
-						"          marque_code as string,",
-						"          canal_distribution_final as string,",
-						"          {nom du canal} as string,",
-						"          canal_final as string,",
-						"          document_vente as string,",
+						"          {ID marque} as string,",
+						"          {ID canal de distribution} as string,",
+						"          {Nom du canal} as string,",
+						"          {Diffus/Chantier} as string,",
+						"          {document_vente (vente directe)} as string,",
 						"          {Agence commerciale corrigé (vente directe)} as string,",
 						"          {Donneur d'ordre (vente directe)} as string,",
 						"          {Facture (vente directe)} as string,",
 						"          {Type poste Facture (vente directe)} as string,",
-						"          no_offre as string,",
+						"          {Numéro offre} as string,",
+						"          {ATC Corrigé (vente directe)} as string,",
 						"          {ATC offre} as string,",
 						"          {ATC livré} as string,",
+						"          {DR (ATC Performance)} as string,",
 						"          {ATC Performance} as string,",
 						"          NomATC as string,",
-						"          DR as string,",
-						"          Matricule as string,",
-						"          {Motif commande} as string,",
-						"          {Type de facture} as string,",
+						"          {Motif commande (vente directe)} as string,",
+						"          {Type de facture (vente directe)} as string,",
 						"          Description as string,",
 						"          N1groupe as string,",
 						"          N2groupe as string,",
@@ -41274,12 +41262,11 @@
 						"          N7locale as string,",
 						"          {Hiérarchgroupe} as string,",
 						"          {Hiérarchlocale} as string,",
-						"          {Numéro du compte} as string,",
-						"          {EPS_Nom du compte} as string,",
-						"          {EPS_Groupe cible/Typologie générale} as string,",
-						"          {EPS_Sous groupe cible/Typologie détaillée} as string,",
-						"          {EPS_Compte principal: Numéro du compte} as string,",
-						"          {EPS_Compte principal: Nom du compte} as string,",
+						"          {Client_direct_Nom du compte} as string,",
+						"          {Client direct_Groupe cible/Typologie générale} as string,",
+						"          {Client direct_Sous groupe cible/Typologie détaillée} as string,",
+						"          {Client direct_Compte principal: Numéro du compte} as string,",
+						"          {Client direct_Compte principal: Nom du compte} as string,",
 						"          Client as string,",
 						"          {Numéro client indirect} as string,",
 						"          CODE_CMI as string,",
@@ -41292,14 +41279,7 @@
 						"          {Client Direct - Hiérarchie N1 SAP } as string,",
 						"          {Client Direct - Hiérarchie N2 SAP } as string,",
 						"          {Client Indirect - Hiérarchie N1 SAP} as string,",
-						"          {Client Indirect - Hiérarchie N2 SAP} as string,",
-						"          yearmonth as string,",
-						"          {ATC Corrigé} as string,",
-						"          {Client_direct_Nom du compte} as string,",
-						"          {Client direct_Groupe cible/Typologie générale} as string,",
-						"          {Client direct_Sous groupe cible/Typologie détaillée} as string,",
-						"          {Client direct_Compte principal: Numéro du compte} as string,",
-						"          {Client direct_Compte principal: Nom du compte} as string",
+						"          {Client Indirect - Hiérarchie N2 SAP} as string",
 						"     ),",
 						"     allowSchemaDrift: true,",
 						"     validateSchema: false,",
@@ -41319,6 +41299,17 @@
 						"filter2 derive({code produit} = coalesce(toString(toInteger(replace({code produit}, \" \", \"\"))),replace({code produit}, \" \", \"\"))) ~> derivedColumn6",
 						"derivedColumn1 filter(year==\"2021\") ~> filter3",
 						"filter3 filter(in([\"facturation sans ecoulement\",\"facturation avec matching\"],{origine de la ligne})) ~> filter4",
+						"source1 derive(ca = toDouble(replace(ca,\",\",\".\")),",
+						"          quantite = toInteger(quantite),",
+						"          column1 = 1) ~> derivedColumn7",
+						"derivedColumn7 filter(year == '2021') ~> filter5",
+						"filter6 aggregate(groupBy({plateforme/vente directe},",
+						"          {origine de la ligne}),",
+						"     ca = sum(toDouble(ca)),",
+						"          quantite = sum(toInteger(quantite))) ~> aggregate5",
+						"aggregate5 derive(ca = replace(toString(ca),\".\",\",\"),",
+						"          quantite = replace(toString(quantite),\".\",\",\")) ~> derivedColumn8",
+						"filter5 filter(in([\"decrementation ecoulement sans matching\",\"ecoulement sans matching\",\"facturation sans ecoulement\",\"facturation avec matching\"],{origine de la ligne})) ~> filter6",
 						"aggregate4 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     input(",
