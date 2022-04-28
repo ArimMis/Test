@@ -65,7 +65,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Code postal du client livré",
+				"name": "Code postal",
 				"type": "String"
 			},
 			{
@@ -73,23 +73,23 @@
 				"type": "String"
 			},
 			{
-				"name": "ID marque",
+				"name": "marque_code",
 				"type": "String"
 			},
 			{
-				"name": "ID canal de distribution",
+				"name": "canal_distribution_final",
 				"type": "String"
 			},
 			{
-				"name": "Nom du canal",
+				"name": "nom du canal",
 				"type": "String"
 			},
 			{
-				"name": "Diffus/Chantier",
+				"name": "canal_final",
 				"type": "String"
 			},
 			{
-				"name": "document_vente (vente directe)",
+				"name": "document_vente",
 				"type": "String"
 			},
 			{
@@ -109,11 +109,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Numéro offre",
-				"type": "String"
-			},
-			{
-				"name": "ATC Corrigé (vente directe)",
+				"name": "no_offre",
 				"type": "String"
 			},
 			{
@@ -125,10 +121,6 @@
 				"type": "String"
 			},
 			{
-				"name": "DR (ATC Performance)",
-				"type": "String"
-			},
-			{
 				"name": "ATC Performance",
 				"type": "String"
 			},
@@ -137,11 +129,19 @@
 				"type": "String"
 			},
 			{
-				"name": "Motif commande (vente directe)",
+				"name": "DR",
 				"type": "String"
 			},
 			{
-				"name": "Type de facture (vente directe)",
+				"name": "Matricule",
+				"type": "String"
+			},
+			{
+				"name": "Motif commande",
+				"type": "String"
+			},
+			{
+				"name": "Type de facture",
 				"type": "String"
 			},
 			{
@@ -269,23 +269,27 @@
 				"type": "String"
 			},
 			{
-				"name": "Client_direct_Nom du compte",
+				"name": "Numéro du compte",
 				"type": "String"
 			},
 			{
-				"name": "Client direct_Groupe cible/Typologie générale",
+				"name": "EPS_Nom du compte",
 				"type": "String"
 			},
 			{
-				"name": "Client direct_Sous groupe cible/Typologie détaillée",
+				"name": "EPS_Groupe cible/Typologie générale",
 				"type": "String"
 			},
 			{
-				"name": "Client direct_Compte principal: Numéro du compte",
+				"name": "EPS_Sous groupe cible/Typologie détaillée",
 				"type": "String"
 			},
 			{
-				"name": "Client direct_Compte principal: Nom du compte",
+				"name": "EPS_Compte principal: Numéro du compte",
+				"type": "String"
+			},
+			{
+				"name": "EPS_Compte principal: Nom du compte",
 				"type": "String"
 			},
 			{
@@ -338,6 +342,34 @@
 			},
 			{
 				"name": "Client Indirect - Hiérarchie N2 SAP",
+				"type": "String"
+			},
+			{
+				"name": "yearmonth",
+				"type": "String"
+			},
+			{
+				"name": "ATC Corrigé",
+				"type": "String"
+			},
+			{
+				"name": "Client_direct_Nom du compte",
+				"type": "String"
+			},
+			{
+				"name": "Client direct_Groupe cible/Typologie générale",
+				"type": "String"
+			},
+			{
+				"name": "Client direct_Sous groupe cible/Typologie détaillée",
+				"type": "String"
+			},
+			{
+				"name": "Client direct_Compte principal: Numéro du compte",
+				"type": "String"
+			},
+			{
+				"name": "Client direct_Compte principal: Nom du compte",
 				"type": "String"
 			}
 		]
