@@ -5,6 +5,9 @@
 			"referenceName": "VAILLANT_ARCHITECTURE",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "FACTURATION"
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
