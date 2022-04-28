@@ -13,7 +13,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "base commerciale.csv",
+				"fileName": "BaseCommercialeDTP2.csv",
+				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
 			"columnDelimiter": ";",
