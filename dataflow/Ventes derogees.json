@@ -67,6 +67,9 @@
 				},
 				{
 					"name": "torolltoList"
+				},
+				{
+					"name": "derivedColumn4"
 				}
 			],
 			"scriptLines": [
@@ -174,7 +177,7 @@
 				"join1, stgOffre join({Référence Offre BA} == Offre,",
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> join2",
-				"torolltoList filter({Canal distribution}==\"43\") ~> filter2",
+				"derivedColumn4 filter({Canal distribution}==\"43\") ~> filter2",
 				"PrixPeriode derive({Période} = iif(length({Période})>1,{Période},\"0\"+{Période})) ~> derivedColumn1",
 				"derivedColumn1 select(mapColumn(",
 				"          Article,",
@@ -252,7 +255,8 @@
 				"          {Période}",
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
-				"     skipDuplicateMapOutputs: false) ~> torolltoList"
+				"     skipDuplicateMapOutputs: false) ~> torolltoList",
+				"torolltoList derive(ref2 = coalesce(toString(toInteger(replace(reference, \" \", \"\"))),replace(reference, \" \", \"\"))) ~> derivedColumn4"
 			]
 		}
 	}
