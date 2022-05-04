@@ -73,6 +73,9 @@
 				},
 				{
 					"name": "createIndexPartedis"
+				},
+				{
+					"name": "derivedColumn5"
 				}
 			],
 			"scriptLines": [
@@ -180,7 +183,7 @@
 				"join1, stgOffre join({Référence Offre BA} == Offre,",
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> join2",
-				"createIndexPartedis filter({Canal distribution}==\"43\") ~> filter2",
+				"derivedColumn5 filter({Canal distribution}==\"43\") ~> filter2",
 				"PrixPeriode derive({Période} = iif(length({Période})>1,{Période},\"0\"+{Période})) ~> derivedColumn1",
 				"derivedColumn1 select(mapColumn(",
 				"          Article,",
@@ -266,7 +269,10 @@
 				"          ref2),",
 				"     asc(yearmonth, true),",
 				"     asc(HubSAPid, true),",
-				"     asc(reference, true)) ~> createIndexPartedis"
+				"     asc(reference, true),",
+				"     indexcols2 = rowNumber()) ~> createIndexPartedis",
+				"createIndexPartedis derive(indexcols2 = year+\"-\"+{Période}+\"-\"+HubSAPid+\"-\"+coalesce(toString(toInteger(replace(reference, \" \", \"\"))),replace(reference, \" \", \"\"))+\"-\"+toString(indexcols2),",
+				"          {Qté facturée} = iif(toDouble({Qté facturée})<=0, -1, 1)) ~> derivedColumn5"
 			]
 		}
 	}
