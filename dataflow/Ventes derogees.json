@@ -245,7 +245,11 @@
 				"          reference,",
 				"          WholeSalerID,",
 				"          WholeSalerHubID,",
-				"          HubName",
+				"          HubName,",
+				"          HubSAPid,",
+				"          toreplicate,",
+				"          toroll,",
+				"          {Période}",
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> torolltoList"
