@@ -61,6 +61,12 @@
 				},
 				{
 					"name": "derivedColumn2"
+				},
+				{
+					"name": "derivedColumn3"
+				},
+				{
+					"name": "torolltoList"
 				}
 			],
 			"scriptLines": [
@@ -168,7 +174,7 @@
 				"join1, stgOffre join({Référence Offre BA} == Offre,",
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> join2",
-				"join3 filter({Canal distribution}==\"43\") ~> filter2",
+				"torolltoList filter({Canal distribution}==\"43\") ~> filter2",
 				"PrixPeriode derive({Période} = iif(length({Période})>1,{Période},\"0\"+{Période})) ~> derivedColumn1",
 				"derivedColumn1 select(mapColumn(",
 				"          Article,",
@@ -179,10 +185,55 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> columnChoicePrix",
-				"derivedColumn2, PrixPeriode join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"derivedColumn2, PrixPeriode join(replace(lower(tempDist), \" \", \"\") == replace(lower(Distributeur), \" \", \"\")",
+				"     && toInteger(year) == toInteger(annee2)",
+				"     && toInteger({Mois calendrier}) == toInteger(month)",
+				"     && coalesce(toString(toInteger(replace(reference, \" \", \"\"))),replace(reference, \" \", \"\")) == coalesce(toString(toInteger(replace(Article, \" \", \"\"))),replace(Article, \" \", \"\")),",
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> join3",
-				"join2 derive(toroll = mapLoop(abs(toInteger( {Qté facturée})), #index)) ~> derivedColumn2"
+				"join2 derive(toroll = mapLoop(abs(toInteger( {Qté facturée})), #index),",
+				"          tempDist = iif(lower(WholeSalerID)=='ancs - accueil négoce chauffage sanitaire','partedis',\r",
+				"  iif(instr(lower(WholeSalerID), 'trva - tereva' )>0, 'tereva', \r",
+				"   iif(instr(lower(WholeSalerID), 'dsc')>0, 'dsc', \r",
+				"    iif(instr(lower(WholeSalerID), 'vf' )>0, 'vf_confort', \r",
+				"     iif(instr(lower(WholeSalerID), 'sonac' )>0, 'sonac',\r",
+				"lower(WholeSalerID))))))) ~> derivedColumn2",
+				"join3 derive({Période} = coalesce( {Période}, \"00\" )) ~> derivedColumn3",
+				"derivedColumn3 foldDown(unroll(toroll, toroll),",
+				"     mapColumn(",
+				"          {Org commerciale} = { Org commerciale},",
+				"          {Canal distribution},",
+				"          {Secteur d'activité},",
+				"          {Document de vente},",
+				"          Poste,",
+				"          {Jour calendaire},",
+				"          {Agence commerciale corrigé},",
+				"          {ATC Corrigé},",
+				"          {Donneur d'ordre},",
+				"          {Recept de march},",
+				"          {Destinataire facture},",
+				"          {Type doc vente},",
+				"          {Type de poste},",
+				"          Livraison,",
+				"          {Type de livraison},",
+				"          {Type poste Livraison},",
+				"          Facture,",
+				"          {Type de facture},",
+				"          {Type poste Facture},",
+				"          {Mois calendrier},",
+				"          {Année civile},",
+				"          {Motif commande},",
+				"          {Qté cdée} = FacturationForOther@{Qté cdée},",
+				"          {CA cdé},",
+				"          {Qté livrée},",
+				"          {CA livré},",
+				"          {Qté facturée},",
+				"          {CA facturé},",
+				"          {Cout standard cdé},",
+				"          {Cout fabrication}",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> torolltoList"
 			]
 		}
 	}
