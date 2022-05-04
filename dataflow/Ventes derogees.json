@@ -55,7 +55,7 @@
 					"name": "join2"
 				},
 				{
-					"name": "filter2"
+					"name": "Canal43"
 				},
 				{
 					"name": "derivedColumn1"
@@ -265,7 +265,7 @@
 				"join1, select1 join({Référence Offre BA} == Offre,",
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> join2",
-				"derivedColumn5 filter({Canal distribution}==\"43\") ~> filter2",
+				"derivedColumn5 filter({Canal distribution}==\"43\") ~> Canal43",
 				"PrixPeriode derive({Période} = iif(length({Période})>1,{Période},\"0\"+{Période})) ~> derivedColumn1",
 				"derivedColumn1 select(mapColumn(",
 				"          Article,",
@@ -314,7 +314,7 @@
 				"          {Mois calendrier},",
 				"          {Année civile},",
 				"          {Motif commande},",
-				"          {Qté cdée} = FacturationForOther@{Qté cdée},",
+				"          {Qté cdée} = select3@{Qté cdée},",
 				"          {CA cdé},",
 				"          {Qté livrée},",
 				"          {CA livré},",
