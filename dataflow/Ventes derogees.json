@@ -58,6 +58,9 @@
 				},
 				{
 					"name": "join3"
+				},
+				{
+					"name": "derivedColumn2"
 				}
 			],
 			"scriptLines": [
@@ -176,9 +179,10 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> columnChoicePrix",
-				"join2, PrixPeriode join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"derivedColumn2, PrixPeriode join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
 				"     joinType:'left',",
-				"     broadcast: 'auto')~> join3"
+				"     broadcast: 'auto')~> join3",
+				"join2 derive(toroll = mapLoop(abs(toInteger( {Qté facturée})), #index)) ~> derivedColumn2"
 			]
 		}
 	}
