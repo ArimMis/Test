@@ -3,8 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "ATC_PERFORMANCE_ET_CLIENT_SAP",
-				"description": "Input : \nBASE_AVANT_TRAITEMENT_ATC\nsecteurFictif\nOutput : \nbaseCommercialOut",
+				"name": "PREPARATION_ECC_AVOIR",
+				"description": "Input : \necoulement\navoir\nsalerDSC\nOrgaTerevas\nOutput : \nAZ_OecoulementDscTerevaWithIndex\noutEccDscTereva\nAZ_OecoulementPartedislikeWithIndex\noutEccNotDSCTEREVA\nAZ_AvoirWithIndexDSClike\nDTAvoirRetraiter\nAvoirForVanMarkes",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -17,7 +17,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "ATC_PERFORMANCE_ET_CLIENT_SAP",
+						"referenceName": "TRAITEMENTECOULEMENT_AVOIR_PERIOD",
 						"type": "DataFlowReference"
 					},
 					"compute": {
