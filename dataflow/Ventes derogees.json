@@ -92,6 +92,9 @@
 				},
 				{
 					"name": "select3"
+				},
+				{
+					"name": "join4"
 				}
 			],
 			"scriptLines": [
@@ -439,7 +442,10 @@
 				"          POSSAMidString = {Numéro interne 2}",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: false) ~> select3"
+				"     skipDuplicateMapOutputs: false) ~> select3",
+				"Canal43, select2 join(derivedColumn5@indexcols2 == select2@indexcols2,",
+				"     joinType:'inner',",
+				"     broadcast: 'auto')~> join4"
 			]
 		}
 	}
