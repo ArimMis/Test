@@ -43,7 +43,15 @@
 					"name": "ecoulmnt"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SinkAvntJoinVenteDeroge",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "filter1"
@@ -455,7 +463,16 @@
 				"derivedColumn5 filter({Canal distribution}==\"51\" || {Canal distribution}==\"45\") ~> filter2",
 				"filter2, select2 join(derivedColumn5@indexcols2 == select2@indexcols2,",
 				"     joinType:'inner',",
-				"     broadcast: 'auto')~> join5"
+				"     broadcast: 'auto')~> join5",
+				"derivedColumn5 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          {yearmonth;reference;Code client;qte_ecoulement} as string",
+				"     ),",
+				"     partitionFileNames:['TestAvantJoinVentederogé.csv'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sink1"
 			]
 		}
 	}

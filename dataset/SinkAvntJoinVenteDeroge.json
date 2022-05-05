@@ -1,0 +1,28 @@
+{
+	"name": "SinkAvntJoinVenteDeroge",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "Temp",
+				"container": "data-warehouse"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "yearmonth;reference;Code client;qte_ecoulement",
+				"type": "String"
+			}
+		]
+	}
+}
