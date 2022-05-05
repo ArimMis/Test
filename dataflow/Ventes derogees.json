@@ -95,6 +95,12 @@
 				},
 				{
 					"name": "join4"
+				},
+				{
+					"name": "filter2"
+				},
+				{
+					"name": "join5"
 				}
 			],
 			"scriptLines": [
@@ -266,7 +272,7 @@
 				"     joinType:'inner',",
 				"     broadcast: 'auto')~> join1",
 				"join1, select1 join({Référence Offre BA} == Offre,",
-				"     joinType:'left',",
+				"     joinType:'inner',",
 				"     broadcast: 'auto')~> join2",
 				"derivedColumn5 filter({Canal distribution}==\"43\") ~> Canal43",
 				"PrixPeriode derive({Période} = iif(length({Période})>1,{Période},\"0\"+{Période})) ~> derivedColumn1",
@@ -445,7 +451,11 @@
 				"     skipDuplicateMapOutputs: false) ~> select3",
 				"Canal43, select2 join(derivedColumn5@indexcols2 == select2@indexcols2,",
 				"     joinType:'inner',",
-				"     broadcast: 'auto')~> join4"
+				"     broadcast: 'auto')~> join4",
+				"derivedColumn5 filter({Canal distribution}==\"51\" || {Canal distribution}==\"45\") ~> filter2",
+				"filter2, select2 join(derivedColumn5@indexcols2 == select2@indexcols2,",
+				"     joinType:'inner',",
+				"     broadcast: 'auto')~> join5"
 			]
 		}
 	}
