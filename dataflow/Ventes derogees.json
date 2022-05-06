@@ -96,7 +96,7 @@
 					"name": "select1"
 				},
 				{
-					"name": "select2"
+					"name": "endEcoulement"
 				},
 				{
 					"name": "select3"
@@ -109,6 +109,9 @@
 				},
 				{
 					"name": "join5"
+				},
+				{
+					"name": "join6"
 				}
 			],
 			"scriptLines": [
@@ -399,7 +402,7 @@
 				"          qte_ecc",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select2",
+				"     skipDuplicateMapOutputs: true) ~> endEcoulement",
 				"join2 select(mapColumn(",
 				"          { Org commerciale},",
 				"          {Canal distribution},",
@@ -458,13 +461,16 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: false) ~> select3",
-				"Canal43, select2 join(derivedColumn5@indexcols2 == select2@indexcols2,",
+				"Canal43, endEcoulement join(derivedColumn5@indexcols2 == endEcoulement@indexcols2,",
 				"     joinType:'inner',",
 				"     broadcast: 'auto')~> join4",
 				"derivedColumn5 filter({Canal distribution}==\"51\" || {Canal distribution}==\"45\") ~> filter2",
-				"filter2, select2 join(derivedColumn5@indexcols2 == select2@indexcols2,",
+				"filter2, endEcoulement join(derivedColumn5@indexcols2 == endEcoulement@indexcols2,",
 				"     joinType:'inner',",
 				"     broadcast: 'auto')~> join5",
+				"derivedColumn3, endEcoulement join(select3@POSSAMidString == endEcoulement@POSSAMidString,",
+				"     joinType:'inner',",
+				"     broadcast: 'auto')~> join6",
 				"derivedColumn5 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
