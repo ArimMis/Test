@@ -126,7 +126,7 @@
 					"name": "endEcoulement"
 				},
 				{
-					"name": "avecMatching43"
+					"name": "split2"
 				}
 			],
 			"scriptLines": [
@@ -488,7 +488,9 @@
 				"     disjoint: false) ~> split1@(AvecOffreEtPossamid, SansOffreNiPossamid)",
 				"derivedColumn5 filter({Canal distribution}==\"51\" ||  {Canal distribution}==\"45\") ~> Filtre5145",
 				"select0 derive({Ecoulement origin} = \"Ecoulement origin\") ~> endEcoulement",
-				"join5 filter(!isNull({Ecoulement origin})) ~> avecMatching43",
+				"join5 split(!isNull({Ecoulement origin}) && !isNull({Facturation origin}),",
+				"     isNull({Facturation origin}),",
+				"     disjoint: false) ~> split2@(avecMatching43, rigthEcoulement43, residu43)",
 				"derivedColumn5 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
