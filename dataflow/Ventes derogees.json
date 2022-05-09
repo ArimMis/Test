@@ -63,9 +63,6 @@
 					"name": "join2"
 				},
 				{
-					"name": "Canal43"
-				},
-				{
 					"name": "derivedColumn1"
 				},
 				{
@@ -102,9 +99,6 @@
 					"name": "select3"
 				},
 				{
-					"name": "join4"
-				},
-				{
 					"name": "filter2"
 				},
 				{
@@ -112,6 +106,18 @@
 				},
 				{
 					"name": "join6"
+				},
+				{
+					"name": "derivedColumn6"
+				},
+				{
+					"name": "derivedColumn7"
+				},
+				{
+					"name": "derivedColumn8"
+				},
+				{
+					"name": "split1"
 				}
 			],
 			"scriptLines": [
@@ -279,13 +285,12 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> ecoulmnt",
 				"FacturationForOther filter({Canal distribution} != \"42\") ~> filter1",
-				"filter1, ArticulationSap join({Document de vente} == Commande,",
-				"     joinType:'inner',",
+				"derivedColumn8, derivedColumn6 join({Document de vente} == Commande,",
+				"     joinType:'left',",
 				"     broadcast: 'auto')~> join1",
-				"join1, select1 join({Référence Offre BA} == Offre,",
-				"     joinType:'inner',",
+				"join1, derivedColumn7 join({Référence Offre BA} == Offre,",
+				"     joinType:'left',",
 				"     broadcast: 'auto')~> join2",
-				"derivedColumn5 filter({Canal distribution}==\"43\") ~> Canal43",
 				"PrixPeriode derive({Période} = iif(length({Période})>1,{Période},\"0\"+{Période})) ~> derivedColumn1",
 				"derivedColumn1 select(mapColumn(",
 				"          Article,",
@@ -403,7 +408,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> endEcoulement",
-				"join2 select(mapColumn(",
+				"split1@Avec offre et Possamid select(mapColumn(",
 				"          { Org commerciale},",
 				"          {Canal distribution},",
 				"          {Secteur d'activité},",
@@ -461,16 +466,18 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: false) ~> select3",
-				"Canal43, endEcoulement join(derivedColumn5@indexcols2 == endEcoulement@indexcols2,",
-				"     joinType:'inner',",
-				"     broadcast: 'auto')~> join4",
-				"derivedColumn5 filter({Canal distribution}==\"51\" || {Canal distribution}==\"45\") ~> filter2",
+				"derivedColumn5 filter( {Canal distribution}==\"43\") ~> filter2",
 				"filter2, endEcoulement join(derivedColumn5@indexcols2 == endEcoulement@indexcols2,",
 				"     joinType:'inner',",
 				"     broadcast: 'auto')~> join5",
 				"derivedColumn3, endEcoulement join(select3@POSSAMidString == endEcoulement@POSSAMidString,",
 				"     joinType:'inner',",
 				"     broadcast: 'auto')~> join6",
+				"ArticulationSap derive({Articulation Origin} = \"Articulation Origin\") ~> derivedColumn6",
+				"select1 derive({Offre origin} = \"Offre origin\") ~> derivedColumn7",
+				"filter1 derive({Facturation origin} = \"Facturation origin\") ~> derivedColumn8",
+				"join2 split(!isNull({Articulation Origin}) &&  !isNull({Offre origin}),",
+				"     disjoint: false) ~> split1@(Avec offre et Possamid, Sans offre ni Possamid)",
 				"derivedColumn5 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
