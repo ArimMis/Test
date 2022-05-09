@@ -383,7 +383,7 @@
 				"          {Qté facturée} = iif(toDouble({Qté facturée})<=0, -1, 1)) ~> derivedColumn5",
 				"stgOffre select(mapColumn(",
 				"          Offre,",
-				"          {Numéro interne 2} = {Numéro interne 1}",
+				"          {Numéro interne 2}",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
