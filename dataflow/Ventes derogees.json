@@ -127,6 +127,9 @@
 				},
 				{
 					"name": "split2"
+				},
+				{
+					"name": "select4"
 				}
 			],
 			"scriptLines": [
@@ -491,6 +494,11 @@
 				"join5 split(!isNull({Ecoulement origin}) && !isNull({Facturation origin}),",
 				"     isNull({Facturation origin}),",
 				"     disjoint: false) ~> split2@(avecMatching43, rigthEcoulement43, residu43)",
+				"split2@rigthEcoulement43 select(mapColumn(",
+				"          yearmonth = split2@rigthEcoulement43@yearmonth",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select4",
 				"derivedColumn5 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
