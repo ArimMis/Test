@@ -99,7 +99,7 @@
 					"name": "select3"
 				},
 				{
-					"name": "filter2"
+					"name": "Filtre43"
 				},
 				{
 					"name": "join5"
@@ -118,6 +118,12 @@
 				},
 				{
 					"name": "split1"
+				},
+				{
+					"name": "Filtre5145"
+				},
+				{
+					"name": "derivedColumn9"
 				}
 			],
 			"scriptLines": [
@@ -466,8 +472,8 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: false) ~> select3",
-				"derivedColumn5 filter( {Canal distribution}==\"43\") ~> filter2",
-				"filter2, endEcoulement join(derivedColumn5@indexcols2 == endEcoulement@indexcols2,",
+				"derivedColumn5 filter( {Canal distribution}==\"43\") ~> Filtre43",
+				"Filtre43, endEcoulement join(derivedColumn5@indexcols2 == endEcoulement@indexcols2,",
 				"     joinType:'inner',",
 				"     broadcast: 'auto')~> join5",
 				"derivedColumn3, endEcoulement join(select3@POSSAMidString == endEcoulement@POSSAMidString,",
@@ -478,6 +484,8 @@
 				"filter1 derive({Facturation origin} = \"Facturation origin\") ~> derivedColumn8",
 				"join2 split(!isNull({Articulation Origin}) &&  !isNull({Offre origin}),",
 				"     disjoint: false) ~> split1@(AvecOffreEtPossamid, SansOffreNiPossamid)",
+				"derivedColumn5 filter( {Canal distribution}==\"51\" ||  {Canal distribution}==\"45\") ~> Filtre5145",
+				"endEcoulement derive({Ecoulement origin} = \"Ecoulement origin\") ~> derivedColumn9",
 				"derivedColumn5 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
