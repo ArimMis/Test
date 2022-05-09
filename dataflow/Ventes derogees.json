@@ -93,7 +93,7 @@
 					"name": "select1"
 				},
 				{
-					"name": "endEcoulement"
+					"name": "select0"
 				},
 				{
 					"name": "select3"
@@ -108,10 +108,10 @@
 					"name": "join6"
 				},
 				{
-					"name": "derivedColumn6"
+					"name": "endArticulation"
 				},
 				{
-					"name": "derivedColumn7"
+					"name": "endOffre"
 				},
 				{
 					"name": "derivedColumn8"
@@ -123,7 +123,10 @@
 					"name": "Filtre5145"
 				},
 				{
-					"name": "derivedColumn9"
+					"name": "endEcoulement"
+				},
+				{
+					"name": "avecMatching43"
 				}
 			],
 			"scriptLines": [
@@ -291,10 +294,10 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> ecoulmnt",
 				"FacturationForOther filter({Canal distribution} != \"42\") ~> filter1",
-				"derivedColumn8, derivedColumn6 join({Document de vente} == Commande,",
+				"derivedColumn8, endArticulation join({Document de vente} == Commande,",
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> join1",
-				"join1, derivedColumn7 join({Référence Offre BA} == Offre,",
+				"join1, endOffre join({Référence Offre BA} == Offre,",
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> join2",
 				"PrixPeriode derive({Période} = iif(length({Période})>1,{Période},\"0\"+{Période})) ~> derivedColumn1",
@@ -371,7 +374,8 @@
 				"          toreplicate,",
 				"          toroll,",
 				"          {Période},",
-				"          Offre",
+				"          Offre,",
+				"          {Facturation origin}",
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> torolltoList",
@@ -412,7 +416,7 @@
 				"          qte_ecc",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> endEcoulement",
+				"     skipDuplicateMapOutputs: true) ~> select0",
 				"split1@AvecOffreEtPossamid select(mapColumn(",
 				"          { Org commerciale},",
 				"          {Canal distribution},",
@@ -465,24 +469,26 @@
 				"          Commande,",
 				"          {Référence Offre BA},",
 				"          Offre,",
-				"          POSSAMidString = {Numéro interne 2}",
+				"          POSSAMidString = {Numéro interne 2},",
+				"          {Facturation origin}",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: false) ~> select3",
 				"derivedColumn5 filter({Canal distribution}==\"43\") ~> Filtre43",
-				"Filtre43, endEcoulement join(derivedColumn5@indexcols2 == endEcoulement@indexcols2,",
-				"     joinType:'inner',",
+				"Filtre43, endEcoulement join(derivedColumn5@indexcols2 == select0@indexcols2,",
+				"     joinType:'outer',",
 				"     broadcast: 'auto')~> join5",
-				"derivedColumn3, endEcoulement join(select3@POSSAMidString == endEcoulement@POSSAMidString,",
+				"derivedColumn3, select0 join(select3@POSSAMidString == select0@POSSAMidString,",
 				"     joinType:'inner',",
 				"     broadcast: 'auto')~> join6",
-				"ArticulationSap derive({Articulation Origin} = \"Articulation Origin\") ~> derivedColumn6",
-				"select1 derive({Offre origin} = \"Offre origin\") ~> derivedColumn7",
+				"ArticulationSap derive({Articulation Origin} = \"Articulation Origin\") ~> endArticulation",
+				"select1 derive({Offre origin} = \"Offre origin\") ~> endOffre",
 				"filter1 derive({Facturation origin} = \"Facturation origin\") ~> derivedColumn8",
 				"join2 split(!isNull({Articulation Origin}) &&  !isNull({Offre origin}),",
 				"     disjoint: false) ~> split1@(AvecOffreEtPossamid, SansOffreNiPossamid)",
 				"derivedColumn5 filter({Canal distribution}==\"51\" ||  {Canal distribution}==\"45\") ~> Filtre5145",
-				"endEcoulement derive({Ecoulement origin} = \"Ecoulement origin\") ~> derivedColumn9",
+				"select0 derive({Ecoulement origin} = \"Ecoulement origin\") ~> endEcoulement",
+				"join5 filter(!isNull({Ecoulement origin})) ~> avecMatching43",
 				"derivedColumn5 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
