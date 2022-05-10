@@ -145,6 +145,9 @@
 				},
 				{
 					"name": "REcoulement5145"
+				},
+				{
+					"name": "Filtre42"
 				}
 			],
 			"scriptLines": [
@@ -706,6 +709,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> REcoulement5145",
+				"derivedColumn5 filter({Canal distribution}==\"42\") ~> Filtre42",
 				"derivedColumn5 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
