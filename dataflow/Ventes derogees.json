@@ -148,6 +148,9 @@
 				},
 				{
 					"name": "Filtre42"
+				},
+				{
+					"name": "union1"
 				}
 			],
 			"scriptLines": [
@@ -710,6 +713,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> REcoulement5145",
 				"derivedColumn5 filter({Canal distribution}==\"42\") ~> Filtre42",
+				"Filtre42, split1@SansOffreNiPossamid union(byName: true)~> union1",
 				"derivedColumn5 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
