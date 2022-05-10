@@ -148,6 +148,9 @@
 				},
 				{
 					"name": "derivedColumn9"
+				},
+				{
+					"name": "window1"
 				}
 			],
 			"scriptLines": [
@@ -764,6 +767,13 @@
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> torolltoList2",
 				"torolltoList2 derive(ref2 = coalesce(toString(toInteger(replace(reference, \" \", \"\"))),replace(reference, \" \", \"\"))) ~> derivedColumn9",
+				"derivedColumn9 window(over(year,",
+				"          {Période},",
+				"          HubSAPid,",
+				"          ref2),",
+				"     asc(yearmonth, true),",
+				"     asc(HubSAPid, true),",
+				"     asc(reference, true)) ~> window1",
 				"derivedColumn5 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
