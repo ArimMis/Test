@@ -142,6 +142,9 @@
 				},
 				{
 					"name": "filter4"
+				},
+				{
+					"name": "torolltoList2"
 				}
 			],
 			"scriptLines": [
@@ -701,6 +704,13 @@
 				"     skipDuplicateMapOutputs: true) ~> REcoulement5145",
 				"derivedColumn3 filter(({Canal distribution} !=\"42\" ) &&  (!isNull({Articulation Origin}) && !isNull({Offre origin}))) ~> filter3",
 				"derivedColumn3 filter({Canal distribution} ==\"42\" || (isNull({Articulation Origin}) || isNull({Offre origin}))) ~> filter4",
+				"filter4 foldDown(unroll(toroll, toroll),",
+				"     mapColumn(",
+				"          each(match(/* Toutes les colonnes d'entrée */ true()),",
+				"               /* Entrez un nom */ $$ = $$)",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> torolltoList2",
 				"derivedColumn5 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
