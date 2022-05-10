@@ -151,6 +151,9 @@
 				},
 				{
 					"name": "window1"
+				},
+				{
+					"name": "aggregate1"
 				}
 			],
 			"scriptLines": [
@@ -774,6 +777,22 @@
 				"     asc(yearmonth, true),",
 				"     asc(HubSAPid, true),",
 				"     asc(reference, true)) ~> window1",
+				"REcoulement5145 aggregate(groupBy(yearmonth,",
+				"          year,",
+				"          month,",
+				"          qte_ecoulement,",
+				"          POSSAMidString,",
+				"          HubSAPid,",
+				"          reference,",
+				"          distributeur,",
+				"          agence_code,",
+				"          marque,",
+				"          {Code postal},",
+				"          marque_name,",
+				"          toreplicate,",
+				"          dd,",
+				"          {Ecoulement origin}),",
+				"     qte_ecc = sum(toFloat(qte_ecc))) ~> aggregate1",
 				"derivedColumn5 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
