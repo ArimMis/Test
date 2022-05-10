@@ -129,7 +129,7 @@
 					"name": "split2"
 				},
 				{
-					"name": "REcoulement"
+					"name": "REcoulement43"
 				},
 				{
 					"name": "select5"
@@ -142,6 +142,9 @@
 				},
 				{
 					"name": "split3"
+				},
+				{
+					"name": "REcoulement5145"
 				}
 			],
 			"scriptLines": [
@@ -527,7 +530,7 @@
 				"          {Ecoulement origin}",
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
-				"     skipDuplicateMapOutputs: true) ~> REcoulement",
+				"     skipDuplicateMapOutputs: true) ~> REcoulement43",
 				"join5 select(mapColumn(",
 				"          {Org commerciale},",
 				"          {Canal distribution},",
@@ -602,7 +605,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: true) ~> select5",
-				"Filtre5145, REcoulement join(indexcols2 == indexcols2Ecoul,",
+				"Filtre5145, REcoulement43 join(indexcols2 == indexcols2Ecoul,",
 				"     joinType:'outer',",
 				"     broadcast: 'auto')~> join7",
 				"join7 select(mapColumn(",
@@ -659,19 +662,19 @@
 				"          {Facturation origin},",
 				"          ref2,",
 				"          indexcols2,",
-				"          yearmonthEcoul = REcoulement@yearmonth,",
-				"          yearEcoul = REcoulement@year,",
+				"          yearmonthEcoul = REcoulement43@yearmonth,",
+				"          yearEcoul = REcoulement43@year,",
 				"          month,",
 				"          qte_ecoulement,",
 				"          POSSAMidStringEcoul,",
-				"          HubSAPidEcoul = REcoulement@HubSAPid,",
-				"          referenceEcoul = REcoulement@reference,",
+				"          HubSAPidEcoul = REcoulement43@HubSAPid,",
+				"          referenceEcoul = REcoulement43@reference,",
 				"          distributeur,",
 				"          agence_code,",
 				"          marque,",
 				"          {Code postal},",
 				"          marque_name,",
-				"          toreplicate = REcoulement@toreplicate,",
+				"          toreplicate = REcoulement43@toreplicate,",
 				"          dd,",
 				"          indexcols2Ecoul,",
 				"          qte_ecc,",
@@ -682,6 +685,20 @@
 				"select6 split(!isNull({Ecoulement origin}) && !isNull({Facturation origin}),",
 				"     isNull({Facturation origin}),",
 				"     disjoint: false) ~> split3@(avecMatching5145, rigthEcoulement5154, residu5145)",
+				"split3@rigthEcoulement5154 select(mapColumn(",
+				"          yearmonth = yearmonthEcoul,",
+				"          year = yearEcoul,",
+				"          month,",
+				"          qte_ecoulement,",
+				"          POSSAMidString = POSSAMidStringEcoul,",
+				"          HubSAPid = HubSAPidEcoul,",
+				"          reference = referenceEcoul,",
+				"          distributeur,",
+				"          agence_code,",
+				"          marque",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> REcoulement5145",
 				"derivedColumn5 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
