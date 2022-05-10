@@ -139,6 +139,9 @@
 				},
 				{
 					"name": "select6"
+				},
+				{
+					"name": "split3"
 				}
 			],
 			"scriptLines": [
@@ -674,8 +677,11 @@
 				"          qte_ecc,",
 				"          {Ecoulement origin}",
 				"     ),",
-				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: true) ~> select6",
+				"select6 split(!isNull({Ecoulement origin}) && !isNull({Facturation origin}),",
+				"     isNull({Facturation origin}),",
+				"     disjoint: false) ~> split3@(avecMatching5145, rigthEcoulement5154, residu5145)",
 				"derivedColumn5 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
