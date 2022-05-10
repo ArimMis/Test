@@ -171,7 +171,10 @@
 					"name": "derivedColumn11"
 				},
 				{
-					"name": "derivedColumn12"
+					"name": "ecoulementReste"
+				},
+				{
+					"name": "join8"
 				}
 			],
 			"scriptLines": [
@@ -868,7 +871,10 @@
 				"     skipDuplicateMapOutputs: true) ~> select7",
 				"select7 derive(indexcols2 = year+agence_code+reference+toString(indexcol2),",
 				"          qte_ecc = iif(toInteger(qte_ecoulement) >0, 1, -1 )) ~> derivedColumn11",
-				"derivedColumn11 derive(ca_ecoulement = abs(toDouble(ca_ecoulement))*qte_ecc) ~> derivedColumn12",
+				"derivedColumn11 derive(ca_ecoulement = abs(toDouble(ca_ecoulement))*qte_ecc) ~> ecoulementReste",
+				"window1, ecoulementReste join(window1@indexcol2 == select7@indexcol2,",
+				"     joinType:'outer',",
+				"     broadcast: 'auto')~> join8",
 				"derivedColumn5 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
