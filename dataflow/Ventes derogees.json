@@ -293,6 +293,9 @@
 				},
 				{
 					"name": "aggregate1"
+				},
+				{
+					"name": "derivedColumn19"
 				}
 			],
 			"scriptLines": [
@@ -462,7 +465,7 @@
 				"derivedColumn8, endArticulation join({Document de vente} == Commande,",
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> join1",
-				"join1, endOffre join({Référence Offre BA} == Offre,",
+				"derivedColumn19, endOffre join({Référence Offre BA} == Offre,",
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> join2",
 				"PrixPeriode derive({Période} = iif(length({Période})>1,{Période},\"0\"+{Période})) ~> derivedColumn1",
@@ -558,6 +561,7 @@
 				"          {Qté facturée} = iif(toDouble({Qté facturée})<=0, -1, 1)) ~> derivedColumn5",
 				"stgOffre select(mapColumn(",
 				"          Offre,",
+				"          Canal,",
 				"          {Numéro interne 2}",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
@@ -995,7 +999,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select7",
-				"select7 derive(indexcols2 = year+\"-\"+{periode}+\"-\"+HubSAPid+\"-\"+coalesce(toString(toInteger(replace(reference, \" \", \"\"))),replace(reference, \" \", \"\"))+\"-\"+toString(indexcol2),",
+				"select7 derive(indexcols2 = year+\"-\"+periode+\"-\"+HubSAPid+\"-\"+coalesce(toString(toInteger(replace(reference, \" \", \"\"))),replace(reference, \" \", \"\"))+\"-\"+toString(indexcol2),",
 				"          qte_ecc = iif(toInteger(qte_ecoulement) >0, 1, -1 )) ~> derivedColumn11",
 				"select11 derive(ca_ecoulement = abs(toDouble(ca_ecoulement))*qte_ecc) ~> caEcoulement",
 				"select12, ecoulementReste join(select12@indexcols2 == ecoulementReste@indexcols2,",
@@ -1931,8 +1935,10 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> ecoulementReste",
-				"stgOffre aggregate(groupBy(Offre),",
+				"stgOffre aggregate(groupBy(Offre,",
+				"          Canal),",
 				"     CodeATC = last(CodeATC)) ~> aggregate1",
+				"join1 derive(canal_final = iif( {Canal distribution}==\"43\" ,  \"Chantier\" , \"Diffus\" )) ~> derivedColumn19",
 				"join9 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
