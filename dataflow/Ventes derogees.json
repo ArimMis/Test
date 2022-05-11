@@ -290,6 +290,9 @@
 				},
 				{
 					"name": "ecoulementReste"
+				},
+				{
+					"name": "aggregate1"
 				}
 			],
 			"scriptLines": [
@@ -1814,7 +1817,7 @@
 				"     skipDuplicateMapOutputs: true) ~> select10",
 				"endFactAVM derive({Qté facturée} = toInteger({Qté facturée})) ~> derivedColumn16",
 				"select10, endEcoulementSansMatcing union(byName: true)~> union6",
-				"stgOffre select(mapColumn(",
+				"aggregate1 select(mapColumn(",
 				"          Offre,",
 				"          {ATC performance} = CodeATC",
 				"     ),",
@@ -1928,6 +1931,8 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> ecoulementReste",
+				"stgOffre aggregate(groupBy(Offre),",
+				"     CodeATC = last(CodeATC)) ~> aggregate1",
 				"join9 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
