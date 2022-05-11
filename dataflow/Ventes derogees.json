@@ -1743,7 +1743,7 @@
 				"     skipDuplicateMapOutputs: true) ~> endFactAVM",
 				"union3 derive(ca_ecoulement = toDouble(ca_ecoulement),",
 				"          qte_ecc = toInteger(qte_ecc),",
-				"          {Qté facturée} = toString({Qté facturée})) ~> derivedColumn15",
+				"          {Qté facturée} = toInteger({Qté facturée})) ~> derivedColumn15",
 				"clearEcoulementSansMatch select(mapColumn(",
 				"          yearmonth,",
 				"          year,",
