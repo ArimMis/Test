@@ -269,6 +269,12 @@
 				},
 				{
 					"name": "union6"
+				},
+				{
+					"name": "endOffreATC"
+				},
+				{
+					"name": "join9"
 				}
 			],
 			"scriptLines": [
@@ -1791,7 +1797,16 @@
 				"     skipDuplicateMapOutputs: true) ~> select10",
 				"endFactAVM derive({Qté facturée} = toInteger({Qté facturée})) ~> derivedColumn16",
 				"select10, endEcoulementSansMatcing union(byName: true)~> union6",
-				"union6 sink(allowSchemaDrift: true,",
+				"stgOffre select(mapColumn(",
+				"          Offre,",
+				"          {ATC performance} = CodeATC",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> endOffreATC",
+				"union6, endOffreATC join(union6@Offre == endOffreATC@Offre,",
+				"     joinType:'left',",
+				"     broadcast: 'auto')~> join9",
+				"join9 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          {SAUNIER DUVAL} as string,",
