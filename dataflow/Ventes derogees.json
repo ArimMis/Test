@@ -46,17 +46,10 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "SinkAvntJoinVenteDeroge",
-						"type": "DatasetReference"
-					},
-					"name": "intermediateSinkForTest"
-				},
-				{
-					"dataset": {
 						"referenceName": "outVenteDeroge",
 						"type": "DatasetReference"
 					},
-					"name": "sink1"
+					"name": "endSinkOutput"
 				}
 			],
 			"transformations": [
@@ -1798,15 +1791,6 @@
 				"     skipDuplicateMapOutputs: true) ~> select10",
 				"endFactAVM derive({Qté facturée} = toInteger({Qté facturée})) ~> derivedColumn16",
 				"select10, endEcoulementSansMatcing union(byName: true)~> union6",
-				"derivedColumn5 sink(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     input(",
-				"          {yearmonth;reference;Code client;qte_ecoulement} as string",
-				"     ),",
-				"     partitionFileNames:['TestAvantJoinVentederogé.csv'],",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
-				"     partitionBy('hash', 1)) ~> intermediateSinkForTest",
 				"union6 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
@@ -1824,7 +1808,7 @@
 				"     partitionFileNames:['tempVenteDeroge.csv'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     partitionBy('hash', 1)) ~> sink1"
+				"     partitionBy('hash', 1)) ~> endSinkOutput"
 			]
 		}
 	}
