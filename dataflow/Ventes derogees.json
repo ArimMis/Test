@@ -1096,7 +1096,6 @@
 				"          qt_factur_e,",
 				"          ca_factur_,",
 				"          year_month,",
-				"          reference = select8@reference,",
 				"          WholeSalerID,",
 				"          WholeSalerHubID,",
 				"          HubName,",
