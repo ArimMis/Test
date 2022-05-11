@@ -13,6 +13,259 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/FacturationForOther')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "facturationForOther.csv",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": " Org commerciale",
+						"type": "String"
+					},
+					{
+						"name": "Canal distribution",
+						"type": "String"
+					},
+					{
+						"name": "Secteur d'activité",
+						"type": "String"
+					},
+					{
+						"name": "Document de vente",
+						"type": "String"
+					},
+					{
+						"name": "Poste",
+						"type": "String"
+					},
+					{
+						"name": "Jour calendaire",
+						"type": "String"
+					},
+					{
+						"name": "1ereDateLivrDdee",
+						"type": "String"
+					},
+					{
+						"name": "Agence commerciale corrigé",
+						"type": "String"
+					},
+					{
+						"name": "ATC Corrigé",
+						"type": "String"
+					},
+					{
+						"name": "Donneur d'ordre",
+						"type": "String"
+					},
+					{
+						"name": "Recept de march",
+						"type": "String"
+					},
+					{
+						"name": "Destinataire facture",
+						"type": "String"
+					},
+					{
+						"name": "Type doc vente",
+						"type": "String"
+					},
+					{
+						"name": "Type de poste",
+						"type": "String"
+					},
+					{
+						"name": "Livraison",
+						"type": "String"
+					},
+					{
+						"name": "Type de livraison",
+						"type": "String"
+					},
+					{
+						"name": "Type poste Livraison",
+						"type": "String"
+					},
+					{
+						"name": "Facture",
+						"type": "String"
+					},
+					{
+						"name": "Type de facture",
+						"type": "String"
+					},
+					{
+						"name": "Type poste Facture",
+						"type": "String"
+					},
+					{
+						"name": "Mois calendrier",
+						"type": "String"
+					},
+					{
+						"name": "Année civile",
+						"type": "String"
+					},
+					{
+						"name": "Motif commande",
+						"type": "String"
+					},
+					{
+						"name": "Qté cdée",
+						"type": "String"
+					},
+					{
+						"name": "CA cdé",
+						"type": "String"
+					},
+					{
+						"name": "Qté livrée",
+						"type": "String"
+					},
+					{
+						"name": "CA livré",
+						"type": "String"
+					},
+					{
+						"name": "Qté facturée",
+						"type": "String"
+					},
+					{
+						"name": "CA facturé",
+						"type": "String"
+					},
+					{
+						"name": "Cout standard cdé",
+						"type": "String"
+					},
+					{
+						"name": "Cout fabrication",
+						"type": "String"
+					},
+					{
+						"name": "Cout standard livré",
+						"type": "String"
+					},
+					{
+						"name": "Cout standard facturé",
+						"type": "String"
+					},
+					{
+						"name": "date_id",
+						"type": "String"
+					},
+					{
+						"name": "year",
+						"type": "String"
+					},
+					{
+						"name": "yearmonth",
+						"type": "String"
+					},
+					{
+						"name": "qt_cd_e",
+						"type": "String"
+					},
+					{
+						"name": "ca_cd_",
+						"type": "String"
+					},
+					{
+						"name": "qt_livr_e",
+						"type": "String"
+					},
+					{
+						"name": "ca_livr_",
+						"type": "String"
+					},
+					{
+						"name": "qt_factur_e",
+						"type": "String"
+					},
+					{
+						"name": "ca_factur_",
+						"type": "String"
+					},
+					{
+						"name": "year_month",
+						"type": "String"
+					},
+					{
+						"name": "reference",
+						"type": "String"
+					},
+					{
+						"name": "WholeSalerID",
+						"type": "String"
+					},
+					{
+						"name": "WholeSalerHubID",
+						"type": "String"
+					},
+					{
+						"name": "HubName",
+						"type": "String"
+					},
+					{
+						"name": "HubSAPid",
+						"type": "String"
+					},
+					{
+						"name": "toreplicate",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/HIERARCHIE_ARTICLE')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "REFERENTIEL ARTICLE"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ";",
+					"encodingName": "WINDOWS-1252",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/HIERARCHIE_ARTICLE_PREPARED')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -2136,7 +2389,8 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "base commerciale.csv",
+						"fileName": "BaseCommercialeDTP2.csv",
+						"folderPath": "Temp",
 						"container": "data-warehouse"
 					},
 					"columnDelimiter": ";",
@@ -2187,7 +2441,7 @@
 						"type": "String"
 					},
 					{
-						"name": "Code postal du client livré",
+						"name": "Code postal",
 						"type": "String"
 					},
 					{
@@ -2195,23 +2449,23 @@
 						"type": "String"
 					},
 					{
-						"name": "ID marque",
+						"name": "marque_code",
 						"type": "String"
 					},
 					{
-						"name": "ID canal de distribution",
+						"name": "canal_distribution_final",
 						"type": "String"
 					},
 					{
-						"name": "Nom du canal",
+						"name": "nom du canal",
 						"type": "String"
 					},
 					{
-						"name": "Diffus/Chantier",
+						"name": "canal_final",
 						"type": "String"
 					},
 					{
-						"name": "document_vente (vente directe)",
+						"name": "document_vente",
 						"type": "String"
 					},
 					{
@@ -2231,11 +2485,7 @@
 						"type": "String"
 					},
 					{
-						"name": "Numéro offre",
-						"type": "String"
-					},
-					{
-						"name": "ATC Corrigé (vente directe)",
+						"name": "no_offre",
 						"type": "String"
 					},
 					{
@@ -2247,10 +2497,6 @@
 						"type": "String"
 					},
 					{
-						"name": "DR (ATC Performance)",
-						"type": "String"
-					},
-					{
 						"name": "ATC Performance",
 						"type": "String"
 					},
@@ -2259,11 +2505,19 @@
 						"type": "String"
 					},
 					{
-						"name": "Motif commande (vente directe)",
+						"name": "DR",
 						"type": "String"
 					},
 					{
-						"name": "Type de facture (vente directe)",
+						"name": "Matricule",
+						"type": "String"
+					},
+					{
+						"name": "Motif commande",
+						"type": "String"
+					},
+					{
+						"name": "Type de facture",
 						"type": "String"
 					},
 					{
@@ -2391,23 +2645,27 @@
 						"type": "String"
 					},
 					{
-						"name": "Client_direct_Nom du compte",
+						"name": "Numéro du compte",
 						"type": "String"
 					},
 					{
-						"name": "Client direct_Groupe cible/Typologie générale",
+						"name": "EPS_Nom du compte",
 						"type": "String"
 					},
 					{
-						"name": "Client direct_Sous groupe cible/Typologie détaillée",
+						"name": "EPS_Groupe cible/Typologie générale",
 						"type": "String"
 					},
 					{
-						"name": "Client direct_Compte principal: Numéro du compte",
+						"name": "EPS_Sous groupe cible/Typologie détaillée",
 						"type": "String"
 					},
 					{
-						"name": "Client direct_Compte principal: Nom du compte",
+						"name": "EPS_Compte principal: Numéro du compte",
+						"type": "String"
+					},
+					{
+						"name": "EPS_Compte principal: Nom du compte",
 						"type": "String"
 					},
 					{
@@ -2460,6 +2718,34 @@
 					},
 					{
 						"name": "Client Indirect - Hiérarchie N2 SAP",
+						"type": "String"
+					},
+					{
+						"name": "yearmonth",
+						"type": "String"
+					},
+					{
+						"name": "ATC Corrigé",
+						"type": "String"
+					},
+					{
+						"name": "Client_direct_Nom du compte",
+						"type": "String"
+					},
+					{
+						"name": "Client direct_Groupe cible/Typologie générale",
+						"type": "String"
+					},
+					{
+						"name": "Client direct_Sous groupe cible/Typologie détaillée",
+						"type": "String"
+					},
+					{
+						"name": "Client direct_Compte principal: Numéro du compte",
+						"type": "String"
+					},
+					{
+						"name": "Client direct_Compte principal: Nom du compte",
 						"type": "String"
 					}
 				]
@@ -2897,210 +3183,6 @@
 					},
 					{
 						"name": "yearmonth",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/MABILE_ECOULEMENT_OUTPUT')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "PREPARATION ECOULEMENT/MABILE"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"folderPath": "Temp",
-						"container": "data-warehouse"
-					},
-					"columnDelimiter": ";",
-					"encodingName": "WINDOWS-1252",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "Représentant",
-						"type": "String"
-					},
-					{
-						"name": "N° Département",
-						"type": "String"
-					},
-					{
-						"name": "Département",
-						"type": "String"
-					},
-					{
-						"name": "Code point de vente",
-						"type": "String"
-					},
-					{
-						"name": "Libellé point de vente",
-						"type": "String"
-					},
-					{
-						"name": "Code Depot source",
-						"type": "String"
-					},
-					{
-						"name": "Code client",
-						"type": "String"
-					},
-					{
-						"name": "Client",
-						"type": "String"
-					},
-					{
-						"name": "N° Siret",
-						"type": "String"
-					},
-					{
-						"name": "Code postal",
-						"type": "String"
-					},
-					{
-						"name": "Ville",
-						"type": "String"
-					},
-					{
-						"name": "Année livraison",
-						"type": "String"
-					},
-					{
-						"name": "Mois livraison",
-						"type": "String"
-					},
-					{
-						"name": "code fournisseur",
-						"type": "String"
-					},
-					{
-						"name": "fournisseur principal",
-						"type": "String"
-					},
-					{
-						"name": "Code produit",
-						"type": "String"
-					},
-					{
-						"name": "produit",
-						"type": "String"
-					},
-					{
-						"name": "Réference",
-						"type": "String"
-					},
-					{
-						"name": "Qte en unité de vente",
-						"type": "String"
-					},
-					{
-						"name": "Montant prv net",
-						"type": "String"
-					},
-					{
-						"name": "fileName",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/MABILE_ORGANISATION')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "PREPARATION ECOULEMENT/MABILE"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "WholeSalerOrganizationExploded",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "Organisation_Mabille_Sonac.xlsx",
-						"folderPath": "Organisation",
-						"container": "data-input"
-					},
-					"firstRowAsHeader": true
-				},
-				"schema": [
-					{
-						"name": "WholeSalerID",
-						"type": "String"
-					},
-					{
-						"name": "WholeSalerShortName",
-						"type": "String"
-					},
-					{
-						"name": "UnitID",
-						"type": "String"
-					},
-					{
-						"name": "POSid",
-						"type": "String"
-					},
-					{
-						"name": "POSdescription",
-						"type": "String"
-					},
-					{
-						"name": "County",
-						"type": "String"
-					},
-					{
-						"name": "POSSAMid",
-						"type": "String"
-					},
-					{
-						"name": "POSSAMidString",
-						"type": "String"
-					},
-					{
-						"name": "SupplierID",
-						"type": "String"
-					},
-					{
-						"name": "BrandID",
-						"type": "String"
-					},
-					{
-						"name": "WholeSalerHubID",
-						"type": "String"
-					},
-					{
-						"name": "HubName",
-						"type": "String"
-					},
-					{
-						"name": "HubSAPid",
-						"type": "String"
-					},
-					{
-						"name": "SectorID",
-						"type": "String"
-					},
-					{
-						"name": "Commentaire",
 						"type": "String"
 					}
 				]
