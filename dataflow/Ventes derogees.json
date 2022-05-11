@@ -296,6 +296,9 @@
 				},
 				{
 					"name": "derivedColumn19"
+				},
+				{
+					"name": "derivedColumn20"
 				}
 			],
 			"scriptLines": [
@@ -1824,11 +1827,13 @@
 				"select10, endEcoulementSansMatcing union(byName: true)~> union6",
 				"aggregate1 select(mapColumn(",
 				"          Offre,",
-				"          {ATC performance} = CodeATC",
+				"          {ATC performance} = CodeATC,",
+				"          Canal",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> endOffreATC",
-				"union6, endOffreATC join(union6@Offre == endOffreATC@Offre,",
+				"derivedColumn20, endOffreATC join(union6@Offre == endOffreATC@Offre",
+				"     && canal_final == Canal,",
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> join9",
 				"REcoulement5145 derive(periode = split(indexcols2,'-')[2]) ~> derivedColumn17",
@@ -1940,6 +1945,7 @@
 				"          Canal),",
 				"     CodeATC = last(CodeATC)) ~> aggregate1",
 				"join1 derive(canal_final = iif( {Canal distribution}==\"43\" ,  \"Chantier\" , \"Diffus\" )) ~> derivedColumn19",
+				"union6 derive(canal_final = iif( {Canal distribution}==\"43\" ,  \"Chantier\" , \"Diffus\" )) ~> derivedColumn20",
 				"join9 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
