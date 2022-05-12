@@ -2112,13 +2112,13 @@
 								]
 							},
 							{
-								"activity": "Model_PARTEDIS2",
+								"activity": "VanMarkes",
 								"dependencyConditions": [
 									"Succeeded"
 								]
 							},
 							{
-								"activity": "VanMarkes",
+								"activity": "PartedisLikeventeDeroge",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -2187,48 +2187,6 @@
 									"StgOffreUnique": {},
 									"DataCommercialNotFOund": {},
 									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "Model_PARTEDIS2",
-						"description": "Input : \necoulement\nassociation\nstgOffre\nfacturation\nrefAtc\nOutput : \nsortiePardedis",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [
-							{
-								"activity": "PREPARATION_ECC_AVOIR",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "Model_PARTEDIS",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"ecoulmnt": {},
-									"facturation": {},
-									"association": {},
-									"offre": {},
-									"refAtc": {},
-									"OModelPartedis": {}
 								}
 							},
 							"staging": {},
@@ -2326,6 +2284,53 @@
 							},
 							"traceLevel": "Fine"
 						}
+					},
+					{
+						"name": "PartedisLikeventeDeroge",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "PREPARATION_ECC_AVOIR",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "Ventes derogees",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"FacturationForOther": {},
+									"ArticulationSap": {},
+									"stgOffre": {},
+									"PrixPeriode": {},
+									"ecoulmnt": {},
+									"refAtc": {},
+									"endSinkOutput": {},
+									"sink1": {},
+									"sink2": {},
+									"sink3": {},
+									"sink4": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 32,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine",
+							"runConcurrently": true
+						}
 					}
 				],
 				"policy": {
@@ -2344,9 +2349,9 @@
 				"[concat(variables('factoryId'), '/dataflows/DSCTEREVA')]",
 				"[concat(variables('factoryId'), '/dataflows/UNION_BASE_COMMERCIAL')]",
 				"[concat(variables('factoryId'), '/dataflows/BaseCommercialePOSTUnion')]",
-				"[concat(variables('factoryId'), '/dataflows/Model_PARTEDIS')]",
 				"[concat(variables('factoryId'), '/dataflows/VanMarkes')]",
-				"[concat(variables('factoryId'), '/dataflows/ATC_PERFORMANCE_ET_CLIENT_SAP')]"
+				"[concat(variables('factoryId'), '/dataflows/ATC_PERFORMANCE_ET_CLIENT_SAP')]",
+				"[concat(variables('factoryId'), '/dataflows/Ventes derogees')]"
 			]
 		},
 		{
@@ -3674,7 +3679,12 @@
 									"stgOffre": {},
 									"PrixPeriode": {},
 									"ecoulmnt": {},
-									"endSinkOutput": {}
+									"refAtc": {},
+									"endSinkOutput": {},
+									"sink1": {},
+									"sink2": {},
+									"sink3": {},
+									"sink4": {}
 								}
 							},
 							"staging": {},
@@ -3813,7 +3823,12 @@
 									"stgOffre": {},
 									"PrixPeriode": {},
 									"ecoulmnt": {},
-									"endSinkOutput": {}
+									"refAtc": {},
+									"endSinkOutput": {},
+									"sink1": {},
+									"sink2": {},
+									"sink3": {},
+									"sink4": {}
 								}
 							},
 							"staging": {},
@@ -3821,7 +3836,8 @@
 								"coreCount": 32,
 								"computeType": "General"
 							},
-							"traceLevel": "Fine"
+							"traceLevel": "Fine",
+							"runConcurrently": true
 						}
 					}
 				],
@@ -26138,6 +26154,14 @@
 						"type": "String"
 					},
 					{
+						"name": "Période",
+						"type": "String"
+					},
+					{
+						"name": "ref2",
+						"type": "String"
+					},
+					{
 						"name": "indexcols2",
 						"type": "String"
 					},
@@ -27445,6 +27469,38 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/VAILLANT_ARCHITECTURE')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/factorationAVM43')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "PREPROD_VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "affecte/non_affecte;plateforme/vente directe;origine de la ligne;year;month;Code client livr�;code client plateforme livree;code produit;quantite;ca;Code postal du client livr�;marque;ID marque;ID canal de distribution;Nom du canal;Diffus/Chantier;document_vente (vente directe);Agence commerciale corrig� (vente directe);Donneur d'ordre (vente directe);Facture (vente directe);Type poste Facture (vente directe);Num�ro offre;ATC Corrig� (vente directe);ATC offre;ATC livr�;DR (ATC Performance);ATC Performance;NomATC;Motif commande (vente directe);Type de facture (vente directe);Description;N1groupe;N2groupe;N3groupe;N4groupe;N5groupe;N6groupe;N7groupe;N1groupedesignation;N2groupedesignation;N3groupedesignation;N4groupedesignation;N5groupedesignation;N6groupedesignation;N7groupedesignation;N1localedesignation;N2localedesignation;N3localedesignation;N4localedesignation;N5localedesignation;N6localedesignation;N7localedesignation;N1locale;N2locale;N3locale;N4locale;N5locale;N6locale;N7locale;Hi�rarchgroupe;Hi�rarchlocale;Client_direct_Nom du compte;Client direct_Groupe cible/Typologie g�n�rale;Client direct_Sous groupe cible/Typologie d�taill�e;Client direct_Compte principal: Num�ro du compte;Client direct_Compte principal: Nom du compte;Client;Num�ro client indirect;CODE_CMI;NOM_CMI;Nom du compte;Client Indirect_ Groupe cible/Typologie g�n�rale;Client Indirect_ Sous groupe cible/Typologie d�taill�e;Client Indirect_  Compte principal: Num�ro du compte;Client Indirect_  Compte principal: Nom du compte;Client Direct - Hi�rarchie N1 SAP ;Client Direct - Hi�rarchie N2 SAP ;Client Indirect - Hi�rarchie N1 SAP;Client Indirect - Hi�rarchie N2 SAP",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/PREPROD_VAILLANT_ARCHITECTURE')]"
 			]
 		},
 		{
@@ -32593,9 +32649,10 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
+						"folderPath": "Temp",
 						"container": "data-warehouse"
 					},
-					"columnDelimiter": ";",
+					"columnDelimiter": ",",
 					"encodingName": "WINDOWS-1252",
 					"escapeChar": "\\",
 					"firstRowAsHeader": true,
@@ -34858,6 +34915,38 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/VAILLANT_ARCHITECTURE')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/tempFacturactionSM')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "PREPROD_VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "affecte/non_affecte;plateforme/vente directe;origine de la ligne;year;month;Code client livr�;code client plateforme livree;code produit;quantite;ca;Code postal du client livr�;marque;ID marque;ID canal de distribution;Nom du canal;Diffus/Chantier;document_vente (vente directe);Agence commerciale corrig� (vente directe);Donneur d'ordre (vente directe);Facture (vente directe);Type poste Facture (vente directe);Num�ro offre;ATC Corrig� (vente directe);ATC offre;ATC livr�;DR (ATC Performance);ATC Performance;NomATC;Motif commande (vente directe);Type de facture (vente directe);Description;N1groupe;N2groupe;N3groupe;N4groupe;N5groupe;N6groupe;N7groupe;N1groupedesignation;N2groupedesignation;N3groupedesignation;N4groupedesignation;N5groupedesignation;N6groupedesignation;N7groupedesignation;N1localedesignation;N2localedesignation;N3localedesignation;N4localedesignation;N5localedesignation;N6localedesignation;N7localedesignation;N1locale;N2locale;N3locale;N4locale;N5locale;N6locale;N7locale;Hi�rarchgroupe;Hi�rarchlocale;Client_direct_Nom du compte;Client direct_Groupe cible/Typologie g�n�rale;Client direct_Sous groupe cible/Typologie d�taill�e;Client direct_Compte principal: Num�ro du compte;Client direct_Compte principal: Nom du compte;Client;Num�ro client indirect;CODE_CMI;NOM_CMI;Nom du compte;Client Indirect_ Groupe cible/Typologie g�n�rale;Client Indirect_ Sous groupe cible/Typologie d�taill�e;Client Indirect_  Compte principal: Num�ro du compte;Client Indirect_  Compte principal: Nom du compte;Client Direct - Hi�rarchie N1 SAP ;Client Direct - Hi�rarchie N2 SAP ;Client Indirect - Hi�rarchie N1 SAP;Client Indirect - Hi�rarchie N2 SAP",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/PREPROD_VAILLANT_ARCHITECTURE')]"
 			]
 		},
 		{
@@ -41302,9 +41391,12 @@
 						},
 						{
 							"name": "derivedColumn2"
+						},
+						{
+							"name": "aggregate1"
 						}
 					],
-					"script": "source(output(\n\t\tyearmonth as string,\n\t\tyear as string,\n\t\tmonth as string,\n\t\tqte_ecoulement as string,\n\t\tca_ecoulement as string,\n\t\tPOSSAMidString as string,\n\t\tHubSAPid as string,\n\t\treference as string,\n\t\tdistributeur as string,\n\t\tmarque_file as string,\n\t\tagence_code as string,\n\t\tmarque_id as string,\n\t\tmarque as string,\n\t\tClient as string,\n\t\t{code postal} as string,\n\t\tmarque_name as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> ecoulement\nsource(output(\n\t\t{Clé} as string,\n\t\tMarque as string,\n\t\tMois_Selection as string,\n\t\tCode_depot as string,\n\t\tDepot as string,\n\t\tNoFrs as string,\n\t\tFOUR2 as string,\n\t\tC_Four as string,\n\t\tLib_Four as string,\n\t\tCategorie as string,\n\t\tCanal as string,\n\t\tFinancement as string,\n\t\tNoOffre as string,\n\t\tDate_Debut as string,\n\t\tDate_Fin as string,\n\t\tNoArtDSC as string,\n\t\tLibArt as string,\n\t\tNoArtVGF as string,\n\t\tAgence as string,\n\t\t{LIB AGENCE} as string,\n\t\t{Qté_Ini} as string,\n\t\tSolde_Qte as string,\n\t\tQte_Tot as string,\n\t\tQte_Retenue as string,\n\t\tQte_Validee_VGF as string,\n\t\tNoCli as string,\n\t\tNomCli as string,\n\t\tPRR as string,\n\t\tPRS_ligne_BL as string,\n\t\tPA_Ref as string,\n\t\tPA_D as string,\n\t\tPA_Valide_VGF as string,\n\t\tEcart as string,\n\t\tAide as string,\n\t\tAide_Retenue as string,\n\t\t{Aide_Validée_VGF} as string,\n\t\tDate_Num as string,\n\t\tP_Fact as string,\n\t\t{Clé_Offre_Article} as string,\n\t\tMotif_Commentaire as string,\n\t\t{Qté_Campagne} as string,\n\t\tPrix_Campagne as string,\n\t\tMois as string,\n\t\t{Année} as string,\n\t\tMontant_Avoir as string,\n\t\tNoDocRefac as string,\n\t\tNoLigneDocRefac as string,\n\t\t{Contrôle} as string,\n\t\tDate_Ctrl as string,\n\t\tCode_Motif_Refus as string,\n\t\tCompanyId as string,\n\t\t{ValidéPar} as string,\n\t\tDateAjout as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> avoir\nsource(output(\n\t\tWholeSalerID as string,\n\t\tWholeSalerShortName as string,\n\t\tUnitID as string,\n\t\tPOSid as string,\n\t\tPOSdescription as string,\n\t\tCounty as string,\n\t\tPOSSAMid as string,\n\t\tPOSSAMidString as string,\n\t\tSupplierID as string,\n\t\tBrandID as string,\n\t\tWholeSalerHubID as string,\n\t\tHubName as string,\n\t\tHubSAPid as string,\n\t\tSectorID as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> salerDSC\nsource(output(\n\t\tWholeSalerID as string,\n\t\tWholeSalerShortName as string,\n\t\tUnitID as string,\n\t\tPOSid as string,\n\t\tPOSdescription as string,\n\t\tCounty as string,\n\t\tPOSSAMid as string,\n\t\tPOSSAMidString as string,\n\t\tSupplierID as string,\n\t\tBrandID as string,\n\t\tWholeSalerHubID as string,\n\t\tHubName as string,\n\t\tHubSAPid as string,\n\t\tSectorID as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> OrgaTerevas\nsource(output(\n\t\tArticle as string,\n\t\tDistributeur as string,\n\t\tprix_unitaire as string,\n\t\t{Durée_période} as string,\n\t\t{Période} as string,\n\t\t{Mois début} as string,\n\t\t{Mois fin} as string,\n\t\tmois1 as string,\n\t\tannee1 as string,\n\t\tmois2 as string,\n\t\tannee2 as string,\n\t\tdd as string,\n\t\tmonth as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> prixParPeriode\necoulement select(mapColumn(\n\t\tyearmonth,\n\t\tyear,\n\t\tmonth,\n\t\tqte_ecoulement,\n\t\tca_ecoulement,\n\t\tPOSSAMidString,\n\t\tHubSAPid,\n\t\treference,\n\t\tdistributeur,\n\t\tagence_code,\n\t\tmarque,\n\t\t{Code postal} = {code postal},\n\t\tmarque_name\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> dropColumns\navoir select(mapColumn(\n\t\tMois_Selection,\n\t\tCode_depot,\n\t\tNoOffre,\n\t\tNoArtVGF,\n\t\tAgence,\n\t\tQte_Validee_VGF,\n\t\tNoCli,\n\t\tPA_Valide_VGF,\n\t\tMois,\n\t\t{Année},\n\t\tCompanyId\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> filterColumnsToUse\nEccAddToReplicate split(in([\"dsc\",'tereva'],lower(distributeur)),\n\tdisjoint: false) ~> filterDistrubitor@(dscTereva, notDscTereva)\nfilterColumnsToUse derive(toreplicate = abs( toInteger( Qte_Validee_VGF ) )) ~> AvoirAddToReplicate\ndropColumns derive(toreplicate = abs(toInteger( qte_ecoulement )),\n\t\tagence_code = replace(agence_code, \".0\", \"\")) ~> EccAddToReplicate\nnewColumns split(in([\"2\",\"7\"], CompanyId),\n\tdisjoint: false) ~> ConditionalSplit1@(DscTerevaAvoir, NotDscTerevaAvoir)\nsalerDSC, OrgaTerevas union(byName: true)~> unionDSCTereva\nunionDSCTereva aggregate(groupBy(POSid),\n\tWholeSalerID = max(WholeSalerID),\n\t\tHubSAPid = last(HubSAPid)) ~> uniqueAgenceCode\nAvoirAddToReplicate derive(ca_avoir = toFloat(PA_Valide_VGF),\n\t\tyearmonth = iif(toInteger(Mois)<10, {Année}+\"0\"+Mois  ,   {Année}+Mois  ),\n\t\tQte_Validee_VGF = toInteger( Qte_Validee_VGF )) ~> newColumns\nReSelect, uniqueAgenceCode join(Agence == POSid,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> DscTerevaJoinOrganisation\nConditionalSplit1@DscTerevaAvoir select(mapColumn(\n\t\tMois_Selection,\n\t\tNoOffre,\n\t\tNoArtVGF,\n\t\tAgence,\n\t\tQte_Validee_VGF,\n\t\tNoCli,\n\t\tPA_Valide_VGF,\n\t\tMois,\n\t\t{Année},\n\t\tCompanyId,\n\t\ttoreplicate,\n\t\tca_avoir,\n\t\tyearmonth\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> ReSelect\nDscTerevaJoinOrganisation filter(toInteger(Qte_Validee_VGF) >0) ~> positiveQuantite\nfilterDistrubitor@dscTereva derive(dd = mapLoop(abs(toInteger(qte_ecoulement)), #index),\n\t\trcount = 1) ~> dd\ndd foldDown(unroll(dd, dd),\n\tmapColumn(\n\t\tyearmonth,\n\t\tyear,\n\t\tmonth,\n\t\tqte_ecoulement,\n\t\tca_ecoulement,\n\t\tPOSSAMidString,\n\t\tHubSAPid,\n\t\treference,\n\t\tdistributeur,\n\t\tagence_code,\n\t\tmarque,\n\t\t{Code postal},\n\t\tmarque_name,\n\t\tdd,\n\t\trcount\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> ddToList\nddToList window(over(year,\n\t\tagence_code,\n\t\treference),\n\tasc(year, true),\n\tasc(agence_code, true),\n\tasc(reference, true),\n\tindexcols2 = rowNumber()) ~> Window1\nfilterDistrubitor@notDscTereva derive(dd = mapLoop(abs(toInteger(qte_ecoulement)), #index)) ~> dd2\nderivedColumn1 foldDown(unroll(dd, dd),\n\tmapColumn(\n\t\tyearmonth,\n\t\tyear,\n\t\tmonth = filterDistrubitor@notDscTereva@month,\n\t\tqte_ecoulement,\n\t\tca_ecoulement,\n\t\tPOSSAMidString,\n\t\tHubSAPid,\n\t\treference,\n\t\tdistributeur = filterDistrubitor@notDscTereva@distributeur,\n\t\tagence_code,\n\t\tmarque,\n\t\t{Code postal},\n\t\tmarque_name,\n\t\ttoreplicate,\n\t\tdd,\n\t\t{Période}\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> dd2ToList\nderivedColumn2 window(over(year,\n\t\t{Période},\n\t\tPOSSAMidString,\n\t\tref2),\n\tasc(yearmonth, true),\n\tasc(HubSAPid, true),\n\tasc(reference, true),\n\tindexcols2 = rowNumber()) ~> Window2\npositiveQuantite derive(dd = mapLoop(abs(toInteger(Qte_Validee_VGF)), #index)) ~> dd3\ndd3tolist window(over(year = {Année},\n\t\tAgence,\n\t\tNoArtVGF),\n\tasc({Année}, true),\n\tasc(Agence, true),\n\tasc(NoArtVGF, true),\n\tindexcols2 = rowNumber()) ~> Window3\ndd3 foldDown(unroll(dd, dd),\n\tmapColumn(\n\t\tNoOffre,\n\t\tNoArtVGF,\n\t\tAgence,\n\t\tQte_Validee_VGF,\n\t\tNoCli,\n\t\t{Année},\n\t\tMois_Selection,\n\t\tMois,\n\t\tPA_Valide_VGF,\n\t\tyearmonth,\n\t\tCompanyId,\n\t\tHubSAPid,\n\t\tca_avoir,\n\t\tPOSid,\n\t\tWholeSalerID,\n\t\tdd\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> dd3tolist\nWindow3 derive(indexcols2 = {Année}+Agence+NoArtVGF+toString(indexcols2),\n\t\tqte_avoir = iif(toInteger(Qte_Validee_VGF) >0, 1, -1 )) ~> indexcols3\nWindow2 derive(indexcols2 = year+\"-\"+{Période}+\"-\"+POSSAMidString+\"-\"+coalesce(toString(toInteger(replace(reference, \" \", \"\"))),replace(reference, \" \", \"\"))+\"-\"+toString(indexcols2),\n\t\tqte_ecc = iif(toInteger(qte_ecoulement) <=0, -1, 1 )) ~> indexcols2\ndropdd derive(indexcols2 = year+agence_code+reference+toString(indexcols2),\n\t\tqte_ecc = iif(toInteger(qte_ecoulement) >0, 1, -1 )) ~> indexcols\nfilterDistrubitor@notDscTereva filter(lower(distributeur)==\"tereva\") ~> Filter1\nWindow1 select(mapColumn(\n\t\tqte_ecoulement,\n\t\tca_ecoulement,\n\t\tPOSSAMidString,\n\t\tHubSAPid,\n\t\treference,\n\t\tdistributeur,\n\t\tagence_code,\n\t\tmarque,\n\t\t{Code postal},\n\t\tmarque_name,\n\t\trcount,\n\t\tindexcols2,\n\t\tyearmonth,\n\t\tyear,\n\t\tmonth\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> dropdd\nindexcols derive(ca_ecoulement = abs(toDouble(ca_ecoulement))*qte_ecc) ~> caEcoulement\nindexcols3 derive(ca_avoir = abs(ca_avoir)*qte_avoir) ~> caAvoir\nReSelect, uniqueAgenceCode join(Agence == POSid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinOrganisation\nJoinOrganisation filter(isNull(POSid)) ~> posidNULL\nprixParPeriode derive({Période} = iif(length({Période})>1,{Période},\"0\"+{Période})) ~> periode\nperiode select(mapColumn(\n\t\tArticle,\n\t\tDistributeur,\n\t\t{Période},\n\t\tannee2,\n\t\tmonth\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> columnChoicePrix\ndd2, columnChoicePrix join(replace(lower( iif(filterDistrubitor@notDscTereva@distributeur==\"MABILLE\", \"sonac\", filterDistrubitor@notDscTereva@distributeur) ), \" \", \"\") == replace(lower(columnChoicePrix@Distributeur), \" \", \"\")\n\t&& toInteger(year) == toInteger(annee2)\n\t&& toInteger(filterDistrubitor@notDscTereva@month) == toInteger(columnChoicePrix@month)\n\t&& coalesce(toString(toInteger(replace(reference, \" \", \"\"))),replace(reference, \" \", \"\")) == coalesce(toString(toInteger(replace(Article, \" \", \"\"))),replace(Article, \" \", \"\")),\n\tjoinType:'left',\n\tbroadcast: 'auto')~> getPeriode\ngetPeriode derive({Période} = coalesce( {Période}, \"00\" )) ~> derivedColumn1\ndd2ToList derive(ref2 = coalesce(toString(toInteger(replace(reference, \" \", \"\"))),replace(reference, \" \", \"\"))) ~> derivedColumn2\nfilterDistrubitor@dscTereva sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['outEccDscTereva.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> outEccDscTereva\npositiveQuantite sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tyearmonth as string,\n\t\tqte_ecoulement as string,\n\t\tca_ecoulement as string,\n\t\tPOSSAMidString as string,\n\t\tHubSAPid as string,\n\t\treference as string,\n\t\tdistributeur as string,\n\t\t{Code postal} as string,\n\t\tmarque_name as string,\n\t\tis_prix_dsc as string,\n\t\tqte_ecc as string,\n\t\t{Canal distribution} as string,\n\t\t{Secteur d'activit�} as string,\n\t\tdocument_vente as string,\n\t\t{Jour calendaire} as string,\n\t\t{Agence commerciale corrig�} as string,\n\t\t{Donneur d'ordre} as string,\n\t\t{R�cept. de march.} as string,\n\t\tRight_reference as string,\n\t\tFacture as string,\n\t\t{Type poste Facture} as string,\n\t\t{Qt� factur�e} as string,\n\t\t{CA factur�} as string,\n\t\tRight_HubSAPid as string,\n\t\t{Type_Facturation�} as string,\n\t\tqt_fact as string,\n\t\tca_final as string,\n\t\tqt_final as string,\n\t\tdata_origin as string,\n\t\tcanal_final as string,\n\t\tCommande as string,\n\t\tno_offre as string,\n\t\t{ATC Performance} as string,\n\t\tcanal as string,\n\t\tRowCount as string,\n\t\tATC as string,\n\t\t{Canal final} as string,\n\t\tcode_postal_atc as string,\n\t\tNomATC as string,\n\t\tMatricule as string,\n\t\tdate_id as string,\n\t\tHubName as string,\n\t\tid_canal_final as string,\n\t\t{qte plateforme final} as string,\n\t\t{ca plateforme final} as string,\n\t\tSum_qt_factur_e as string,\n\t\tSum_ca_factur_ as string,\n\t\tSum_ca_ecoulement as string,\n\t\tSum_qte_ecoulement as string,\n\t\tcode_depot as string,\n\t\tid_canal as string,\n\t\tmarque_code as string,\n\t\t{Document de vente} as string,\n\t\t{Type de facture} as string,\n\t\tClient as string,\n\t\tMarque as string,\n\t\t{ATC Corrig�} as string,\n\t\t{Motif commande} as string,\n\t\t{Org. commerciale} as string,\n\t\tmarque_id as string,\n\t\tOffre as string\n\t),\n\tpartitionFileNames:['DscAvoirTemp.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> DTAvoirRetraiter\ncaEcoulement sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tyearmonth as string,\n\t\tqte_ecoulement as string,\n\t\tca_ecoulement as string,\n\t\tPOSSAMidString as string,\n\t\tHubSAPid as string,\n\t\treference as string,\n\t\tdistributeur as string,\n\t\t{Code postal} as string,\n\t\tmarque_name as string,\n\t\tis_prix_dsc as string,\n\t\tqte_ecc as string,\n\t\t{Canal distribution} as string,\n\t\t{Secteur d'activit�} as string,\n\t\tdocument_vente as string,\n\t\t{Jour calendaire} as string,\n\t\t{Agence commerciale corrig�} as string,\n\t\t{Donneur d'ordre} as string,\n\t\t{R�cept. de march.} as string,\n\t\tRight_reference as string,\n\t\tFacture as string,\n\t\t{Type poste Facture} as string,\n\t\t{Qt� factur�e} as string,\n\t\t{CA factur�} as string,\n\t\tRight_HubSAPid as string,\n\t\t{Type_Facturation�} as string,\n\t\tqt_fact as string,\n\t\tca_final as string,\n\t\tqt_final as string,\n\t\tdata_origin as string,\n\t\tcanal_final as string,\n\t\tCommande as string,\n\t\tno_offre as string,\n\t\t{ATC Performance} as string,\n\t\tcanal as string,\n\t\tRowCount as string,\n\t\tATC as string,\n\t\t{Canal final} as string,\n\t\tcode_postal_atc as string,\n\t\tNomATC as string,\n\t\tMatricule as string,\n\t\tdate_id as string,\n\t\tHubName as string,\n\t\tid_canal_final as string,\n\t\t{qte plateforme final} as string,\n\t\t{ca plateforme final} as string,\n\t\tSum_qt_factur_e as string,\n\t\tSum_ca_factur_ as string,\n\t\tSum_ca_ecoulement as string,\n\t\tSum_qte_ecoulement as string,\n\t\tcode_depot as string,\n\t\tid_canal as string,\n\t\tmarque_code as string,\n\t\t{Document de vente} as string,\n\t\t{Type de facture} as string,\n\t\tClient as string,\n\t\tMarque as string,\n\t\t{ATC Corrig�} as string,\n\t\t{Motif commande} as string,\n\t\t{Org. commerciale} as string,\n\t\tmarque_id as string,\n\t\tOffre as string\n\t),\n\tpartitionFileNames:['AZ_OecoulementDscTerevaWithIndex.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> outEcoulementDScTereva\nindexcols2 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tyearmonth as string,\n\t\tqte_ecoulement as string,\n\t\tca_ecoulement as string,\n\t\tPOSSAMidString as string,\n\t\tHubSAPid as string,\n\t\treference as string,\n\t\tdistributeur as string,\n\t\t{Code postal} as string,\n\t\tmarque_name as string,\n\t\tis_prix_dsc as string,\n\t\tqte_ecc as string,\n\t\t{Canal distribution} as string,\n\t\t{Secteur d'activit�} as string,\n\t\tdocument_vente as string,\n\t\t{Jour calendaire} as string,\n\t\t{Agence commerciale corrig�} as string,\n\t\t{Donneur d'ordre} as string,\n\t\t{R�cept. de march.} as string,\n\t\tRight_reference as string,\n\t\tFacture as string,\n\t\t{Type poste Facture} as string,\n\t\t{Qt� factur�e} as string,\n\t\t{CA factur�} as string,\n\t\tRight_HubSAPid as string,\n\t\t{Type_Facturation�} as string,\n\t\tqt_fact as string,\n\t\tca_final as string,\n\t\tqt_final as string,\n\t\tdata_origin as string,\n\t\tcanal_final as string,\n\t\tCommande as string,\n\t\tno_offre as string,\n\t\t{ATC Performance} as string,\n\t\tcanal as string,\n\t\tRowCount as string,\n\t\tATC as string,\n\t\t{Canal final} as string,\n\t\tcode_postal_atc as string,\n\t\tNomATC as string,\n\t\tMatricule as string,\n\t\tdate_id as string,\n\t\tHubName as string,\n\t\tid_canal_final as string,\n\t\t{qte plateforme final} as string,\n\t\t{ca plateforme final} as string,\n\t\tSum_qt_factur_e as string,\n\t\tSum_ca_factur_ as string,\n\t\tSum_ca_ecoulement as string,\n\t\tSum_qte_ecoulement as string,\n\t\tcode_depot as string,\n\t\tid_canal as string,\n\t\tmarque_code as string,\n\t\t{Document de vente} as string,\n\t\t{Type de facture} as string,\n\t\tClient as string,\n\t\tMarque as string,\n\t\t{ATC Corrig�} as string,\n\t\t{Motif commande} as string,\n\t\t{Org. commerciale} as string,\n\t\tmarque_id as string,\n\t\tOffre as string\n\t),\n\tpartitionFileNames:['AZ_OecoulementPartedislikeWithIndex.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> outputEcoulementPartedis\ncaAvoir sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tyearmonth as string,\n\t\tqte_ecoulement as string,\n\t\tca_ecoulement as string,\n\t\tPOSSAMidString as string,\n\t\tHubSAPid as string,\n\t\treference as string,\n\t\tdistributeur as string,\n\t\t{Code postal} as string,\n\t\tmarque_name as string,\n\t\tis_prix_dsc as string,\n\t\tqte_ecc as string,\n\t\t{Canal distribution} as string,\n\t\t{Secteur d'activit�} as string,\n\t\tdocument_vente as string,\n\t\t{Jour calendaire} as string,\n\t\t{Agence commerciale corrig�} as string,\n\t\t{Donneur d'ordre} as string,\n\t\t{R�cept. de march.} as string,\n\t\tRight_reference as string,\n\t\tFacture as string,\n\t\t{Type poste Facture} as string,\n\t\t{Qt� factur�e} as string,\n\t\t{CA factur�} as string,\n\t\tRight_HubSAPid as string,\n\t\t{Type_Facturation�} as string,\n\t\tqt_fact as string,\n\t\tca_final as string,\n\t\tqt_final as string,\n\t\tdata_origin as string,\n\t\tcanal_final as string,\n\t\tCommande as string,\n\t\tno_offre as string,\n\t\t{ATC Performance} as string,\n\t\tcanal as string,\n\t\tRowCount as string,\n\t\tATC as string,\n\t\t{Canal final} as string,\n\t\tcode_postal_atc as string,\n\t\tNomATC as string,\n\t\tMatricule as string,\n\t\tdate_id as string,\n\t\tHubName as string,\n\t\tid_canal_final as string,\n\t\t{qte plateforme final} as string,\n\t\t{ca plateforme final} as string,\n\t\tSum_qt_factur_e as string,\n\t\tSum_ca_factur_ as string,\n\t\tSum_ca_ecoulement as string,\n\t\tSum_qte_ecoulement as string,\n\t\tcode_depot as string,\n\t\tid_canal as string,\n\t\tmarque_code as string,\n\t\t{Document de vente} as string,\n\t\t{Type de facture} as string,\n\t\tClient as string,\n\t\tMarque as string,\n\t\t{ATC Corrig�} as string,\n\t\t{Motif commande} as string,\n\t\t{Org. commerciale} as string,\n\t\tmarque_id as string,\n\t\tOffre as string\n\t),\n\tpartitionFileNames:['AZ_AvoirWithIndexDSClike.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> outputAvoirDSc\nConditionalSplit1@NotDscTerevaAvoir sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tyearmonth as string,\n\t\tyear as string,\n\t\tmonth as string,\n\t\tqte_ecoulement as string,\n\t\tca_ecoulement as string,\n\t\tPOSSAMidString as string,\n\t\tHubSAPid as string,\n\t\treference as string,\n\t\tdistributeur as string,\n\t\tagence_code as string,\n\t\tmarque as string,\n\t\t{Code postal} as string,\n\t\tmarque_name as string,\n\t\ttoreplicate as string,\n\t\tdd as string,\n\t\trcount as string,\n\t\tindexcols2 as string,\n\t\tqte_ecc as string\n\t),\n\tpartitionFileNames:['AvoirForVanMarkes.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> AvoirForVanMarkes\nposidNULL sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\t{Marque DESC} as string,\n\t\t{Marque Code} as string,\n\t\t{Sous Famille} as string,\n\t\t{Référence Article Fournisseur} as string,\n\t\t{Agence Code} as string,\n\t\t{Département ID} as string,\n\t\t{Quantité en UV BL} as string,\n\t\tyearmonth as string,\n\t\tyear as string,\n\t\tmonth as string,\n\t\tPOSid as string,\n\t\tWholeSalerID as string,\n\t\tPOSSAMidString as string,\n\t\tHubSAPid as string,\n\t\tBrandID as string\n\t),\n\tpartitionFileNames:['avoir.organisationNotFound.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> outputAvoirNotFound"
+					"script": "source(output(\n\t\tyearmonth as string,\n\t\tyear as string,\n\t\tmonth as string,\n\t\tqte_ecoulement as string,\n\t\tca_ecoulement as string,\n\t\tPOSSAMidString as string,\n\t\tHubSAPid as string,\n\t\treference as string,\n\t\tdistributeur as string,\n\t\tmarque_file as string,\n\t\tagence_code as string,\n\t\tmarque_id as string,\n\t\tmarque as string,\n\t\tClient as string,\n\t\t{code postal} as string,\n\t\tmarque_name as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> ecoulement\nsource(output(\n\t\t{Clé} as string,\n\t\tMarque as string,\n\t\tMois_Selection as string,\n\t\tCode_depot as string,\n\t\tDepot as string,\n\t\tNoFrs as string,\n\t\tFOUR2 as string,\n\t\tC_Four as string,\n\t\tLib_Four as string,\n\t\tCategorie as string,\n\t\tCanal as string,\n\t\tFinancement as string,\n\t\tNoOffre as string,\n\t\tDate_Debut as string,\n\t\tDate_Fin as string,\n\t\tNoArtDSC as string,\n\t\tLibArt as string,\n\t\tNoArtVGF as string,\n\t\tAgence as string,\n\t\t{LIB AGENCE} as string,\n\t\t{Qté_Ini} as string,\n\t\tSolde_Qte as string,\n\t\tQte_Tot as string,\n\t\tQte_Retenue as string,\n\t\tQte_Validee_VGF as string,\n\t\tNoCli as string,\n\t\tNomCli as string,\n\t\tPRR as string,\n\t\tPRS_ligne_BL as string,\n\t\tPA_Ref as string,\n\t\tPA_D as string,\n\t\tPA_Valide_VGF as string,\n\t\tEcart as string,\n\t\tAide as string,\n\t\tAide_Retenue as string,\n\t\t{Aide_Validée_VGF} as string,\n\t\tDate_Num as string,\n\t\tP_Fact as string,\n\t\t{Clé_Offre_Article} as string,\n\t\tMotif_Commentaire as string,\n\t\t{Qté_Campagne} as string,\n\t\tPrix_Campagne as string,\n\t\tMois as string,\n\t\t{Année} as string,\n\t\tMontant_Avoir as string,\n\t\tNoDocRefac as string,\n\t\tNoLigneDocRefac as string,\n\t\t{Contrôle} as string,\n\t\tDate_Ctrl as string,\n\t\tCode_Motif_Refus as string,\n\t\tCompanyId as string,\n\t\t{ValidéPar} as string,\n\t\tDateAjout as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> avoir\nsource(output(\n\t\tWholeSalerID as string,\n\t\tWholeSalerShortName as string,\n\t\tUnitID as string,\n\t\tPOSid as string,\n\t\tPOSdescription as string,\n\t\tCounty as string,\n\t\tPOSSAMid as string,\n\t\tPOSSAMidString as string,\n\t\tSupplierID as string,\n\t\tBrandID as string,\n\t\tWholeSalerHubID as string,\n\t\tHubName as string,\n\t\tHubSAPid as string,\n\t\tSectorID as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> salerDSC\nsource(output(\n\t\tWholeSalerID as string,\n\t\tWholeSalerShortName as string,\n\t\tUnitID as string,\n\t\tPOSid as string,\n\t\tPOSdescription as string,\n\t\tCounty as string,\n\t\tPOSSAMid as string,\n\t\tPOSSAMidString as string,\n\t\tSupplierID as string,\n\t\tBrandID as string,\n\t\tWholeSalerHubID as string,\n\t\tHubName as string,\n\t\tHubSAPid as string,\n\t\tSectorID as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> OrgaTerevas\nsource(output(\n\t\tArticle as string,\n\t\tDistributeur as string,\n\t\tprix_unitaire as string,\n\t\t{Durée_période} as string,\n\t\t{Période} as string,\n\t\t{Mois début} as string,\n\t\t{Mois fin} as string,\n\t\tmois1 as string,\n\t\tannee1 as string,\n\t\tmois2 as string,\n\t\tannee2 as string,\n\t\tdd as string,\n\t\tmonth as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> prixParPeriode\necoulement select(mapColumn(\n\t\tyearmonth,\n\t\tyear,\n\t\tmonth,\n\t\tqte_ecoulement,\n\t\tca_ecoulement,\n\t\tPOSSAMidString,\n\t\tHubSAPid,\n\t\treference,\n\t\tdistributeur,\n\t\tagence_code,\n\t\tmarque,\n\t\t{Code postal} = {code postal},\n\t\tmarque_name\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> dropColumns\navoir select(mapColumn(\n\t\tMois_Selection,\n\t\tCode_depot,\n\t\tNoOffre,\n\t\tNoArtVGF,\n\t\tAgence,\n\t\tQte_Validee_VGF,\n\t\tNoCli,\n\t\tPA_Valide_VGF,\n\t\tMois,\n\t\t{Année},\n\t\tCompanyId\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> filterColumnsToUse\nEccAddToReplicate split(in([\"dsc\",'tereva'],lower(distributeur)),\n\tdisjoint: false) ~> filterDistrubitor@(dscTereva, notDscTereva)\nfilterColumnsToUse derive(toreplicate = abs( toInteger( Qte_Validee_VGF ) )) ~> AvoirAddToReplicate\ndropColumns derive(toreplicate = abs(toInteger( qte_ecoulement )),\n\t\tagence_code = replace(agence_code, \".0\", \"\")) ~> EccAddToReplicate\nnewColumns split(in([\"2\",\"7\"], CompanyId),\n\tdisjoint: false) ~> ConditionalSplit1@(DscTerevaAvoir, NotDscTerevaAvoir)\nsalerDSC, OrgaTerevas union(byName: true)~> unionDSCTereva\nunionDSCTereva aggregate(groupBy(POSid),\n\tWholeSalerID = max(WholeSalerID),\n\t\tHubSAPid = last(HubSAPid)) ~> uniqueAgenceCode\nAvoirAddToReplicate derive(ca_avoir = toFloat(PA_Valide_VGF),\n\t\tyearmonth = iif(toInteger(Mois)<10, {Année}+\"0\"+Mois  ,   {Année}+Mois  ),\n\t\tQte_Validee_VGF = toInteger( Qte_Validee_VGF )) ~> newColumns\nReSelect, uniqueAgenceCode join(Agence == POSid,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> DscTerevaJoinOrganisation\nConditionalSplit1@DscTerevaAvoir select(mapColumn(\n\t\tMois_Selection,\n\t\tNoOffre,\n\t\tNoArtVGF,\n\t\tAgence,\n\t\tQte_Validee_VGF,\n\t\tNoCli,\n\t\tPA_Valide_VGF,\n\t\tMois,\n\t\t{Année},\n\t\tCompanyId,\n\t\ttoreplicate,\n\t\tca_avoir,\n\t\tyearmonth\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> ReSelect\nDscTerevaJoinOrganisation filter(toInteger(Qte_Validee_VGF) >0) ~> positiveQuantite\nfilterDistrubitor@dscTereva derive(dd = mapLoop(abs(toInteger(qte_ecoulement)), #index),\n\t\trcount = 1) ~> dd\ndd foldDown(unroll(dd, dd),\n\tmapColumn(\n\t\tyearmonth,\n\t\tyear,\n\t\tmonth,\n\t\tqte_ecoulement,\n\t\tca_ecoulement,\n\t\tPOSSAMidString,\n\t\tHubSAPid,\n\t\treference,\n\t\tdistributeur,\n\t\tagence_code,\n\t\tmarque,\n\t\t{Code postal},\n\t\tmarque_name,\n\t\tdd,\n\t\trcount\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> ddToList\nddToList window(over(year,\n\t\tagence_code,\n\t\treference),\n\tasc(year, true),\n\tasc(agence_code, true),\n\tasc(reference, true),\n\tindexcols2 = rowNumber()) ~> Window1\nfilterDistrubitor@notDscTereva derive(dd = mapLoop(abs(toInteger(qte_ecoulement)), #index)) ~> dd2\nderivedColumn1 foldDown(unroll(dd, dd),\n\tmapColumn(\n\t\tyearmonth,\n\t\tyear,\n\t\tmonth = filterDistrubitor@notDscTereva@month,\n\t\tqte_ecoulement,\n\t\tca_ecoulement,\n\t\tPOSSAMidString,\n\t\tHubSAPid,\n\t\treference,\n\t\tdistributeur = filterDistrubitor@notDscTereva@distributeur,\n\t\tagence_code,\n\t\tmarque,\n\t\t{Code postal},\n\t\tmarque_name,\n\t\ttoreplicate,\n\t\tdd,\n\t\t{Période}\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> dd2ToList\nderivedColumn2 window(over(year,\n\t\t{Période},\n\t\tPOSSAMidString,\n\t\tref2),\n\tasc(yearmonth, true),\n\tasc(HubSAPid, true),\n\tasc(reference, true),\n\tindexcols2 = rowNumber()) ~> Window2\npositiveQuantite derive(dd = mapLoop(abs(toInteger(Qte_Validee_VGF)), #index)) ~> dd3\ndd3tolist window(over(year = {Année},\n\t\tAgence,\n\t\tNoArtVGF),\n\tasc({Année}, true),\n\tasc(Agence, true),\n\tasc(NoArtVGF, true),\n\tindexcols2 = rowNumber()) ~> Window3\ndd3 foldDown(unroll(dd, dd),\n\tmapColumn(\n\t\tNoOffre,\n\t\tNoArtVGF,\n\t\tAgence,\n\t\tQte_Validee_VGF,\n\t\tNoCli,\n\t\t{Année},\n\t\tMois_Selection,\n\t\tMois,\n\t\tPA_Valide_VGF,\n\t\tyearmonth,\n\t\tCompanyId,\n\t\tHubSAPid,\n\t\tca_avoir,\n\t\tPOSid,\n\t\tWholeSalerID,\n\t\tdd\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> dd3tolist\nWindow3 derive(indexcols2 = {Année}+Agence+NoArtVGF+toString(indexcols2),\n\t\tqte_avoir = iif(toInteger(Qte_Validee_VGF) >0, 1, -1 )) ~> indexcols3\nWindow2 derive(indexcols2 = year+\"-\"+{Période}+\"-\"+POSSAMidString+\"-\"+coalesce(toString(toInteger(replace(reference, \" \", \"\"))),replace(reference, \" \", \"\"))+\"-\"+toString(indexcols2),\n\t\tqte_ecc = iif(toInteger(qte_ecoulement) <=0, -1, 1 )) ~> indexcols2\ndropdd derive(indexcols2 = year+agence_code+reference+toString(indexcols2),\n\t\tqte_ecc = iif(toInteger(qte_ecoulement) >0, 1, -1 )) ~> indexcols\nfilterDistrubitor@notDscTereva filter(lower(distributeur)==\"tereva\") ~> Filter1\nWindow1 select(mapColumn(\n\t\tqte_ecoulement,\n\t\tca_ecoulement,\n\t\tPOSSAMidString,\n\t\tHubSAPid,\n\t\treference,\n\t\tdistributeur,\n\t\tagence_code,\n\t\tmarque,\n\t\t{Code postal},\n\t\tmarque_name,\n\t\trcount,\n\t\tindexcols2,\n\t\tyearmonth,\n\t\tyear,\n\t\tmonth\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> dropdd\nindexcols derive(ca_ecoulement = abs(toDouble(ca_ecoulement))*qte_ecc) ~> caEcoulement\nindexcols3 derive(ca_avoir = abs(ca_avoir)*qte_avoir) ~> caAvoir\nReSelect, uniqueAgenceCode join(Agence == POSid,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> JoinOrganisation\nJoinOrganisation filter(isNull(POSid)) ~> posidNULL\nprixParPeriode derive({Période} = iif(length({Période})>1,{Période},\"0\"+{Période})) ~> periode\nperiode select(mapColumn(\n\t\tArticle,\n\t\tDistributeur,\n\t\t{Période},\n\t\tannee2,\n\t\tmonth\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> columnChoicePrix\ndd2, columnChoicePrix join(replace(lower( iif(filterDistrubitor@notDscTereva@distributeur==\"MABILLE\", \"sonac\", filterDistrubitor@notDscTereva@distributeur) ), \" \", \"\") == replace(lower(columnChoicePrix@Distributeur), \" \", \"\")\n\t&& toInteger(year) == toInteger(annee2)\n\t&& toInteger(filterDistrubitor@notDscTereva@month) == toInteger(columnChoicePrix@month)\n\t&& coalesce(toString(toInteger(replace(reference, \" \", \"\"))),replace(reference, \" \", \"\")) == coalesce(toString(toInteger(replace(Article, \" \", \"\"))),replace(Article, \" \", \"\")),\n\tjoinType:'left',\n\tbroadcast: 'auto')~> getPeriode\ngetPeriode derive({Période} = coalesce( {Période}, \"00\" )) ~> derivedColumn1\ndd2ToList derive(ref2 = coalesce(toString(toInteger(replace(reference, \" \", \"\"))),replace(reference, \" \", \"\"))) ~> derivedColumn2\nindexcols2 aggregate(qte_ecc = sum(qte_ecc)) ~> aggregate1\nfilterDistrubitor@dscTereva sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['outEccDscTereva.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> outEccDscTereva\npositiveQuantite sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tyearmonth as string,\n\t\tqte_ecoulement as string,\n\t\tca_ecoulement as string,\n\t\tPOSSAMidString as string,\n\t\tHubSAPid as string,\n\t\treference as string,\n\t\tdistributeur as string,\n\t\t{Code postal} as string,\n\t\tmarque_name as string,\n\t\tis_prix_dsc as string,\n\t\tqte_ecc as string,\n\t\t{Canal distribution} as string,\n\t\t{Secteur d'activit�} as string,\n\t\tdocument_vente as string,\n\t\t{Jour calendaire} as string,\n\t\t{Agence commerciale corrig�} as string,\n\t\t{Donneur d'ordre} as string,\n\t\t{R�cept. de march.} as string,\n\t\tRight_reference as string,\n\t\tFacture as string,\n\t\t{Type poste Facture} as string,\n\t\t{Qt� factur�e} as string,\n\t\t{CA factur�} as string,\n\t\tRight_HubSAPid as string,\n\t\t{Type_Facturation�} as string,\n\t\tqt_fact as string,\n\t\tca_final as string,\n\t\tqt_final as string,\n\t\tdata_origin as string,\n\t\tcanal_final as string,\n\t\tCommande as string,\n\t\tno_offre as string,\n\t\t{ATC Performance} as string,\n\t\tcanal as string,\n\t\tRowCount as string,\n\t\tATC as string,\n\t\t{Canal final} as string,\n\t\tcode_postal_atc as string,\n\t\tNomATC as string,\n\t\tMatricule as string,\n\t\tdate_id as string,\n\t\tHubName as string,\n\t\tid_canal_final as string,\n\t\t{qte plateforme final} as string,\n\t\t{ca plateforme final} as string,\n\t\tSum_qt_factur_e as string,\n\t\tSum_ca_factur_ as string,\n\t\tSum_ca_ecoulement as string,\n\t\tSum_qte_ecoulement as string,\n\t\tcode_depot as string,\n\t\tid_canal as string,\n\t\tmarque_code as string,\n\t\t{Document de vente} as string,\n\t\t{Type de facture} as string,\n\t\tClient as string,\n\t\tMarque as string,\n\t\t{ATC Corrig�} as string,\n\t\t{Motif commande} as string,\n\t\t{Org. commerciale} as string,\n\t\tmarque_id as string,\n\t\tOffre as string\n\t),\n\tpartitionFileNames:['DscAvoirTemp.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> DTAvoirRetraiter\ncaEcoulement sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tyearmonth as string,\n\t\tqte_ecoulement as string,\n\t\tca_ecoulement as string,\n\t\tPOSSAMidString as string,\n\t\tHubSAPid as string,\n\t\treference as string,\n\t\tdistributeur as string,\n\t\t{Code postal} as string,\n\t\tmarque_name as string,\n\t\tis_prix_dsc as string,\n\t\tqte_ecc as string,\n\t\t{Canal distribution} as string,\n\t\t{Secteur d'activit�} as string,\n\t\tdocument_vente as string,\n\t\t{Jour calendaire} as string,\n\t\t{Agence commerciale corrig�} as string,\n\t\t{Donneur d'ordre} as string,\n\t\t{R�cept. de march.} as string,\n\t\tRight_reference as string,\n\t\tFacture as string,\n\t\t{Type poste Facture} as string,\n\t\t{Qt� factur�e} as string,\n\t\t{CA factur�} as string,\n\t\tRight_HubSAPid as string,\n\t\t{Type_Facturation�} as string,\n\t\tqt_fact as string,\n\t\tca_final as string,\n\t\tqt_final as string,\n\t\tdata_origin as string,\n\t\tcanal_final as string,\n\t\tCommande as string,\n\t\tno_offre as string,\n\t\t{ATC Performance} as string,\n\t\tcanal as string,\n\t\tRowCount as string,\n\t\tATC as string,\n\t\t{Canal final} as string,\n\t\tcode_postal_atc as string,\n\t\tNomATC as string,\n\t\tMatricule as string,\n\t\tdate_id as string,\n\t\tHubName as string,\n\t\tid_canal_final as string,\n\t\t{qte plateforme final} as string,\n\t\t{ca plateforme final} as string,\n\t\tSum_qt_factur_e as string,\n\t\tSum_ca_factur_ as string,\n\t\tSum_ca_ecoulement as string,\n\t\tSum_qte_ecoulement as string,\n\t\tcode_depot as string,\n\t\tid_canal as string,\n\t\tmarque_code as string,\n\t\t{Document de vente} as string,\n\t\t{Type de facture} as string,\n\t\tClient as string,\n\t\tMarque as string,\n\t\t{ATC Corrig�} as string,\n\t\t{Motif commande} as string,\n\t\t{Org. commerciale} as string,\n\t\tmarque_id as string,\n\t\tOffre as string\n\t),\n\tpartitionFileNames:['AZ_OecoulementDscTerevaWithIndex.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> outEcoulementDScTereva\nindexcols2 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tyearmonth as string,\n\t\tqte_ecoulement as string,\n\t\tca_ecoulement as string,\n\t\tPOSSAMidString as string,\n\t\tHubSAPid as string,\n\t\treference as string,\n\t\tdistributeur as string,\n\t\t{Code postal} as string,\n\t\tmarque_name as string,\n\t\tis_prix_dsc as string,\n\t\tqte_ecc as string,\n\t\t{Canal distribution} as string,\n\t\t{Secteur d'activit�} as string,\n\t\tdocument_vente as string,\n\t\t{Jour calendaire} as string,\n\t\t{Agence commerciale corrig�} as string,\n\t\t{Donneur d'ordre} as string,\n\t\t{R�cept. de march.} as string,\n\t\tRight_reference as string,\n\t\tFacture as string,\n\t\t{Type poste Facture} as string,\n\t\t{Qt� factur�e} as string,\n\t\t{CA factur�} as string,\n\t\tRight_HubSAPid as string,\n\t\t{Type_Facturation�} as string,\n\t\tqt_fact as string,\n\t\tca_final as string,\n\t\tqt_final as string,\n\t\tdata_origin as string,\n\t\tcanal_final as string,\n\t\tCommande as string,\n\t\tno_offre as string,\n\t\t{ATC Performance} as string,\n\t\tcanal as string,\n\t\tRowCount as string,\n\t\tATC as string,\n\t\t{Canal final} as string,\n\t\tcode_postal_atc as string,\n\t\tNomATC as string,\n\t\tMatricule as string,\n\t\tdate_id as string,\n\t\tHubName as string,\n\t\tid_canal_final as string,\n\t\t{qte plateforme final} as string,\n\t\t{ca plateforme final} as string,\n\t\tSum_qt_factur_e as string,\n\t\tSum_ca_factur_ as string,\n\t\tSum_ca_ecoulement as string,\n\t\tSum_qte_ecoulement as string,\n\t\tcode_depot as string,\n\t\tid_canal as string,\n\t\tmarque_code as string,\n\t\t{Document de vente} as string,\n\t\t{Type de facture} as string,\n\t\tClient as string,\n\t\tMarque as string,\n\t\t{ATC Corrig�} as string,\n\t\t{Motif commande} as string,\n\t\t{Org. commerciale} as string,\n\t\tmarque_id as string,\n\t\tOffre as string\n\t),\n\tpartitionFileNames:['AZ_OecoulementPartedislikeWithIndex.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> outputEcoulementPartedis\ncaAvoir sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tyearmonth as string,\n\t\tqte_ecoulement as string,\n\t\tca_ecoulement as string,\n\t\tPOSSAMidString as string,\n\t\tHubSAPid as string,\n\t\treference as string,\n\t\tdistributeur as string,\n\t\t{Code postal} as string,\n\t\tmarque_name as string,\n\t\tis_prix_dsc as string,\n\t\tqte_ecc as string,\n\t\t{Canal distribution} as string,\n\t\t{Secteur d'activit�} as string,\n\t\tdocument_vente as string,\n\t\t{Jour calendaire} as string,\n\t\t{Agence commerciale corrig�} as string,\n\t\t{Donneur d'ordre} as string,\n\t\t{R�cept. de march.} as string,\n\t\tRight_reference as string,\n\t\tFacture as string,\n\t\t{Type poste Facture} as string,\n\t\t{Qt� factur�e} as string,\n\t\t{CA factur�} as string,\n\t\tRight_HubSAPid as string,\n\t\t{Type_Facturation�} as string,\n\t\tqt_fact as string,\n\t\tca_final as string,\n\t\tqt_final as string,\n\t\tdata_origin as string,\n\t\tcanal_final as string,\n\t\tCommande as string,\n\t\tno_offre as string,\n\t\t{ATC Performance} as string,\n\t\tcanal as string,\n\t\tRowCount as string,\n\t\tATC as string,\n\t\t{Canal final} as string,\n\t\tcode_postal_atc as string,\n\t\tNomATC as string,\n\t\tMatricule as string,\n\t\tdate_id as string,\n\t\tHubName as string,\n\t\tid_canal_final as string,\n\t\t{qte plateforme final} as string,\n\t\t{ca plateforme final} as string,\n\t\tSum_qt_factur_e as string,\n\t\tSum_ca_factur_ as string,\n\t\tSum_ca_ecoulement as string,\n\t\tSum_qte_ecoulement as string,\n\t\tcode_depot as string,\n\t\tid_canal as string,\n\t\tmarque_code as string,\n\t\t{Document de vente} as string,\n\t\t{Type de facture} as string,\n\t\tClient as string,\n\t\tMarque as string,\n\t\t{ATC Corrig�} as string,\n\t\t{Motif commande} as string,\n\t\t{Org. commerciale} as string,\n\t\tmarque_id as string,\n\t\tOffre as string\n\t),\n\tpartitionFileNames:['AZ_AvoirWithIndexDSClike.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> outputAvoirDSc\nConditionalSplit1@NotDscTerevaAvoir sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tyearmonth as string,\n\t\tyear as string,\n\t\tmonth as string,\n\t\tqte_ecoulement as string,\n\t\tca_ecoulement as string,\n\t\tPOSSAMidString as string,\n\t\tHubSAPid as string,\n\t\treference as string,\n\t\tdistributeur as string,\n\t\tagence_code as string,\n\t\tmarque as string,\n\t\t{Code postal} as string,\n\t\tmarque_name as string,\n\t\ttoreplicate as string,\n\t\tdd as string,\n\t\trcount as string,\n\t\tindexcols2 as string,\n\t\tqte_ecc as string\n\t),\n\tpartitionFileNames:['AvoirForVanMarkes.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> AvoirForVanMarkes\nposidNULL sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\t{Marque DESC} as string,\n\t\t{Marque Code} as string,\n\t\t{Sous Famille} as string,\n\t\t{Référence Article Fournisseur} as string,\n\t\t{Agence Code} as string,\n\t\t{Département ID} as string,\n\t\t{Quantité en UV BL} as string,\n\t\tyearmonth as string,\n\t\tyear as string,\n\t\tmonth as string,\n\t\tPOSid as string,\n\t\tWholeSalerID as string,\n\t\tPOSSAMidString as string,\n\t\tHubSAPid as string,\n\t\tBrandID as string\n\t),\n\tpartitionFileNames:['avoir.organisationNotFound.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> outputAvoirNotFound"
 				}
 			},
 			"dependsOn": [
@@ -42156,6 +42248,13 @@
 								"type": "DatasetReference"
 							},
 							"name": "ecoulmnt"
+						},
+						{
+							"dataset": {
+								"referenceName": "ref_atc",
+								"type": "DatasetReference"
+							},
+							"name": "refAtc"
 						}
 					],
 					"sinks": [
@@ -42165,6 +42264,34 @@
 								"type": "DatasetReference"
 							},
 							"name": "endSinkOutput"
+						},
+						{
+							"dataset": {
+								"referenceName": "tempFacturactionSM",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						},
+						{
+							"dataset": {
+								"referenceName": "factorationAVM43",
+								"type": "DatasetReference"
+							},
+							"name": "sink2"
+						},
+						{
+							"dataset": {
+								"referenceName": "factorationAVM43",
+								"type": "DatasetReference"
+							},
+							"name": "sink3"
+						},
+						{
+							"dataset": {
+								"referenceName": "outVenteDeroge",
+								"type": "DatasetReference"
+							},
+							"name": "sink4"
 						}
 					],
 					"transformations": [
@@ -42414,6 +42541,57 @@
 						},
 						{
 							"name": "derivedColumn20"
+						},
+						{
+							"name": "select13"
+						},
+						{
+							"name": "aggregate2"
+						},
+						{
+							"name": "aggregate3"
+						},
+						{
+							"name": "aggregate4"
+						},
+						{
+							"name": "aggregate5"
+						},
+						{
+							"name": "aggregate6"
+						},
+						{
+							"name": "aggregate7"
+						},
+						{
+							"name": "derivedColumn21"
+						},
+						{
+							"name": "derivedColumn22"
+						},
+						{
+							"name": "derivedColumn23"
+						},
+						{
+							"name": "aggregate8"
+						},
+						{
+							"name": "derivedColumn24"
+						},
+						{
+							"name": "endATC"
+						},
+						{
+							"name": "join10"
+						},
+						{
+							"name": "select14"
+						},
+						{
+							"name": "endDecrementation"
+						},
+						{
+							"name": "unionDecrementation"
 						}
 					],
 					"scriptLines": [
@@ -42574,12 +42752,34 @@
 						"          marque_name as string,",
 						"          toreplicate as string,",
 						"          dd as string,",
+						"          {Période} as string,",
+						"          ref2 as string,",
 						"          indexcols2 as string,",
 						"          qte_ecc as string",
 						"     ),",
 						"     allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     ignoreNoFilesFound: false) ~> ecoulmnt",
+						"source(output(",
+						"          Marque as string,",
+						"          {Code Postal début} as string,",
+						"          {Code Postal fin} as string,",
+						"          Utilisateur as string,",
+						"          Fonction as string,",
+						"          {Département} as string,",
+						"          ATC as string,",
+						"          NomATC as string,",
+						"          {Plan primes} as string,",
+						"          Matricule as string,",
+						"          {Canal final} as string,",
+						"          toreplicate as string,",
+						"          dd as string,",
+						"          DR as string,",
+						"          {Code postal} as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> refAtc",
 						"derivedColumn8, endArticulation join({Document de vente} == Commande,",
 						"     joinType:'left',",
 						"     broadcast: 'auto')~> join1",
@@ -42844,6 +43044,7 @@
 						"          WholeSalerID,",
 						"          WholeSalerHubID,",
 						"          HubName,",
+						"          HubSAPid_Fact = HubSAPid,",
 						"          POSSAMidStringFact = torolltoList@POSSAMidString,",
 						"          toreplicateFact = torolltoList@toreplicate,",
 						"          toroll,",
@@ -43372,7 +43573,8 @@
 						"          HubSAPid = F_HubSAPid,",
 						"          POSSAMidString = F_POSSAMidString,",
 						"          {Période},",
-						"          Offre",
+						"          Offre,",
+						"          data_origin",
 						"     ),",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true) ~> clearFacturationSansM",
@@ -43441,7 +43643,7 @@
 						"          WholeSalerID,",
 						"          WholeSalerHubID,",
 						"          HubName,",
-						"          HubSAPid,",
+						"          HubSAPid = HubSAPid_Fact,",
 						"          POSSAMidString = POSSAMidStringFact,",
 						"          {Période},",
 						"          Offre,",
@@ -43604,6 +43806,7 @@
 						"          {Cout standard facturé},",
 						"          date_id,",
 						"          year = yearFact,",
+						"          month,",
 						"          yearmonth = yearmonthFact,",
 						"          qt_cd_e,",
 						"          ca_cd_,",
@@ -43855,7 +44058,7 @@
 						"     skipDuplicateMapOutputs: true) ~> endFactAVM",
 						"union3 derive(ca_ecoulement = toDouble(ca_ecoulement),",
 						"          qte_ecc = toInteger(qte_ecc),",
-						"          {Qté facturée} = toString({Qté facturée})) ~> derivedColumn15",
+						"          {Qté facturée} = toInteger({Qté facturée})) ~> derivedColumn15",
 						"clearEcoulementSansMatch select(mapColumn(",
 						"          yearmonth,",
 						"          year,",
@@ -43947,12 +44150,13 @@
 						"     ),",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true) ~> endOffreATC",
-						"derivedColumn20, endOffreATC join(union6@Offre == endOffreATC@Offre",
+						"derivedColumn20, endOffreATC join(unionDecrementation@Offre == endOffreATC@Offre",
 						"     && canal_final == Canal,",
 						"     joinType:'left',",
 						"     broadcast: 'auto')~> join9",
 						"REcoulement5145 derive(periode = split(indexcols2,'-')[2]) ~> derivedColumn17",
-						"select8 derive(indexcols2 = year+\"-\"+{Période}+\"-\"+HubSAPid+\"-\"+ref2+\"-\"+toString(indexcol2)) ~> derivedColumn18",
+						"select8 derive(indexcols2 = year+\"-\"+{Période}+\"-\"+HubSAPid+\"-\"+ref2+\"-\"+toString(indexcol2),",
+						"          {Qté facturée} = iif(toDouble({Qté facturée})<=0, -1, 1)) ~> derivedColumn18",
 						"derivedColumn11 select(mapColumn(",
 						"          E_yearmonth = yearmonth,",
 						"          E_year = year,",
@@ -44060,13 +44264,196 @@
 						"          Canal),",
 						"     CodeATC = last(CodeATC)) ~> aggregate1",
 						"join1 derive(canal_final = iif( {Canal distribution}==\"43\" ,  \"Chantier\" , \"Diffus\" )) ~> derivedColumn19",
-						"union6 derive(canal_final = iif( {Canal distribution}==\"43\" ,  \"Chantier\" , \"Diffus\" )) ~> derivedColumn20",
-						"join9 sink(allowSchemaDrift: true,",
+						"unionDecrementation derive(canal_final = iif( {Canal distribution}==\"43\" ,  \"Chantier\" , \"Diffus\" ),",
+						"          month = coalesce(month, right(yearmonth,2) )) ~> derivedColumn20",
+						"join9 select(mapColumn(",
+						"          Org_commerciale,",
+						"          {Canal distribution},",
+						"          {Secteur d'activité},",
+						"          {Document de vente},",
+						"          Poste,",
+						"          {Jour calendaire},",
+						"          {Agence commerciale corrigé},",
+						"          {ATC Corrigé},",
+						"          {Donneur d'ordre},",
+						"          {Recept de march},",
+						"          {Destinataire facture},",
+						"          {Type doc vente},",
+						"          {Type de poste},",
+						"          Livraison,",
+						"          {Type de livraison},",
+						"          {Type poste Livraison},",
+						"          Facture,",
+						"          {Type de facture},",
+						"          {Type poste Facture},",
+						"          {Mois calendrier},",
+						"          {Année civile},",
+						"          {Motif commande},",
+						"          {CA cdé},",
+						"          {Qté livrée},",
+						"          {CA livré},",
+						"          {Qté facturée},",
+						"          {CA facturé},",
+						"          {Cout standard cdé},",
+						"          {Cout fabrication},",
+						"          {Cout standard livré},",
+						"          {Cout standard facturé},",
+						"          date_id,",
+						"          year,",
+						"          yearmonth,",
+						"          qt_cd_e,",
+						"          ca_cd_,",
+						"          qt_factur_e,",
+						"          ca_factur_,",
+						"          reference,",
+						"          WholeSalerID,",
+						"          WholeSalerHubID,",
+						"          HubName,",
+						"          {Période},",
+						"          Offre = unionDecrementation@Offre,",
+						"          month,",
+						"          qte_ecoulement,",
+						"          POSSAMidString,",
+						"          HubSAPid,",
+						"          distributeur,",
+						"          agence_code,",
+						"          marque,",
+						"          {Code postal},",
+						"          marque_name,",
+						"          qte_ecc,",
+						"          ca_ecoulement,",
+						"          data_origin,",
+						"          {Ecoulement origin},",
+						"          canal_final,",
+						"          Offre = endOffreATC@Offre,",
+						"          {ATC performance},",
+						"          Canal",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select13",
+						"filter4 aggregate({Qté facturée} = sum( toInteger({Qté facturée}) )) ~> aggregate2",
+						"derivedColumn18 aggregate({Qté facturée} = sum(toInteger({Qté facturée})),",
+						"          column1 = sum(1)) ~> aggregate3",
+						"adddataOriginAvecMatchin aggregate(col1 = sum(1)) ~> aggregate4",
+						"derivedColumn2 aggregate(totalQteFactuter = sum(toInteger({Qté facturée}))) ~> aggregate5",
+						"filter3 aggregate(qte4251 = sum(toInteger({Qté facturée}))) ~> aggregate6",
+						"derivedColumn5 aggregate(qte4351 = sum(toInteger({Qté facturée}))) ~> aggregate7",
+						"select13 derive(distributeur = coalesce(lower(distributeur),iif(lower(WholeSalerID)=='ancs - accueil négoce chauffage sanitaire','partedis', iif(instr(lower(WholeSalerID), 'trva - tereva' )>0, 'tereva', iif(instr(lower(WholeSalerID), 'dsc')>0, 'dsc', iif(instr(lower(WholeSalerID), 'vf' )>0, 'vf_confort', iif(instr(lower(WholeSalerID), 'sonac' )>0, 'sonac',lower(WholeSalerID))))))),",
+						"          marque_id = iif(data_origin == \"écoulement sans matching\",marque,Org_commerciale)) ~> derivedColumn21",
+						"derivedColumn21 derive(marque_name = iif(marque_id=='1604', \"SaunierDuval\", iif(marque_id=='1621', \"Vaillant\", \"\")),",
+						"          {Canal distribution} = iif(data_origin == \"écoulement sans matching\",\"42\",{Canal distribution}),",
+						"          ca_final = iif((data_origin == \"écoulement sans matching\" || data_origin == \"facturation avec matching\"),toString(ca_ecoulement),toString({CA facturé})),",
+						"          qt_final = iif((data_origin == \"écoulement sans matching\" || data_origin == \"facturation avec matching\"),toString(qte_ecc),toString({Qté facturée}))) ~> derivedColumn22",
+						"derivedColumn22 derive(canal_final = iif({Canal distribution} ==\"43\",\"Chantier\",\"Diffus\")) ~> derivedColumn23",
+						"refAtc aggregate(groupBy(Marque,",
+						"          {Canal final},",
+						"          {Code postal}),",
+						"     ATC = max(ATC),",
+						"          NomATC = max(NomATC),",
+						"          Matricule = max(Matricule)) ~> aggregate8",
+						"aggregate8 derive({Code postal} = toInteger({Code postal})) ~> derivedColumn24",
+						"derivedColumn24 select(mapColumn(",
+						"          Marque,",
+						"          {Canal final},",
+						"          {Code postal},",
+						"          ATC,",
+						"          NomATC,",
+						"          Matricule",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> endATC",
+						"derivedColumn23, endATC join(marque_name == endATC@Marque",
+						"     && canal_final == {Canal final}",
+						"     && iif(data_origin==\"decrementation ecoulement sans matching\", -5, toInteger(select13@{Code postal})) == endATC@{Code postal},",
+						"     joinType:'left',",
+						"     broadcast: 'auto')~> join10",
+						"join10 select(mapColumn(",
+						"          yearmonth,",
+						"          year,",
+						"          month,",
+						"          qte_ecoulement,",
+						"          ca_ecoulement,",
+						"          POSSAMidString,",
+						"          HubSAPid,",
+						"          reference,",
+						"          distributeur,",
+						"          agence_code,",
+						"          marque_id,",
+						"          {Code postal} = select13@{Code postal},",
+						"          marque_name,",
+						"          {Canal distribution},",
+						"          {Secteur d'activité},",
+						"          {Document de vente},",
+						"          {Jour calendaire},",
+						"          {Agence commerciale corrigé},",
+						"          {ATC Corrigé},",
+						"          {Donneur d'ordre},",
+						"          {Recept de march},",
+						"          {Type doc vente},",
+						"          {Type de poste},",
+						"          Livraison,",
+						"          {Type de livraison},",
+						"          {Type poste Livraison},",
+						"          Facture,",
+						"          {Type poste Facture},",
+						"          {Motif commande},",
+						"          {Qté facturée},",
+						"          {CA facturé},",
+						"          no_offre = Offre,",
+						"          ca_final,",
+						"          qt_final,",
+						"          data_origin,",
+						"          canal_final,",
+						"          {ATC performance},",
+						"          ATC,",
+						"          NomATC,",
+						"          Matricule",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select14",
+						"endEcoulementSansMatcing derive(POSSAMidString = HubSAPid,",
+						"          qte_ecc = -1*toDouble(qte_ecc),",
+						"          data_origin = \"decrementation ecoulement sans matching\") ~> endDecrementation",
+						"union6, endDecrementation union(byName: true)~> unionDecrementation",
+						"select13 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     partitionFileNames:['tempVenteDeroge.csv'],",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true,",
-						"     partitionBy('hash', 1)) ~> endSinkOutput"
+						"     partitionBy('hash', 1)) ~> endSinkOutput",
+						"clearColFacturationSM43 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          {affecte/non_affecte;plateforme/vente directe;origine de la ligne;year;month;Code client livr�;code client plateforme livree;code produit;quantite;ca;Code postal du client livr�;marque;ID marque;ID canal de distribution;Nom du canal;Diffus/Chantier;document_vente (vente directe);Agence commerciale corrig� (vente directe);Donneur d'ordre (vente directe);Facture (vente directe);Type poste Facture (vente directe);Num�ro offre;ATC Corrig� (vente directe);ATC offre;ATC livr�;DR (ATC Performance);ATC Performance;NomATC;Motif commande (vente directe);Type de facture (vente directe);Description;N1groupe;N2groupe;N3groupe;N4groupe;N5groupe;N6groupe;N7groupe;N1groupedesignation;N2groupedesignation;N3groupedesignation;N4groupedesignation;N5groupedesignation;N6groupedesignation;N7groupedesignation;N1localedesignation;N2localedesignation;N3localedesignation;N4localedesignation;N5localedesignation;N6localedesignation;N7localedesignation;N1locale;N2locale;N3locale;N4locale;N5locale;N6locale;N7locale;Hi�rarchgroupe;Hi�rarchlocale;Client_direct_Nom du compte;Client direct_Groupe cible/Typologie g�n�rale;Client direct_Sous groupe cible/Typologie d�taill�e;Client direct_Compte principal: Num�ro du compte;Client direct_Compte principal: Nom du compte;Client;Num�ro client indirect;CODE_CMI;NOM_CMI;Nom du compte;Client Indirect_ Groupe cible/Typologie g�n�rale;Client Indirect_ Sous groupe cible/Typologie d�taill�e;Client Indirect_  Compte principal: Num�ro du compte;Client Indirect_  Compte principal: Nom du compte;Client Direct - Hi�rarchie N1 SAP ;Client Direct - Hi�rarchie N2 SAP ;Client Indirect - Hi�rarchie N1 SAP;Client Indirect - Hi�rarchie N2 SAP} as string",
+						"     ),",
+						"     partitionFileNames:['ventederogeAnalysis.csv'],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     partitionBy('hash', 1)) ~> sink1",
+						"clearColAVM43 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          {affecte/non_affecte;plateforme/vente directe;origine de la ligne;year;month;Code client livr�;code client plateforme livree;code produit;quantite;ca;Code postal du client livr�;marque;ID marque;ID canal de distribution;Nom du canal;Diffus/Chantier;document_vente (vente directe);Agence commerciale corrig� (vente directe);Donneur d'ordre (vente directe);Facture (vente directe);Type poste Facture (vente directe);Num�ro offre;ATC Corrig� (vente directe);ATC offre;ATC livr�;DR (ATC Performance);ATC Performance;NomATC;Motif commande (vente directe);Type de facture (vente directe);Description;N1groupe;N2groupe;N3groupe;N4groupe;N5groupe;N6groupe;N7groupe;N1groupedesignation;N2groupedesignation;N3groupedesignation;N4groupedesignation;N5groupedesignation;N6groupedesignation;N7groupedesignation;N1localedesignation;N2localedesignation;N3localedesignation;N4localedesignation;N5localedesignation;N6localedesignation;N7localedesignation;N1locale;N2locale;N3locale;N4locale;N5locale;N6locale;N7locale;Hi�rarchgroupe;Hi�rarchlocale;Client_direct_Nom du compte;Client direct_Groupe cible/Typologie g�n�rale;Client direct_Sous groupe cible/Typologie d�taill�e;Client direct_Compte principal: Num�ro du compte;Client direct_Compte principal: Nom du compte;Client;Num�ro client indirect;CODE_CMI;NOM_CMI;Nom du compte;Client Indirect_ Groupe cible/Typologie g�n�rale;Client Indirect_ Sous groupe cible/Typologie d�taill�e;Client Indirect_  Compte principal: Num�ro du compte;Client Indirect_  Compte principal: Nom du compte;Client Direct - Hi�rarchie N1 SAP ;Client Direct - Hi�rarchie N2 SAP ;Client Indirect - Hi�rarchie N1 SAP;Client Indirect - Hi�rarchie N2 SAP} as string",
+						"     ),",
+						"     partitionFileNames:['factorationAVM43.csv'],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     partitionBy('hash', 1)) ~> sink2",
+						"unionFSM435145 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          {affecte/non_affecte;plateforme/vente directe;origine de la ligne;year;month;Code client livr�;code client plateforme livree;code produit;quantite;ca;Code postal du client livr�;marque;ID marque;ID canal de distribution;Nom du canal;Diffus/Chantier;document_vente (vente directe);Agence commerciale corrig� (vente directe);Donneur d'ordre (vente directe);Facture (vente directe);Type poste Facture (vente directe);Num�ro offre;ATC Corrig� (vente directe);ATC offre;ATC livr�;DR (ATC Performance);ATC Performance;NomATC;Motif commande (vente directe);Type de facture (vente directe);Description;N1groupe;N2groupe;N3groupe;N4groupe;N5groupe;N6groupe;N7groupe;N1groupedesignation;N2groupedesignation;N3groupedesignation;N4groupedesignation;N5groupedesignation;N6groupedesignation;N7groupedesignation;N1localedesignation;N2localedesignation;N3localedesignation;N4localedesignation;N5localedesignation;N6localedesignation;N7localedesignation;N1locale;N2locale;N3locale;N4locale;N5locale;N6locale;N7locale;Hi�rarchgroupe;Hi�rarchlocale;Client_direct_Nom du compte;Client direct_Groupe cible/Typologie g�n�rale;Client direct_Sous groupe cible/Typologie d�taill�e;Client direct_Compte principal: Num�ro du compte;Client direct_Compte principal: Nom du compte;Client;Num�ro client indirect;CODE_CMI;NOM_CMI;Nom du compte;Client Indirect_ Groupe cible/Typologie g�n�rale;Client Indirect_ Sous groupe cible/Typologie d�taill�e;Client Indirect_  Compte principal: Num�ro du compte;Client Indirect_  Compte principal: Nom du compte;Client Direct - Hi�rarchie N1 SAP ;Client Direct - Hi�rarchie N2 SAP ;Client Indirect - Hi�rarchie N1 SAP;Client Indirect - Hi�rarchie N2 SAP} as string",
+						"     ),",
+						"     partitionFileNames:['factorationAVM435145.vdb'],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     partitionBy('hash', 1)) ~> sink3",
+						"select14 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     partitionFileNames:['OModelPartedis.csv'],",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     partitionBy('hash', 1)) ~> sink4"
 					]
 				}
 			},
@@ -44076,7 +44463,10 @@
 				"[concat(variables('factoryId'), '/datasets/STG_OFFRE_SOURCE')]",
 				"[concat(variables('factoryId'), '/datasets/InPrixMoyenSplited')]",
 				"[concat(variables('factoryId'), '/datasets/ecouPartedisLikeWithIndex')]",
-				"[concat(variables('factoryId'), '/datasets/outVenteDeroge')]"
+				"[concat(variables('factoryId'), '/datasets/ref_atc')]",
+				"[concat(variables('factoryId'), '/datasets/outVenteDeroge')]",
+				"[concat(variables('factoryId'), '/datasets/tempFacturactionSM')]",
+				"[concat(variables('factoryId'), '/datasets/factorationAVM43')]"
 			]
 		},
 		{

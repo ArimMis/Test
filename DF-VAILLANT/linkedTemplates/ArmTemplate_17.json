@@ -13,6 +13,151 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/PL_POST_UNION')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CleaninPostUnion",
+						"description": "Input : \nunionEccoulement\narticlehierarchi\nunionsapehs\npricelisteReplicated\nOutput : \ntunionSap\noutputPreparationEcoulement",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "EPS_CLEANING_POST_UNION",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"unionEccoulement": {},
+									"articlehierarchi": {},
+									"unionsapehs": {},
+									"pricelisteReplicated": {},
+									"EHS": {},
+									"EPS": {},
+									"outputPreparationEcoulement": {},
+									"sink2": {},
+									"sink3": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT"
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-01-06T12:25:16Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_REFERENTIEL_ATC')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "lower_data",
+						"description": "Input: \nrefaffectation\nref2021\nOutpout :\natcAffectationLower\natcC2021Lower",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "lower_data",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"refaffectation": {},
+									"atcAffectationLower": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "cleaning",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "lower_data",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "cleaning",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"atcJoined": {},
+									"AtcprepareForReplicate": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "REFERENTIEL"
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-01-06T12:25:18Z"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/PL_REFERENTIEL_PRIX')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -701,7 +846,12 @@
 									"stgOffre": {},
 									"PrixPeriode": {},
 									"ecoulmnt": {},
-									"endSinkOutput": {}
+									"refAtc": {},
+									"endSinkOutput": {},
+									"sink1": {},
+									"sink2": {},
+									"sink3": {},
+									"sink4": {}
 								}
 							},
 							"staging": {},
@@ -836,7 +986,12 @@
 									"stgOffre": {},
 									"PrixPeriode": {},
 									"ecoulmnt": {},
-									"endSinkOutput": {}
+									"refAtc": {},
+									"endSinkOutput": {},
+									"sink1": {},
+									"sink2": {},
+									"sink3": {},
+									"sink4": {}
 								}
 							},
 							"staging": {},
@@ -844,7 +999,8 @@
 								"coreCount": 32,
 								"computeType": "General"
 							},
-							"traceLevel": "Fine"
+							"traceLevel": "Fine",
+							"runConcurrently": true
 						}
 					}
 				],
@@ -1534,6 +1690,7 @@
 				"lastPublishTime": "2022-01-21T11:37:14Z"
 			},
 			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PL_POST_UNION')]",
 				"[concat(variables('factoryId'), '/pipelines/PL_VF_CONFORT')]",
 				"[concat(variables('factoryId'), '/pipelines/PL_TEREVA')]"
 			]
@@ -1600,7 +1757,9 @@
 				"annotations": [],
 				"lastPublishTime": "2022-01-06T12:25:19Z"
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PL_REFERENTIEL_ATC')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/PL_MAIN_RH')]",
