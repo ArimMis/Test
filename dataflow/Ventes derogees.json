@@ -2185,6 +2185,7 @@
 				"          {Type poste Livraison} = {Type poste Facture},",
 				"          {Motif commande},",
 				"          {Qté facturée},",
+				"          {CA facturé},",
 				"          no_offre = Offre,",
 				"          ca_final,",
 				"          qt_final,",
