@@ -84,6 +84,14 @@
 				"type": "String"
 			},
 			{
+				"name": "Période",
+				"type": "String"
+			},
+			{
+				"name": "ref2",
+				"type": "String"
+			},
+			{
 				"name": "indexcols2",
 				"type": "String"
 			},
