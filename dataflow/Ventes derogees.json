@@ -2133,7 +2133,7 @@
 				"derivedColumn5 aggregate(qte4351 = sum(toInteger({Qté facturée}))) ~> aggregate7",
 				"select13 derive(distributeur = coalesce(lower(distributeur),iif(lower(WholeSalerID)=='ancs - accueil négoce chauffage sanitaire','partedis', iif(instr(lower(WholeSalerID), 'trva - tereva' )>0, 'tereva', iif(instr(lower(WholeSalerID), 'dsc')>0, 'dsc', iif(instr(lower(WholeSalerID), 'vf' )>0, 'vf_confort', iif(instr(lower(WholeSalerID), 'sonac' )>0, 'sonac',lower(WholeSalerID))))))),",
 				"          marque_id = iif(data_origin == \"écoulement sans matching\",marque,Org_commerciale)) ~> derivedColumn21",
-				"derivedColumn21 derive(marque_name = iif(marque=='1604', \"SaunierDuval\", iif(marque=='1621', \"Vaillant\", \"\")),",
+				"derivedColumn21 derive(marque_name = iif(marque_id=='1604', \"SaunierDuval\", iif(marque_id=='1621', \"Vaillant\", \"\")),",
 				"          {Canal distribution} = iif(data_origin == \"écoulement sans matching\",\"42\",{Canal distribution}),",
 				"          ca_final = iif((data_origin == \"écoulement sans matching\" || data_origin == \"facturation avec matching\"),toString(ca_ecoulement),toString({CA facturé})),",
 				"          qt_final = iif((data_origin == \"écoulement sans matching\" || data_origin == \"facturation avec matching\"),toString(qte_ecc),toString({Qté facturée}))) ~> derivedColumn22",
