@@ -316,7 +316,10 @@
 					"name": "aggregate5"
 				},
 				{
-					"name": "sumQteNo42"
+					"name": "aggregate6"
+				},
+				{
+					"name": "aggregate7"
 				}
 			],
 			"scriptLines": [
@@ -2036,7 +2039,8 @@
 				"          column1 = sum(1)) ~> aggregate3",
 				"adddataOriginAvecMatchin aggregate(col1 = sum(1)) ~> aggregate4",
 				"derivedColumn2 aggregate(totalQteFactuter = sum(toInteger({Qté facturée}))) ~> aggregate5",
-				"derivedColumn4 aggregate(qteno42 = sum(toInteger({Qté facturée}))) ~> sumQteNo42",
+				"filter3 aggregate(qte4251 = sum(toInteger({Qté facturée}))) ~> aggregate6",
+				"derivedColumn5 aggregate(qte4351 = sum(toInteger({Qté facturée}))) ~> aggregate7",
 				"select13 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     partitionFileNames:['tempVenteDeroge.csv'],",
