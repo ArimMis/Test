@@ -347,6 +347,9 @@
 				},
 				{
 					"name": "derivedColumn22"
+				},
+				{
+					"name": "derivedColumn23"
 				}
 			],
 			"scriptLines": [
@@ -2079,6 +2082,7 @@
 				"          {Canal distribution} = iif(data_origin == \"écoulement sans matching\",\"42\",{Canal distribution}),",
 				"          ca_final = iif((data_origin == \"écoulement sans matching\" || data_origin == \"facturation avec matching\"),toString(ca_ecoulement),toString({CA facturé})) ,",
 				"          qt_final = iif((data_origin == \"écoulement sans matching\" || data_origin == \"facturation avec matching\"),toString(qte_ecoulement),toString({Qté facturée})) ) ~> derivedColumn22",
+				"derivedColumn22 derive(canal_final = iif({Canal distribution} ==\"43\",\"Chantier\",\"Diffus\")) ~> derivedColumn23",
 				"select13 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     partitionFileNames:['tempVenteDeroge.csv'],",
