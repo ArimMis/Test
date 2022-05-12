@@ -108,7 +108,7 @@
 						]
 					},
 					{
-						"activity": "venteDeroge",
+						"activity": "PartedisLikeventeDeroge",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -231,7 +231,7 @@
 				}
 			},
 			{
-				"name": "venteDeroge",
+				"name": "PartedisLikeventeDeroge",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
