@@ -379,6 +379,12 @@
 				},
 				{
 					"name": "select14"
+				},
+				{
+					"name": "endDecrementation"
+				},
+				{
+					"name": "unionDecrementation"
 				}
 			],
 			"scriptLines": [
@@ -2051,7 +2057,7 @@
 				"          Canal),",
 				"     CodeATC = last(CodeATC)) ~> aggregate1",
 				"join1 derive(canal_final = iif( {Canal distribution}==\"43\" ,  \"Chantier\" , \"Diffus\" )) ~> derivedColumn19",
-				"union6 derive(canal_final = iif( {Canal distribution}==\"43\" ,  \"Chantier\" , \"Diffus\" ),",
+				"unionDecrementation derive(canal_final = iif( {Canal distribution}==\"43\" ,  \"Chantier\" , \"Diffus\" ),",
 				"          month = coalesce(month, right(yearmonth,2) )) ~> derivedColumn20",
 				"join9 select(mapColumn(",
 				"          Org_commerciale,",
@@ -2198,6 +2204,10 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select14",
+				"endEcoulementSansMatcing derive(POSSAMidString = HubSAPid,",
+				"          qte_ecc = toString(-1*toDouble(qte_ecc)),",
+				"          data_origin = \"decrementation ecoulement sans matching\") ~> endDecrementation",
+				"union6, endDecrementation union(byName: true)~> unionDecrementation",
 				"select13 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     partitionFileNames:['tempVenteDeroge.csv'],",
