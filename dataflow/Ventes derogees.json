@@ -2037,7 +2037,7 @@
 				"          HubName,",
 				"          {Période},",
 				"          Offre = union6@Offre,",
-				"          month = union6@month,",
+				"          month,",
 				"          qte_ecoulement,",
 				"          POSSAMidString,",
 				"          HubSAPid,",
