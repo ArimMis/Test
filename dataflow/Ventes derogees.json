@@ -2182,7 +2182,7 @@
 				"          {Type de livraison},",
 				"          {Type poste Livraison},",
 				"          Facture,",
-				"          {Type poste Livraison} = {Type poste Facture},",
+				"          {Type poste Facture},",
 				"          {Motif commande},",
 				"          {Qté facturée},",
 				"          {CA facturé},",
