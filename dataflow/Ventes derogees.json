@@ -302,6 +302,12 @@
 				},
 				{
 					"name": "select13"
+				},
+				{
+					"name": "aggregate2"
+				},
+				{
+					"name": "aggregate3"
 				}
 			],
 			"scriptLines": [
@@ -2016,6 +2022,8 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select13",
+				"filter4 aggregate({Qté facturée} = sum( toInteger({Qté facturée}) )) ~> aggregate2",
+				"derivedColumn18 aggregate({Qté facturée} = sum(toInteger({Qté facturée}))) ~> aggregate3",
 				"select13 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     partitionFileNames:['tempVenteDeroge.csv'],",
