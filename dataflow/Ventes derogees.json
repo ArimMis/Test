@@ -41,6 +41,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "ecoulmnt"
+				},
+				{
+					"dataset": {
+						"referenceName": "ref_atc",
+						"type": "DatasetReference"
+					},
+					"name": "refAtc"
 				}
 			],
 			"sinks": [
@@ -350,6 +357,18 @@
 				},
 				{
 					"name": "derivedColumn23"
+				},
+				{
+					"name": "aggregate8"
+				},
+				{
+					"name": "derivedColumn24"
+				},
+				{
+					"name": "endATC"
+				},
+				{
+					"name": "join10"
 				}
 			],
 			"scriptLines": [
@@ -518,6 +537,26 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> ecoulmnt",
+				"source(output(",
+				"          Marque as string,",
+				"          {Code Postal début} as string,",
+				"          {Code Postal fin} as string,",
+				"          Utilisateur as string,",
+				"          Fonction as string,",
+				"          {Département} as string,",
+				"          ATC as string,",
+				"          NomATC as string,",
+				"          {Plan primes} as string,",
+				"          Matricule as string,",
+				"          {Canal final} as string,",
+				"          toreplicate as string,",
+				"          dd as string,",
+				"          DR as string,",
+				"          {Code postal} as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> refAtc",
 				"derivedColumn8, endArticulation join({Document de vente} == Commande,",
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> join1",
@@ -2080,9 +2119,31 @@
 				"          marque_id = iif(data_origin == \"écoulement sans matching\",marque,Org_commerciale)) ~> derivedColumn21",
 				"derivedColumn21 derive(marque_name = iif(marque=='1604', \"SaunierDuval\", iif(marque=='1621', \"Vaillant\", \"\")),",
 				"          {Canal distribution} = iif(data_origin == \"écoulement sans matching\",\"42\",{Canal distribution}),",
-				"          ca_final = iif((data_origin == \"écoulement sans matching\" || data_origin == \"facturation avec matching\"),toString(ca_ecoulement),toString({CA facturé})) ,",
-				"          qt_final = iif((data_origin == \"écoulement sans matching\" || data_origin == \"facturation avec matching\"),toString(qte_ecoulement),toString({Qté facturée})) ) ~> derivedColumn22",
+				"          ca_final = iif((data_origin == \"écoulement sans matching\" || data_origin == \"facturation avec matching\"),toString(ca_ecoulement),toString({CA facturé})),",
+				"          qt_final = iif((data_origin == \"écoulement sans matching\" || data_origin == \"facturation avec matching\"),toString(qte_ecoulement),toString({Qté facturée}))) ~> derivedColumn22",
 				"derivedColumn22 derive(canal_final = iif({Canal distribution} ==\"43\",\"Chantier\",\"Diffus\")) ~> derivedColumn23",
+				"refAtc aggregate(groupBy(Marque,",
+				"          {Canal final},",
+				"          {Code postal}),",
+				"     ATC = max(ATC),",
+				"          NomATC = max(NomATC),",
+				"          Matricule = max(Matricule)) ~> aggregate8",
+				"aggregate8 derive({Code postal} = toInteger({Code postal})) ~> derivedColumn24",
+				"derivedColumn24 select(mapColumn(",
+				"          Marque,",
+				"          {Canal final},",
+				"          {Code postal},",
+				"          ATC,",
+				"          NomATC,",
+				"          Matricule",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> endATC",
+				"derivedColumn23, endATC join(marque_name == endATC@Marque",
+				"     && canal_final == {Canal final}",
+				"     && iif(data_origin==\"decrementation ecoulement sans matching\", -5, toInteger(select13@{Code postal})) == endATC@{Code postal},",
+				"     joinType:'left',",
+				"     broadcast: 'auto')~> join10",
 				"select13 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     partitionFileNames:['tempVenteDeroge.csv'],",
