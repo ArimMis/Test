@@ -133,11 +133,19 @@
 				"type": "String"
 			},
 			{
+				"name": "Type poste Facture",
+				"type": "String"
+			},
+			{
 				"name": "Motif commande",
 				"type": "String"
 			},
 			{
 				"name": "Qté facturée",
+				"type": "String"
+			},
+			{
+				"name": "CA facturé",
 				"type": "String"
 			},
 			{
