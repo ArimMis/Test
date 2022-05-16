@@ -43205,6 +43205,15 @@
 						},
 						{
 							"name": "aggregate24"
+						},
+						{
+							"name": "select15"
+						},
+						{
+							"name": "aggregate25"
+						},
+						{
+							"name": "aggregate26"
 						}
 					],
 					"scriptLines": [
@@ -45046,6 +45055,13 @@
 						"join7 aggregate({Qté facturée} = sum(toInteger({Qté facturée}))) ~> aggregate22",
 						"addDataOriginAvecMathcin4551 aggregate({Qté facturée} = sum(toInteger({Qté facturée}))) ~> aggregate23",
 						"addDataOriginFSM aggregate({Qté facturée} = sum(toInteger({Qté facturée}))) ~> aggregate24",
+						"aggregate13 select(mapColumn(",
+						"          qte_ecc",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select15",
+						"derivedColumn15 aggregate({Qté facturée} = sum(toInteger({Qté facturée}))) ~> aggregate25",
+						"unionFSM435145 aggregate({Qté facturée} = sum(toInteger({Qté facturée}))) ~> aggregate26",
 						"select13 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     partitionFileNames:['tempVenteDeroge.csv'],",
