@@ -13,6 +13,113 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/PL_ORCAB')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ORCAB_PREPARATION",
+						"description": "Input : \n-ORCAB_ECOULEMENT_INPUT\n-ORCAB_ORGANISATION\n-ventesDirectes\nOutput : \n-ORCAB_QTE_NULL\n-organisationNotFound\n-ORCAB_ECOULEMENT_PREPARED",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "ORCAB_PREPARATION",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"ecoulement": {},
+									"organisation": {},
+									"ORCABECOULPREPARED": {},
+									"quantityNullOutput": {},
+									"organisationNotFound": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT"
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-01-06T12:25:16Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_PARTEDIS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "PREPARATION",
+						"description": "Input : \necoulement\nPARTEDIS_ORGANISATION\nventesDirectes\npartedisPrixStd\nprixParPeriode\nOutput : \norganisationNotFound\nquantityNullOutput\nPARTEDIS_ECOUL_PREPARED",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "PARTEDIS_PREPARATION",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"ecoulement": {},
+									"organisation": {},
+									"venteDirecte": {},
+									"organisationNotFound": {},
+									"quantityNullOutput": {},
+									"PARTEDISECOULPREPARED": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT"
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-01-06T12:25:16Z"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/PL_POST_UNION')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -851,7 +958,9 @@
 									"sink1": {},
 									"sink2": {},
 									"sink3": {},
-									"sink4": {}
+									"sink4": {},
+									"sinkFact43": {},
+									"sinkAfterArticulatioOffreJoin": {}
 								}
 							},
 							"staging": {},
@@ -991,7 +1100,9 @@
 									"sink1": {},
 									"sink2": {},
 									"sink3": {},
-									"sink4": {}
+									"sink4": {},
+									"sinkFact43": {},
+									"sinkAfterArticulatioOffreJoin": {}
 								}
 							},
 							"staging": {},
@@ -1691,8 +1802,10 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/PL_POST_UNION')]",
+				"[concat(variables('factoryId'), '/pipelines/PL_ORCAB')]",
 				"[concat(variables('factoryId'), '/pipelines/PL_VF_CONFORT')]",
-				"[concat(variables('factoryId'), '/pipelines/PL_TEREVA')]"
+				"[concat(variables('factoryId'), '/pipelines/PL_TEREVA')]",
+				"[concat(variables('factoryId'), '/pipelines/PL_PARTEDIS')]"
 			]
 		},
 		{
@@ -1958,216 +2071,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/PL_VENTES_DIRECTES')]",
 				"[concat(variables('factoryId'), '/pipelines/PL_REFERENTIEL_PRIX')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/MAIN')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "MAIN_PREPARATION_ECOULEMENT",
-						"description": "PL Input_Load\nPL_MABILLE\nPL_ORCAB\nPL_VF_CONFORT\nPL_TEREVA\nPL_PARTEDIS\nPL_TRAITEMENT_DSC\nDF_UNION_ECOULEMENT\nPL_POST_UNION",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "MAIN_REFERENTIEL",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "PREPARATION_FACTURATION",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "MAIN_PREPARATION",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					},
-					{
-						"name": "PL_MAIN_BASE_COMMERCIAL",
-						"description": "PL main for : \nPREPARATION_ECC_AVOIR\nDSCTEREVA2\nModel_PARTEDIS2\nVanMarkes\nModelVenteDirecte\nUNION_BASE_COMMERCIAL\nPOST_UNION_FINISH\nATC_PERFORMANCE",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "MAIN_PREPARATION_ECOULEMENT",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "PL_MAIN_BASE_COMMERCIALE",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					},
-					{
-						"name": "MAIN_REFERENTIEL",
-						"description": "PL_GET_ARTICLE_DESIGNATION\nPL_OFFRE\nPL_REFERENTIEL_ATC\nPL_REFERENTIEL_PRIX",
-						"type": "ExecutePipeline",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "MAIN_REFERENTIEL",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					},
-					{
-						"name": "MAIN_LOGISTIQUE",
-						"description": "NomenclatureProduit\nNomenclatureClient\nTDataSD",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "MAIN_REFERENTIEL",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "MAIN_LOGISTIQUE",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					},
-					{
-						"name": "CONTRAT DISTRIBUTION",
-						"description": "CALCUL SEUIL\nCALCUL REMUNERATION\nCONTRAT DISTRIBUTION",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "PL_MAIN_BASE_COMMERCIAL",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "PL_CONTRAT_DISTRIBUTION",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					},
-					{
-						"name": "PL_SUIVIE_OFFRE",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "PL_MAIN_BASE_COMMERCIAL",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "PL_SUIVIE_OFFRE",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					},
-					{
-						"name": "SORTIE MARKETING",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "PL_MAIN_BASE_COMMERCIAL",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "SORTIE MARKETING",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					},
-					{
-						"name": "PL_MAIN_RH",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "PL_MAIN_BASE_COMMERCIAL",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "PL_MAIN_RH",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					},
-					{
-						"name": "PREPARATION_FACTURATION",
-						"type": "ExecutePipeline",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "PREPARATION_FACTURATION",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2022-01-06T12:34:45Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/MAIN_PREPARATION')]",
-				"[concat(variables('factoryId'), '/pipelines/MAIN_REFERENTIEL')]",
-				"[concat(variables('factoryId'), '/pipelines/MAIN_LOGISTIQUE')]",
-				"[concat(variables('factoryId'), '/pipelines/PL_SUIVIE_OFFRE')]",
-				"[concat(variables('factoryId'), '/pipelines/SORTIE MARKETING')]",
-				"[concat(variables('factoryId'), '/pipelines/PL_MAIN_RH')]",
-				"[concat(variables('factoryId'), '/pipelines/PREPARATION_FACTURATION')]"
 			]
 		}
 	]
