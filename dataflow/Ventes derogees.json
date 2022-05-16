@@ -398,9 +398,6 @@
 					"name": "unionDecrementation"
 				},
 				{
-					"name": "filter5"
-				},
-				{
 					"name": "filter6"
 				},
 				{
@@ -411,6 +408,51 @@
 				},
 				{
 					"name": "aggregate9"
+				},
+				{
+					"name": "aggregate10"
+				},
+				{
+					"name": "aggregate11"
+				},
+				{
+					"name": "aggregate12"
+				},
+				{
+					"name": "aggregate13"
+				},
+				{
+					"name": "aggregate14"
+				},
+				{
+					"name": "aggregate15"
+				},
+				{
+					"name": "aggregate16"
+				},
+				{
+					"name": "aggregate17"
+				},
+				{
+					"name": "aggregate18"
+				},
+				{
+					"name": "aggregate19"
+				},
+				{
+					"name": "aggregate20"
+				},
+				{
+					"name": "aggregate21"
+				},
+				{
+					"name": "aggregate22"
+				},
+				{
+					"name": "aggregate23"
+				},
+				{
+					"name": "aggregate24"
 				}
 			],
 			"scriptLines": [
@@ -1139,7 +1181,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select7",
 				"select7 derive(indexcols2 = year+\"-\"+periode+\"-\"+HubSAPid+\"-\"+coalesce(toString(toInteger(replace(reference, \" \", \"\"))),replace(reference, \" \", \"\"))+\"-\"+toString(indexcol2),",
-				"          qte_ecc = iif(toInteger(qte_ecoulement) >0, 1, -1 )) ~> derivedColumn11",
+				"          qte_ecc = iif(toInteger(qte_ecc) >0, 1, -1 )) ~> derivedColumn11",
 				"select11 derive(ca_ecoulement = abs(toDouble(ca_ecoulement))*qte_ecc) ~> caEcoulement",
 				"select12, ecoulementReste join(select12@indexcols2 == ecoulementReste@indexcols2,",
 				"     joinType:'outer',",
@@ -2230,13 +2272,28 @@
 				"          qte_ecc = -1*toDouble(qte_ecc),",
 				"          data_origin = \"decrementation ecoulement sans matching\") ~> endDecrementation",
 				"union6, endDecrementation union(byName: true)~> unionDecrementation",
-				"derivedColumn5 filter(POSSAMidString==\"16001050\" && ref2==\"10021498\" && year=='2021') ~> filter5",
 				"derivedColumn3 filter(POSSAMidString==\"16001050\" && reference ==\"0010021498\" && year=='2021') ~> filter6",
 				"derivedColumn2 filter(POSSAMidString==\"16001050\" && reference==\"0010021498\" && year=='2021') ~> ftest",
 				"createIndexPartedis filter(POSSAMidString==\"16001050\" && ref2==\"10021498\" && year=='2021') ~> filter7",
 				"select1 aggregate(groupBy(Offre,",
 				"          Canal),",
 				"     {Numéro interne 2} = max({Numéro interne 2})) ~> aggregate9",
+				"ecoulementReste aggregate(qte_ecc = sum(toFloat(qte_ecc))) ~> aggregate10",
+				"REcoulement5145 aggregate(qte_ecc = sum(toFloat(qte_ecc))) ~> aggregate11",
+				"ResteEcoulement aggregate(qte_ecc = sum(toFloat(qte_ecc))) ~> aggregate12",
+				"derivedColumn11 aggregate(qte_ecc = sum(toFloat(qte_ecc))) ~> aggregate13",
+				"select3 aggregate(Qt = sum(toFloat({Qté facturée}))) ~> aggregate14",
+				"FacturationForOther aggregate(groupBy(WholeSalerID),",
+				"     {Qté facturée} = sum(toFloat({Qté facturée}))) ~> aggregate15",
+				"derivedColumn5 aggregate({Qté facturée} = sum(toInteger({Qté facturée}))) ~> aggregate16",
+				"Filtre5145 aggregate({Qté facturée} = sum(toInteger({Qté facturée}))) ~> aggregate17",
+				"Filtre43 aggregate({Qté facturée} = sum(toInteger({Qté facturée}))) ~> aggregate18",
+				"select5 aggregate({Qté facturée} = sum(toInteger({Qté facturée}))) ~> aggregate19",
+				"addDataOriginFM aggregate({Qté facturée} = sum(toInteger({Qté facturée}))) ~> aggregate20",
+				"clearColFacturationSM43 aggregate({Qté facturée} = sum(toInteger({Qté facturée}))) ~> aggregate21",
+				"join7 aggregate({Qté facturée} = sum(toInteger({Qté facturée}))) ~> aggregate22",
+				"addDataOriginAvecMathcin4551 aggregate({Qté facturée} = sum(toInteger({Qté facturée}))) ~> aggregate23",
+				"addDataOriginFSM aggregate({Qté facturée} = sum(toInteger({Qté facturée}))) ~> aggregate24",
 				"select13 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     partitionFileNames:['tempVenteDeroge.csv'],",
