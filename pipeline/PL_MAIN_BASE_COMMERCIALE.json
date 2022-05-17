@@ -102,12 +102,6 @@
 						]
 					},
 					{
-						"activity": "VanMarkes",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
 						"activity": "PartedisLikeventeDeroge",
 						"dependencyConditions": [
 							"Succeeded"
@@ -157,38 +151,6 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "BaseCommercialePOSTUnion",
-						"type": "DataFlowReference"
-					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
-				}
-			},
-			{
-				"name": "VanMarkes",
-				"description": "Input : \norganisaation\nAvoir\nFacturation\nExtarctionSAP\nREFATC\nOffre\nOutput : \nrenameNoOffre\nOutputVanMarkes",
-				"type": "ExecuteDataFlow",
-				"dependsOn": [
-					{
-						"activity": "PREPARATION_ECC_AVOIR",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "1.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataflow": {
-						"referenceName": "VanMarkes",
 						"type": "DataFlowReference"
 					},
 					"compute": {
