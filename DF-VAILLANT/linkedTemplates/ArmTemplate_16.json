@@ -3843,6 +3843,7 @@
 									"stgOffre": {},
 									"referentielATC": {},
 									"facturation": {},
+									"prixMoyen": {},
 									"OModelDSC": {},
 									"avoirUnMapped": {}
 								}
@@ -3873,13 +3874,13 @@
 								]
 							},
 							{
-								"activity": "VanMarkes",
+								"activity": "PartedisLikeventeDeroge",
 								"dependencyConditions": [
 									"Succeeded"
 								]
 							},
 							{
-								"activity": "PartedisLikeventeDeroge",
+								"activity": "VanMarkes",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -3948,51 +3949,6 @@
 									"StgOffreUnique": {},
 									"DataCommercialNotFOund": {},
 									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "VanMarkes",
-						"description": "Input : \norganisaation\nAvoir\nFacturation\nExtarctionSAP\nREFATC\nOffre\nOutput : \nrenameNoOffre\nOutputVanMarkes",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [
-							{
-								"activity": "PREPARATION_ECC_AVOIR",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "VanMarkes",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"organisaation": {},
-									"Avoir": {},
-									"Facturation": {},
-									"ExtarctionSAP": {},
-									"REFATC": {},
-									"Offre": {},
-									"articleInput": {},
-									"inputEPS": {},
-									"SinkVanMarkes": {}
 								}
 							},
 							"staging": {},
@@ -4093,6 +4049,51 @@
 							},
 							"traceLevel": "Fine",
 							"runConcurrently": true
+						}
+					},
+					{
+						"name": "VanMarkes",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "PREPARATION_ECC_AVOIR",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "VanMarkes",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"organisaation": {},
+									"Avoir": {},
+									"Facturation": {},
+									"ExtarctionSAP": {},
+									"REFATC": {},
+									"Offre": {},
+									"articleInput": {},
+									"inputEPS": {},
+									"PrixPeriode": {},
+									"SinkVanMarkes": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
 						}
 					}
 				],
