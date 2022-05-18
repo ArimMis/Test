@@ -2279,6 +2279,7 @@
 				"     skipDuplicateMapOutputs: true) ~> select14",
 				"endEcoulementSansMatcing derive(POSSAMidString = HubSAPid,",
 				"          qte_ecc = -1*toDouble(qte_ecc),",
+				"          ca_ecoulement = -1*toDouble(ca_ecoulement),",
 				"          data_origin = \"decrementation ecoulement sans matching\") ~> endDecrementation",
 				"union6, endDecrementation union(byName: true)~> unionDecrementation",
 				"derivedColumn3 filter(POSSAMidString==\"16001050\" && reference ==\"0010021498\" && year=='2021') ~> filter6",
