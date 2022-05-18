@@ -804,7 +804,7 @@
 				"          {Qté livrée},",
 				"          {CA livré},",
 				"          {Qté facturée},",
-				"          {CA facturé} = FacturationForOther@{CA facturé},",
+				"          {CA facturé},",
 				"          {Cout standard cdé},",
 				"          {Cout fabrication},",
 				"          {Cout standard livré},",
