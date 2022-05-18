@@ -462,6 +462,9 @@
 				},
 				{
 					"name": "aggregate26"
+				},
+				{
+					"name": "derivedColumn25"
 				}
 			],
 			"scriptLines": [
@@ -2312,6 +2315,7 @@
 				"     skipDuplicateMapOutputs: true) ~> select15",
 				"derivedColumn15 aggregate({Qté facturée} = sum(toInteger({Qté facturée}))) ~> aggregate25",
 				"unionFSM435145 aggregate({Qté facturée} = sum(toInteger({Qté facturée}))) ~> aggregate26",
+				"select14 derive({ATC performance} = iif(data_origin == \"facturation sans matching\", \"\" ,{ATC performance})) ~> derivedColumn25",
 				"select13 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     partitionFileNames:['tempVenteDeroge.csv'],",
@@ -2345,7 +2349,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     partitionBy('hash', 1)) ~> sink3",
-				"select14 sink(allowSchemaDrift: true,",
+				"derivedColumn25 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     partitionFileNames:['OModelPartedis.csv'],",
 				"     skipDuplicateMapInputs: true,",
