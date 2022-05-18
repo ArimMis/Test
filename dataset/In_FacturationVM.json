@@ -24,7 +24,7 @@
 		},
 		"schema": [
 			{
-				"name": "Org. commerciale",
+				"name": "Org commerciale",
 				"type": "String"
 			},
 			{
