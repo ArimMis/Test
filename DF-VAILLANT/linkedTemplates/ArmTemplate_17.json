@@ -13,6 +13,59 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/PL_OFFRE')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "UNIFORMISATION OFFRE",
+						"description": "Input : \noffreDiffusInput\noffreChantierInput\nreferentielATCinput\nOutput : \noffreDiffusTemp\nStg_offre_diffus\noffreChantierTemp\nstagingChantier\noffreAtcTemp\n",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "UNIFORMISATION_OFFRE",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"offreDiffusInput": {},
+									"offreChantierInput": {},
+									"stagingDiffus": {},
+									"stagingChantier": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "REFERENTIEL"
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-01-06T12:25:17Z"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/PL_ORCAB')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -1872,6 +1925,7 @@
 				"lastPublishTime": "2022-01-06T12:25:19Z"
 			},
 			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PL_OFFRE')]",
 				"[concat(variables('factoryId'), '/pipelines/PL_REFERENTIEL_ATC')]"
 			]
 		},
@@ -1968,111 +2022,6 @@
 				"lastPublishTime": "2022-01-06T12:25:18Z"
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PREPARATION_FACTURATION')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "PREPARATION_FACTURATION",
-						"description": "Input : -facturationbw\n          -PLATEFORMES\ntraitement : -join facturationbw & Plateformes\n                 -join facturationbw & other plateformes\n                 -join facturationbw & filtre DSC\nOutput : -venteDirect\n-AZ_OFacturactionPartedisLikeWithIndex\n-facturationForOtherPlateform\n-facturationForDSCTEREVA\n-facturationForVanMarkes",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [
-							{
-								"activity": "PL_REFERENTIEL_PRIX",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "PREPARATION_FACTURATION_PERIOD",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"facturationAC": {},
-									"PLATEFORMES": {},
-									"facturationAP": {},
-									"prixParPeriode": {},
-									"facturationForDSCTEREVA": {},
-									"facturationForOtherPlateform": {},
-									"notDSCTerevaPlateform": {},
-									"facturationForVanMarkes": {},
-									"venteDirecteForModel": {},
-									"OFacturactionPartedisLikeWithIndex": {},
-									"sink1": {},
-									"VenteDirectForDecrementation": {},
-									"sink2": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					},
-					{
-						"name": "PL_VENTES_DIRECTES",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "PREPARATION_FACTURATION",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "PL_VENTES_DIRECTES",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					},
-					{
-						"name": "PL_REFERENTIEL_PRIX",
-						"type": "ExecutePipeline",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "PL_REFERENTIEL_PRIX",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "PREPARATION ECOULEMENT"
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/PL_VENTES_DIRECTES')]",
-				"[concat(variables('factoryId'), '/pipelines/PL_REFERENTIEL_PRIX')]"
-			]
 		}
 	]
 }

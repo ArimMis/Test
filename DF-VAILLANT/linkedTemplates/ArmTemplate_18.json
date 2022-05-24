@@ -13,6 +13,108 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/PREPARATION_FACTURATION')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "PREPARATION_FACTURATION",
+						"description": "Input : -facturationbw\n          -PLATEFORMES\ntraitement : -join facturationbw & Plateformes\n                 -join facturationbw & other plateformes\n                 -join facturationbw & filtre DSC\nOutput : -venteDirect\n-AZ_OFacturactionPartedisLikeWithIndex\n-facturationForOtherPlateform\n-facturationForDSCTEREVA\n-facturationForVanMarkes",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "PL_REFERENTIEL_PRIX",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "PREPARATION_FACTURATION_PERIOD",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"facturationAC": {},
+									"PLATEFORMES": {},
+									"facturationAP": {},
+									"prixParPeriode": {},
+									"facturationForDSCTEREVA": {},
+									"facturationForOtherPlateform": {},
+									"notDSCTerevaPlateform": {},
+									"facturationForVanMarkes": {},
+									"venteDirecteForModel": {},
+									"OFacturactionPartedisLikeWithIndex": {},
+									"sink1": {},
+									"VenteDirectForDecrementation": {},
+									"sink2": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "PL_VENTES_DIRECTES",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "PREPARATION_FACTURATION",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "PL_VENTES_DIRECTES",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "PL_REFERENTIEL_PRIX",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "PL_REFERENTIEL_PRIX",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT"
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/MAIN')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -212,7 +314,9 @@
 				"annotations": [],
 				"lastPublishTime": "2022-01-06T12:34:45Z"
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PREPARATION_FACTURATION')]"
+			]
 		}
 	]
 }
