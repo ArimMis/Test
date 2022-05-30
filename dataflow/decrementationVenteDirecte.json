@@ -33,7 +33,7 @@
 			],
 			"scriptLines": [
 				"input(output(",
-				"          id as float,",
+				"          id as long,",
 				"          PossAMid as string,",
 				"          reference as string,",
 				"          year as string,",
