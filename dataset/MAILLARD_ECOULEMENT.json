@@ -67,6 +67,10 @@
 			{
 				"name": "CP Dépôt",
 				"type": "String"
+			},
+			{
+				"name": "Dummy",
+				"type": "String"
 			}
 		]
 	},
