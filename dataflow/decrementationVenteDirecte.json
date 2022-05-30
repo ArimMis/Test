@@ -1,0 +1,68 @@
+{
+	"name": "decrementationVenteDirecte",
+	"properties": {
+		"folder": {
+			"name": "PREPARATION ECOULEMENT"
+		},
+		"type": "Flowlet",
+		"typeProperties": {
+			"sources": [],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "window1"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "window2"
+				},
+				{
+					"name": "derivedColumn2"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "input1"
+				},
+				{
+					"name": "output1"
+				}
+			],
+			"scriptLines": [
+				"input(output(",
+				"          id as string,",
+				"          PossAMid as string,",
+				"          reference as string,",
+				"          year as string,",
+				"          month as integer,",
+				"          qte_ecoulement as float,",
+				"          qte_venteDirecte as float",
+				"     ),",
+				"     order: 0) ~> input1",
+				"input1 window(over(year,",
+				"          PossAMid,",
+				"          reference),",
+				"     asc(month, true),",
+				"     qte_cumul = sum(qte_ecoulement)) ~> window1",
+				"window1 derive(ecart = toDouble(qte_cumul)-toDouble(qte_venteDirecte),",
+				"          signe = iif(toDouble(qte_cumul)-toDouble(qte_venteDirecte) <=0 , 0, 1)) ~> derivedColumn1",
+				"derivedColumn1 window(over(year,",
+				"          PossAMid,",
+				"          reference),",
+				"     asc(month, true),",
+				"     signe_cumul = sum(signe)) ~> window2",
+				"window2 derive(qt_final = iif( signe_cumul <1,0, iif (signe_cumul ==1 , toInteger(ecart), toInteger( qte_ecoulement)   ) )) ~> derivedColumn2",
+				"derivedColumn2 select(mapColumn(",
+				"          id,",
+				"          qt_final",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 output() ~> output1"
+			]
+		}
+	}
+}
