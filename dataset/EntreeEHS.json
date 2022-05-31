@@ -41,10 +41,6 @@
 				"type": "String"
 			},
 			{
-				"name": "Description Article",
-				"type": "String"
-			},
-			{
 				"name": "year",
 				"type": "String"
 			},
@@ -82,6 +78,10 @@
 			},
 			{
 				"name": "qte_ecoulement",
+				"type": "String"
+			},
+			{
+				"name": "Description Article",
 				"type": "String"
 			}
 		]
