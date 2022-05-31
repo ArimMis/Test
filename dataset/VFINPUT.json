@@ -22,55 +22,55 @@
 		},
 		"schema": [
 			{
-				"name": "Représentant",
+				"name": "représentant",
 				"type": "String"
 			},
 			{
-				"name": "N° Département",
+				"name": "n° département",
 				"type": "String"
 			},
 			{
-				"name": "Département",
+				"name": "département",
 				"type": "String"
 			},
 			{
-				"name": "Code point de vente",
+				"name": "code point de vente",
 				"type": "String"
 			},
 			{
-				"name": "Libellé point de vente",
+				"name": "libellé point de vente",
 				"type": "String"
 			},
 			{
-				"name": "Code Depot source",
+				"name": "code depot source",
 				"type": "String"
 			},
 			{
-				"name": "Code client",
+				"name": "code client",
 				"type": "String"
 			},
 			{
-				"name": "Client",
+				"name": "client",
 				"type": "String"
 			},
 			{
-				"name": "N° Siret",
+				"name": "n° siret",
 				"type": "String"
 			},
 			{
-				"name": "Code postal",
+				"name": "code postal",
 				"type": "String"
 			},
 			{
-				"name": "Ville",
+				"name": "ville",
 				"type": "String"
 			},
 			{
-				"name": "Année livraison",
+				"name": "année livraison",
 				"type": "String"
 			},
 			{
-				"name": "Mois livraison",
+				"name": "mois livraison",
 				"type": "String"
 			},
 			{
@@ -82,7 +82,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Code produit",
+				"name": "code produit",
 				"type": "String"
 			},
 			{
@@ -90,15 +90,15 @@
 				"type": "String"
 			},
 			{
-				"name": "Réference",
+				"name": "réference",
 				"type": "String"
 			},
 			{
-				"name": "Qte en unité de vente",
+				"name": "qte en unité de vente",
 				"type": "String"
 			},
 			{
-				"name": "Montant prv net",
+				"name": "montant prv net",
 				"type": "String"
 			},
 			{
@@ -106,63 +106,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Libellé Point de Vente",
-				"type": "String"
-			},
-			{
-				"name": "Code Depot Source",
-				"type": "String"
-			},
-			{
-				"name": "Code Client",
-				"type": "String"
-			},
-			{
-				"name": "N° SIRET",
-				"type": "String"
-			},
-			{
-				"name": "Code Postal",
-				"type": "String"
-			},
-			{
-				"name": "Numéro Fournisseur",
-				"type": "String"
-			},
-			{
-				"name": "Année Livraison",
-				"type": "String"
-			},
-			{
-				"name": "Mois Livraison",
-				"type": "String"
-			},
-			{
-				"name": "Code Fournisseur",
-				"type": "String"
-			},
-			{
-				"name": "Fournisseur Principal",
-				"type": "String"
-			},
-			{
-				"name": "Code Produit",
-				"type": "String"
-			},
-			{
-				"name": "Produit",
-				"type": "String"
-			},
-			{
-				"name": "Code Point de Vente",
-				"type": "String"
-			},
-			{
-				"name": "Qte en Unité de Vente",
-				"type": "String"
-			},
-			{
-				"name": "Montant PRV Net",
+				"name": "numéro fournisseur",
 				"type": "String"
 			}
 		]
