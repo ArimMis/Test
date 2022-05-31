@@ -75,6 +75,10 @@
 			{
 				"name": "marque_file",
 				"type": "String"
+			},
+			{
+				"name": "agence_code",
+				"type": "String"
 			}
 		]
 	},
