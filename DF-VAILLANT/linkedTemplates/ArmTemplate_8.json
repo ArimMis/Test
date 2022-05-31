@@ -13,6 +13,98 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/TerevaOrgaNotFound')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Error finding organisation not found",
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT/TEREVA"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "Error_finding",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ";",
+					"encodingName": "WINDOWS-1252",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Marque DESC",
+						"type": "String"
+					},
+					{
+						"name": "Marque Code",
+						"type": "String"
+					},
+					{
+						"name": "Sous Famille",
+						"type": "String"
+					},
+					{
+						"name": "Référence Article Fournisseur",
+						"type": "String"
+					},
+					{
+						"name": "Agence Code",
+						"type": "String"
+					},
+					{
+						"name": "Département ID",
+						"type": "String"
+					},
+					{
+						"name": "Quantité en UV BL",
+						"type": "String"
+					},
+					{
+						"name": "yearmonth",
+						"type": "String"
+					},
+					{
+						"name": "year",
+						"type": "String"
+					},
+					{
+						"name": "month",
+						"type": "String"
+					},
+					{
+						"name": "POSid",
+						"type": "String"
+					},
+					{
+						"name": "WholeSalerID",
+						"type": "String"
+					},
+					{
+						"name": "POSSAMidString",
+						"type": "String"
+					},
+					{
+						"name": "HubSAPid",
+						"type": "String"
+					},
+					{
+						"name": "BrandID",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/TestAfterArticulationOffreJoin')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -605,7 +697,7 @@
 				},
 				"schema": [
 					{
-						"name": "yearmonth",
+						"name": "year",
 						"type": "String"
 					},
 					{
@@ -879,14 +971,6 @@
 						"type": "String"
 					},
 					{
-						"name": "ReprÃ©sentant",
-						"type": "String"
-					},
-					{
-						"name": "departement_id",
-						"type": "String"
-					},
-					{
 						"name": "reference",
 						"type": "String"
 					},
@@ -960,55 +1044,55 @@
 				},
 				"schema": [
 					{
-						"name": "Représentant",
+						"name": "représentant",
 						"type": "String"
 					},
 					{
-						"name": "N° Département",
+						"name": "n° département",
 						"type": "String"
 					},
 					{
-						"name": "Département",
+						"name": "département",
 						"type": "String"
 					},
 					{
-						"name": "Code point de vente",
+						"name": "code point de vente",
 						"type": "String"
 					},
 					{
-						"name": "Libellé point de vente",
+						"name": "libellé point de vente",
 						"type": "String"
 					},
 					{
-						"name": "Code Depot source",
+						"name": "code depot source",
 						"type": "String"
 					},
 					{
-						"name": "Code client",
+						"name": "code client",
 						"type": "String"
 					},
 					{
-						"name": "Client",
+						"name": "client",
 						"type": "String"
 					},
 					{
-						"name": "N° Siret",
+						"name": "n° siret",
 						"type": "String"
 					},
 					{
-						"name": "Code postal",
+						"name": "code postal",
 						"type": "String"
 					},
 					{
-						"name": "Ville",
+						"name": "ville",
 						"type": "String"
 					},
 					{
-						"name": "Année livraison",
+						"name": "année livraison",
 						"type": "String"
 					},
 					{
-						"name": "Mois livraison",
+						"name": "mois livraison",
 						"type": "String"
 					},
 					{
@@ -1020,7 +1104,7 @@
 						"type": "String"
 					},
 					{
-						"name": "Code produit",
+						"name": "code produit",
 						"type": "String"
 					},
 					{
@@ -1028,15 +1112,15 @@
 						"type": "String"
 					},
 					{
-						"name": "Réference",
+						"name": "réference",
 						"type": "String"
 					},
 					{
-						"name": "Qte en unité de vente",
+						"name": "qte en unité de vente",
 						"type": "String"
 					},
 					{
-						"name": "Montant prv net",
+						"name": "montant prv net",
 						"type": "String"
 					},
 					{
@@ -1044,63 +1128,7 @@
 						"type": "String"
 					},
 					{
-						"name": "Libellé Point de Vente",
-						"type": "String"
-					},
-					{
-						"name": "Code Depot Source",
-						"type": "String"
-					},
-					{
-						"name": "Code Client",
-						"type": "String"
-					},
-					{
-						"name": "N° SIRET",
-						"type": "String"
-					},
-					{
-						"name": "Code Postal",
-						"type": "String"
-					},
-					{
-						"name": "Numéro Fournisseur",
-						"type": "String"
-					},
-					{
-						"name": "Année Livraison",
-						"type": "String"
-					},
-					{
-						"name": "Mois Livraison",
-						"type": "String"
-					},
-					{
-						"name": "Code Fournisseur",
-						"type": "String"
-					},
-					{
-						"name": "Fournisseur Principal",
-						"type": "String"
-					},
-					{
-						"name": "Code Produit",
-						"type": "String"
-					},
-					{
-						"name": "Produit",
-						"type": "String"
-					},
-					{
-						"name": "Code Point de Vente",
-						"type": "String"
-					},
-					{
-						"name": "Qte en Unité de Vente",
-						"type": "String"
-					},
-					{
-						"name": "Montant PRV Net",
+						"name": "numéro fournisseur",
 						"type": "String"
 					}
 				]
@@ -2163,69 +2191,6 @@
 					},
 					{
 						"name": "order",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/atcc2021')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "REFERENTIEL_ATC"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "atc_c2021_lower",
-						"folderPath": "Temp",
-						"container": "data-warehouse"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "ATC",
-						"type": "String"
-					},
-					{
-						"name": "NomATC",
-						"type": "String"
-					},
-					{
-						"name": "Plan primes",
-						"type": "String"
-					},
-					{
-						"name": "DR",
-						"type": "String"
-					},
-					{
-						"name": "Secteur prime",
-						"type": "String"
-					},
-					{
-						"name": "Matricule",
-						"type": "String"
-					},
-					{
-						"name": "Secteur DEC",
-						"type": "String"
-					},
-					{
-						"name": "Rallye",
 						"type": "String"
 					}
 				]

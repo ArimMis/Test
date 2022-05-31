@@ -13,6 +13,139 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/MABILE_ECOULEMENT_INPUT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "PREPARATION ECOULEMENT/MABILE"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Sheet1",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "MABILE_ECOULEMENT.xlsx",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Activité",
+						"type": "String"
+					},
+					{
+						"name": "Fournisseur Groupe",
+						"type": "String"
+					},
+					{
+						"name": "Société",
+						"type": "String"
+					},
+					{
+						"name": "Code",
+						"type": "String"
+					},
+					{
+						"name": "Fournisseur",
+						"type": "String"
+					},
+					{
+						"name": "Agence du client",
+						"type": "String"
+					},
+					{
+						"name": "Code article",
+						"type": "String"
+					},
+					{
+						"name": "Libellé article",
+						"type": "String"
+					},
+					{
+						"name": "Ref fournisseur",
+						"type": "String"
+					},
+					{
+						"name": "Qté Mois A-1",
+						"type": "String"
+					},
+					{
+						"name": "Qté Cumul A-1",
+						"type": "String"
+					},
+					{
+						"name": "CA Mois A-1",
+						"type": "String"
+					},
+					{
+						"name": "CA Cumul A-1",
+						"type": "String"
+					},
+					{
+						"name": "MB Mois A-1",
+						"type": "String"
+					},
+					{
+						"name": "MB Cumul A-1",
+						"type": "String"
+					},
+					{
+						"name": "VVA Mois A-1",
+						"type": "String"
+					},
+					{
+						"name": "VVA Cumul A-1",
+						"type": "String"
+					},
+					{
+						"name": "Qté Mois A",
+						"type": "String"
+					},
+					{
+						"name": "Qté Cumul A",
+						"type": "String"
+					},
+					{
+						"name": "CA Mois A",
+						"type": "String"
+					},
+					{
+						"name": "CA Cumul A",
+						"type": "String"
+					},
+					{
+						"name": "MB Mois A",
+						"type": "String"
+					},
+					{
+						"name": "MB Cumul A",
+						"type": "String"
+					},
+					{
+						"name": "VVA Mois A",
+						"type": "String"
+					},
+					{
+						"name": "VVA Cumul A",
+						"type": "String"
+					},
+					{
+						"name": "yearmonth",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/MABILE_ECOULEMENT_OUTPUT')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -667,6 +800,10 @@
 					},
 					{
 						"name": "CP Dépôt",
+						"type": "String"
+					},
+					{
+						"name": "Dummy",
 						"type": "String"
 					}
 				]
@@ -1960,55 +2097,6 @@
 					},
 					{
 						"name": "Qte Livrée 2019",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ORCAB_ORGANISATION')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "PREPARATION ECOULEMENT/ORCAB"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "Sectorisation",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "Organisation_Orcab.xlsx",
-						"folderPath": "Organisation",
-						"container": "data-input"
-					},
-					"firstRowAsHeader": true
-				},
-				"schema": [
-					{
-						"name": "Nom Coopérative",
-						"type": "String"
-					},
-					{
-						"name": "CP Coop.",
-						"type": "String"
-					},
-					{
-						"name": "POSSAMid",
-						"type": "String"
-					},
-					{
-						"name": "HubSAPid",
-						"type": "String"
-					},
-					{
-						"name": "BrandID",
 						"type": "String"
 					}
 				]
