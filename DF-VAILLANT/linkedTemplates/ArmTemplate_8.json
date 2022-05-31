@@ -955,10 +955,6 @@
 				},
 				"schema": [
 					{
-						"name": "Code postal",
-						"type": "String"
-					},
-					{
 						"name": "marque_file",
 						"type": "String"
 					},
@@ -1012,6 +1008,10 @@
 					},
 					{
 						"name": "distributeur",
+						"type": "String"
+					},
+					{
+						"name": "Code point de vente",
 						"type": "String"
 					}
 				]
