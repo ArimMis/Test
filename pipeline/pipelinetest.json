@@ -52,20 +52,6 @@
 				}
 			},
 			{
-				"name": "PL_TRAITEMENT_DSC",
-				"description": "Input : \nDSCINPUT\norganisation\nventesDirectes\nOutput : \noutputNullQuantity\norgaNotFound\npreparedDSC\nDSCPieceDetache",
-				"type": "ExecutePipeline",
-				"dependsOn": [],
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "PL_DSC",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true
-				}
-			},
-			{
 				"name": "PL_VF_CONFORT",
 				"description": "Input : \n-ecoulement\n-CONFORT_ORGANISATION\n-ventesDirectes\nOutput : \n-outputQuantityNull\n-VFCONFORT_ECOULEMENT_PREPARED",
 				"type": "ExecutePipeline",
@@ -123,12 +109,6 @@
 						]
 					},
 					{
-						"activity": "PL_TRAITEMENT_DSC",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					},
-					{
 						"activity": "PL_ORCAB",
 						"dependencyConditions": [
 							"Succeeded"
@@ -142,6 +122,12 @@
 					},
 					{
 						"activity": "PL_VF_CONFORT",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "DSC_PREPARATION",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -207,6 +193,31 @@
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "DSC_PREPARATION",
+				"description": "Input : \nDSCINPUT\norganisation\nventesDirectes\nOutput : \noutputNullQuantity\norgaNotFound\npreparedDSC\nDSCPieceDetache",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "DSC_PREPARATION",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
 				}
 			}
 		],
