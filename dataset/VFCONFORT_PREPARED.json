@@ -41,14 +41,6 @@
 				"type": "String"
 			},
 			{
-				"name": "ReprÃ©sentant",
-				"type": "String"
-			},
-			{
-				"name": "departement_id",
-				"type": "String"
-			},
-			{
 				"name": "reference",
 				"type": "String"
 			},
