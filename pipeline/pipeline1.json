@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "PREPARATION_FACTURATION",
+				"name": "df1",
 				"description": "Input : -facturationbw\n          -PLATEFORMES\ntraitement : -join facturationbw & Plateformes\n                 -join facturationbw & other plateformes\n                 -join facturationbw & filtre DSC\nOutput : -venteDirect\n-AZ_OFacturactionPartedisLikeWithIndex\n-facturationForOtherPlateform\n-facturationForDSCTEREVA\n-facturationForVanMarkes",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
