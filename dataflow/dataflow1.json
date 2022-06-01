@@ -12,10 +12,21 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "toutput",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "filter1"
+				},
+				{
+					"name": "aggregate1"
 				}
 			],
 			"scriptLines": [
@@ -103,7 +114,66 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
-				"source1 filter(in(['16009659',\"16009650\",\"16012261\"] ,{Code client livré})) ~> filter1"
+				"source1 filter(in(['16009659',\"16009650\",\"16012261\"] ,{Code client livré})) ~> filter1",
+				"filter1 aggregate(groupBy({} = ERROR_FUNCTION(''),",
+				"          {} = ERROR_FUNCTION(''))) ~> aggregate1",
+				"aggregate1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          {Org commerciale} as string,",
+				"          {Canal distribution} as string,",
+				"          {Secteur d'activité} as string,",
+				"          {Document de vente} as string,",
+				"          Poste as string,",
+				"          {Jour calendaire} as string,",
+				"          {Agence commerciale corrigé} as string,",
+				"          {ATC Corrigé} as string,",
+				"          {Donneur d'ordre} as string,",
+				"          {Recept de march} as string,",
+				"          {Destinataire facture} as string,",
+				"          {Type doc vente} as string,",
+				"          {Type de poste} as string,",
+				"          Livraison as string,",
+				"          {Type de livraison} as string,",
+				"          {Type poste Livraison} as string,",
+				"          Facture as string,",
+				"          {Type de facture} as string,",
+				"          {Type poste Facture} as string,",
+				"          {Mois calendrier} as string,",
+				"          {Année civile} as string,",
+				"          {Motif commande} as string,",
+				"          {CA cdé} as string,",
+				"          {Qté livrée} as string,",
+				"          {CA livré} as string,",
+				"          {Qté facturée} as string,",
+				"          {CA facturé} as string,",
+				"          {Cout standard cdé} as string,",
+				"          {Cout fabrication} as string,",
+				"          {Cout standard livré} as string,",
+				"          {Cout standard facturé} as string,",
+				"          date_id as string,",
+				"          year as string,",
+				"          yearmonth as string,",
+				"          qt_cd_e as string,",
+				"          ca_cd_ as string,",
+				"          qt_livr_e as string,",
+				"          qt_factur_e as string,",
+				"          ca_factur_ as string,",
+				"          year_month as string,",
+				"          reference as string,",
+				"          WholeSalerID as string,",
+				"          WholeSalerHubID as string,",
+				"          HubName as string,",
+				"          HubSAPid as string,",
+				"          POSSAMidString as string,",
+				"          {Période} as string,",
+				"          Offre as string,",
+				"          data_origin as string",
+				"     ),",
+				"     partitionFileNames:['testTereva'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sink1"
 			]
 		}
 	}
