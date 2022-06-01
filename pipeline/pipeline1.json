@@ -17,7 +17,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "dataflow1",
+						"referenceName": "DSCTEREVA",
 						"type": "DataFlowReference"
 					},
 					"compute": {
