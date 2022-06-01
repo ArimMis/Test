@@ -1,0 +1,56 @@
+{
+	"name": "flowletPrixPeriode",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "InPrixMoyenSplited",
+						"type": "DatasetReference"
+					},
+					"name": "prixPeriode"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "select1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Article as string,",
+				"          Distributeur as string,",
+				"          prix_unitaire as string,",
+				"          {Durée_période} as string,",
+				"          {Période} as string,",
+				"          {Mois début} as string,",
+				"          {Mois fin} as string,",
+				"          mois1 as string,",
+				"          annee1 as string,",
+				"          mois2 as string,",
+				"          annee2 as string,",
+				"          dd as string,",
+				"          month as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> prixPeriode",
+				"prixPeriode derive({Période} = iif(length({Période})>1,{Période},\"0\"+{Période})) ~> derivedColumn1",
+				"derivedColumn1 select(mapColumn(",
+				"          Article,",
+				"          Distributeur,",
+				"          {Période},",
+				"          mois2,",
+				"          annee2",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1"
+			]
+		}
+	}
+}
