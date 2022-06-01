@@ -335,6 +335,10 @@
 			{
 				"name": "Client Indirect - Hiérarchie N2 SAP",
 				"type": "String"
+			},
+			{
+				"name": "Période",
+				"type": "String"
 			}
 		]
 	}
