@@ -24,7 +24,7 @@
 		},
 		"schema": [
 			{
-				"name": "Org commerciale",
+				"name": " Org commerciale",
 				"type": "String"
 			},
 			{
@@ -64,7 +64,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Récept. de march.",
+				"name": "Recept de march",
 				"type": "String"
 			},
 			{
@@ -72,11 +72,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Article",
-				"type": "String"
-			},
-			{
-				"name": " vente",
+				"name": "Type doc vente",
 				"type": "String"
 			},
 			{
@@ -160,7 +156,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Prop_0",
+				"name": "date_id",
 				"type": "String"
 			},
 			{
@@ -169,14 +165,6 @@
 			},
 			{
 				"name": "yearmonth",
-				"type": "String"
-			},
-			{
-				"name": "date_id",
-				"type": "String"
-			},
-			{
-				"name": "fact_filter",
 				"type": "String"
 			},
 			{
@@ -204,23 +192,11 @@
 				"type": "String"
 			},
 			{
-				"name": "cout_standard_cd_",
-				"type": "String"
-			},
-			{
-				"name": "cout_fabrication",
-				"type": "String"
-			},
-			{
-				"name": "cout_standard_livr_",
-				"type": "String"
-			},
-			{
-				"name": "cout_standard_factur_",
-				"type": "String"
-			},
-			{
 				"name": "year_month",
+				"type": "String"
+			},
+			{
+				"name": "reference",
 				"type": "String"
 			},
 			{
