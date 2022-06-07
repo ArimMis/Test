@@ -44,7 +44,7 @@
 				"          month as string,",
 				"          year as string,",
 				"          companyid as string,",
-				"          ca_avoir as float,",
+				"          ca_avoir as string,",
 				"          yearmonth as string,",
 				"          HubSapID as string",
 				"     ),",
