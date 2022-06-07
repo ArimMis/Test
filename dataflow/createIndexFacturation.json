@@ -1,0 +1,78 @@
+{
+	"name": "createIndexFacturation",
+	"properties": {
+		"folder": {
+			"name": "BASE COMMERCIALE"
+		},
+		"type": "Flowlet",
+		"typeProperties": {
+			"sources": [],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "flatten1"
+				},
+				{
+					"name": "window1"
+				},
+				{
+					"name": "derivedColumn2"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "input1"
+				},
+				{
+					"name": "output1"
+				}
+			],
+			"scriptLines": [
+				"input(output(",
+				"          temp_id as long,",
+				"          qte_facturer as string,",
+				"          year as string,",
+				"          hubsapid as string,",
+				"          reference as string,",
+				"          {CA facturé} as float",
+				"     ),",
+				"     order: 0) ~> input1",
+				"input1 derive(toroll = mapLoop(abs(toInteger( qte_facturer)), #index)) ~> derivedColumn1",
+				"derivedColumn1 foldDown(unroll(toroll, toroll),",
+				"     mapColumn(",
+				"          temp_id,",
+				"          qte_facturer,",
+				"          year,",
+				"          hubsapid,",
+				"          reference,",
+				"          {CA facturé},",
+				"          toroll",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> flatten1",
+				"flatten1 window(over(year,",
+				"          hubsapid,",
+				"          reference),",
+				"     asc(year, true),",
+				"     asc(hubsapid, true),",
+				"     asc(reference, true),",
+				"     indexcols2 = rowNumber()) ~> window1",
+				"window1 derive(indexcols2 = year+\"-\"+hubsapid+'-'+coalesce(toString(toInteger(replace(reference, \" \", \"\"))),replace(reference, \" \", \"\"))+'-'+toString(indexcols2),",
+				"          {Qté facturée} = iif(toDouble(qte_facturer)<=0, -1, 1)) ~> derivedColumn2",
+				"derivedColumn2 select(mapColumn(",
+				"          temp_id,",
+				"          {CA facturé},",
+				"          indexcols2,",
+				"          {Qté facturée}",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 output() ~> output1"
+			]
+		}
+	}
+}
