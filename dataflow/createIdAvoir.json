@@ -76,7 +76,7 @@
 				"     asc(HubSapID, true),",
 				"     asc(reference, true),",
 				"     indexcols2 = rowNumber()) ~> window1",
-				"window1 derive(indexcols2 = year+\"-\"+HubSapID+\"-\"+reference+\"-\"+toString(indexcols2),",
+				"window1 derive(indexcols2 = toString(year)+\"-\"+HubSapID+\"-\"+reference+\"-\"+toString(indexcols2),",
 				"          qte_avoir = iif(toInteger(qte_valide) >0, 1, -1 )) ~> derivedColumn1",
 				"derivedColumn1 derive(ca_avoir = abs(ca_avoir)*qte_avoir) ~> derivedColumn2",
 				"derivedColumn2 output() ~> output1"
