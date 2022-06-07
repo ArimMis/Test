@@ -1,0 +1,86 @@
+{
+	"name": "createIdAvoir",
+	"properties": {
+		"description": "create IndexColAvoir",
+		"folder": {
+			"name": "BASE COMMERCIALE"
+		},
+		"type": "Flowlet",
+		"typeProperties": {
+			"sources": [],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "createColToReplicate"
+				},
+				{
+					"name": "toList"
+				},
+				{
+					"name": "window1"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "derivedColumn2"
+				},
+				{
+					"name": "input1"
+				},
+				{
+					"name": "output1"
+				}
+			],
+			"scriptLines": [
+				"input(output(",
+				"          mois_selection as string,",
+				"          no_offre as string,",
+				"          reference as string,",
+				"          agence as string,",
+				"          qte_valide as string,",
+				"          no_cli as string,",
+				"          pa_valide_vgf as string,",
+				"          month as string,",
+				"          year as string,",
+				"          companyid as string,",
+				"          ca_avoir as float,",
+				"          yearmonth as string,",
+				"          HubSapID as string",
+				"     ),",
+				"     order: 0) ~> input1",
+				"input1 derive(dd = mapLoop(abs(toInteger(qte_valide)), #index)) ~> createColToReplicate",
+				"createColToReplicate foldDown(unroll(dd, dd),",
+				"     mapColumn(",
+				"          mois_selection,",
+				"          no_offre,",
+				"          reference,",
+				"          agence,",
+				"          qte_valide,",
+				"          no_cli,",
+				"          pa_valide_vgf,",
+				"          month,",
+				"          year,",
+				"          companyid,",
+				"          ca_avoir,",
+				"          yearmonth,",
+				"          HubSapID,",
+				"          dd",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> toList",
+				"toList window(over(year,",
+				"          HubSapID,",
+				"          reference),",
+				"     asc(year, true),",
+				"     asc(HubSapID, true),",
+				"     asc(reference, true),",
+				"     indexcols2 = rowNumber()) ~> window1",
+				"window1 derive(indexcols2 = year+\"-\"+HubSapID+\"-\"+reference+\"-\"+toString(indexcols2),",
+				"          qte_avoir = iif(toInteger(qte_valide) >0, 1, -1 )) ~> derivedColumn1",
+				"derivedColumn1 derive(ca_avoir = abs(ca_avoir)*qte_avoir) ~> derivedColumn2",
+				"derivedColumn2 output() ~> output1"
+			]
+		}
+	}
+}
