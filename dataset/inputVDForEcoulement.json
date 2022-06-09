@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "VENTES_DIRECTES_PREPARATION",
+				"fileName": "VENTES_DIRECTES_PREPARATION.csv",
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
