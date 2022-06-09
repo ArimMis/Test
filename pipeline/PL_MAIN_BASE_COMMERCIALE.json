@@ -251,7 +251,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "VanMarkes",
+						"referenceName": "VanMarkes_copy1",
 						"type": "DataFlowReference"
 					},
 					"compute": {
