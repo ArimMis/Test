@@ -33,7 +33,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Secteur d'activit?",
+				"name": "Secteur d'activité",
 				"type": "String"
 			},
 			{
@@ -53,11 +53,11 @@
 				"type": "String"
 			},
 			{
-				"name": "Agence commerciale corrig?",
+				"name": "Agence commerciale corrigé",
 				"type": "String"
 			},
 			{
-				"name": "ATC Corrig?",
+				"name": "ATC Corrigé",
 				"type": "String"
 			},
 			{
@@ -109,7 +109,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Ann?e civile",
+				"name": "Année civile",
 				"type": "String"
 			},
 			{
@@ -117,31 +117,31 @@
 				"type": "String"
 			},
 			{
-				"name": "Qt? cd?e",
+				"name": "Qté cdée",
 				"type": "String"
 			},
 			{
-				"name": "CA cd?",
+				"name": "CA cdé",
 				"type": "String"
 			},
 			{
-				"name": "Qt? livr?e",
+				"name": "Qté livrée",
 				"type": "String"
 			},
 			{
-				"name": "CA livr?",
+				"name": "CA livré",
 				"type": "String"
 			},
 			{
-				"name": "Qt? factur?e",
+				"name": "Qté facturée",
 				"type": "String"
 			},
 			{
-				"name": "CA factur?",
+				"name": "CA facturé",
 				"type": "String"
 			},
 			{
-				"name": "Cout standard cd?",
+				"name": "Cout standard cdé",
 				"type": "String"
 			},
 			{
@@ -149,11 +149,11 @@
 				"type": "String"
 			},
 			{
-				"name": "Cout standard livr?",
+				"name": "Cout standard livré",
 				"type": "String"
 			},
 			{
-				"name": "Cout standard factur?",
+				"name": "Cout standard facturé",
 				"type": "String"
 			},
 			{
