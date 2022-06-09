@@ -13,11 +13,12 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "facturationForVanMarkes",
+				"fileName": "facturationForVanMarkes.csv",
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": ";",
+			"encodingName": "WINDOWS-1252",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
@@ -32,7 +33,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Secteur d'activité",
+				"name": "Secteur d'activit?",
 				"type": "String"
 			},
 			{
@@ -52,11 +53,11 @@
 				"type": "String"
 			},
 			{
-				"name": "Agence commerciale corrigé",
+				"name": "Agence commerciale corrig?",
 				"type": "String"
 			},
 			{
-				"name": "ATC Corrigé",
+				"name": "ATC Corrig?",
 				"type": "String"
 			},
 			{
@@ -108,7 +109,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Année civile",
+				"name": "Ann?e civile",
 				"type": "String"
 			},
 			{
@@ -116,31 +117,31 @@
 				"type": "String"
 			},
 			{
-				"name": "Qté cdée",
+				"name": "Qt? cd?e",
 				"type": "String"
 			},
 			{
-				"name": "CA cdé",
+				"name": "CA cd?",
 				"type": "String"
 			},
 			{
-				"name": "Qté livrée",
+				"name": "Qt? livr?e",
 				"type": "String"
 			},
 			{
-				"name": "CA livré",
+				"name": "CA livr?",
 				"type": "String"
 			},
 			{
-				"name": "Qté facturée",
+				"name": "Qt? factur?e",
 				"type": "String"
 			},
 			{
-				"name": "CA facturé",
+				"name": "CA factur?",
 				"type": "String"
 			},
 			{
-				"name": "Cout standard cdé",
+				"name": "Cout standard cd?",
 				"type": "String"
 			},
 			{
@@ -148,11 +149,11 @@
 				"type": "String"
 			},
 			{
-				"name": "Cout standard livré",
+				"name": "Cout standard livr?",
 				"type": "String"
 			},
 			{
-				"name": "Cout standard facturé",
+				"name": "Cout standard factur?",
 				"type": "String"
 			},
 			{
