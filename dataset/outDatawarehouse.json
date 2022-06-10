@@ -1,5 +1,5 @@
 {
-	"name": "baseCommercialOut",
+	"name": "outDatawarehouse",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "VAILLANT_ARCHITECTURE",
