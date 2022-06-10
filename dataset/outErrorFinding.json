@@ -1,5 +1,5 @@
 {
-	"name": "avoirUnMappedutput",
+	"name": "outErrorFinding",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "VAILLANT_ARCHITECTURE",
