@@ -49,6 +49,10 @@
 				"type": "String"
 			},
 			{
+				"name": "1ereDateLivrDdee",
+				"type": "String"
+			},
+			{
 				"name": "Agence commerciale corrigé",
 				"type": "String"
 			},
