@@ -13,6 +13,97 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/AvoirForVanMarkesInput')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "VAILLANT_ARCHITECTURE",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "VANMARKES"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "AvoirForVanMarkes.csv",
+						"folderPath": "Temp",
+						"container": "data-warehouse"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Mois_Selection",
+						"type": "String"
+					},
+					{
+						"name": "Code_depot",
+						"type": "String"
+					},
+					{
+						"name": "NoOffre",
+						"type": "String"
+					},
+					{
+						"name": "NoArtVGF",
+						"type": "String"
+					},
+					{
+						"name": "Agence",
+						"type": "String"
+					},
+					{
+						"name": "Qte_Validee_VGF",
+						"type": "String"
+					},
+					{
+						"name": "NoCli",
+						"type": "String"
+					},
+					{
+						"name": "PA_Valide_VGF",
+						"type": "String"
+					},
+					{
+						"name": "Mois",
+						"type": "String"
+					},
+					{
+						"name": "Année",
+						"type": "String"
+					},
+					{
+						"name": "CompanyId",
+						"type": "String"
+					},
+					{
+						"name": "HubSAPid",
+						"type": "String"
+					},
+					{
+						"name": "toreplicate",
+						"type": "String"
+					},
+					{
+						"name": "ca_avoir",
+						"type": "String"
+					},
+					{
+						"name": "yearmonth",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/BASE_AVANT_TRAITEMENT_ATC')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1423,81 +1514,6 @@
 					},
 					{
 						"name": "yearmonth",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DV_SAUNC')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "VAILLANT_ARCHITECTURE",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "PREPARATION ECOULEMENT/MAILLARD"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "dvSAUNC.csv",
-						"folderPath": "Ecoulement/Maillard",
-						"container": "data-input"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "Soci�t�",
-						"type": "String"
-					},
-					{
-						"name": "D�pot",
-						"type": "String"
-					},
-					{
-						"name": "Mois",
-						"type": "String"
-					},
-					{
-						"name": "Code GTAC",
-						"type": "String"
-					},
-					{
-						"name": "R�f�rence",
-						"type": "String"
-					},
-					{
-						"name": "D�signation",
-						"type": "String"
-					},
-					{
-						"name": "Quantit�",
-						"type": "String"
-					},
-					{
-						"name": "Valeur",
-						"type": "String"
-					},
-					{
-						"name": "Quantit� n-1",
-						"type": "String"
-					},
-					{
-						"name": "Valeur n-1",
-						"type": "String"
-					},
-					{
-						"name": "CP D�p�t",
 						"type": "String"
 					}
 				]
