@@ -3,33 +3,37 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "PL_POST_UNION",
-				"description": "prix_moyen\nunionSAP_EHS\nCleaninPostUnion",
-				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "UNION_ECOULEMENT",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"name": "UNION_BASE_COMMERCIAL",
+				"description": "Input : \nventeDirect\nDSCModel\nPartedisModel\nVanMarkes\nOutput : \nOunionBaseCommercialt",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
 				"userProperties": [],
 				"typeProperties": {
-					"pipeline": {
-						"referenceName": "PL_POST_UNION",
-						"type": "PipelineReference"
+					"dataflow": {
+						"referenceName": "UNION_BASE_COMMERCIAL",
+						"type": "DataFlowReference"
 					},
-					"waitOnCompletion": true
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
 				}
 			},
 			{
-				"name": "UNION_ECOULEMENT",
-				"description": "Inupt : \nvfconfortPrepared\nmabillePrepared\norcabPrepared\ntereva\nDSC\nmaillard\nPartedis\nEHS\nOutput : \nallUnionedDistributor",
+				"name": "POST_UNION_FINISH",
+				"description": "Input : \nBCUnion\nArticleHierarchi\nPlateformes\nExtractionCompte\nClientEHS\nInputManuel\nStgOffreUnique\nOutput : \nDataCommercialNotFOund\nTEMP_baseCommercialOut\nOutputBaseAllDistru\nDataCommercialDT2",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [
 					{
-						"activity": "PL_MABILE",
+						"activity": "UNION_BASE_COMMERCIAL",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -45,7 +49,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "UNION_ECOULEMENT",
+						"referenceName": "BaseCommercialePOSTUnion",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -56,16 +60,35 @@
 				}
 			},
 			{
-				"name": "PL_MABILE",
-				"type": "ExecutePipeline",
-				"dependsOn": [],
+				"name": "ATC_PERFORMANCE_ET_CLIENT_SAP",
+				"description": "Input : \nBASE_AVANT_TRAITEMENT_ATC\nsecteurFictif\nOutput : \nbaseCommercialOut",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "POST_UNION_FINISH",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
 				"userProperties": [],
 				"typeProperties": {
-					"pipeline": {
-						"referenceName": "PL_MABILE",
-						"type": "PipelineReference"
+					"dataflow": {
+						"referenceName": "ATC_PERFORMANCE_ET_CLIENT_SAP",
+						"type": "DataFlowReference"
 					},
-					"waitOnCompletion": true
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
 				}
 			}
 		],
