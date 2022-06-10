@@ -181,11 +181,11 @@
 				"type": "String"
 			},
 			{
-				"name": "ca_final",
+				"name": "CA facturé",
 				"type": "String"
 			},
 			{
-				"name": "qt_final",
+				"name": "Qté facturée",
 				"type": "String"
 			},
 			{
