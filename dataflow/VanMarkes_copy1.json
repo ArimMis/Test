@@ -81,7 +81,7 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "baseCommercialOut",
+						"referenceName": "outDatawarehouse",
 						"type": "DatasetReference"
 					},
 					"name": "sink2"
