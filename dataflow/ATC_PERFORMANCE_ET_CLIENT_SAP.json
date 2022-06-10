@@ -53,7 +53,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "outDatawarehouse",
+						"referenceName": "baseCommercialOut",
 						"type": "DatasetReference"
 					},
 					"name": "outFinale"
