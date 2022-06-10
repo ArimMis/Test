@@ -53,7 +53,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "outErrorFinding",
+						"referenceName": "avoirUnMappedutput",
 						"type": "DatasetReference"
 					},
 					"name": "avoirUnMapped"
