@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "VanMarkes_copy1",
+				"name": "unionDistru",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "VanMarkes_copy1",
+						"referenceName": "UNION_ECOULEMENT",
 						"type": "DataFlowReference"
 					},
 					"compute": {
