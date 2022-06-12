@@ -3,8 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "PREPARATION_ECC_AVOIR",
-				"description": "Input : \necoulement\navoir\nsalerDSC\nOrgaTerevas\nOutput : \nAZ_OecoulementDscTerevaWithIndex\noutEccDscTereva\nAZ_OecoulementPartedislikeWithIndex\noutEccNotDSCTEREVA\nAZ_AvoirWithIndexDSClike\nDTAvoirRetraiter\nAvoirForVanMarkes",
+				"name": "ModelVenteDirecte",
+				"description": "Input : \nventedirecte\ncomptesap\nrefAtc\nassociationoffre\noffre\nOutput : \noVenteDirect",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -17,7 +17,81 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "TRAITEMENTECOULEMENT_AVOIR_PERIOD",
+						"referenceName": "ModelVenteDirecte",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "DSCTEREVA2",
+				"description": "Input : \necoulementwithIndex\navoirwithIndex\nstgOffre\nreferentielATC\nfacturation\nOutput : \navoirUnMappedutput\noutdsctereva2",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "DSCTEREVA",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "PartedisLikeventeDeroge",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "Ventes derogees",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 32,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine",
+					"runConcurrently": true
+				}
+			},
+			{
+				"name": "VanMarkes",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "VanMarkes_copy1",
 						"type": "DataFlowReference"
 					},
 					"compute": {
