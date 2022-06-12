@@ -46,10 +46,6 @@
 			],
 			"sinks": [
 				{
-					"dataset": {
-						"referenceName": "eccToReplicate",
-						"type": "DatasetReference"
-					},
 					"name": "outEccDscTereva"
 				},
 				{
