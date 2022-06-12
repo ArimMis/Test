@@ -74,7 +74,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "outAvoirNotFound",
+						"referenceName": "outErrorFinding",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
