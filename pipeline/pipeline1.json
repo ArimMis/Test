@@ -25,6 +25,27 @@
 					},
 					"traceLevel": "Fine"
 				}
+			},
+			{
+				"name": "PL_POST_UNION",
+				"description": "prix_moyen\nunionSAP_EHS\nCleaninPostUnion",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "unionDistru",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_POST_UNION",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
 			}
 		],
 		"folder": {
