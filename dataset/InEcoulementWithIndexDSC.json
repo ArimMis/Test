@@ -17,24 +17,13 @@
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": ";",
+			"encodingName": "WINDOWS-1252",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": [
-			{
-				"name": "yearmonth",
-				"type": "String"
-			},
-			{
-				"name": "year",
-				"type": "String"
-			},
-			{
-				"name": "month",
-				"type": "String"
-			},
 			{
 				"name": "qte_ecoulement",
 				"type": "String"
@@ -76,19 +65,23 @@
 				"type": "String"
 			},
 			{
-				"name": "toreplicate",
-				"type": "String"
-			},
-			{
-				"name": "dd",
-				"type": "String"
-			},
-			{
 				"name": "rcount",
 				"type": "String"
 			},
 			{
 				"name": "indexcols2",
+				"type": "String"
+			},
+			{
+				"name": "yearmonth",
+				"type": "String"
+			},
+			{
+				"name": "year",
+				"type": "String"
+			},
+			{
+				"name": "month",
 				"type": "String"
 			},
 			{
