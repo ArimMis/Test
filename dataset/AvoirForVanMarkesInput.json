@@ -25,7 +25,59 @@
 		},
 		"schema": [
 			{
-				"name": "Mois_Selection;Code_depot;NoOffre;NoArtVGF;Agence;Qte_Validee_VGF;NoCli;PA_Valide_VGF;Mois;Ann�e;CompanyId;toreplicate;ca_avoir;yearmonth",
+				"name": "Mois_Selection",
+				"type": "String"
+			},
+			{
+				"name": "Code_depot",
+				"type": "String"
+			},
+			{
+				"name": "NoOffre",
+				"type": "String"
+			},
+			{
+				"name": "NoArtVGF",
+				"type": "String"
+			},
+			{
+				"name": "Agence",
+				"type": "String"
+			},
+			{
+				"name": "Qte_Validee_VGF",
+				"type": "String"
+			},
+			{
+				"name": "NoCli",
+				"type": "String"
+			},
+			{
+				"name": "PA_Valide_VGF",
+				"type": "String"
+			},
+			{
+				"name": "Mois",
+				"type": "String"
+			},
+			{
+				"name": "Année",
+				"type": "String"
+			},
+			{
+				"name": "CompanyId",
+				"type": "String"
+			},
+			{
+				"name": "toreplicate",
+				"type": "String"
+			},
+			{
+				"name": "ca_avoir",
+				"type": "String"
+			},
+			{
+				"name": "yearmonth",
 				"type": "String"
 			}
 		]
