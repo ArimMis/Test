@@ -1,5 +1,5 @@
 {
-	"name": "Stg_offre_diffus",
+	"name": "outStaging",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "VAILLANT_ARCHITECTURE",
