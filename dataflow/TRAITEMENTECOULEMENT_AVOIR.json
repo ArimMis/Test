@@ -89,7 +89,7 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "outAvoirNotFound",
+						"referenceName": "outErrorFinding",
 						"type": "DatasetReference"
 					},
 					"name": "outputAvoirNotFound"
