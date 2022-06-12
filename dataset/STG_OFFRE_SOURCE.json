@@ -25,7 +25,223 @@
 		},
 		"schema": [
 			{
-				"name": "DateOffre;Date Prev Cde;Code projet;Projet;Type;CP projet;Ville projet;NbLogement;R�f�rence;Marque;Famille;Produit;Quantit�;Prix de base;Prix DO;Prix pro;Prix total;Num�ro interne 1;Client;Ville client;Type financement;Num�ro interne 2;N�goce;Ville n�goce;Statut offre;Responsable;Groupe;Offre;Date de maj statut;Num�ro avant vente;Cr�ateur offre;Commentaire interne;Offre d�rog�e;Contrat cadre;Offre nationale;Ann�e Tarif;PotentielP1N;PotentielP2N;PotentielP3N;PotentielP4N;PotentielP5N;PotentielP6N;DateFinValidit�;CODE_CMI;NOM_CMI;CodeATC;DEEE;OffreSupprimee;Date de cr�ation;NomSignataire1;NomSignataire2;DateSignataire1;DateSignataire2;DateD�rogation;Canal",
+				"name": "DateOffre",
+				"type": "String"
+			},
+			{
+				"name": "Date Prev Cde",
+				"type": "String"
+			},
+			{
+				"name": "Code projet",
+				"type": "String"
+			},
+			{
+				"name": "Projet",
+				"type": "String"
+			},
+			{
+				"name": "Type",
+				"type": "String"
+			},
+			{
+				"name": "CP projet",
+				"type": "String"
+			},
+			{
+				"name": "Ville projet",
+				"type": "String"
+			},
+			{
+				"name": "NbLogement",
+				"type": "String"
+			},
+			{
+				"name": "Référence",
+				"type": "String"
+			},
+			{
+				"name": "Marque",
+				"type": "String"
+			},
+			{
+				"name": "Famille",
+				"type": "String"
+			},
+			{
+				"name": "Produit",
+				"type": "String"
+			},
+			{
+				"name": "Quantité",
+				"type": "String"
+			},
+			{
+				"name": "Prix de base",
+				"type": "String"
+			},
+			{
+				"name": "Prix DO",
+				"type": "String"
+			},
+			{
+				"name": "Prix pro",
+				"type": "String"
+			},
+			{
+				"name": "Prix total",
+				"type": "String"
+			},
+			{
+				"name": "Numéro interne 1",
+				"type": "String"
+			},
+			{
+				"name": "Client",
+				"type": "String"
+			},
+			{
+				"name": "Ville client",
+				"type": "String"
+			},
+			{
+				"name": "Type financement",
+				"type": "String"
+			},
+			{
+				"name": "Numéro interne 2",
+				"type": "String"
+			},
+			{
+				"name": "Négoce",
+				"type": "String"
+			},
+			{
+				"name": "Ville négoce",
+				"type": "String"
+			},
+			{
+				"name": "Statut offre",
+				"type": "String"
+			},
+			{
+				"name": "Responsable",
+				"type": "String"
+			},
+			{
+				"name": "Groupe",
+				"type": "String"
+			},
+			{
+				"name": "Offre",
+				"type": "String"
+			},
+			{
+				"name": "Date de maj statut",
+				"type": "String"
+			},
+			{
+				"name": "Numéro avant vente",
+				"type": "String"
+			},
+			{
+				"name": "Créateur offre",
+				"type": "String"
+			},
+			{
+				"name": "Commentaire interne",
+				"type": "String"
+			},
+			{
+				"name": "Offre dérogée",
+				"type": "String"
+			},
+			{
+				"name": "Contrat cadre",
+				"type": "String"
+			},
+			{
+				"name": "Offre nationale",
+				"type": "String"
+			},
+			{
+				"name": "Année Tarif",
+				"type": "String"
+			},
+			{
+				"name": "PotentielP1N",
+				"type": "String"
+			},
+			{
+				"name": "PotentielP2N",
+				"type": "String"
+			},
+			{
+				"name": "PotentielP3N",
+				"type": "String"
+			},
+			{
+				"name": "PotentielP4N",
+				"type": "String"
+			},
+			{
+				"name": "PotentielP5N",
+				"type": "String"
+			},
+			{
+				"name": "PotentielP6N",
+				"type": "String"
+			},
+			{
+				"name": "DateFinValidité",
+				"type": "String"
+			},
+			{
+				"name": "CODE_CMI",
+				"type": "String"
+			},
+			{
+				"name": "NOM_CMI",
+				"type": "String"
+			},
+			{
+				"name": "CodeATC",
+				"type": "String"
+			},
+			{
+				"name": "DEEE",
+				"type": "String"
+			},
+			{
+				"name": "OffreSupprimee",
+				"type": "String"
+			},
+			{
+				"name": "Date de création",
+				"type": "String"
+			},
+			{
+				"name": "NomSignataire1",
+				"type": "String"
+			},
+			{
+				"name": "NomSignataire2",
+				"type": "String"
+			},
+			{
+				"name": "DateSignataire1",
+				"type": "String"
+			},
+			{
+				"name": "DateSignataire2",
+				"type": "String"
+			},
+			{
+				"name": "DateDérogation",
+				"type": "String"
+			},
+			{
+				"name": "Canal",
 				"type": "String"
 			}
 		]
