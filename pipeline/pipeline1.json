@@ -3,8 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "ModelVenteDirecte",
-				"description": "Input : \nventedirecte\ncomptesap\nrefAtc\nassociationoffre\noffre\nOutput : \noVenteDirect",
+				"name": "UNION_BASE_COMMERCIAL",
+				"description": "Input : \nventeDirect\nDSCModel\nPartedisModel\nVanMarkes\nOutput : \nOunionBaseCommercialt",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -17,7 +17,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "ModelVenteDirecte",
+						"referenceName": "UNION_BASE_COMMERCIAL",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -28,10 +28,17 @@
 				}
 			},
 			{
-				"name": "DSCTEREVA2",
-				"description": "Input : \necoulementwithIndex\navoirwithIndex\nstgOffre\nreferentielATC\nfacturation\nOutput : \navoirUnMappedutput\noutdsctereva2",
+				"name": "POST_UNION_FINISH",
+				"description": "Input : \nBCUnion\nArticleHierarchi\nPlateformes\nExtractionCompte\nClientEHS\nInputManuel\nStgOffreUnique\nOutput : \nDataCommercialNotFOund\nTEMP_baseCommercialOut\nOutputBaseAllDistru\nDataCommercialDT2",
 				"type": "ExecuteDataFlow",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "UNION_BASE_COMMERCIAL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "1.00:00:00",
 					"retry": 0,
@@ -42,56 +49,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "DSCTEREVA",
-						"type": "DataFlowReference"
-					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
-				}
-			},
-			{
-				"name": "PartedisLikeventeDeroge",
-				"type": "ExecuteDataFlow",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "1.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataflow": {
-						"referenceName": "Ventes derogees",
-						"type": "DataFlowReference"
-					},
-					"compute": {
-						"coreCount": 32,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine",
-					"runConcurrently": true
-				}
-			},
-			{
-				"name": "VanMarkes",
-				"type": "ExecuteDataFlow",
-				"dependsOn": [],
-				"policy": {
-					"timeout": "1.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataflow": {
-						"referenceName": "VanMarkes_copy1",
+						"referenceName": "BaseCommercialePOSTUnion",
 						"type": "DataFlowReference"
 					},
 					"compute": {
