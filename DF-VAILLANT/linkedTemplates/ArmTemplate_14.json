@@ -673,6 +673,60 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/pipeline7')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Data flow1",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "DSCTEREVA_copy1",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"ecoulementwithIndex": {},
+									"avoirwithIndex": {},
+									"stgOffre": {},
+									"referentielATC": {},
+									"facturation": {},
+									"prixMoyen": {},
+									"avoirUnMapped": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "test"
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/smalportionoftheBase')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -2206,37 +2260,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/PREPARATION_FACTURATION')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/tonight')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "MAIN",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Hour",
-						"interval": 5,
-						"startTime": "2022-05-26T02:13:00Z",
-						"endTime": "2022-06-30T00:13:00Z",
-						"timeZone": "UTC"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/MAIN')]"
 			]
 		}
 	]
