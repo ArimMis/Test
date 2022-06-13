@@ -10,7 +10,7 @@
 					"referenceName": "AKVVAILLANT",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "sk-dspreprodvaillant"
+				"secretName": "sk-dsvaillantfr"
 			}
 		}
 	},
