@@ -24,6 +24,9 @@
 			"transformations": [
 				{
 					"name": "filter1"
+				},
+				{
+					"name": "aggregate1"
 				}
 			],
 			"scriptLines": [
@@ -113,6 +116,8 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
 				"source1 filter(in(['16009659',\"16009650\",\"16012261\"] ,{Code client livré})) ~> filter1",
+				"source1 aggregate(groupBy({plateforme/vente directe}),",
+				"     val = sum(1)) ~> aggregate1",
 				"filter1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
