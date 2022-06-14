@@ -13,19 +13,18 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "facturationForVanMarkes.csv",
+				"fileName": "facturationForVanMarkes",
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
-			"columnDelimiter": ";",
-			"encodingName": "WINDOWS-1252",
+			"columnDelimiter": ",",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": [
 			{
-				"name": " Org commerciale",
+				"name": "Org commerciale",
 				"type": "String"
 			},
 			{
@@ -65,7 +64,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Recept de march",
+				"name": "Récept. de march.",
 				"type": "String"
 			},
 			{
@@ -73,7 +72,11 @@
 				"type": "String"
 			},
 			{
-				"name": "Type doc vente",
+				"name": "Article",
+				"type": "String"
+			},
+			{
+				"name": " vente",
 				"type": "String"
 			},
 			{
@@ -157,7 +160,7 @@
 				"type": "String"
 			},
 			{
-				"name": "date_id",
+				"name": "Prop_0",
 				"type": "String"
 			},
 			{
@@ -166,6 +169,14 @@
 			},
 			{
 				"name": "yearmonth",
+				"type": "String"
+			},
+			{
+				"name": "date_id",
+				"type": "String"
+			},
+			{
+				"name": "fact_filter",
 				"type": "String"
 			},
 			{
@@ -193,11 +204,23 @@
 				"type": "String"
 			},
 			{
-				"name": "year_month",
+				"name": "cout_standard_cd_",
 				"type": "String"
 			},
 			{
-				"name": "reference",
+				"name": "cout_fabrication",
+				"type": "String"
+			},
+			{
+				"name": "cout_standard_livr_",
+				"type": "String"
+			},
+			{
+				"name": "cout_standard_factur_",
+				"type": "String"
+			},
+			{
+				"name": "year_month",
 				"type": "String"
 			},
 			{

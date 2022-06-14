@@ -1,0 +1,63 @@
+{
+	"name": "ORCAB_ECOULEMENT_SAMPLE",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "PREPARATION ECOULEMENT/ORCAB"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "ecoulements PF VAILLANT DECEMBRE 2020.xlsx",
+				"folderPath": "Ecoulement/ORCAB",
+				"container": "data-input"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Fournisseur",
+				"type": "String"
+			},
+			{
+				"name": "Coopérative",
+				"type": "String"
+			},
+			{
+				"name": "REFFOURNISSEUR",
+				"type": "String"
+			},
+			{
+				"name": "Désignation",
+				"type": "String"
+			},
+			{
+				"name": "Mois",
+				"type": "String"
+			},
+			{
+				"name": "CA 2020",
+				"type": "String"
+			},
+			{
+				"name": "CA 2019",
+				"type": "String"
+			},
+			{
+				"name": "Qte Livrée 2020",
+				"type": "String"
+			},
+			{
+				"name": "Qte Livrée 2019",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

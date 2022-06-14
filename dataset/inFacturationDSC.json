@@ -17,8 +17,7 @@
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
-			"columnDelimiter": ";",
-			"encodingName": "WINDOWS-1252",
+			"columnDelimiter": ",",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
@@ -46,10 +45,6 @@
 			},
 			{
 				"name": "Jour calendaire",
-				"type": "String"
-			},
-			{
-				"name": "1ereDateLivrDdee",
 				"type": "String"
 			},
 			{
@@ -198,6 +193,14 @@
 			},
 			{
 				"name": "reference",
+				"type": "String"
+			},
+			{
+				"name": "article",
+				"type": "String"
+			},
+			{
+				"name": "prix_unitaire_std",
 				"type": "String"
 			},
 			{

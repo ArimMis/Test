@@ -17,15 +17,106 @@
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
-			"columnDelimiter": ";",
-			"encodingName": "WINDOWS-1252",
+			"columnDelimiter": ",",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": [
 			{
+				"name": "marque_id",
+				"type": "String"
+			},
+			{
+				"name": "marque_name",
+				"type": "String"
+			},
+			{
+				"name": "canal_final",
+				"type": "String"
+			},
+			{
+				"name": "id_canal_final",
+				"type": "String"
+			},
+			{
+				"name": "Secteur d'activité",
+				"type": "String"
+			},
+			{
+				"name": "Document de vente",
+				"type": "String"
+			},
+			{
+				"name": "POSSAMidString",
+				"type": "String"
+			},
+			{
+				"name": "reference",
+				"type": "String"
+			},
+			{
+				"name": "Facture",
+				"type": "String"
+			},
+			{
+				"name": "Type de facture",
+				"type": "String"
+			},
+			{
+				"name": "Type poste Facture",
+				"type": "String"
+			},
+			{
+				"name": "Motif commande",
+				"type": "String"
+			},
+			{
 				"name": "yearmonth",
+				"type": "String"
+			},
+			{
+				"name": "distributeur",
+				"type": "String"
+			},
+			{
+				"name": "Code postal",
+				"type": "String"
+			},
+			{
+				"name": "Agence commerciale",
+				"type": "String"
+			},
+			{
+				"name": "ATC Corrigé",
+				"type": "String"
+			},
+			{
+				"name": "ATC",
+				"type": "String"
+			},
+			{
+				"name": "NomATC",
+				"type": "String"
+			},
+			{
+				"name": "Matricule",
+				"type": "String"
+			},
+			{
+				"name": "no_offre",
+				"type": "String"
+			},
+			{
+				"name": "ca_final",
+				"type": "String"
+			},
+			{
+				"name": "qt_final",
+				"type": "String"
+			},
+			{
+				"name": "data_origin",
 				"type": "String"
 			},
 			{
@@ -45,31 +136,7 @@
 				"type": "String"
 			},
 			{
-				"name": "POSSAMidString",
-				"type": "String"
-			},
-			{
 				"name": "HubSAPid",
-				"type": "String"
-			},
-			{
-				"name": "reference",
-				"type": "String"
-			},
-			{
-				"name": "distributeur",
-				"type": "String"
-			},
-			{
-				"name": "marque_id",
-				"type": "String"
-			},
-			{
-				"name": "marque_name",
-				"type": "String"
-			},
-			{
-				"name": "no_offre",
 				"type": "String"
 			},
 			{
@@ -77,43 +144,7 @@
 				"type": "String"
 			},
 			{
-				"name": "ca_final",
-				"type": "String"
-			},
-			{
-				"name": "qt_final",
-				"type": "String"
-			},
-			{
-				"name": "data_origin",
-				"type": "String"
-			},
-			{
-				"name": "id_canal_final",
-				"type": "String"
-			},
-			{
-				"name": "canal_final",
-				"type": "String"
-			},
-			{
 				"name": "ATC Performance",
-				"type": "String"
-			},
-			{
-				"name": "Code postal",
-				"type": "String"
-			},
-			{
-				"name": "ATC",
-				"type": "String"
-			},
-			{
-				"name": "NomATC",
-				"type": "String"
-			},
-			{
-				"name": "Matricule",
 				"type": "String"
 			},
 			{
@@ -145,23 +176,11 @@
 				"type": "String"
 			},
 			{
-				"name": "Secteur d'activité",
-				"type": "String"
-			},
-			{
-				"name": "Document de vente",
-				"type": "String"
-			},
-			{
 				"name": "Jour calendaire",
 				"type": "String"
 			},
 			{
 				"name": "Agence commerciale corrigé",
-				"type": "String"
-			},
-			{
-				"name": "ATC Corrigé",
 				"type": "String"
 			},
 			{
@@ -189,35 +208,11 @@
 				"type": "String"
 			},
 			{
-				"name": "Facture",
-				"type": "String"
-			},
-			{
-				"name": "Type poste Facture",
-				"type": "String"
-			},
-			{
-				"name": "Motif commande",
-				"type": "String"
-			},
-			{
 				"name": "Qté facturée",
 				"type": "String"
 			},
 			{
 				"name": "CA facturé",
-				"type": "String"
-			},
-			{
-				"name": "Type de facture",
-				"type": "String"
-			},
-			{
-				"name": "canal",
-				"type": "String"
-			},
-			{
-				"name": "ATC performance",
 				"type": "String"
 			}
 		]

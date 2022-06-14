@@ -63,10 +63,6 @@
 			{
 				"name": "marque_id",
 				"type": "String"
-			},
-			{
-				"name": "agence_code",
-				"type": "String"
 			}
 		]
 	},

@@ -1,0 +1,52 @@
+{
+	"name": "jk_extraction_vente_directe",
+	"properties": {
+		"description": "extraire les ventes directes à partir de la facturation",
+		"folder": {
+			"name": "JK"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "jk_facturation",
+						"type": "DatasetReference"
+					},
+					"name": "InputVenteDirecte"
+				},
+				{
+					"dataset": {
+						"referenceName": "jk_plateformes",
+						"type": "DatasetReference"
+					},
+					"name": "InputPlateformes"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "jk_vente_directe",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "extractionYearMonth"
+				},
+				{
+					"name": "Filtrer1"
+				},
+				{
+					"name": "Joindre1"
+				},
+				{
+					"name": "Filtrer2"
+				}
+			],
+			"script": "source(output(\n\t\t{Org. commerciale} as string,\n\t\t{Canal distribution} as string,\n\t\t{Secteur d'activité} as string,\n\t\t{Document de vente} as string,\n\t\tPoste as string,\n\t\t{Jour calendaire} as string,\n\t\t{Agence commerciale corrigé} as string,\n\t\t{ATC Corrigé} as string,\n\t\t{Donneur d'ordre} as string,\n\t\t{Récept. de march.} as string,\n\t\t{Destinataire facture} as string,\n\t\tArticle as string,\n\t\t{Type doc. vente} as string,\n\t\t{Type de poste} as string,\n\t\tLivraison as string,\n\t\t{Type de livraison} as string,\n\t\t{Type poste Livraison} as string,\n\t\tFacture as string,\n\t\t{Type de facture} as string,\n\t\t{Type poste Facture} as string,\n\t\t{Mois calendrier} as string,\n\t\t{Année civile} as string,\n\t\t{Motif commande} as string,\n\t\t{Qté cdée} as string,\n\t\t{CA cdé} as string,\n\t\t{Qté livrée} as string,\n\t\t{CA livré} as string,\n\t\t{Qté facturée} as string,\n\t\t{CA facturé} as string,\n\t\t{Cout standard cdé} as string,\n\t\t{Cout fabrication} as string,\n\t\t{Cout standard livré} as string,\n\t\t{Cout standard facturé} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> InputVenteDirecte\nsource(output(\n\t\tWholeSalerID as string,\n\t\tWholeSalerHubID as string,\n\t\tHubName as string,\n\t\tHubSAPid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> InputPlateformes\nInputVenteDirecte derive(year = split({Jour calendaire}, '-')[1],\n\t\tyearmonth = split({Jour calendaire}, '-')[1] + split({Jour calendaire}, '-')[2]) ~> extractionYearMonth\nextractionYearMonth filter(!({Type de facture} =='YFAR' && ({Motif commande}=='FAS') || ( {Type de facture}=='YFAB' && {Motif commande}=='FAS' ))) ~> Filtrer1\nFiltrer1, InputPlateformes join({Récept. de march.} == HubSAPid,\n\tjoinType:'left',\n\tmatchType:'exact',\n\tignoreSpaces: false,\n\tbroadcast: 'auto')~> Joindre1\nJoindre1 filter(isNull(HubSAPid)) ~> Filtrer2\nFiltrer2 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['jk_extraction_vente_directe.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> sink1"
+		}
+	}
+}

@@ -17,13 +17,16 @@
 				"folderPath": "Temp",
 				"container": "data-warehouse"
 			},
-			"columnDelimiter": ";",
-			"encodingName": "WINDOWS-1252",
+			"columnDelimiter": ",",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": [
+			{
+				"name": "Mois_Selection",
+				"type": "String"
+			},
 			{
 				"name": "NoOffre",
 				"type": "String"
@@ -45,11 +48,7 @@
 				"type": "String"
 			},
 			{
-				"name": "Année",
-				"type": "String"
-			},
-			{
-				"name": "Mois_Selection",
+				"name": "PA_Valide_VGF",
 				"type": "String"
 			},
 			{
@@ -57,11 +56,7 @@
 				"type": "String"
 			},
 			{
-				"name": "PA_Valide_VGF",
-				"type": "String"
-			},
-			{
-				"name": "yearmonth",
+				"name": "Année",
 				"type": "String"
 			},
 			{
@@ -73,7 +68,15 @@
 				"type": "String"
 			},
 			{
+				"name": "toreplicate",
+				"type": "String"
+			},
+			{
 				"name": "ca_avoir",
+				"type": "String"
+			},
+			{
+				"name": "yearmonth",
 				"type": "String"
 			},
 			{
@@ -86,10 +89,6 @@
 			},
 			{
 				"name": "dd",
-				"type": "String"
-			},
-			{
-				"name": "year",
 				"type": "String"
 			},
 			{

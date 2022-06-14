@@ -3,8 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "UNION_BASE_COMMERCIAL",
-				"description": "Input : \nventeDirect\nDSCModel\nPartedisModel\nVanMarkes\nOutput : \nOunionBaseCommercialt",
+				"name": "PREPARATION_FACTURATION",
+				"description": "Input : -facturationbw\n          -PLATEFORMES\ntraitement : -join facturationbw & Plateformes\n                 -join facturationbw & other plateformes\n                 -join facturationbw & filtre DSC\nOutput : -venteDirect\n-AZ_OFacturactionPartedisLikeWithIndex\n-facturationForOtherPlateform\n-facturationForDSCTEREVA\n-facturationForVanMarkes",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -17,71 +17,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "UNION_BASE_COMMERCIAL",
-						"type": "DataFlowReference"
-					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
-				}
-			},
-			{
-				"name": "POST_UNION_FINISH",
-				"description": "Input : \nBCUnion\nArticleHierarchi\nPlateformes\nExtractionCompte\nClientEHS\nInputManuel\nStgOffreUnique\nOutput : \nDataCommercialNotFOund\nTEMP_baseCommercialOut\nOutputBaseAllDistru\nDataCommercialDT2",
-				"type": "ExecuteDataFlow",
-				"dependsOn": [
-					{
-						"activity": "UNION_BASE_COMMERCIAL",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "1.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataflow": {
-						"referenceName": "BaseCommercialePOSTUnion",
-						"type": "DataFlowReference"
-					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
-					},
-					"traceLevel": "Fine"
-				}
-			},
-			{
-				"name": "ATC_PERFORMANCE_ET_CLIENT_SAP",
-				"description": "Input : \nBASE_AVANT_TRAITEMENT_ATC\nsecteurFictif\nOutput : \nbaseCommercialOut",
-				"type": "ExecuteDataFlow",
-				"dependsOn": [
-					{
-						"activity": "POST_UNION_FINISH",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "1.00:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataflow": {
-						"referenceName": "ATC_PERFORMANCE_ET_CLIENT_SAP",
+						"referenceName": "PREPARATION_FACTURATION_PERIOD",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -95,6 +31,8 @@
 		"folder": {
 			"name": "test"
 		},
-		"annotations": []
-	}
+		"annotations": [],
+		"lastPublishTime": "2022-06-10T12:28:31Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
 }

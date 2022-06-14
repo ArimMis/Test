@@ -1,5 +1,6 @@
 {
 	"name": "PREPROD_VAILLANT_ARCHITECTURE",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "AzureBlobStorage",
@@ -13,6 +14,5 @@
 				"secretName": "sk-dspreprodvaillant"
 			}
 		}
-	},
-	"type": "Microsoft.DataFactory/factories/linkedservices"
+	}
 }

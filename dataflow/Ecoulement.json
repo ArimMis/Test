@@ -1,0 +1,136 @@
+{
+	"name": "Ecoulement",
+	"properties": {
+		"description": "INTUITION\nA partir du fichier des écoulements:\nNettoyer les données.\nSéparer les écoulements identifiés dans la base des organisations\nCorriger les quantités comptées en double en décrémentant à partir des ventes directes du mêmes client.\n",
+		"folder": {
+			"name": "Ignace/ORCAB"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "aymeric_preparation2",
+						"type": "DatasetReference"
+					},
+					"name": "VenteDirect"
+				},
+				{
+					"dataset": {
+						"referenceName": "OrcabOrganisation",
+						"type": "DatasetReference"
+					},
+					"name": "InputOrganisaction"
+				},
+				{
+					"dataset": {
+						"referenceName": "EcoulementOrcab",
+						"type": "DatasetReference"
+					},
+					"name": "ecoulementOrcab"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "OrcabQteNull",
+						"type": "DatasetReference"
+					},
+					"name": "OrcabQteNull"
+				},
+				{
+					"dataset": {
+						"referenceName": "OrcabOrganisactionNotFound",
+						"type": "DatasetReference"
+					},
+					"name": "OrcabOrganisactionNotFound"
+				},
+				{
+					"dataset": {
+						"referenceName": "outputOrcab",
+						"type": "DatasetReference"
+					},
+					"name": "orcabEcoulementUniforme"
+				}
+			],
+			"transformations": [
+				{
+					"name": "selectCols"
+				},
+				{
+					"name": "aggQteFacturation"
+				},
+				{
+					"name": "endVenteDirecte"
+				},
+				{
+					"name": "VerificationCols"
+				},
+				{
+					"name": "Filter1"
+				},
+				{
+					"name": "UniqueOrganisation"
+				},
+				{
+					"name": "Select2"
+				},
+				{
+					"name": "getYearMonth"
+				},
+				{
+					"name": "mappM"
+				},
+				{
+					"name": "yearmonth"
+				},
+				{
+					"name": "filtreQte"
+				},
+				{
+					"name": "Verificaiton"
+				},
+				{
+					"name": "InnerJoin"
+				},
+				{
+					"name": "LeftJoin"
+				},
+				{
+					"name": "FilterOrganisactionNull"
+				},
+				{
+					"name": "removeCols"
+				},
+				{
+					"name": "Select3"
+				},
+				{
+					"name": "Join1"
+				},
+				{
+					"name": "decrementerQte"
+				},
+				{
+					"name": "Join2"
+				},
+				{
+					"name": "filtreEcoulementNonDecrementer"
+				},
+				{
+					"name": "Union1"
+				},
+				{
+					"name": "Select4"
+				},
+				{
+					"name": "ecoulementNonDecrementer"
+				},
+				{
+					"name": "Select5"
+				}
+			],
+			"script": "source(output(\n\t\t{Org. commerciale} as string,\n\t\t{Canal distribution} as string,\n\t\t{Secteur d'activité} as string,\n\t\t{Document de vente} as string,\n\t\tPoste as string,\n\t\t{Jour calendaire} as string,\n\t\t{Agence commerciale corrigé} as string,\n\t\t{ATC Corrigé} as string,\n\t\t{Donneur d'ordre} as string,\n\t\t{Récept. de march.} as string,\n\t\t{Destinataire facture} as string,\n\t\tArticle as string,\n\t\t{Type doc. vente} as string,\n\t\t{Type de poste} as string,\n\t\tLivraison as string,\n\t\t{Type de livraison} as string,\n\t\t{Type poste Livraison} as string,\n\t\tFacture as string,\n\t\t{Type de facture} as string,\n\t\t{Type poste Facture} as string,\n\t\t{Mois calendrier} as string,\n\t\t{Année civile} as string,\n\t\t{Motif commande} as string,\n\t\t{Qté cdée} as string,\n\t\t{CA cdé} as string,\n\t\t{Qté livrée} as string,\n\t\t{CA livré} as string,\n\t\t{Qté facturée} as integer,\n\t\t{CA facturé} as string,\n\t\t{Cout standard cdé} as string,\n\t\t{Cout fabrication} as string,\n\t\t{Cout standard livré} as string,\n\t\t{Cout standard facturé} as string,\n\t\tdate_id as string,\n\t\tyear as string,\n\t\tyearmonth as string,\n\t\tWholeSalerID as string,\n\t\tWholeSalerHubID as string,\n\t\tHubName as string,\n\t\tHubSAPid as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> VenteDirect\nsource(output(\n\t\t{Nom Coopérative} as string,\n\t\t{CP Coop.} as string,\n\t\tPOSSAMid as string,\n\t\tHubSAPid as string,\n\t\tBrandID as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> InputOrganisaction\nsource(output(\n\t\tFournisseur as string,\n\t\t{Coopérative} as string,\n\t\t{Référence} as string,\n\t\t{Désignation} as string,\n\t\tMois as string,\n\t\t{CA 2020} as string,\n\t\t{CA 2019} as string,\n\t\t{Qte 2020} as string,\n\t\t{Qte 2019} as string,\n\t\tpath as string,\n\t\tqte_ecoulement as integer,\n\t\tFamille as string,\n\t\t{Sous Famille} as string,\n\t\tREFFOURNISSEUR as string,\n\t\t{Qte Livrée 2020} as string,\n\t\t{Qte Livrée 2019} as string,\n\t\t{Code Dispo Cde} as string,\n\t\t{Code SAPAIG} as string,\n\t\t{CA sans Marge} as string,\n\t\t{CA sans Marge A-1} as string,\n\t\t{Evol. CA A/A-1} as string,\n\t\t{Qte Livrée} as string,\n\t\t{Qte Livrée A-1} as string,\n\t\t{Evol. Qte A/A-1} as string,\n\t\t{Qté Livrée 2020} as string,\n\t\t{Qté Livrée 2019} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> ecoulementOrcab\nVenteDirect select(mapColumn(\n\t\t{Récept. de march.},\n\t\tArticle,\n\t\tyearmonth,\n\t\t{Qté facturée}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> selectCols\nselectCols aggregate(groupBy({Récept. de march.},\n\t\tArticle,\n\t\tyearmonth),\n\t{Qté facturée} = sum({Qté facturée})) ~> aggQteFacturation\naggQteFacturation select(mapColumn(\n\t\t{Code client} = {Récept. de march.},\n\t\tArticle,\n\t\tyearmonth,\n\t\t{Qté facturée}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> endVenteDirecte\nInputOrganisaction select(mapColumn(\n\t\t{Nom Coopérative},\n\t\t{CP Coop.},\n\t\tPOSSAMid,\n\t\tHubSAPid,\n\t\tBrandID\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> VerificationCols\nVerificationCols filter(!isNull({Nom Coopérative})) ~> Filter1\nFilter1 aggregate(groupBy(POSSAMid,\n\t\tHubSAPid,\n\t\t{CP Coop.},\n\t\t{Nom Coopérative}),\n\tBrandID = first(BrandID)) ~> UniqueOrganisation\necoulementOrcab select(mapColumn(\n\t\tFournisseur,\n\t\t{Coopérative},\n\t\t{Référence},\n\t\t{Désignation},\n\t\tMois,\n\t\tpath,\n\t\tqte_ecoulement,\n\t\tFamille,\n\t\t{Sous Famille},\n\t\t{Code SAPAIG}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select2\nSelect2 derive(year = replace(split(path, \" \")[5], \".xlsx\", \"\"),\n\t\tmonth = Mois) ~> getYearMonth\ngetYearMonth derive(month = iif(lower(Mois)==\"janvier\", \"01\",      iif(lower(Mois)==\"février\",\"02\",     iif(lower(Mois)==\"mars\", \"03\",      iif(lower(Mois)==\"avril\", \"04\",      iif(lower(Mois)==\"mai\", \"05\",      iif(lower(Mois)==\"juin\", \"06\",      iif(lower(Mois)==\"juillet\", \"07\",      iif(lower(Mois)==\"août\", \"08\",      iif(lower(Mois)==\"septembre\", \"09\",      iif(lower(Mois)==\"octobre\", \"10\",      iif(lower(Mois)==\"novembre\", \"11\",      iif(lower(Mois)==\"décembre\", \"12\", \"0\"))))))))))))) ~> mappM\nmappM derive(yearmonth = year+month) ~> yearmonth\nyearmonth split(qte_ecoulement!=0,\n\tdisjoint: false) ~> filtreQte@(qteNonNul, qteNull)\nfiltreQte@qteNonNul select(mapColumn(\n\t\tFournisseur,\n\t\t{Coopérative},\n\t\t{Référence},\n\t\t{Désignation},\n\t\tMois,\n\t\tpath,\n\t\tqte_ecoulement,\n\t\tFamille,\n\t\t{Sous Famille},\n\t\t{Code SAPAIG},\n\t\tyear,\n\t\tmonth,\n\t\tyearmonth\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Verificaiton\nVerificaiton, UniqueOrganisation join({Coopérative} == {CP Coop.},\n\tjoinType:'inner',\n\tmatchType:'exact',\n\tignoreSpaces: false,\n\tbroadcast: 'auto')~> InnerJoin\nVerificaiton, UniqueOrganisation join({Coopérative} == {CP Coop.},\n\tjoinType:'left',\n\tmatchType:'exact',\n\tignoreSpaces: false,\n\tbroadcast: 'auto')~> LeftJoin\nLeftJoin filter(isNull({CP Coop.})) ~> FilterOrganisactionNull\nFilterOrganisactionNull select(mapColumn(\n\t\tFournisseur,\n\t\t{Coopérative},\n\t\t{Référence},\n\t\t{Désignation},\n\t\tMois,\n\t\tpath,\n\t\tqte_ecoulement,\n\t\tFamille,\n\t\t{Sous Famille},\n\t\t{Code SAPAIG},\n\t\tyear,\n\t\tmonth,\n\t\tyearmonth\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> removeCols\nInnerJoin select(mapColumn(\n\t\tFournisseur,\n\t\t{Coopérative},\n\t\t{Référence},\n\t\t{Désignation},\n\t\tMois,\n\t\tpath,\n\t\tqte_ecoulement,\n\t\tFamille,\n\t\t{Sous Famille},\n\t\t{Code SAPAIG},\n\t\tyear,\n\t\tmonth,\n\t\tyearmonth,\n\t\tPOSSAMid,\n\t\tHubSAPid,\n\t\t{CP Coop.},\n\t\t{Nom Coopérative},\n\t\tBrandID\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select3\nSelect3, endVenteDirecte join(POSSAMid == {Code client}\n\t&& {Référence} == Article\n\t&& Select3@yearmonth == endVenteDirecte@yearmonth,\n\tjoinType:'inner',\n\tmatchType:'exact',\n\tignoreSpaces: false,\n\tbroadcast: 'auto')~> Join1\nJoin1 derive(qte_ecoulement = qte_ecoulement - {Qté facturée}) ~> decrementerQte\nSelect3, endVenteDirecte join(POSSAMid == {Code client}\n\t&& {Référence} == Article\n\t&& Select3@yearmonth == endVenteDirecte@yearmonth,\n\tjoinType:'left',\n\tmatchType:'exact',\n\tignoreSpaces: false,\n\tbroadcast: 'auto')~> Join2\nJoin2 filter(isNull({Qté facturée})) ~> filtreEcoulementNonDecrementer\nSelect4, ecoulementNonDecrementer union(byName: true)~> Union1\ndecrementerQte select(mapColumn(\n\t\tFournisseur,\n\t\t{Coopérative},\n\t\t{Référence},\n\t\t{Désignation},\n\t\tMois,\n\t\tpath,\n\t\tqte_ecoulement,\n\t\tFamille,\n\t\t{Sous Famille},\n\t\t{Code SAPAIG},\n\t\tyear,\n\t\tmonth,\n\t\tyearmonth = Select3@yearmonth,\n\t\tPOSSAMid,\n\t\tHubSAPid,\n\t\t{CP Coop.},\n\t\t{Nom Coopérative},\n\t\tBrandID,\n\t\t{Code client},\n\t\tArticle,\n\t\tyearmonth = endVenteDirecte@yearmonth,\n\t\t{Qté facturée}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select4\nfiltreEcoulementNonDecrementer select(mapColumn(\n\t\tFournisseur,\n\t\t{Coopérative},\n\t\t{Référence},\n\t\t{Désignation},\n\t\tMois,\n\t\tpath,\n\t\tqte_ecoulement,\n\t\tFamille,\n\t\t{Sous Famille},\n\t\t{Code SAPAIG},\n\t\tyear,\n\t\tmonth,\n\t\tyearmonth = Select3@yearmonth,\n\t\tPOSSAMid,\n\t\tHubSAPid,\n\t\t{CP Coop.},\n\t\t{Nom Coopérative},\n\t\tBrandID\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> ecoulementNonDecrementer\nUnion1 select(mapColumn(\n\t\tFournisseur,\n\t\t{Coopérative},\n\t\t{Référence},\n\t\t{Désignation},\n\t\tMois,\n\t\tpath,\n\t\tqte_ecoulement,\n\t\tFamille,\n\t\t{Sous Famille},\n\t\t{Code SAPAIG},\n\t\tyear,\n\t\tmonth,\n\t\tyearmonth,\n\t\tPOSSAMid,\n\t\tHubSAPid,\n\t\t{CP Coop.},\n\t\t{Nom Coopérative},\n\t\tBrandID,\n\t\t{Code client},\n\t\tArticle,\n\t\t{Qté facturée}\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select5\nfiltreQte@qteNull sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\t{Org. commerciale} as string,\n\t\t{Canal distribution} as string,\n\t\t{Secteur d'activité} as string,\n\t\t{Document de vente} as string,\n\t\tPoste as string,\n\t\t{Jour calendaire} as string,\n\t\t{Agence commerciale corrigé} as string,\n\t\t{ATC Corrigé} as string,\n\t\t{Donneur d'ordre} as string,\n\t\t{Récept. de march.} as string,\n\t\t{Destinataire facture} as string,\n\t\tArticle as string,\n\t\t{Type doc. vente} as string,\n\t\t{Type de poste} as string,\n\t\tLivraison as string,\n\t\t{Type de livraison} as string,\n\t\t{Type poste Livraison} as string,\n\t\tFacture as string,\n\t\t{Type de facture} as string,\n\t\t{Type poste Facture} as string,\n\t\t{Mois calendrier} as string,\n\t\t{Année civile} as string,\n\t\t{Motif commande} as string,\n\t\t{Qté cdée} as string,\n\t\t{CA cdé} as string,\n\t\t{Qté livrée} as string,\n\t\t{CA livré} as string,\n\t\t{Qté facturée} as string,\n\t\t{CA facturé} as string,\n\t\t{Cout standard cdé} as string,\n\t\t{Cout fabrication} as string,\n\t\t{Cout standard livré} as string,\n\t\t{Cout standard facturé} as string,\n\t\tdate_id as string,\n\t\tyear as string,\n\t\tyearmonth as string,\n\t\tWholeSalerID as string,\n\t\tWholeSalerHubID as string,\n\t\tHubName as string,\n\t\tHubSAPid as string\n\t),\n\tpartitionFileNames:['OrcabQteNull.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> OrcabQteNull\nremoveCols sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\t{Org. commerciale} as string,\n\t\t{Canal distribution} as string,\n\t\t{Secteur d'activité} as string,\n\t\t{Document de vente} as string,\n\t\tPoste as string,\n\t\t{Jour calendaire} as string,\n\t\t{Agence commerciale corrigé} as string,\n\t\t{ATC Corrigé} as string,\n\t\t{Donneur d'ordre} as string,\n\t\t{Récept. de march.} as string,\n\t\t{Destinataire facture} as string,\n\t\tArticle as string,\n\t\t{Type doc. vente} as string,\n\t\t{Type de poste} as string,\n\t\tLivraison as string,\n\t\t{Type de livraison} as string,\n\t\t{Type poste Livraison} as string,\n\t\tFacture as string,\n\t\t{Type de facture} as string,\n\t\t{Type poste Facture} as string,\n\t\t{Mois calendrier} as string,\n\t\t{Année civile} as string,\n\t\t{Motif commande} as string,\n\t\t{Qté cdée} as string,\n\t\t{CA cdé} as string,\n\t\t{Qté livrée} as string,\n\t\t{CA livré} as string,\n\t\t{Qté facturée} as string,\n\t\t{CA facturé} as string,\n\t\t{Cout standard cdé} as string,\n\t\t{Cout fabrication} as string,\n\t\t{Cout standard livré} as string,\n\t\t{Cout standard facturé} as string,\n\t\tdate_id as string,\n\t\tyear as string,\n\t\tyearmonth as string,\n\t\tWholeSalerID as string,\n\t\tWholeSalerHubID as string,\n\t\tHubName as string,\n\t\tHubSAPid as string\n\t),\n\tpartitionFileNames:['OrcabOrganisactionNotFound.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> OrcabOrganisactionNotFound\nSelect5 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\t{Org. commerciale} as string,\n\t\t{Canal distribution} as string,\n\t\t{Secteur d'activité} as string,\n\t\t{Document de vente} as string,\n\t\tPoste as string,\n\t\t{Jour calendaire} as string,\n\t\t{Agence commerciale corrigé} as string,\n\t\t{ATC Corrigé} as string,\n\t\t{Donneur d'ordre} as string,\n\t\t{Récept. de march.} as string,\n\t\t{Destinataire facture} as string,\n\t\tArticle as string,\n\t\t{Type doc. vente} as string,\n\t\t{Type de poste} as string,\n\t\tLivraison as string,\n\t\t{Type de livraison} as string,\n\t\t{Type poste Livraison} as string,\n\t\tFacture as string,\n\t\t{Type de facture} as string,\n\t\t{Type poste Facture} as string,\n\t\t{Mois calendrier} as string,\n\t\t{Année civile} as string,\n\t\t{Motif commande} as string,\n\t\t{Qté cdée} as string,\n\t\t{CA cdé} as string,\n\t\t{Qté livrée} as string,\n\t\t{CA livré} as string,\n\t\t{Qté facturée} as string,\n\t\t{CA facturé} as string,\n\t\t{Cout standard cdé} as string,\n\t\t{Cout fabrication} as string,\n\t\t{Cout standard livré} as string,\n\t\t{Cout standard facturé} as string,\n\t\tdate_id as string,\n\t\tyear as string,\n\t\tyearmonth as string,\n\t\tWholeSalerID as string,\n\t\tWholeSalerHubID as string,\n\t\tHubName as string,\n\t\tHubSAPid as string\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> orcabEcoulementUniforme"
+		}
+	}
+}

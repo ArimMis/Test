@@ -24,7 +24,7 @@
 		},
 		"schema": [
 			{
-				"name": "year",
+				"name": "yearmonth",
 				"type": "String"
 			},
 			{

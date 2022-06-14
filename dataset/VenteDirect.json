@@ -1,0 +1,207 @@
+{
+	"name": "VenteDirect",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "VENTE DIRECT BASE COMM"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "ventedirectTemp.xlsx",
+				"folderPath": "Temp",
+				"container": "data-warehouse"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Org. commerciale",
+				"type": "String"
+			},
+			{
+				"name": "Canal distribution",
+				"type": "String"
+			},
+			{
+				"name": "Secteur d'activité",
+				"type": "String"
+			},
+			{
+				"name": "Document de vente",
+				"type": "String"
+			},
+			{
+				"name": "Poste",
+				"type": "String"
+			},
+			{
+				"name": "Jour calendaire",
+				"type": "String"
+			},
+			{
+				"name": "Agence commerciale corrigé",
+				"type": "String"
+			},
+			{
+				"name": "ATC Corrigé",
+				"type": "String"
+			},
+			{
+				"name": "Donneur d'ordre",
+				"type": "String"
+			},
+			{
+				"name": "Récept. de march.",
+				"type": "String"
+			},
+			{
+				"name": "Destinataire facture",
+				"type": "String"
+			},
+			{
+				"name": "Article",
+				"type": "String"
+			},
+			{
+				"name": "Type doc. vente",
+				"type": "String"
+			},
+			{
+				"name": "Type de poste",
+				"type": "String"
+			},
+			{
+				"name": "Livraison",
+				"type": "String"
+			},
+			{
+				"name": "Type de livraison",
+				"type": "String"
+			},
+			{
+				"name": "Type poste Livraison",
+				"type": "String"
+			},
+			{
+				"name": "Facture",
+				"type": "String"
+			},
+			{
+				"name": "Type de facture",
+				"type": "String"
+			},
+			{
+				"name": "Type poste Facture",
+				"type": "String"
+			},
+			{
+				"name": "Mois calendrier",
+				"type": "String"
+			},
+			{
+				"name": "Année civile",
+				"type": "String"
+			},
+			{
+				"name": "Motif commande",
+				"type": "String"
+			},
+			{
+				"name": "Qté cdée",
+				"type": "String"
+			},
+			{
+				"name": "CA cdé",
+				"type": "String"
+			},
+			{
+				"name": "Qté livrée",
+				"type": "String"
+			},
+			{
+				"name": "CA livré",
+				"type": "String"
+			},
+			{
+				"name": "Qté facturée",
+				"type": "String"
+			},
+			{
+				"name": "CA facturé",
+				"type": "String"
+			},
+			{
+				"name": "Cout standard cdé",
+				"type": "String"
+			},
+			{
+				"name": "Cout fabrication",
+				"type": "String"
+			},
+			{
+				"name": "Cout standard livré",
+				"type": "String"
+			},
+			{
+				"name": "Cout standard facturé",
+				"type": "String"
+			},
+			{
+				"name": "date_id",
+				"type": "String"
+			},
+			{
+				"name": "year",
+				"type": "String"
+			},
+			{
+				"name": "yearmonth",
+				"type": "String"
+			},
+			{
+				"name": "qt_cd_e",
+				"type": "String"
+			},
+			{
+				"name": "ca_cd_",
+				"type": "String"
+			},
+			{
+				"name": "qt_livr_e",
+				"type": "String"
+			},
+			{
+				"name": "ca_livr_",
+				"type": "String"
+			},
+			{
+				"name": "qt_factur_e",
+				"type": "String"
+			},
+			{
+				"name": "ca_factur_",
+				"type": "String"
+			},
+			{
+				"name": "year_month",
+				"type": "String"
+			},
+			{
+				"name": "reference",
+				"type": "String"
+			},
+			{
+				"name": "prix_unitaire_std",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

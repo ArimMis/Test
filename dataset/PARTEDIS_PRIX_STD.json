@@ -1,0 +1,39 @@
+{
+	"name": "PARTEDIS_PRIX_STD",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "VAILLANT_ARCHITECTURE",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "PREPARATION ECOULEMENT/PARTEDIS"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Px Std 2020",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Partedis.xlsx",
+				"folderPath": "PriceList",
+				"container": "data-input"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Référence",
+				"type": "String"
+			},
+			{
+				"name": "Article",
+				"type": "String"
+			},
+			{
+				"name": "Prix Unitaire Std",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

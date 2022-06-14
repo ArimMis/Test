@@ -1,0 +1,40 @@
+{
+	"name": "aymeric_plateformes",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "tuto_file",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Feuil1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Plateformes.xlsx",
+				"folderPath": "input",
+				"container": "aymeric"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "WholeSalerID",
+				"type": "String"
+			},
+			{
+				"name": "WholeSalerHubID",
+				"type": "String"
+			},
+			{
+				"name": "HubName",
+				"type": "String"
+			},
+			{
+				"name": "HubSAPid",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
