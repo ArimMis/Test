@@ -27,6 +27,9 @@
 				},
 				{
 					"name": "aggregate1"
+				},
+				{
+					"name": "filter2"
 				}
 			],
 			"scriptLines": [
@@ -118,6 +121,7 @@
 				"source1 filter(in(['16009659',\"16009650\",\"16012261\"] ,{Code client livré})) ~> filter1",
 				"source1 aggregate(groupBy({plateforme/vente directe}),",
 				"     val = sum(1)) ~> aggregate1",
+				"source1 filter(instr({plateforme/vente directe} , \"van\") >0) ~> filter2",
 				"filter1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
