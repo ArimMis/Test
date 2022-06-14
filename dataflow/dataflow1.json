@@ -55,6 +55,12 @@
 				},
 				{
 					"name": "filter7"
+				},
+				{
+					"name": "offre"
+				},
+				{
+					"name": "vente"
 				}
 			],
 			"scriptLines": [
@@ -303,6 +309,8 @@
 				"     skipDuplicateMapOutputs: true) ~> select1",
 				"baseComDansDW filter({Numéro offre}==\"FP1SAABA210122AAD\") ~> filter6",
 				"filter6 filter(instr({plateforme/vente directe} , \"ente\") >0) ~> filter7",
+				"baseComDansTemp filter({Numéro offre}==\"FP1SAABA210122AAD\") ~> offre",
+				"offre filter(instr({plateforme/vente directe} , \"ente\") >0) ~> vente",
 				"filter1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
