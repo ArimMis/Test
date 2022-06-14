@@ -217,7 +217,7 @@
 				"     val = sum(1)) ~> aggregate1",
 				"baseComDansDW filter(instr({plateforme/vente directe} , \"van\") >0) ~> filter2",
 				"baseComDansTemp filter(instr({plateforme/vente directe}, \"van\")>0) ~> filter3",
-				"filter2 filter(instr({plateforme/vente directe} , \"match\") >0) ~> filter4",
+				"filter2 filter(instr({origine de la ligne} , \"mat\") >0) ~> filter4",
 				"filter1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
